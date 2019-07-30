@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>Purchase Component Site Configuration File</description>
+
+    <!-- Request Mappings -->
+    <request-map uri="inventoryMain">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="inventoryMain"/>
+    </request-map>
+
+    <!-- Operation -->
+    <request-map uri="operation">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="operation"/>
+    </request-map>
+    <!-- Operation -->
+
+    <!-- Production -->
+    <request-map uri="production">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="production"/>
+    </request-map>
+    <!-- Production -->
+
+    <!-- Claim -->
+    <request-map uri="claim">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="claim"/>
+    </request-map>
+    <!-- Claim -->
+
+    <!-- View Mappings -->
+	<view-map name="inventoryMain" page="component://uspErp/widget/inventory/InventoryScreens.xml#inventoryMain" type="screen"/>
+    <!-- Operation -->
+    <view-map name="operation" page="component://uspErp/widget/inventory/InventoryScreens.xml#operation" type="screen"/>
+    <!-- Production -->
+    <view-map name="production" page="component://uspErp/widget/inventory/InventoryScreens.xml#production" type="screen"/>
+    <!-- Claim -->
+    <view-map name="claim" page="component://uspErp/widget/inventory/InventoryScreens.xml#claim" type="screen"/>
+
+</site-conf>

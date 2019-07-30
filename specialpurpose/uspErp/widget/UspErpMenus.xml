@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Menu" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Menu http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="PurchaseMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.PurchaseApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.PurchaseMain}"><link target="purchaseMain" /></menu-item>
+        <menu-item name="po" title="${uiLabelMap.PurchaseOrder}"><link target="FindPoList" /></menu-item>
+        <menu-item name="document" title="${uiLabelMap.ProductionOrder}"><link target="shippingDocManage" /></menu-item>
+    </menu>
+
+    <menu name="InventoryMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.InventoryApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.InventoryMain}"><link target="inventoryMain" /></menu-item>
+        <menu-item name="operation" title="${uiLabelMap.Operation}"><link target="operation" /></menu-item>
+        <menu-item name="production" title="${uiLabelMap.Production}"><link target="production" /></menu-item>
+        <menu-item name="claim" title="${uiLabelMap.Claim}"><link target="claim" /></menu-item>
+    </menu>
+
+    <menu name="LogisticsMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.LogisticsApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.LogisticsMain}"><link target="logisticsMain" /></menu-item>
+        <menu-item name="vesselControl" title="${uiLabelMap.VesselControl}"><link target="vesselControl" /></menu-item>
+        <menu-item name="transfer" title="${uiLabelMap.Transfer}"><link target="transfer" /></menu-item>
+    </menu>
+
+    <menu name="SalesMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.SalesApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.SalesMain}"><link target="salesMain" /></menu-item>
+        <menu-item name="salesManagement" title="${uiLabelMap.SalesManagement}"><link target="salesManagement" /></menu-item>
+    </menu>
+
+    <menu name="AccountingMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.AccountingApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.Accounting}"><link target="accountingMain" /></menu-item>
+    </menu>
+
+    <menu name="ReportMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.ReportApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.ReportMain}"><link target="reportMain" /></menu-item>
+    </menu>
+
+    <menu name="AdminMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.AdminApplication}&amp;nbsp;"
+          default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
+        <menu-item name="main" title="${uiLabelMap.AdminMain}"><link target="adminMain" /></menu-item>
+        <menu-item name="employeeManagement" title="${uiLabelMap.employeeManagement}"><link target="employeeManagement" /></menu-item>
+        <menu-item name="securityGroupManagement" title="${uiLabelMap.securityGroupManagement}"><link target="securityGroupManagement" /></menu-item>
+        <menu-item name="permissionManagement" title="${uiLabelMap.permissionManagement}"><link target="permissionManagement" /></menu-item>
+    </menu>
+</menus>

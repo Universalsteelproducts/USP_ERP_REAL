@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="FindPoList" type="single" target="FindPoList" default-entity-name="PoMasterNReference">
+	    <field name="noConditionFind">
+	    	<hidden value="Y"/> <!-- if this isn't there then with all fields empty no query will be done -->
+	    </field>
+	    <field name="poNo" title="${uiLabelMap.poNo}" position="1">
+	    	<text-find/>
+	    </field>
+	    <field name="vendorId" title="${uiLabelMap.vendorId}" position="1">
+	    	<lookup target-form-name="LookupVendor" name="vendorId" position="center" />
+	    </field>
+	    <field name="customerId" title="${uiLabelMap.customerId}" position="2">
+	    	<lookup target-form-name="LookupCustomer" name="customerId" position="center" />
+	    </field>
+	    <field name="port" title="${uiLabelMap.port}" position="1">
+	    	<text-find/>
+	    </field>
+	    <field name="grade" title="${uiLabelMap.grade}" position="2">
+	    	<text-find/>
+	    </field>
+	    <field name="coatingWeight" title="${uiLabelMap.coatingWeight}" position="1">
+	    	<text-find/>
+	    </field>
+	    <field name="surfaceCoilType" title="${uiLabelMap.type}" position="2">
+	    	<text-find/>
+	    </field>
+	    <field name="gauge" title="${uiLabelMap.gauge}" position="1">
+	    	<text-find/>
+	    </field>
+	    <field name="width" title="${uiLabelMap.width}" position="2">
+	    	<text-find/>
+	    </field>
+	    <field name="searchButton"><submit/></field>
+	</form>
+
+	<form name="ListPoResult" type="list" list-name="listIt" paginate-target="FindPoList" default-entity-name="PoMasterNReference" separate-columns="true"
+        odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+
+		<actions>
+			<!-- 아래의 태그는 리스트 불러와서 처음 데이터 뿌릴때 sorting시킬 컬럼 설정 -->
+<!-- 			<set field="parameters.sortField" from-field="parameters.sortField" default-value="poNo"/> -->
+
+			<!-- Preparing search results for user query by using OFBiz stock service to perform find operations on a single entity or view entity -->
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
+				<field-map field-name="inputFields" from-field="purchaseCtx"/>
+				<field-map field-name="entityName" value="PoMasterNReference"/>
+				<field-map field-name="orderBy" from-field="parameters.sortField"/>
+				<field-map field-name="viewIndex" from-field="viewIndex"/>
+				<field-map field-name="viewSize" from-field="viewSize"/>
+			</service>
+	    </actions>
+
+        <field name="codeName" title="${uiLabelMap.poStatus}" sort-field="true"><display/></field>
+        <field name="poNo" title="${uiLabelMap.poNo}" widget-style="buttontext">
+            <hyperlink description="${poNo}" target="EditPo" also-hidden="false">
+                <parameter param-name="poNo"/>
+            </hyperlink>
+        </field>
+        <field name="lotNo" title="${uiLabelMap.lotNo}" sort-field="true"><display/></field>
+        <field name="etd" title="${uiLabelMap.etd}" sort-field="true"><display/></field>
+        <field name="eta" title="${uiLabelMap.eta}" sort-field="true"><display/></field>
+        <field name="vessel" title="${uiLabelMap.vessel}" sort-field="true"><display/></field>
+        <field name="port" title="${uiLabelMap.port}" sort-field="true"><display/></field>
+        <field name="steelType" title="${uiLabelMap.steelType}" sort-field="true"><display/></field>
+        <field name="grade" title="${uiLabelMap.grade}" sort-field="true"><display/></field>
+        <field name="coatingWeight" title="${uiLabelMap.coatingWeight}" sort-field="true"><display/></field>
+        <field name="surfaceCoilType" title="${uiLabelMap.surfaceCoilType}" sort-field="true"><display/></field>
+        <field name="gauge" title="${uiLabelMap.gauge}" sort-field="true"><display/></field>
+        <field name="width" title="${uiLabelMap.width}" sort-field="true"><display/></field>
+        <field name="coilMaxWeight" title="${uiLabelMap.coilMaxWeight}" sort-field="true"><display/></field>
+        <field name="innerDiameter" title="${uiLabelMap.innerDiameter}" sort-field="true"><display/></field>
+        <field name="packaging" title="${uiLabelMap.packaging}" sort-field="true"><display/></field>
+        <field name="businessClass" title="${uiLabelMap.businessClass}" sort-field="true"><display/></field>
+        <field name="customerId" title="${uiLabelMap.customerId}" sort-field="true"><display/></field>
+        <field name="unitPrice" title="${uiLabelMap.steelCost}" sort-field="true"><display/></field>
+        <field name="paintCode" title="${uiLabelMap.civAmount}" sort-field="true"><display/></field>
+        <field name="paintColor" title="${uiLabelMap.shippingDoc}" sort-field="true"><display/></field>
+        <field name="paintType" title="${uiLabelMap.paymentMethod}" sort-field="true"><display/></field>
+        <field name="priceTerm" title="${uiLabelMap.priceTerm}" sort-field="true"><display/></field>
+        <field name="paintBrand" title="${uiLabelMap.lcPaymentYn}" sort-field="true"><display/></field>
+        <field name="mtcVerificationStatus" title="${uiLabelMap.paintCoatingThickness}" sort-field="true"><display/></field>
+        <field name="paintCoatingThickness" title="${uiLabelMap.remark}" sort-field="true"><display/></field>
+        <field name="lastUpdateDate" title="${uiLabelMap.lastUpdatedStamp}" sort-field="true"><display/></field>
+    </form>
+
+    <form name="PoInfo" type="single" target="shippingDocManage" default-entity-name="Reference">
+	    <field name="poNo" title="${uiLabelMap.poNo}" position="1">
+	    	<lookup target-form-name="LookupPo"/>
+	    </field>
+	    <field name="lotNo" title="${uiLabelMap.lotNo}" position="2">
+	    	<text size="32" maxlength="60"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+	<form name="BLDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+    	<field name="blFile" position="1"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
+	    <field name="vessel" title="${uiLabelMap.vessel}" position="1">
+	    	<text size="32" maxlength="150"/>
+	    </field>
+	    <field name="blNo" title="${uiLabelMap.blNo}" position="2">
+	    	<text size="32" maxlength="60"/>
+	    </field>
+	    <field name="blDate" title="${uiLabelMap.blDate}" tooltip="${uiLabelMap.blDate}" tooltip-style="button-text" position="3">
+            <date-time mask="Y"/>
+	    </field>
+	    <field name="portOfLoading" title="${uiLabelMap.portOfLoading}" position="1">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="shippingCarrier" title="${uiLabelMap.shippingCarrier}" position="2">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+	<form name="CommercialInvoiceDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	    <field name="commercialInvoiceFile" position="1"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
+	    <field name="contractNo" title="${uiLabelMap.contractNo}" position="1">
+	    	<text size="32" maxlength="20"/>
+	    </field>
+	    <field name="unitCost" title="${uiLabelMap.unitCost}" position="2">
+	    	<text size="32" maxlength="15"/>
+	    </field>
+	    <field name="civAmount" title="${uiLabelMap.civAmount}" position="3">
+	    	<text size="32" maxlength="15"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+	<form name="PackingListDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	    <field name="packingListFile" position="1"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
+	    <field name="loadedQty" title="${uiLabelMap.loadedQty}" position="1">
+	    	<text size="32" maxlength="15"/>
+	    </field>
+	    <field name="weight" title="${uiLabelMap.weight}" position="2">
+	    	<text size="32" maxlength="150"/>
+	    </field>
+	    <field name="linealFeet" title="${uiLabelMap.linealFeet}" position="3">
+	    	<text size="32" maxlength="150"/>
+	    </field>
+	    <field name="coilQuantity" title="${uiLabelMap.coilQuantity}" position="1">
+	    	<text size="32" maxlength="150"/>
+	    </field>
+	    <field name="yield" title="${uiLabelMap.yield}" position="2">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+	<form name="WeightListDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	    <field name="weightListFile" position="1" widget-area-style="fieldWidth100"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" widget-area-style="fieldWidth100" position="2"><check /></field>
+    	<field name="submitButton" position="1"><submit/></field>
+	</form>
+
+	<form name="MTCDoc" type="single" target="FindPoList" default-entity-name="Reference">
+	    <field name="mtcFile" title="${uiLabelMap.mtcFile}" position="1"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
+	    <field name="mtcVerified" title="${uiLabelMap.mtcVerified}" position="1">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+	<form name="ShipmentAdviceDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	    <field name="shipmentAdviceFile" title="${uiLabelMap.shipmentAdviceFile}" position="1"><file/></field>
+    	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
+	    <field name="shppingAgent" title="${uiLabelMap.shppingAgent}" position="1">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="email" title="${uiLabelMap.email}" position="1">
+	    	<text size="32" maxlength="255"/>
+	    </field>
+	    <field name="submitButton"><submit/></field>
+	</form>
+
+</forms>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Simple-Method" xsi:schemaLocation="http://ofbiz.apache.org/Simple-Method http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+    <simple-method method-name="UploadShippingDoc" short-description="Method to upload multiple files for shipping Document">
+        <set-service-fields service-name="multipleUploadShippingDoc" map="parameters" to-map="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+       	<set field="shippingDocMap.docClass" value="BL"/>
+        <if-compare field="parameters.blDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._blDocFile_fileName">
+	            <set field="shippingDocMap.uploadedFile" from-field="parameters.blDocFile"/>
+	            <set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._blDocFile_fileName"/>
+	            <set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._blDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.blDocFileYN" value="Y" />
+		</if-compare>
+		<set field="shippingDocMap.vessel" from-field="parameters.vessel"/>
+		<set field="shippingDocMap.blNo" from-field="parameters.blNo"/>
+		<set field="shippingDocMap.blDate" from-field="parameters.blDate"/>
+		<set field="shippingDocMap.portOfLoading" from-field="parameters.portOfLoading"/>
+		<set field="shippingDocMap.shippingCarrier" from-field="parameters.shippingCarrier"/>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+		<set field="shippingDocMap.docClass" value="CI"/>
+	    <if-compare field="parameters.ciDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._ciDocFile_fileName">
+				<set field="shippingDocMap.uploadedFile" from-field="parameters.ciDocFile"/>
+				<set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._ciDocFile_fileName"/>
+				<set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._ciDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.ciDocFileYN" value="Y" />
+		</if-compare>
+		<set field="shippingDocMap.contractNo" from-field="parameters.contractNo"/>
+		<set field="shippingDocMap.unitCost" from-field="parameters.unitCost"/>
+		<set field="shippingDocMap.civAmount" from-field="parameters.civAmount"/>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+		<set field="shippingDocMap.docClass" value="PL"/>
+		<if-compare field="parameters.plDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._packingListDocFile_fileName">
+				<set field="shippingDocMap.uploadedFile" from-field="parameters.packingListDocFile"/>
+				<set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._packingListDocFile_fileName"/>
+				<set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._packingListDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.plDocFileYN" value="Y" />
+		</if-compare>
+		<set field="shippingDocMap.loadedQty" from-field="parameters.loadedQty"/>
+		<set field="shippingDocMap.weight" from-field="parameters.weight"/>
+		<set field="shippingDocMap.linealFeet" from-field="parameters.linealFeet"/>
+		<set field="shippingDocMap.coilQty" from-field="parameters.coilQty"/>
+		<set field="shippingDocMap.yield" from-field="parameters.yield"/>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+		<set field="shippingDocMap.docClass" value="WL"/>
+		<if-compare field="parameters.wlDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._weightListDocFile_fileName">
+				<set field="shippingDocMap.uploadedFile" from-field="parameters.weightListDocFile"/>
+				<set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._weightListDocFile_fileName"/>
+				<set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._weightListDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.wlDocFileYN" value="Y" />
+		</if-compare>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+		<set field="shippingDocMap.docClass" value="MTC"/>
+		<if-compare field="parameters.mtcDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._mtcDocFile_fileName">
+				<set field="shippingDocMap.uploadedFile" from-field="parameters.mtcDocFile"/>
+				<set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._mtcDocFile_fileName"/>
+				<set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._mtcDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.mtcDocFileYN" value="Y" />
+		</if-compare>
+		<set field="shippingDocMap.mtcVerified" from-field="parameters.mtcVerified"/>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+		<set field="shippingDocMap.poNo" from-field="parameters.poNo"/>
+		<set field="shippingDocMap.lotNo" from-field="parameters.lotNo"/>
+		<set field="shippingDocMap.docClass" value="SA"/>
+	    <if-compare field="parameters.shipmentAdviceDocFileYN" operator="not-equals" value="N">
+	        <if-not-empty field="parameters._shipmentAdviceDocFile_fileName">
+				<set field="shippingDocMap.uploadedFile" from-field="parameters.shipmentAdviceDocFile"/>
+				<set field="shippingDocMap._uploadedFile_fileName" from-field="parameters._shipmentAdviceDocFile_fileName"/>
+				<set field="shippingDocMap._uploadedFile_contentType" from-field="parameters._shipmentAdviceDocFile_contentType"/>
+	        </if-not-empty>
+			<set field="shippingDocMap.shipmentAdviceDocFileYN" value="Y" />
+	    </if-compare>
+		<set field="shippingDocMap.shippingAgent" from-field="parameters.shippingAgent"/>
+		<set field="shippingDocMap.email" from-field="parameters.email"/>
+		<call-service service-name="multipleUploadShippingDoc" in-map-name="shippingDocMap"/>
+		<clear-field field="shippingDocMap"/>
+        <field-to-result field="parameters.poNo" result-name="poNo"/>
+        <field-to-result field="parameters.lotNo" result-name="lotNo"/>
+    </simple-method>
+
+</simple-methods>

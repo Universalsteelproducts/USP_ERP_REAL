@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-properties.xsd">
+    <property key="UspErpApplication">
+        <value xml:lang="en">USP-ERP Application</value>
+    </property>
+    <property key="PurchaseApplication">
+        <value xml:lang="en">PURCHASE Application</value>
+    </property>
+    <property key="InventoryApplication">
+        <value xml:lang="en">INVENTORY Application</value>
+    </property>
+    <property key="LogisticsApplication">
+        <value xml:lang="en">LOGISTICS Application</value>
+    </property>
+    <property key="SalesApplication">
+        <value xml:lang="en">SALES Application</value>
+    </property>
+    <property key="AccountingApplication">
+        <value xml:lang="en">ACCOUNTING Application</value>
+    </property>
+    <property key="ReportApplication">
+        <value xml:lang="en">REPORT Application</value>
+    </property>
+    <property key="AdminApplication">
+        <value xml:lang="en">ADMIN Application</value>
+    </property>
+
+    <property key="UspErpCompanyName">
+        <value xml:lang="en">USP-ERP</value>
+    </property>
+    <property key="UspErpCompanySubtitle">
+        <value xml:lang="en">Part of the Apache OFBiz Family of Open Source Software</value>
+    </property>
+    <property key="UspErpViewPermissionError">
+        <value xml:lang="en">You are not allowed to view this page.</value>
+    </property>
+
+    <!-- MENU LABEL START-->
+    <property key="purchase">
+        <value xml:lang="en">Purchase</value>
+    </property>
+    <property key="PurchaseMain">
+        <value xml:lang="en">Main</value>
+    </property>
+    <property key="PurchaseOrder">
+        <value xml:lang="en">Purchase Order</value>
+    </property>
+    <property key="ProductionOrder">
+        <value xml:lang="en">Production Order</value>
+    </property>
+    <property key="ShippingDocumentManagement">
+        <value xml:lang="en">Shipping Document Managemen</value>
+    </property>
+
+    <property key="Inventory">
+        <value xml:lang="en">Inventory</value>
+    </property>
+    <property key="InventoryMain">
+        <value xml:lang="en">Main</value>
+    </property>
+    <property key="Operation">
+        <value xml:lang="en">Operation</value>
+    </property>
+    <property key="Production">
+        <value xml:lang="en">Production</value>
+    </property>
+    <property key="Claim">
+        <value xml:lang="en">Claim</value>
+    </property>
+
+    <property key="Logistics">
+        <value xml:lang="en">Logistics</value>
+    </property>
+    <property key="LogisticsMain">
+        <value xml:lang="en">Main</value>
+    </property>
+    <property key="VesselControl">
+        <value xml:lang="en">Vessel Control</value>
+    </property>
+    <property key="Transfer">
+        <value xml:lang="en">Transfer</value>
+    </property>
+
+    <property key="Sales">
+        <value xml:lang="en">Sales</value>
+    </property>
+    <property key="SalesMain">
+        <value xml:lang="en">Main</value>
+    </property>
+    <property key="SalesManagement">
+        <value xml:lang="en">Sales Management</value>
+    </property>
+
+    <property key="Accounting">
+        <value xml:lang="en">Accounting</value>
+    </property>
+    <property key="accountMain">
+        <value xml:lang="en">Main</value>
+    </property>
+
+    <property key="Report">
+        <value xml:lang="en">Report</value>
+    </property>
+    <property key="ReportMain">
+        <value xml:lang="en">Main</value>
+    </property>
+
+    <property key="Admin">
+        <value xml:lang="en">Admin</value>
+    </property>
+    <property key="AdminMain">
+        <value xml:lang="en">Admin Main</value>
+    </property>
+    <property key="employeeManagement">
+        <value xml:lang="en">Employee Management</value>
+    </property>
+    <property key="securityGroupManagement">
+        <value xml:lang="en">Security Group Management</value>
+    </property>
+    <property key="permissionManagement">
+        <value xml:lang="en">Permission Management</value>
+    </property>
+    <!-- MENU LABEL END-->
+
+    <!-- PURCHASE VIEW LABEL START-->
+    <!-- PURCHASE VIEW LABEL END-->
+
+    <!-- INVENTORY VIEW LABEL START-->
+    <!-- INVENTORY VIEW LABEL END-->
+
+    <!-- LOGISTICS VIEW LABEL START-->
+    <!-- LOGISTICS VIEW LABEL END-->
+
+    <!-- SALES VIEW LABEL START-->
+    <!-- SALES VIEW LABEL END-->
+
+    <!-- ACCOUTING VIEW LABEL START-->
+    <!-- ACCOUTING VIEW LABEL END-->
+
+    <!-- REPORT VIEW LABEL START-->
+    <!-- REPORT VIEW LABEL END-->
+
+    <!-- ADMIN VIEW LABEL START-->
+    <!-- ADMIN VIEW LABEL END-->
+
+    <property key="searchPoForm">
+        <value xml:lang="en">Search PO </value>
+    </property>
+    <property key="poNo">
+        <value xml:lang="en">PO#</value>
+    </property>
+    <property key="poStatus">
+        <value xml:lang="en">PO Status</value>
+    </property>
+    <property key="vendor">
+        <value xml:lang="en">Vendor</value>
+    </property>
+    <property key="vendorId">
+        <value xml:lang="en">Vendor</value>
+    </property>
+    <property key="orderDate">
+        <value xml:lang="en">Order Date</value>
+    </property>
+    <property key="freightTerm">
+        <value xml:lang="en">Freight Term</value>
+    </property>
+    <property key="paymentTerm">
+        <value xml:lang="en">Payment Term</value>
+    </property>
+    <property key="downPayment">
+        <value xml:lang="en">Down Payment</value>
+    </property>
+    <property key="shipmentMonth">
+        <value xml:lang="en">Shipment Month</value>
+    </property>
+    <property key="fobPoint">
+        <value xml:lang="en">FOB Point</value>
+    </property>
+    <property key="poType">
+        <value xml:lang="en">PO Type</value>
+    </property>
+    <property key="billingAccountId">
+        <value xml:lang="en">Billing Account</value>
+    </property>
+    <property key="referenceNo">
+        <value xml:lang="en">Reference# </value>
+    </property>
+
+    <property key="ppglNo">
+        <value xml:lang="en">PPGL#</value>
+    </property>
+    <property key="destination">
+        <value xml:lang="en">Destination</value>
+    </property>
+    <property key="gradeDesc">
+        <value xml:lang="">Grade Description</value>
+    </property>
+    <property key="coatingWeightDesc">
+        <value xml:lang="en">Coating Weight Description</value>
+    </property>
+    <property key="surfaceCoilType">
+        <value xml:lang="en">Surface Type</value>
+    </property>
+    <property key="surfaceCoilTypeDesc">
+        <value xml:lang="en">Surface Type Description</value>
+    </property>
+    <property key="gaugeUnit">
+        <value xml:lang="en">Gauge Unit</value>
+    </property>
+    <property key="gaugeDesc">
+        <value xml:lang="en">Gauge Description</value>
+    </property>
+    <property key="widthDesc">
+        <value xml:lang="en">Width Description</value>
+    </property>
+    <property key="coilMaxWeight">
+        <value xml:lang="en">Coil Max Weight</value>
+    </property>
+    <property key="innerDiameter">
+        <value xml:lang="en">Inner Diameter</value>
+    </property>
+    <property key="packaging">
+        <value xml:lang="en">Packaging</value>
+    </property>
+    <property key="packagingDesc">
+        <value xml:lang="en">Packaging Description</value>
+    </property>
+    <property key="barge">
+        <value xml:lang="en">Barge</value>
+    </property>
+    <property key="businessClass">
+        <value xml:lang="en">Business Class</value>
+    </property>
+    <property key="customerId">
+        <value xml:lang="en">Customer</value>
+    </property>
+    <property key="customerName">
+        <value xml:lang="en">Customer</value>
+    </property>
+    <property key="otherDetail">
+        <value xml:lang="en">Other Details</value>
+    </property>
+    <property key="orderQuantity">
+        <value xml:lang="en">Order Qty</value>
+    </property>
+    <property key="unitQuantity">
+        <value xml:lang="en">Unit Qty</value>
+    </property>
+    <property key="quantityUnit">
+        <value xml:lang="en">Qty Unit</value>
+    </property>
+    <property key="unitPrice">
+        <value xml:lang="en">Unit Price</value>
+    </property>
+    <property key="totalPrice">
+        <value xml:lang="en">Total Price</value>
+    </property>
+    <property key="priceUnit">
+        <value xml:lang="en">Price Unite</value>
+    </property>
+    <property key="commissionUnitPrice">
+        <value xml:lang="en">Commission Unit Price</value>
+    </property>
+    <property key="partialYN">
+        <value xml:lang="en">Partial?</value>
+    </property>
+    <property key="partialNo">
+        <value xml:lang="en">Partial#</value>
+    </property>
+    <property key="paintBrand">
+        <value xml:lang="en">Paint Brand</value>
+    </property>
+    <property key="paintCode">
+        <value xml:lang="en">Paint Code</value>
+    </property>
+    <property key="paintColor">
+        <value xml:lang="en">Paint Color</value>
+    </property>
+    <property key="paintType">
+        <value xml:lang="en">Paint Type</value>
+    </property>
+    <property key="paintCoatingThickness">
+        <value xml:lang="en">Paint Coating Thickness</value>
+    </property>
+    <property key="lcPayment">
+        <value xml:lang="en">L/C</value>
+    </property>
+    <property key="blDocFile">
+        <value xml:lang="en">B/L Doc File</value>
+    </property>
+    <property key="blNo">
+        <value xml:lang="en">B/L#</value>
+    </property>
+    <property key="blDate">
+        <value xml:lang="en">B/L Date</value>
+    </property>
+    <property key="portOfLoading">
+        <value xml:lang="en">Port Of Loading</value>
+    </property>
+    <property key="shippingCarrier">
+        <value xml:lang="en">Shipping Carrier</value>
+    </property>
+    <property key="ciDocFileYN">
+        <value xml:lang="en">C/I?</value>
+    </property>
+    <property key="contractNo">
+        <value xml:lang="en">Contract#</value>
+    </property>
+    <property key="unitCost">
+        <value xml:lang="en">Unit Cost</value>
+    </property>
+    <property key="civAmount">
+        <value xml:lang="en">CIV Amount</value>
+    </property>
+    <property key="plDocFileYN">
+        <value xml:lang="en">P/L?</value>
+    </property>
+    <property key="loadedQty">
+        <value xml:lang="en">Loaded Qty</value>
+    </property>
+    <property key="weight">
+        <value xml:lang="en">Weight</value>
+    </property>
+    <property key="linealFeet">
+        <value xml:lang="en">Lineal Feet</value>
+    </property>
+    <property key="coilQuantity">
+        <value xml:lang="en">Coil Qty</value>
+    </property>
+    <property key="mtcFile">
+        <value xml:lang="en">MTC File</value>
+    </property>
+    <property key="shippingAgent">
+        <value xml:lang="en">Shipping Agent</value>
+    </property>
+    <property key="email">
+        <value xml:lang="en">Email</value>
+    </property>
+    <property key="shipmentAdviceFile">
+        <value xml:lang="en">Shipment Advice File</value>
+    </property>
+    <property key="customerName">
+        <value xml:lang="en">Customer Name</value>
+    </property>
+    <property key="gaugeControlYield">
+        <value xml:lang="en">Guage Control Yield</value>
+    </property>
+    <property key="totalQuantity">
+        <value xml:lang="en">Total Qty</value>
+    </property>
+    <property key="vendorAddr">
+        <value xml:lang="en">Address</value>
+    </property>
+    <property key="vendorEmail">
+        <value xml:lang="en">Email</value>
+    </property>
+    <property key="vendorTel">
+        <value xml:lang="en">Tel</value>
+    </property>
+    <property key="vendorFax">
+        <value xml:lang="en">Fax</value>
+    </property>
+    <property key="totalPoAmount">
+        <value xml:lang="en">Total PO Amount</value>
+    </property>
+    <property key="internalNote">
+        <value xml:lang="en">Internal Note</value>
+    </property>
+    <property key="tel">
+        <value xml:lang="en">Tel</value>
+    </property>
+    <property key="fax">
+        <value xml:lang="en">Fax</value>
+    </property>
+    <property key="lot">
+        <value xml:lang="en">Lot</value>
+    </property>
+    <property key="coilDescription">
+        <value xml:lang="en">Coil Description</value>
+    </property>
+    <property key="coilSpec">
+        <value xml:lang="en">Coil Spec</value>
+    </property>
+    <property key="coilId">
+        <value xml:lang="en">Coil Inner Diameter</value>
+    </property>
+    <property key="otherDetails">
+        <value xml:lang="en">Other Details</value>
+    </property>
+    <property key="coilGrade">
+        <value xml:lang="en">Coil Grade</value>
+    </property>
+    <property key="gaugeControlYield">
+        <value xml:lang="en">Guage Control Yield</value>
+    </property>
+
+    <property key="stage">
+        <value xml:lang="en">Stage</value>
+    </property>
+    <property key="lotNo">
+        <value xml:lang="en">LOT#</value>
+    </property>
+    <property key="etd">
+        <value xml:lang="en">ETD</value>
+    </property>
+    <property key="eta">
+        <value xml:lang="en">ETA</value>
+    </property>
+    <property key="vessel">
+        <value xml:lang="en">Vessel</value>
+    </property>
+    <property key="port">
+        <value xml:lang="en">Port</value>
+    </property>
+    <property key="steelType">
+        <value xml:lang="en">Steel Type</value>
+    </property>
+    <property key="grade">
+        <value xml:lang="en">Grade</value>
+    </property>
+    <property key="coatingWeight">
+        <value xml:lang="en">Coating Weight</value>
+    </property>
+    <property key="type">
+        <value xml:lang="en">Type</value>
+    </property>
+    <property key="gauge">
+        <value xml:lang="en">Gauge</value>
+    </property>
+    <property key="width">
+        <value xml:lang="en">Width</value>
+    </property>
+    <property key="mt">
+        <value xml:lang="en">MT</value>
+    </property>
+    <property key="lbs">
+        <value xml:lang="en">LBS</value>
+    </property>
+    <property key="ft">
+        <value xml:lang="en">FT</value>
+    </property>
+    <property key="yield">
+        <value xml:lang="en">Yield</value>
+    </property>
+    <property key="customer">
+        <value xml:lang="en">Customer</value>
+    </property>
+    <property key="steelCost">
+        <value xml:lang="en">Steel Cost($/MT)</value>
+    </property>
+    <property key="civAmount">
+        <value xml:lang="en">CIV Amount</value>
+    </property>
+    <property key="shippingDoc">
+        <value xml:lang="en">Shipping DOC,Received Status</value>
+    </property>
+    <property key="paymentMethod">
+        <value xml:lang="en">Payment Method</value>
+    </property>
+    <property key="priceTerm">
+        <value xml:lang="en">Price Term</value>
+    </property>
+    <property key="lcLsd">
+        <value xml:lang="en">LCLSD</value>
+    </property>
+    <property key="mtcVerificationStatus">
+        <value xml:lang="en">MTC Verification Status</value>
+    </property>
+    <property key="remark">
+        <value xml:lang="en">Remark</value>
+    </property>
+    <property key="lastUpdateDate">
+        <value xml:lang="en">Last Update Date</value>
+    </property>
+    <property key="newPo">
+        <value xml:lang="en">New PO Issue</value>
+    </property>
+    <property key="lastUpdateUserId">
+        <value xml:lang="en">Last Update User</value>
+    </property>
+    <property key="lastUpdateStamp">
+        <value xml:lang="en">Last Update Date</value>
+    </property>
+    <property key="na">
+        <value xml:lang="en">N/A</value>
+    </property>
+
+    <property key="lotInfo">
+        <value xml:lang="en">LOT Information</value>
+    </property>
+    <property key="poInfo">
+        <value xml:lang="en">PO Information</value>
+    </property>
+
+    <property key="allClear">
+        <value xml:lang="en">All Clear</value>
+    </property>
+    <property key="deleteRow">
+        <value xml:lang="en">Delete Row</value>
+    </property>
+    <property key="update">
+        <value xml:lang="en">Update</value>
+    </property>
+    <property key="cancel">
+        <value xml:lang="en">Cancel</value>
+    </property>
+    <property key="submit">
+        <value xml:lang="en">Submit</value>
+    </property>
+    <property key="patial">
+        <value xml:lang="en">Partial</value>
+    </property>
+    <property key="duplicate">
+        <value xml:lang="en">Duplicate</value>
+    </property>
+
+    <property key="blDoc">
+        <value xml:lang="en">B/L Document</value>
+    </property>
+    <property key="commercialInvoiceDoc">
+        <value xml:lang="en">Commercial Invoice Document</value>
+    </property>
+    <property key="commercialInvoiceFile">
+        <value xml:lang="en">Commercial Invoice File</value>
+    </property>
+    <property key="packingListDoc">
+        <value xml:lang="en">Packing List Document</value>
+    </property>
+    <property key="plDocFile">
+        <value xml:lang="en">Packing List File</value>
+    </property>
+    <property key="weightListDoc">
+        <value xml:lang="en">Weight List Document</value>
+    </property>
+    <property key="wlDocFile">
+        <value xml:lang="en">Weight List File</value>
+    </property>
+    <property key="mtcDoc">
+        <value xml:lang="en">MTC Document</value>
+    </property>
+    <property key="mtcDocFile">
+        <value xml:lang="en">MTC File</value>
+    </property>
+    <property key="shipmentAdviceDoc">
+        <value xml:lang="en">Shipment Advice Document</value>
+    </property>
+    <property key="shipmentAdviceDocFile">
+        <value xml:lang="en">Shipment Advice File</value>
+    </property>
+</resource>

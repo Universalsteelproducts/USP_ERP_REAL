@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of Purchase Component</title>
+    <description></description>
+    <copyright>USP</copyright>
+    <version>1.0</version>
+
+    <!-- PO Master -->
+    <entity entity-name="PoMaster" package-name="org.apache.ofbiz.purchase" title="Purchase PoMaster Entity">
+        <field name="poNo" type="id-long-ne"></field>
+        <field name="vendorId" type="id-long"></field>
+        <field name="poStatus" type="id-long"></field>
+        <field name="orderDate" type="date-time"></field>
+        <field name="priceTerm" type="id-long"></field>
+        <field name="freightTerm" type="id-long"></field>
+        <field name="paymentTerm" type="id-long"></field>
+        <field name="downPayment" type="currency-amount"></field>
+        <field name="remark" type="comment"></field>
+        <field name="shipmentMonth" type="short-varchar"></field>
+        <field name="poType" type="id-long"></field>
+        <field name="billingAccountId" type="id-long"></field>
+        <field name="internalNote" type="comment"></field>
+        <field name="createUserId" type="id-long"></field>
+        <field name="lastUpdateUserId" type="id-long"></field>
+
+        <prim-key field="poNo"/>
+    </entity>
+
+    <!-- PO Reference -->
+    <entity entity-name="Reference" package-name="org.apache.ofbiz.purchase" title="Purchase Reference Entity">
+        <field name="referenceSeq" type="numeric"></field>
+        <field name="referenceNo" type="id-long-ne"></field>
+        <field name="lotNo" type="id-long-ne"></field>
+        <field name="poNo" type="id-long-ne"></field>
+        <field name="ppglNo" type="numeric"></field>
+        <field name="partialYN" type="indicator"></field>
+        <field name="partialNo" type="id-long"></field>
+        <field name="port" type="short-varchar"></field>
+        <field name="destination" type="id-long"></field>
+        <field name="steelType" type="id-long"></field>
+        <field name="grade" type="id-long"></field>
+        <field name="gradeDesc" type="description"></field>
+        <field name="coatingWeight" type="id-long"></field>
+        <field name="coatingWeightDesc" type="description"></field>
+        <field name="surfaceCoilType" type="id-long"></field>
+        <field name="surfaceCoilTypeDesc" type="description"></field>
+        <field name="gauge" type="id-long"></field>
+        <field name="gaugeUnit" type="id-long"></field>
+        <field name="gaugeDesc" type="description"></field>
+        <field name="width" type="id-long"></field>
+        <field name="widthDesc" type="description"></field>
+        <field name="coilMaxWeight" type="id-long"></field>
+        <field name="innerDiameter" type="id-long"></field>
+        <field name="gaugeControlYield" type="id-long"></field>
+        <field name="packaging" type="id-long"></field>
+        <field name="packagingDesc" type="description"></field>
+        <field name="barge" type="indicator"></field>
+        <field name="businessClass" type="id-long"></field>
+        <field name="customerId" type="id-long"></field>
+        <field name="customerName" type="id-long"></field>
+        <field name="otherDetail" type="description"></field>
+        <!-- 		<field name="orderQuantity" type="fixed-point"></field> -->
+        <field name="unitQuantity" type="fixed-point"></field>
+        <field name="quantityUnit" type="id-long"></field>
+        <field name="unitPrice" type="currency-amount"></field>
+        <field name="commissionUnitPrice" type="currency-amount"></field>
+        <field name="priceUnit" type="id-long"></field>
+        <field name="paintBrand" type="id-long"></field>
+        <field name="paintCode" type="id-long"></field>
+        <field name="paintColor" type="id-long"></field>
+        <field name="paintType" type="id-long"></field>
+        <field name="paintCoatingThickness" type="id-long"></field>
+        <field name="paintCoatingThicknessDesc" type="description"></field>
+        <field name="lcPaymentYn" type="indicator"></field>
+        <field name="etd" type="date-time"></field>
+        <field name="eta" type="date-time"></field>
+        <field name="createUserId" type="id-long"></field>
+        <field name="lastUpdateUserId" type="id-long"></field>
+
+        <field name="blDocFileYN" type="indicator"></field>
+        <field name="blDocFilePath" type="description"></field>
+        <field name="vessel" type="id-long"></field>
+        <field name="blNo" type="id-long"></field>
+        <field name="blDate" type="date-time"></field>
+        <field name="portOfLoading" type="id-long"></field>
+        <field name="shippingCarrier" type="description"></field>
+
+        <field name="ciDocFileYN" type="indicator"></field>
+        <field name="ciDocFilePath" type="description"></field>
+        <field name="contractNo" type="id-long"></field>
+        <field name="unitCost" type="currency-amount"></field>
+        <field name="civAmount" type="currency-amount"></field>
+
+        <field name="plDocFileYN" type="indicator"></field>
+        <field name="plDocFilePath" type="description"></field>
+        <field name="loadedQty" type="fixed-point"></field>
+        <field name="weight" type="fixed-point"></field>
+        <field name="linealFeet" type="id-long"></field>
+        <field name="coilQuantity" type="fixed-point"></field>
+
+        <field name="wlDocFileYN" type="indicator"></field>
+        <field name="wlDocFilePath" type="description"></field>
+
+        <field name="mtcDocFileYN" type="indicator"></field>
+        <field name="mtcDocFilePath" type="description"></field>
+        <field name="mtcVerified" type="indicator"></field>
+
+        <field name="shipmentAdviceDocFileYN" type="indicator"></field>
+        <field name="shipmentAdviceDocFilePath" type="description"></field>
+        <field name="shippingAgent" type="id-long"></field>
+        <field name="email" type="description"></field>
+
+        <prim-key field="referenceSeq"/>
+
+        <relation type="one" rel-entity-name="PoMaster">
+            <key-map field-name="poNo"/>
+        </relation>
+    </entity>
+
+    <!-- Vendor Master -->
+    <entity entity-name="Vendor" package-name="org.apache.ofbiz.purchase" title="Purchase Vendor Entity">
+        <field name="vendorId" type="id-long-ne"></field>
+        <field name="vendorNm" type="long-varchar"></field>
+        <field name="vendorInitials" type="id"></field>
+        <field name="vendorAddr" type="long-varchar"></field>
+        <field name="vendorEmail" type="long-varchar"></field>
+        <field name="vendorTel" type="long-varchar"></field>
+        <field name="vendorFax" type="long-varchar"></field>
+        <field name="priceTerm" type="long-varchar"></field>
+        <field name="freightTerm" type="long-varchar"></field>
+        <field name="paymentTerm" type="long-varchar"></field>
+        <field name="remark" type="comment"></field>
+
+        <prim-key field="vendorId"/>
+    </entity>
+
+    <!-- Customer Master -->
+    <entity entity-name="Customer" package-name="org.apache.ofbiz.purchase" title="Purchase Customer Entity">
+        <field name="customerId" type="id-long-ne"></field>
+        <field name="customerName" type="long-varchar"></field>
+        <field name="contactPerson" type="long-varchar"></field>
+        <field name="customerTel" type="long-varchar"></field>
+        <field name="customerFax" type="long-varchar"></field>
+        <field name="customerEmail" type="long-varchar"></field>
+        <field name="customerAddr" type="long-varchar"></field>
+
+        <prim-key field="customerId"/>
+    </entity>
+
+    <!-- code Master -->
+    <entity entity-name="Code" package-name="org.apache.ofbiz.purchase" title="Purchase Code Entity">
+        <field name="code" type="id-long-ne"></field>
+        <field name="codeName" type="long-varchar"></field>
+        <field name="codeGroup" type="id-long-ne"></field>
+        <field name="attribute1" type="long-varchar"></field>
+        <field name="attribute2" type="long-varchar"></field>
+        <field name="attribute3" type="long-varchar"></field>
+        <field name="attribute4" type="long-varchar"></field>
+        <field name="sort" type="id"></field>
+        <field name="remark" type="comment"></field>
+
+        <prim-key field="code"/>
+        <prim-key field="codeGroup"/>
+    </entity>
+
+    <view-entity entity-name="PoMasterNReference"
+                 package-name="org.apache.ofbiz.purchase"
+                 title="PoMaster and Reference">
+        <member-entity entity-alias="P" entity-name="PoMaster"/>
+        <member-entity entity-alias="R" entity-name="Reference"/>
+        <member-entity entity-alias="V" entity-name="Vendor"/>
+        <member-entity entity-alias="C" entity-name="Customer"/>
+        <member-entity entity-alias="CD" entity-name="Code"/>
+
+        <!-- 		<alias entity-alias="R" name="totalOrderQuantity" field="orderQuantity" function="sum"/> -->
+        <!-- 		<alias entity-alias="R" name="totalQuantity" field="unitQuantity" function="sum"/> -->
+        <!--         <alias entity-alias="R" name="totalPrice" field="unitPrice" function="sum"/> -->
+
+        <alias-all entity-alias="P"/>
+        <alias-all entity-alias="R"/>
+        <alias-all entity-alias="V"/>
+        <alias-all entity-alias="C"/>
+        <alias-all entity-alias="CD"/>
+
+        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
+            <key-map field-name="poNo"/>
+        </view-link>
+
+        <view-link entity-alias="P" rel-entity-alias="CD" rel-optional="true">
+            <key-map field-name="poStatus" rel-field-name="code" />
+            <entity-condition>
+                <condition-expr field-name="codeGroup" entity-alias="CD" value="PO_STATUS"/>
+            </entity-condition>
+        </view-link>
+
+        <view-link entity-alias="R" rel-entity-alias="C" rel-optional="true">
+            <key-map field-name="customerId"/>
+        </view-link>
+
+        <view-link entity-alias="P" rel-entity-alias="V" rel-optional="true">
+            <key-map field-name="vendorId"/>
+        </view-link>
+    </view-entity>
+
+</entitymodel>

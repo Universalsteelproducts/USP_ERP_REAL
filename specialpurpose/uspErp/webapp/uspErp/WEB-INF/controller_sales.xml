@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>Purchase Component Site Configuration File</description>
+
+    <!-- Request Mappings -->
+    <request-map uri="salesMain">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="salesMain"/>
+    </request-map>
+
+    <!-- Sales Management -->
+    <request-map uri="salesManagement">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="salesManagement"/>
+    </request-map>
+
+    <!-- View Mappings -->
+	<view-map name="salesMain" page="component://uspErp/widget/sales/SalesScreens.xml#salesMain" type="screen"/>
+    <!-- Sales Management -->
+    <view-map name="salesManagement" page="component://uspErp/widget/sales/SalesScreens.xml#salesManagement" type="screen"/>
+</site-conf>

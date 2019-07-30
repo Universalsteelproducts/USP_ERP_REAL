@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- Sales Main 화면 -->
+    <screen name="salesMain">
+        <section>
+            <actions>
+                <set field="headerItem" value="SalesMain"/>
+                <set field="titleProperty" value="Sales Main"/>
+                <set field="appMenuNm" value="SalesMainAppBar"/>
+                <!-- <entity-one entity-name="PoMaster" value-field="poMaster"/> -->
+            </actions>
+            <widgets>
+                <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <label text="Hello Sales World!! :)"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- Sales Management Screen -->
+    <screen name="salesManagement">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_ADMIN"/>
+            </condition>
+            <actions>
+                <set field="appMenuNm" value="SalesMainAppBar"/>
+                <set field="headerItem" value="SalesManagement"/>
+                <set field="titleProperty" value="Sales Management"/>
+                <set field="initializedCB" value ="N"/>
+                <set field="searchCriteriaKey" value ="SEARCH_CRITERIA_USER"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://uspErp/template/sales/salesManagement.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

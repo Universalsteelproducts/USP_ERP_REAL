@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>Purchase Component Site Configuration File</description>
+
+    <!-- Request Mappings -->
+    <request-map uri="logisticsMain">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="logisticsMain"/>
+    </request-map>
+
+    <!-- Vessel Control -->
+    <request-map uri="vesselControl">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="vesselControl"/>
+    </request-map>
+
+    <!-- Transfer -->
+    <request-map uri="transfer">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="transfer"/>
+    </request-map>
+
+    <!-- View Mappings -->
+	<view-map name="logisticsMain" page="component://uspErp/widget/logistics/LogisticsScreens.xml#logisticsMain" type="screen"/>
+    <!-- Vessel Control -->
+    <view-map name="vesselControl" page="component://uspErp/widget/logistics/LogisticsScreens.xml#vesselControl" type="screen"/>
+    <!-- Transfer -->
+    <view-map name="transfer" page="component://uspErp/widget/logistics/LogisticsScreens.xml#transfer" type="screen"/>
+</site-conf>

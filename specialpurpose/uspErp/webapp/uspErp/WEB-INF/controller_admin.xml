@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>Purchase Component Site Configuration File</description>
+
+    <!-- Request Mappings -->
+    <request-map uri="adminMain">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="adminMain"/>
+    </request-map>
+
+    <!-- Employee Management -->
+    <request-map uri="employeeManagement">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="employeeManagement"/>
+    </request-map>
+    <!-- Employee Management -->
+
+    <!-- Security Management -->
+    <request-map uri="securityGroupManagement">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="securityGroupManagement"/>
+    </request-map>
+    <!-- Security Management -->
+
+    <!-- Permission Management -->
+    <request-map uri="permissionManagement">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="permissionManagement"/>
+    </request-map>
+    <!-- Permission Management -->
+
+    <!-- View Mappings -->
+    <view-map name="adminMain" page="component://uspErp/widget/admin/AdminScreens.xml#adminMain" type="screen"/>
+    <!-- Employee Management -->
+    <view-map name="employeeManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#employeeManagement"/>
+    <!-- Security Management -->
+    <view-map name="securityGroupManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#securityGroupManagement"/>
+    <!-- Permission Management -->
+    <view-map name="permissionManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#permissionManagement"/>
+
+</site-conf>
