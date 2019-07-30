@@ -109,7 +109,7 @@
         <value xml:lang="en">Admin</value>
     </property>
     <property key="AdminMain">
-        <value xml:lang="en">Admin Main</value>
+        <value xml:lang="en">Main</value>
     </property>
     <property key="employeeManagement">
         <value xml:lang="en">Employee Management</value>

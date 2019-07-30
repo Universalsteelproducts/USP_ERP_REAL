@@ -18,7 +18,7 @@
 
                 <!-- jquery grid -->
                 <set field="layoutSettings.javaScripts[+0]" value="/images/jquery/plugins/DataTables/datatables.min.js" global="true"/>
-                <set field="layoutSettings.javaScripts[+0]" value="/uspErp/static/uspErpCommon.js" global="true"/>
+                <set field="layoutSettings.javaScripts[]" value="/uspErp/static/uspErpCommon.js" global="true"/>
                 <set field="layoutSettings.javaScripts[+0]" value="/uspErp/static/jquery-input-mask-phone-number.min.js" global="true"/>
                 <set field="layoutSettings.styleSheets[+0]" value="/images/jquery/plugins/DataTables/datatables.min.css" global="true"/>
 
