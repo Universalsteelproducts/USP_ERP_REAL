@@ -109,7 +109,7 @@
         <value xml:lang="en">Admin</value>
     </property>
     <property key="AdminMain">
-        <value xml:lang="en">Main</value>
+        <value xml:lang="en">Admin Main</value>
     </property>
     <property key="employeeManagement">
         <value xml:lang="en">Employee Management</value>
@@ -121,6 +121,33 @@
         <value xml:lang="en">Permission Management</value>
     </property>
     <!-- MENU LABEL END-->
+
+    <!-- BUTTON LABEL END-->
+    <property key="allClear">
+        <value xml:lang="en">All Clear</value>
+    </property>
+    <property key="deleteRow">
+        <value xml:lang="en">Delete Row</value>
+    </property>
+    <property key="update">
+        <value xml:lang="en">Update</value>
+    </property>
+    <property key="list">
+        <value xml:lang="en">List</value>
+    </property>
+    <property key="cancel">
+        <value xml:lang="en">Cancel</value>
+    </property>
+    <property key="submit">
+        <value xml:lang="en">Submit</value>
+    </property>
+    <property key="patial">
+        <value xml:lang="en">Partial</value>
+    </property>
+    <property key="duplicate">
+        <value xml:lang="en">Duplicate</value>
+    </property>
+    <!-- BUTTON LABEL END-->
 
     <!-- PURCHASE VIEW LABEL START-->
     <!-- PURCHASE VIEW LABEL END-->
@@ -141,6 +168,64 @@
     <!-- REPORT VIEW LABEL END-->
 
     <!-- ADMIN VIEW LABEL START-->
+    <property key="createEmployee">
+        <value xml:lang="en">Create Employee</value>
+    </property>
+    <property key="employeeId">
+        <value xml:lang="en">Employee ID</value>
+    </property>
+    <property key="securityGroup">
+        <value xml:lang="en">Security Group</value>
+    </property>
+    <property key="securityGroup">
+        <value xml:lang="en">Security Group</value>
+    </property>
+    <property key="employeeLoginId">
+        <value xml:lang="en">Employee Login ID</value>
+    </property>
+    <property key="system">
+        <value xml:lang="en">System</value>
+    </property>
+    <property key="enabled">
+        <value xml:lang="en">Enabled</value>
+    </property>
+    <property key="reqPwdChange">
+        <value xml:lang="en">Request Passwd Change</value>
+    </property>
+    <property key="disabledDate">
+        <value xml:lang="en">Disabled Date</value>
+    </property>
+
+    <property key="employeeDetail">
+        <value xml:lang="en">Employee Detail</value>
+    </property>
+    <property key="employeeCreate">
+        <value xml:lang="en">Create Employee</value>
+    </property>
+    <property key="currentPw">
+        <value xml:lang="en">Current Password</value>
+    </property>
+    <property key="passwd">
+        <value xml:lang="en">New Password</value>
+    </property>
+    <property key="confirmPw">
+        <value xml:lang="en">Confirm Password</value>
+    </property>
+    <property key="pwHint">
+        <value xml:lang="en">Password Hint</value>
+    </property>
+    <property key="reqPasswdChange">
+        <value xml:lang="en">Require Password Change</value>
+    </property>
+    <property key="hasLoginOut">
+        <value xml:lang="en">Has Login Out</value>
+    </property>
+    <property key="disabledDate">
+        <value xml:lang="en">Disabled Date</value>
+    </property>
+    <property key="successFailedLogins">
+        <value xml:lang="en">Successive Failed Logins</value>
+    </property>
     <!-- ADMIN VIEW LABEL END-->
 
     <property key="searchPoForm">
@@ -490,28 +575,6 @@
     </property>
     <property key="poInfo">
         <value xml:lang="en">PO Information</value>
-    </property>
-
-    <property key="allClear">
-        <value xml:lang="en">All Clear</value>
-    </property>
-    <property key="deleteRow">
-        <value xml:lang="en">Delete Row</value>
-    </property>
-    <property key="update">
-        <value xml:lang="en">Update</value>
-    </property>
-    <property key="cancel">
-        <value xml:lang="en">Cancel</value>
-    </property>
-    <property key="submit">
-        <value xml:lang="en">Submit</value>
-    </property>
-    <property key="patial">
-        <value xml:lang="en">Partial</value>
-    </property>
-    <property key="duplicate">
-        <value xml:lang="en">Duplicate</value>
     </property>
 
     <property key="blDoc">

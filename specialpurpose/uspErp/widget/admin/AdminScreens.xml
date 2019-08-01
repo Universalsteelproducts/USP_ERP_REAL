@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
-    <!-- Sales Main 화면 -->
+    <!-- Admin Main 화면 -->
     <screen name="adminMain">
         <section>
             <condition>
                 <if-has-permission permission="USPERP" action="_ADMIN"/>
             </condition>
             <actions>
-                <set field="headerItem" value="AdminMain"/>
+                <set field="headerItem" value="main"/>
                 <set field="titleProperty" value="Admin Main"/>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
                 <!-- <entity-one entity-name="PoMaster" value-field="poMaster"/> -->
@@ -32,7 +32,7 @@
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
-                <set field="headerItem" value="EmployeeManagement"/>
+                <set field="headerItem" value="employeeManagement"/>
                 <set field="titleProperty" value="Employee Management"/>
                 <set field="initializedCB" value ="N"/>
                 <set field="searchCriteriaKey" value ="SEARCH_CRITERIA_USER"/>
@@ -41,6 +41,9 @@
                 <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
                         <section>
+                            <actions>
+                                <script location="component://uspErp/groovyScript/admin/EmployeeManagement.groovy"/>
+                            </actions>
                             <widgets>
                                 <platform-specific>
                                     <html><html-template location="component://uspErp/template/admin/employeeManagement.ftl"/></html>
@@ -52,6 +55,60 @@
             </widgets>
         </section>
     </screen>
+    <screen name="createEmployeeDetailForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_ADMIN"/>
+            </condition>
+            <actions>
+                <set field="curdType" value="C"/>
+                <set field="headerItem" value="employeeManagement"/>
+                <set field="titleProperty" value="Create Employee"/>
+            </actions>
+            <widgets>
+                <include-screen name="commonEmployeeDetailForm" />
+            </widgets>
+        </section>
+    </screen>
+    <screen name="updateEmployeeDetailForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_ADMIN"/>
+            </condition>
+            <actions>
+                <set field="curdType" value="RU"/>
+                <set field="headerItem" value="employeeManagement"/>
+                <set field="titleProperty" value="Employee Detail"/>
+            </actions>
+            <widgets>
+                <include-screen name="commonEmployeeDetailForm" />
+            </widgets>
+        </section>
+    </screen>
+    <screen name="commonEmployeeDetailForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_ADMIN"/>
+            </condition>
+            <actions>
+                <set field="appMenuNm" value="AdminMainAppBar"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://uspErp/template/admin/employeeCRUD.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- Employee Management Screen -->
 
     <!-- Security Group Management Screen -->
     <screen name="securityGroupManagement">
@@ -61,7 +118,7 @@
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
-                <set field="headerItem" value="SecurityGroupManagement"/>
+                <set field="headerItem" value="securityGroupManagement"/>
                 <set field="titleProperty" value="Security Group Management"/>
                 <set field="initializedCB" value ="N"/>
                 <set field="searchCriteriaKey" value ="SEARCH_CRITERIA_USER"/>
@@ -81,6 +138,7 @@
             </widgets>
         </section>
     </screen>
+    <!-- Security Group Management Screen -->
 
     <!-- Permission Management Screen -->
     <screen name="permissionManagement">
@@ -90,7 +148,7 @@
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
-                <set field="headerItem" value="PermissionManagement"/>
+                <set field="headerItem" value="permissionManagement"/>
                 <set field="titleProperty" value="Permission Management"/>
                 <set field="initializedCB" value ="N"/>
                 <set field="searchCriteriaKey" value ="SEARCH_CRITERIA_USER"/>
@@ -110,5 +168,6 @@
             </widgets>
         </section>
     </screen>
+    <!-- Permission Management Screen -->
 
 </screens>
