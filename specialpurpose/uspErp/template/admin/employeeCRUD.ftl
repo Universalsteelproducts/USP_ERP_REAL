@@ -80,6 +80,7 @@ under the License.
                     <td>
                     <#if curdType == "RU">
                         ${(employeeInfo.userLoginId)?default("")}
+                        <input type="hidden" name="employeeLoginId" id="employeeLoginId" value="${(employeeInfo.userLoginId)?default("")}" size="60" maxlength="255"/>
                     <#elseif curdType == "C" >
                         <input type="text" name="employeeLoginId" id="employeeLoginId" size="60" maxlength="255"/>
                     </#if>
@@ -133,6 +134,7 @@ under the License.
                             <option value="Y" <#if (employeeInfo.isSystem)?default("") != "" && (employeeInfo.isSystem)?default("") == "Y">selected="selected"</#if>>YES</option>
                             <option value="N" <#if (employeeInfo.isSystem)?default("") == "" || (employeeInfo.isSystem)?default("") == "N">selected="selected"</#if>>NO</option>
                         </select>
+                        <input type="hidden" id="isSystem" name="isSystem" value="${(employeeInfo.isSystem)?default("")}" />
                     </td>
                 </tr>
             <#if curdType == "RU">
@@ -146,6 +148,7 @@ under the License.
                             <option value="Y" <#if (employeeInfo.hasLoggedOut)?default("") == "" || (employeeInfo.hasLoggedOut)?default("") == "Y">selected="selected"</#if>>YES</option>
                             <option value="N" <#if (employeeInfo.hasLoggedOut)?default("") != "" && (employeeInfo.hasLoggedOut)?default("") == "N">selected="selected"</#if>>NO</option>
                         </select>
+                        <input type="hidden" id="hasLoggedOut" name="hasLoggedOut" value="${(employeeInfo.hasLoggedOut)?default("")}" />
                     </td>
                 </tr>
             </#if>
@@ -159,6 +162,7 @@ under the License.
                             <option value="Y" <#if (employeeInfo.enabled)?default("") == "" || (employeeInfo.enabled)?default("") == "Y">selected="selected"</#if>>YES</option>
                             <option value="N" <#if (employeeInfo.enabled)?default("") != "" && (employeeInfo.enabled)?default("") == "N">selected="selected"</#if>>NO</option>
                         </select>
+                        <input type="hidden" id="enabled" name="enabled" value="${(employeeInfo.enabled)?default("")}" />
                     </td>
                 </tr>
                 <tr id="extendTr" style="display:none;">
@@ -189,7 +193,7 @@ under the License.
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td>
-                       <input type="text" name="successiveFailedLogins" id="successiveFailedLogins" value="${employeeInfo.successiveFailedLogins!}" size="60" maxlength="255" disabled="disabled"/>
+                       <input type="text" name="successiveFailedLogins" id="successiveFailedLogins" value="${(employeeInfo.successiveFailedLogins)?default('')}" size="60" maxlength="255" disabled="disabled"/>
                     </td>
                 </tr>
             </#if>

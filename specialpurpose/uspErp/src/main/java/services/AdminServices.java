@@ -111,17 +111,40 @@ public class AdminServices {
 	}
 
     public static Map<String, Object> searchEmployee(DispatchContext dctx, Map<String, ?> context) {
-    	Delegator delegator = dctx.getDelegator();
-    	Locale locale = (Locale) context.get("locale");
-        Map<String, Object> result = ServiceUtil.returnSuccess();
-        GenericValue userLogin = (GenericValue) context.get("userLogin");
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String productStoreId = context.get("productStoreId") == null ? "" : (String) context.get("productStoreId");
+		String srchEmployeeId = context.get("srchEmployeeId") == null ? "" : (String) context.get("srchEmployeeId");
+		String searchGroupId = context.get("searchGroupId") == null ? "" : (String) context.get("searchGroupId");
 
 		List<Map<String, Object>> resultList = new LinkedList<Map<String,Object>>();
+		if (userLogin != null) {
+			String userLoginId = (String) userLogin.get("userLoginId");
 
+			try {
+				List<EntityCondition> employeeConditionList = new ArrayList<EntityCondition>();
+
+				if(!"".equals(srchEmployeeId)) {
+					employeeConditionList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("userLoginId"), EntityOperator.LIKE, "%" + srchEmployeeId.toUpperCase() + "%"));
+				}
+
+				List<GenericValue> employeeList = new  ArrayList<GenericValue>();
+				EntityCondition mainCond = EntityCondition.makeCondition(employeeConditionList, EntityOperator.AND);
+				employeeList = delegator.findList("UserLogin",mainCond, null, UtilMisc.toList("userLoginId"), null, false);
+
+				resultList.addAll(employeeList);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot searchEmployee ", module);
+			}
+		}
 		result.put("data", resultList);
 		result.put("recordsTotal", resultList.size());
 		result.put("recordsFiltered", resultList.size());
-        return result;
+
+		return result;
     }
 
 }

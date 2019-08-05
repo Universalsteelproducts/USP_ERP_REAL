@@ -1,11 +1,5 @@
-import org.apache.commons.collections.FastArrayList
 import org.apache.commons.lang.StringUtils
 import org.apache.ofbiz.base.util.UtilValidate
-import org.apache.ofbiz.entity.condition.EntityCondition
-import org.apache.ofbiz.entity.condition.EntityOperator
-import org.apache.ofbiz.entity.util.EntityUtil
-import org.apache.ofbiz.entity.condition.EntityFunction
-import org.apache.ofbiz.base.util.UtilMisc
 
 productStoreId = context.productStoreId
 
