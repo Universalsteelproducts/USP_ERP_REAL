@@ -97,6 +97,9 @@
                 <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
                         <section>
+                            <actions>
+                                <script location="component://uspErp/groovyScript/admin/EmployeeDetail.groovy"/>
+                            </actions>
                             <widgets>
                                 <platform-specific>
                                     <html><html-template location="component://uspErp/template/admin/employeeCRUD.ftl"/></html>
