@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Simple-Method" xsi:schemaLocation="http://ofbiz.apache.org/Simple-Method http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+	<simple-method method-name="successMessage" short-description="Display success message when no error messages are found.">
+		<set field="errorMessageListSize" value="${groovy:if(parameters.errorMessageList != null)return(parameters.errorMessageList.size());}"  type="Integer" default-value="0"/>
+		<if-compare field="errorMessageListSize" operator="equals" value="0">
+			<if-empty field="parameters.successMessageList">
+				<property-to-field resource="UspErpUiLabels" property="UpdatedSuccess" field="defaultSuccessMessage"/>
+				<string-to-list string="${defaultSuccessMessage}" list="parameters.successMessageList"/>
+			</if-empty>
+			<field-to-result field="parameters.successMessageList" result-name="uspErpSuccessMessageList"/>
+			<field-to-result field="parameters.warningMessageList" result-name="warningMessageList"/>
+		</if-compare>
+	</simple-method>
+
+	<simple-method method-name="createEmployee" short-description="Create an Employee">
+		<!-- check for bad or missing values -->
+		<if-empty field="parameters.employeeLoginId">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BadUserLoginIdError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="userLoginId"  list="error_list"/>
+			<else>
+				<call-object-method method-name="length" obj-field="parameters.employeeLoginId" ret-field="userLoginIdLength"/>
+				<set field="minUserLoginIdLength" value="5"/>
+
+				<if-compare-field field="userLoginIdLength" operator="less" to-field="minUserLoginIdLength" type="Integer">
+					<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BadUserLoginIdError"/>
+					<string-to-list string="${tempErrorMessage}" message-field="userLoginId"  list="error_list"/>
+					<else>
+						<call-class-method class-name="util.UspErpCommonUtil"  method-name="isValidId" ret-field="isValidId">
+							<field field="parameters.employeeLoginId"/>
+						</call-class-method>
+						<if-compare field="isValidId" operator="equals" value="true">
+							<call-object-method obj-field="parameters.employeeLoginId" method-name="toLowerCase" ret-field="parameters.employeeLoginId"/>
+							<entity-one entity-name="UserLogin" value-field="existingUserLoginId">
+								<field-map field-name="userLoginId" from-field="parameters.employeeLoginId"/>
+							</entity-one>
+							<if-not-empty field="existingUserLoginId">
+								<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginIdExistError"/>
+								<string-to-list string="${tempErrorMessage}" message-field="userLoginId"  list="error_list"/>
+								<else></else>
+							</if-not-empty>
+							<else>
+								<set field="errorKey" from-field="parameters.employeeLoginId"/>
+								<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="ValidIdError"/>
+								<string-to-list string="${tempErrorMessage}" message-field="userLoginId"  list="error_list"/>
+							</else>
+						</if-compare>
+					</else>
+				</if-compare-field>
+				<!-- check if userLoginId contains an @ symbol -->
+				<call-class-method class-name="util.UspErpCommonUtil"  method-name="isSubString" ret-field="isSubString">
+					<string value="@"/>
+					<field field="parameters.employeeLoginId"/>
+				</call-class-method>
+				<if-compare-field field="isSubString" operator="equals" to-field="true" type="Boolean">
+					<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginIdEmailAddressError"/>
+					<string-to-list string="${tempErrorMessage}" message-field="userLoginId"  list="error_list"/>
+				</if-compare-field>
+			</else>
+		</if-empty>
+
+		<if-not-empty field="parameters.passwd">
+			<if-empty field="parameters.confirmPw">
+				<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginPasswordError"/>
+				<string-to-list string="${tempErrorMessage}" message-field="confirmPassword"  list="error_list"/>
+				<else>
+					<if-compare-field field="parameters.passwd" operator="equals" to-field="parameters.confirmPw" type="String">
+						<call-object-method method-name="length" obj-field="parameters.passwd" ret-field="userLoginPasswordLength"/>
+						<set field="minUserLoginPasswordLength" value="6"/>
+						<if-compare-field field="userLoginPasswordLength" operator="less" to-field="minUserLoginPasswordLength" type="Integer">
+							<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginPasswordError"/>
+							<string-to-list string="${tempErrorMessage}" message-field="newPassword"  list="error_list"/>
+							<else>
+								<set field="parameters.currentPassword" from-field="parameters.passwd"/>
+								<set field="parameters.currentPasswordVerify" from-field="parameters.confirmPw"/>
+							</else>
+						</if-compare-field>
+						<else>
+							<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginPasswordError"/>
+							<string-to-list string="${tempErrorMessage}" message-field="newPassword"  list="error_list"/>
+						</else>
+					</if-compare-field>
+				</else>
+			</if-empty>
+			<else>
+				<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="UserLoginPasswordError"/>
+				<string-to-list string="${tempErrorMessage}" message-field="newPassword"  list="error_list"/>
+			</else>
+		</if-not-empty>
+
+		<if-empty field="parameters.pwHint">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BlankPasswordHintError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="passwordHint"  list="error_list"/>
+		</if-empty>
+
+		<if-not-empty field="parameters.disabledDate">
+			<set field="parameters.disabledDateTime" from-field="parameters.disabledDate"/>
+			<!-- check if datetime passed already -->
+			<call-class-method class-name="util.UspErpCommonUtil"  method-name="checkPassedJobDate" ret-field="PassedDisabledTime">
+				<field field="parameters.disabledDateTime"/>
+			</call-class-method>
+			<if-compare field="PassedDisabledTime" operator="equals" value="false">
+				<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="DisabledTimePassedError"/>
+				<string-to-list string="${tempErrorMessage}" message-field="disabledDate"  list="error_list"/>
+			</if-compare>
+		</if-not-empty>
+
+		<set field="parameters.partyId" from-field="parameters.employeeLoginId"/>
+		<set field="parameters.statusId" value="PARTY_ENABLED"/>
+		<set field="parameters.roleTypeId" value="CONTENT_USER"/>
+		<set field="parameters.userLoginId" from-field="parameters.employeeLoginId"/>
+
+		<now-timestamp field="nowTimestamp"/>
+		<set field="parameters.fromDate" from-field="nowTimestamp"/>
+		<set field="parameters.groupId" value="FULLADMIN"/>
+		<!--<set field="parameters.groupId" value="USPERPADMIN"/>-->
+
+		<check-errors/>
+
+		<!-- create record in entities: Party, PartyRole, UserLogin, UserLoginSecurityGroup, ProductStoreRole -->
+		<make-value value-field="createPartyEntity" entity-name="Party"/>
+		<set-pk-fields map="parameters" value-field="createPartyEntity"/>
+		<set-nonpk-fields map="parameters" value-field="createPartyEntity"/>
+		<create-value value-field="createPartyEntity"/>
+
+		<set-service-fields service-name="createPartyRole" map="parameters" to-map="createPartyRoleCtx"/>
+		<make-value value-field="createPartyRoleEntity" entity-name="PartyRole"/>
+		<set-pk-fields map="createPartyRoleCtx" value-field="createPartyRoleEntity"/>
+		<set-nonpk-fields map="createPartyRoleCtx" value-field="createPartyRoleEntity"/>
+		<create-value value-field="createPartyRoleEntity"/>
+
+		<set-service-fields service-name="createUserLogin" map="parameters" to-map="createUserLoginEntity"/>
+		<call-service service-name="createUserLogin" in-map-name="createUserLoginEntity"/>
+
+		<make-value value-field="createUserLoginSecurityGroupEntity" entity-name="UserLoginSecurityGroup"/>
+		<set-pk-fields map="parameters" value-field="createUserLoginSecurityGroupEntity"/>
+		<set-nonpk-fields map="parameters" value-field="createUserLoginSecurityGroupEntity"/>
+		<create-value value-field="createUserLoginSecurityGroupEntity"/>
+
+		<make-value entity-name="ProductStoreRole" value-field="productStoreRole"/>
+		<set field="productStoreRole.partyId" from-field="parameters.partyId"/>
+		<set field="productStoreRole.roleTypeId" value="CONTENT_USER"/>
+		<set field="productStoreRole.productStoreId" from-field="parameters.productStoreId"/>
+		<now-timestamp field="productStoreRole.fromDate"/>
+		<create-value value-field="productStoreRole"/>
+
+		<if-not-empty field="createPartyEntity">
+			<if-not-empty field="createPartyRoleEntity">
+				<if-not-empty field="createUserLoginEntity">
+					<set field="editUser" from-field="parameters.employeeLoginId"/>
+					<property-to-field resource="UspErpUiLabels" property="EditUserSuccess" field="editUserSuccessMessage"/>
+					<string-to-list string="${editUserSuccessMessage}" list="successMessageList"/>
+				</if-not-empty>
+			</if-not-empty>
+		</if-not-empty>
+
+	</simple-method>
+
+	<simple-method method-name="updateEmployee" short-description="Update an Employee">
+
+	</simple-method>
+
+</simple-methods>
