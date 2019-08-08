@@ -30,6 +30,23 @@ under the License.
 		/***************************************************************************
 		 ******************			Input Tag Control			********************
 		 ***************************************************************************/
+		$("#enabledSel").on("change", function() {
+		    var curVal = $(this).val();
+		    $("#enabled").val(curVal);
+            if(curVal == "Y") {
+                $("#extendTr").hide();
+            } else {
+                $("#extendTr").show();
+            }
+		});
+
+		$("#hasLogOut").on("change", function() {
+		    $("#hasLoggedOut").val($(this).val());
+        });
+
+		$("#system").on("change", function() {
+		    $("#isSystem").val($(this).val());
+        });
 
 		/***************************************************************************
 		 ******************				Button Control			********************
@@ -42,11 +59,17 @@ under the License.
 		});
 
 		$("#updateBtn").on("click", function() {
-
+            var targetForm = $("#detailForm");
+            targetForm.attr("method", "post");
+            targetForm.attr("action", "<@ofbizUrl>updateEmployeeDetail</@ofbizUrl>");
+            targetForm.submit();
         });
 
 		$("#submitBtn").on("click", function() {
-
+            var targetForm = $("#detailForm");
+            targetForm.attr("method", "post");
+            targetForm.attr("action", "<@ofbizUrl>createEmployee</@ofbizUrl>");
+            targetForm.submit();
         });
 	});
 </script>
