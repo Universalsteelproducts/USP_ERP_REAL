@@ -188,7 +188,7 @@ under the License.
                         <input type="hidden" id="enabled" name="enabled" value="${(employeeInfo.enabled)?default("")}" />
                     </td>
                 </tr>
-                <tr id="extendTr" <#if (employeeInfo.enabled)?default("") == "Y">style="display:none;"</#if>>
+                <tr id="extendTr" <#if (employeeInfo.enabled)?default("") == "Y" || curdType == "C">style="display:none;"</#if>>
                     <td class="label" width="15%" align="right" >
                         ${uiLabelMap.disabledDate}
                     </td>
