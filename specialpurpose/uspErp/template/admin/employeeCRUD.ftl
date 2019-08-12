@@ -188,13 +188,13 @@ under the License.
                         <input type="hidden" id="enabled" name="enabled" value="${(employeeInfo.enabled)?default("")}" />
                     </td>
                 </tr>
-                <tr id="extendTr" style="display:none;">
+                <tr id="extendTr" <#if (employeeInfo.enabled)?default("") == "Y">style="display:none;"</#if>>
                     <td class="label" width="15%" align="right" >
                         ${uiLabelMap.disabledDate}
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td>
-                       <@htmlTemplate.renderDateTimeField name="disabledDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="disabledDate" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                       <@htmlTemplate.renderDateTimeField name="disabledDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="${(employeeInfo.disabledDateTime)?default('')}" size="25" maxlength="50" id="disabledDate" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                     </td>
                 </tr>
                 <tr>

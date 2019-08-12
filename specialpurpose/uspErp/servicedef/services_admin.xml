@@ -50,4 +50,28 @@
         <attribute name="disabledDate" type="String" mode="IN" optional="true"/>
     </service>
 
+    <service name="updateEmployeeGroup" engine="group" auth="false">
+        <description>
+            Update an Employee
+        </description>
+        <group>
+            <invoke name="updateEmployee" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="updateEmployee" engine="simple" auth="false"
+             location="component://uspErp/minilang/admin/EmployeeManagementServices.xml"
+             invoke="updateEmployee">
+        <description>Update an Employee</description>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="employeeLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="passwd" type="String" mode="IN" optional="true"/>
+        <attribute name="confirmPw" type="String" mode="IN" optional="true"/>
+        <attribute name="pwHint" type="String" mode="IN" optional="true"/>
+        <attribute name="isSystem" type="String" mode="IN" optional="true"/>
+        <attribute name="enabled" type="String" mode="IN" optional="true"/>
+        <attribute name="requirePasswordChange" type="String" mode="IN" optional="true"/>
+        <attribute name="disabledDate" type="String" mode="IN" optional="true"/>
+        <attribute name="successFailedLogins" type="String" mode="IN" optional="true"/>
+    </service>
 </services>

@@ -36,7 +36,7 @@ public class UspErpCommonUtil {
 
     public static boolean checkPassedJobDate(String date) {
         long starterTime = (new Date()).getTime();
-        //check start datetime
+        boolean boolTF = false;
         if (UtilValidate.isNotEmpty(date)) {
             try {
                 Timestamp ts1 = Timestamp.valueOf(date);
@@ -50,9 +50,11 @@ public class UspErpCommonUtil {
             }
 
             if (starterTime < (new Date()).getTime()) {
-                return false;
+                boolTF = false;
+            } else {
+                boolTF = true;
             }
         }
-        return true;
+        return boolTF;
     }
 }
