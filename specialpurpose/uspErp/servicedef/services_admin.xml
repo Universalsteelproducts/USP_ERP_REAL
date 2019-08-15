@@ -7,6 +7,7 @@
 
     <service name="searchEmployee" default-entity-name="UserLogin" engine="java" auth="true"
              location="services.AdminServices" invoke="searchEmployee">
+        <attribute name="productStoreId" mode="IN" type="String" optional="true"/>
         <attribute name="srchEmployeeId" mode="IN" type="String" optional="true"/>
         <attribute name="searchGroupId" mode="IN" type="String" optional="true"/>
         <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>

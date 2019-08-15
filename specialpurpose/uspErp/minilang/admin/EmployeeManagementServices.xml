@@ -135,8 +135,7 @@ under the License.
 
 		<now-timestamp field="nowTimestamp"/>
 		<set field="parameters.fromDate" from-field="nowTimestamp"/>
-		<set field="parameters.groupId" value="FULLADMIN"/>
-		<set field="parameters.groupId" value="USPERPADMIN"/>
+		<set field="parameters.groupId" value="USPERP"/>
 
 		<check-errors/>
 
