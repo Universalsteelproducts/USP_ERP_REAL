@@ -110,7 +110,7 @@ public class AdminServices {
 		return categories;
 	}
 
-    public static Map<String, Object> searchEmployee(DispatchContext dctx, Map<String, ?> context) {
+	public static Map<String, Object> searchEmployee(DispatchContext dctx, Map<String, ?> context) {
 		Delegator delegator = dctx.getDelegator();
 		Locale locale = (Locale) context.get("locale");
 		Map<String, Object> result = ServiceUtil.returnSuccess();
@@ -130,12 +130,74 @@ public class AdminServices {
 				if(!"".equals(srchEmployeeId)) {
 					employeeConditionList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("userLoginId"), EntityOperator.LIKE, "%" + srchEmployeeId.toUpperCase() + "%"));
 				}
+				if(!"".equals(searchGroupId)) {
+					List<EntityCondition> userLogSecGroupCond = new ArrayList<EntityCondition>();
+					userLogSecGroupCond.add(EntityCondition.makeCondition("groupId", EntityOperator.EQUALS, searchGroupId));
+					List<GenericValue> userLoginSecurityGroups = delegator.findList("UserLoginSecurityGroup", EntityCondition.makeCondition(UtilMisc.toMap("groupId", "searchGroupId")), null, null, null, false);
+					List<String> contentIds = EntityUtil.getFieldListFromEntityList(userLoginSecurityGroups, "userLoginId", true);
+					employeeConditionList.add(EntityCondition.makeCondition("userLoginId", EntityOperator.IN, contentIds));
+				}
+
+				List<GenericValue> contentUserList = delegator.findList("ProductStoreRole", EntityCondition.makeCondition(UtilMisc.toMap("roleTypeId", "CONTENT_USER", "productStoreId", productStoreId)), null, null, null, false);
+				List<String> contentUserListIds = EntityUtil.getFieldListFromEntityList(contentUserList, "partyId", true);
+				employeeConditionList.add(EntityCondition.makeCondition("partyId", EntityOperator.IN, contentUserListIds));
 
 				List<GenericValue> employeeList = new  ArrayList<GenericValue>();
-				EntityCondition mainCond = EntityCondition.makeCondition(employeeConditionList, EntityOperator.AND);
-				employeeList = delegator.findList("UserLogin",mainCond, null, UtilMisc.toList("userLoginId"), null, false);
+				if (UtilValidate.isNotEmpty(employeeConditionList)) {
+					EntityCondition mainCond = EntityCondition.makeCondition(employeeConditionList, EntityOperator.AND);
+					employeeList = delegator.findList("UserLogin",mainCond, null, UtilMisc.toList("userLoginId"), null, false);
+				}
 
-				resultList.addAll(employeeList);
+				if(employeeList.size() > 0) {
+					for (GenericValue employeeInfo : employeeList) {
+						Map<String, Object> resultMap = new HashMap<String, Object>();
+
+						String groupIdString = "";
+						boolean securityGroupExpired = false;
+						boolean addMapTF = true;
+						if (!"".equals(searchGroupId)) {
+							List<GenericValue> userLoginSecurityGroups = delegator.findByAnd("UserLoginSecurityGroup", UtilMisc.toMap("userLoginId", employeeInfo.getString("userLoginId"), "groupId", searchGroupId), null, false);
+							if (userLoginSecurityGroups.size() > 0) {
+								for (GenericValue userLoginSecurityGroup : userLoginSecurityGroups) {
+									Timestamp nowTimeStamp = UtilDateTime.nowTimestamp();
+									if(userLoginSecurityGroup.getTimestamp("thruDate") != null) {
+										if (nowTimeStamp.after(userLoginSecurityGroup.getTimestamp("thruDate"))) {
+											securityGroupExpired = true;
+										}
+									}
+								}
+								addMapTF = true;
+							} else {
+								addMapTF = false;
+							}
+						}
+
+						if (securityGroupExpired == false) {
+							if(addMapTF == true) {
+								resultMap.putAll(employeeInfo);
+
+								List<GenericValue> userGroups = delegator.findByAnd("UserLoginSecurityGroup", UtilMisc.toMap("userLoginId", employeeInfo.getString("userLoginId")), null, false);
+								List<String> groupIds = EntityUtil.getFieldListFromEntityList(userGroups, "groupId", true);
+								int resultCnt = 0;
+								if (groupIds.size() > 0) {
+									for (String groupId : groupIds) {
+										if (resultCnt == 0) {
+											groupIdString += groupId;
+										} else {
+											groupIdString += ", " + groupId;
+										}
+										resultCnt++;
+									}
+									resultMap.put("groupId", groupIdString);
+								} else {
+									resultMap.put("groupId", "");
+								}
+
+								resultList.add(resultMap);
+							}
+						}
+					}
+				}
 			} catch (GenericEntityException e){
 				Debug.logError(e, "Cannot searchEmployee ", module);
 			}
@@ -145,6 +207,6 @@ public class AdminServices {
 		result.put("recordsFiltered", resultList.size());
 
 		return result;
-    }
+	}
 
 }

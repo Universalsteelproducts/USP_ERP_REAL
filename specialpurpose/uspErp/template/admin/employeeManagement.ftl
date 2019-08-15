@@ -1,8 +1,4 @@
 <#--
-	total / orderquantity control 다시
-	function 들 공통화 작업
--->
-<#--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -36,6 +32,7 @@ under the License.
                 "url"		: '<@ofbizUrl>searchEmployee</@ofbizUrl>',
                 "data"		: function(d) {
                     d.draw = "0";
+                    d.productStoreId = "${productStoreId}";
                     d.srchEmployeeId = $("#srchEmployeeId").val();
                     d.searchGroupId = $("#searchGroupId").val();
                 }
@@ -109,10 +106,10 @@ under the License.
 	</span>
 </div>
 <div class="button-bar">
-	<a class="buttontext create" href="/uspErp/control/createEmployeeDetailForm">
-		${uiLabelMap.createEmployee}
-	</a>
-</div>
+      	<a class="buttontext create" href="/uspErp/control/createEmployeeDetailForm">
+      		${uiLabelMap.createEmployee}
+      	</a>
+      </div>
 
 <form name="searchForm" id="searchForm" method="post">
 	<!-- Search Condition -->
@@ -142,7 +139,7 @@ under the License.
                         <select name="searchGroupId" id="searchGroupId">
                             <option value=""></option>
                         <#list securityGroups as securityGroup>
-                            <option value="${securityGroup.groupId!}" <#if securityGroup.groupId == srchEmployeeId! >selected="selected"</#if>>${securityGroup.groupId!}</option>
+                            <option value="${securityGroup.groupId!}" <#if securityGroup.groupId == searchGroupId! >selected="selected"</#if>>${securityGroup.groupId!}</option>
                         </#list>
                         </select>
                     </#if>

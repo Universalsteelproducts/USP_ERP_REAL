@@ -45,33 +45,35 @@ under the License.
 <div id="navigation" <#if show_last_menu??>class="menu_selected"</#if>>
 <!-- CUSTOMIZING MENU 2019.07.22 START -->
 <#if uspErpTF?has_content>
-    <#if uspErpTF == "true">
-    <div id="main-navigation">
-        <h2>${uiLabelMap.CommonApplications}</h2>
-        <ul>
-            <li>
-                <ul class="main">
-                    <li>
-                        <ul class="primary">
-                        <#list mainMenuList as display>
-                            <#assign selected = false>
-                            <#assign thisURL = "/uspErp/control/" + display.target>
+    <#if userLogin?has_content>
+        <#if uspErpTF == "true">
+        <div id="main-navigation">
+            <h2>${uiLabelMap.CommonApplications}</h2>
+            <ul>
+                <li>
+                    <ul class="main">
+                        <li>
+                            <ul class="primary">
+                            <#list mainMenuList as display>
+                                <#assign selected = false>
+                                <#assign thisURL = "/uspErp/control/" + display.target>
 
-                            <#if appMenuNm?has_content>
-                                <#if appMenuNm == display.appMenuNm>
-                                    <#assign selected = true>
+                                <#if appMenuNm?has_content>
+                                    <#if appMenuNm == display.appMenuNm>
+                                        <#assign selected = true>
+                                    </#if>
                                 </#if>
-                            </#if>
-                            <li<#if selected> class="selected"</#if>>
-                                <a href="${thisURL + externalKeyParam}"<#if uiLabelMap??> title="${uiLabelMap[display.title]}">${uiLabelMap[display.title]}<#else> title="${display.description}">${display.title}</#if></a>
-                            </li>
-                        </#list>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+                                <li<#if selected> class="selected"</#if>>
+                                    <a href="${thisURL + externalKeyParam}"<#if uiLabelMap??> title="${uiLabelMap[display.title]}">${uiLabelMap[display.title]}<#else> title="${display.description}">${display.title}</#if></a>
+                                </li>
+                            </#list>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        </#if>
     </#if>
 <#else>
 <!-- CUSTOMIZING MENU 2019.07.22 END -->
