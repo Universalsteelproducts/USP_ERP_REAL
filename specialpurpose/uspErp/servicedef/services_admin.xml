@@ -75,4 +75,34 @@
         <attribute name="disabledDate" type="String" mode="IN" optional="true"/>
         <attribute name="successFailedLogins" type="String" mode="IN" optional="true"/>
     </service>
+
+    <service name="searchEmployeeSecurityGroupList" default-entity-name="UserLoginSecurityGroup" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchEmployeeSecurityGroupList">
+        <attribute name="employeeLoginId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+
+    <service name="updateEmployeeSecurityGroupGroup" engine="group" auth="false" transaction-timeout="7200">
+        <group>
+            <invoke name="updateEmployeeSecurityGroup" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="updateEmployeeSecurityGroup" engine="simple"
+             location="component://uspErp/minilang/admin/SecurityGroupManagementServices.xml"
+             invoke="updateEmployeeSecurityGroup" auth="true">
+        <description>Update employee security groups</description>
+        <attribute name="employeeLoginId" mode="IN" type="String" optional="false"/>
+        <attribute name="groupIdMap" type="Map" string-map-prefix="groupIdMap_" mode="IN" optional="true"/>
+    </service>
+
+    <service name="searchSecurityGroupList" default-entity-name="SecurityGroup" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchSecurityGroupList">
+        <attribute name="groupId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
 </services>

@@ -45,12 +45,36 @@
         <response name="success" type="request-redirect" value="employeeManagement"/>
         <response name="error" type="view" value="updateEmployeeDetailForm"/>
     </request-map>
+    <!-- Employee Security Group Management -->
+    <request-map uri="employeeSecurityGroupList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="employeeSecurityGroupList"/>
+    </request-map>
+    <request-map uri="updateEmployeeSecurityGroup">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateEmployeeSecurityGroupGroup"/>
+        <response name="success" type="request-redirect" value="employeeManagement"/>
+        <response name="error" type="view" value="employeeSecurityGroupList"/>
+    </request-map>
+    <request-map uri="searchEmployeeSecurityGroupList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchEmployeeSecurityGroupList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- Employee Security Group Management -->
     <!-- Employee Management -->
 
     <!-- Security Management -->
     <request-map uri="securityGroupManagement">
         <security https="true" auth="true"/>
         <response name="success" type="view" value="securityGroupManagement"/>
+    </request-map>
+    <request-map uri="searchSecurityGroupList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchSecurityGroupList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
     </request-map>
     <!-- Security Management -->
 
@@ -69,6 +93,7 @@
     <view-map name="updateEmployeeDetailForm" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#updateEmployeeDetailForm"/>
     <!-- Security Management -->
     <view-map name="securityGroupManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#securityGroupManagement"/>
+    <view-map name="employeeSecurityGroupList" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#employeeSecurityGroupList"/>
     <!-- Permission Management -->
     <view-map name="permissionManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#permissionManagement"/>
 

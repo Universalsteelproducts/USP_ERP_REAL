@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+           xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
     <!-- The controller elements that are common to all OFBiz components
          can be found in the following xml file. A component can override the
          elements found in the common-controller.xml file. -->
@@ -44,7 +44,14 @@
         <response name="error" type="request" value="json"/>
     </request-map>
 
+    <request-map uri="lookupEmployeeSecurityGroup">
+        <security auth="true" https="true"/>
+        <response name="success" type="view" value="lookupEmployeeSecurityGroup"/>
+    </request-map>
+
     <view-map name="LookupVendor" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupVendor"/>
     <view-map name="LookupCustomer" type="screen" page="component://uspErp/widget/lookup/widget/LookupScreens.xml#LookupCustomer"/>
     <view-map name="LookupPo" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupPo"/>
+    <view-map name="lookupEmployeeSecurityGroup" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#lookupEmployeeSecurityGroup"/>
+
 </site-conf>

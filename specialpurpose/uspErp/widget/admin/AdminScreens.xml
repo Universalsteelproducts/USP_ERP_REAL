@@ -113,6 +113,37 @@
     </screen>
     <!-- Employee Management Screen -->
 
+    <!-- Employee Security Group Management Screen -->
+    <screen name="employeeSecurityGroupList">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
+            </condition>
+            <actions>
+                <set field="appMenuNm" value="AdminMainAppBar"/>
+                <set field="headerItem" value="employeeManagement"/>
+                <set field="titleProperty" value="Employee Management"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <script location="component://uspErp/groovyScript/admin/EmployeeSecurityGroupList.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://uspErp/template/admin/employeeSecurityGroupList.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- Employee Security Group Management Screen -->
+
     <!-- Security Group Management Screen -->
     <screen name="securityGroupManagement">
         <section>

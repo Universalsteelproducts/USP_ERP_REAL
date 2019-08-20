@@ -19,7 +19,7 @@ under the License.
 -->
 
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
     <screen name="LookupVendor">
         <section>
@@ -65,6 +65,31 @@ under the License.
                     </decorator-section>
                     <decorator-section name="search-results">
                         <include-form name="ListCustomer" location="component://uspErp/widget/lookup/LookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="lookupEmployeeSecurityGroup">
+        <section>
+            <actions>
+                <property-map resource="UspErpUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.searchGroupId}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                <set field="entityName" value="SecurityGroup"/>
+                <set field="employeeLoginId" value="parameters.employeeLoginId"/>
+                <set field="searchFields" value="[groupId]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html><html-template location="component://uspErp/template/lookup/employeeSecurityGroupLookup.ftl"/></html>
+                        </platform-specific>
                     </decorator-section>
                 </decorator-screen>
             </widgets>

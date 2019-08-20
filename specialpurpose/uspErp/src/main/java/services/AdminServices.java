@@ -209,4 +209,71 @@ public class AdminServices {
 		return result;
 	}
 
+	public static Map<String, Object> searchEmployeeSecurityGroupList(DispatchContext dctx, Map<String, ?> context) {
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String employeeLoginId = context.get("employeeLoginId") == null ? "" : (String) context.get("employeeLoginId");
+
+		List<GenericValue> resultList = new LinkedList<GenericValue>();
+		if (userLogin != null) {
+			try {
+				List<EntityCondition> entityExprList = new LinkedList<EntityCondition>();
+				if(UtilValidate.isNotEmpty(employeeLoginId)) {
+					entityExprList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("userLoginId"), EntityOperator.EQUALS, employeeLoginId.toUpperCase()));
+				}
+
+				EntityCondition prodCond = null;
+				if (UtilValidate.isNotEmpty(entityExprList)) {
+					prodCond = EntityCondition.makeCondition(entityExprList, EntityOperator.AND);
+				}
+
+				resultList = delegator.findList("UserLoginSecurityGroup", prodCond, null, null, null, false);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot searchEmployeeSecurityGroupList ", module);
+			}
+		}
+
+		result.put("data", resultList);
+		result.put("recordsTotal", resultList.size());
+		result.put("recordsFiltered", resultList.size());
+
+		return result;
+	}
+
+	public static Map<String, Object> searchSecurityGroupList(DispatchContext dctx, Map<String, ?> context) {
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String groupId = context.get("groupId") == null ? "" : (String) context.get("groupId");
+
+		List<GenericValue> resultList = new LinkedList<GenericValue>();
+		if (userLogin != null) {
+			try {
+				List<EntityCondition> entityExprList = new LinkedList<EntityCondition>();
+				if(UtilValidate.isNotEmpty(groupId)) {
+					entityExprList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("groupId"), EntityOperator.LIKE, "%" + groupId.toUpperCase() + "%"));
+				}
+
+				EntityCondition prodCond = null;
+				if (UtilValidate.isNotEmpty(entityExprList)) {
+					prodCond = EntityCondition.makeCondition(entityExprList, EntityOperator.AND);
+				}
+				resultList = delegator.findList("SecurityGroup", prodCond, null, null, null, false);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot searchSecurityGroupList ", module);
+			}
+		}
+
+		result.put("data", resultList);
+		result.put("recordsTotal", resultList.size());
+		result.put("recordsFiltered", resultList.size());
+
+		return result;
+	}
+
 }

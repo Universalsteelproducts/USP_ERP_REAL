@@ -126,6 +126,12 @@
     <property key="allClear">
         <value xml:lang="en">All Clear</value>
     </property>
+    <property key="confirm">
+        <value xml:lang="en">Confirm</value>
+    </property>
+    <property key="delete">
+        <value xml:lang="en">Delete</value>
+    </property>
     <property key="deleteRow">
         <value xml:lang="en">Delete Row</value>
     </property>
@@ -146,6 +152,12 @@
     </property>
     <property key="duplicate">
         <value xml:lang="en">Duplicate</value>
+    </property>
+    <property key="addSecurityGroupBtn">
+        <value xml:lang="en">Add Security Group</value>
+    </property>
+    <property key="deleteSecurityGroupBtn">
+        <value xml:lang="en">Delete Security Group</value>
     </property>
     <!-- BUTTON LABEL END-->
 

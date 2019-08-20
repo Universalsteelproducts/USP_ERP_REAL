@@ -1,9 +1,15 @@
 package util;
 
+import org.apache.ofbiz.base.util.UtilGenerics;
 import org.apache.ofbiz.base.util.UtilValidate;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import org.apache.ofbiz.base.util.Debug;
+import org.apache.ofbiz.entity.GenericValue;
 
 public class UspErpCommonUtil {
 
@@ -29,7 +35,6 @@ public class UspErpCommonUtil {
         return UtilValidate.isInteger(number);
     }
 
-    /** Returns true if single String subString is contained within string s. */
     public static boolean isSubString(String subString, String s) {
         return (s.indexOf(subString) != -1);
     }
@@ -56,5 +61,25 @@ public class UspErpCommonUtil {
             }
         }
         return boolTF;
+    }
+
+    public static List getDuplicateList(List<String> values) {
+        List duplicates = new ArrayList<>();
+        HashSet uniques = new HashSet<>();
+        for (String value : values) {
+            if (uniques.contains(value)) {
+                duplicates.add(value);
+            } else {
+                uniques.add(value);
+            }
+        }
+        deleteDuplicateItem(duplicates);
+        return duplicates;
+    }
+
+    public static void deleteDuplicateItem(List list) {
+        HashSet set = new HashSet(list);
+        list.clear();
+        list.addAll(set);
     }
 }
