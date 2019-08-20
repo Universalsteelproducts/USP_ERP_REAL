@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Simple-Method" xsi:schemaLocation="http://ofbiz.apache.org/Simple-Method http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+	<simple-method method-name="successMessage" short-description="Display success message when no error messages are found.">
+		<set field="errorMessageListSize" value="${groovy:if(parameters.errorMessageList != null)return(parameters.errorMessageList.size());}"  type="Integer" default-value="0"/>
+		<if-compare field="errorMessageListSize" operator="equals" value="0">
+			<if-empty field="parameters.successMessageList">
+				<property-to-field resource="UspErpUiLabels" property="UpdatedSuccess" field="defaultSuccessMessage"/>
+				<string-to-list string="${defaultSuccessMessage}" list="parameters.successMessageList"/>
+			</if-empty>
+			<field-to-result field="parameters.successMessageList" result-name="uspErpSuccessMessageList"/>
+			<field-to-result field="parameters.warningMessageList" result-name="warningMessageList"/>
+		</if-compare>
+	</simple-method>
+
+	<simple-method method-name="updateEmployeeSecurityGroup" short-description="Method to update user security groups">
+		<iterate-map key="groupIdKey" value="groupIdValue" map="parameters.groupIdMap">
+			<field-to-list field="groupIdValue" list="groupIdList"/>
+		</iterate-map>
+		<if-not-empty field="groupIdList">
+			<call-class-method class-name="util.UspErpCommonUtil"  method-name="getDuplicateList" ret-field="returnList">
+				<field field="groupIdList" type="List"/>
+			</call-class-method>
+		</if-not-empty>
+		<if-not-empty field="returnList">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="DuplicateSecurityGroupError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="employeeLoginId"  list="error_list"/>
+		</if-not-empty>
+
+		<check-errors/>
+
+		<set field="employeeLoginSecurityGroupMap.userLoginId" from-field="parameters.employeeLoginId" />
+
+		<!-- delete all security groups from this user -->
+		<set field="secGroupDeleteMap.userLoginId" from-field="parameters.employeeLoginId" />
+		<find-by-and entity-name="UserLoginSecurityGroup" map="employeeLoginSecurityGroupMap" list="employeeLoginSecurityGroupList"/>
+		<call-object-method obj-field="employeeLoginSecurityGroupList" method-name="size" ret-field="employeeLoginSecurityGroupListSize"/>
+		<if-compare field="employeeLoginSecurityGroupListSize" operator="greater" value="0" type="Integer">
+			<iterate entry="secGroup" list="employeeLoginSecurityGroupList">
+				<set field="secGroupDeleteMap.groupId" from-field="secGroup.groupId" />
+				<find-by-and entity-name="UserLoginSecurityGroup" map="secGroupDeleteMap" list="secGroupDeleteList"/>
+				<call-class-method class-name="org.apache.ofbiz.entity.util.EntityUtil" method-name="getFirst" ret-field="secGroupToDeleteValue">
+					<field field="secGroupDeleteList" type="List"/>
+				</call-class-method>
+				<remove-value value-field="secGroupToDeleteValue"/>
+			</iterate>
+		</if-compare>
+
+		<!-- add selected security groups -->
+		<now-timestamp field="nowTimestamp"/>
+		<set field="employeeLoginSecurityGroupMap.fromDate" from-field="nowTimestamp" />
+		<iterate-map key="groupIdKey" value="groupIdValue" map="parameters.groupIdMap">
+			<set field="employeeLoginSecurityGroupMap.groupId" from-field="groupIdValue" />
+			<make-value value-field="createEmployeeLoginSecurityGroupEntity" entity-name="UserLoginSecurityGroup"/>
+			<set-pk-fields map="employeeLoginSecurityGroupMap" value-field="createEmployeeLoginSecurityGroupEntity"/>
+			<create-value value-field="createEmployeeLoginSecurityGroupEntity"/>
+		</iterate-map>
+
+		<if-not-empty field="createEmployeeLoginSecurityGroupEntity">
+			<set field="editEmployee" from-field="parameters.employeeLoginId"/>
+			<property-to-field resource="UspErpUiLabels" property="EditUserSecurityGroupSuccess" field="editEmployeeSuccessMessage"/>
+			<string-to-list string="${editEmployeeSuccessMessage}" list="successMessageList"/>
+		</if-not-empty>
+	</simple-method>
+
+</simple-methods>
