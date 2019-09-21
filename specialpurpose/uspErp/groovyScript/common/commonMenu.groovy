@@ -24,37 +24,44 @@ mainMenuList = [
         [
                 title : uiLabelMap.purchase,
                 target : "purchaseMain",
-                appMenuNm : "PurchaseMainAppBar"
+                appMenuNm : "PurchaseMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Inventory,
                 target : "inventoryMain",
-                appMenuNm : "InventoryMainAppBar"
+                appMenuNm : "InventoryMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Logistics,
                 target : "logisticsMain",
-                appMenuNm : "LogisticsMainAppBar"
+                appMenuNm : "LogisticsMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Sales,
                 target : "salesMain",
-                appMenuNm : "SalesMainAppBar"
+                appMenuNm : "SalesMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Accounting,
                 target : "accountingMain",
-                appMenuNm : "AccountingMainAppBar"
+                appMenuNm : "AccountingMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Report,
                 target : "reportMain",
-                appMenuNm : "ReportMainAppBar"
+                appMenuNm : "ReportMainAppBar",
+                permission : ""
         ],
         [
                 title : uiLabelMap.Admin,
                 target : "adminMain",
-                appMenuNm : "AdminMainAppBar"
+                appMenuNm : "AdminMainAppBar",
+                permission : "ERP_MANAGER_VIEW"
         ]
 ]
 

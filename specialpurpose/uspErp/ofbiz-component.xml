@@ -16,11 +16,13 @@
     <entity-resource type="data" reader-name="seed" loader="main" location="data/UspErpSecurityPermissionSeedData.xml"/>
     <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpSecurityGroupDemoData.xml"/>
     <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpDemoData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpEmailData.xml"/>
 
     <!-- service resources: model(s), eca(s) and group definitions -->
     <service-resource type="model" loader="main" location="servicedef/services.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_accounting.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_admin.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/services_email.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_inventory.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_sales.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_report.xml"/>
@@ -38,6 +40,6 @@
         title="UspErp"
         server="default-server"
         location="webapp/uspErp"
-        base-permission="OFBTOOLS,USPERP"
+        base-permission="USPERP"
         mount-point="/uspErp"/>
 </ofbiz-component>

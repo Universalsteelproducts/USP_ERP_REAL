@@ -80,46 +80,50 @@ under the License.
 	});
 </script>
 <!-- Search Condition -->
-<div class="page-title">
-	<span>
-		${uiLabelMap.permissionManagement}
-	</span>
-</div>
-
-<form name="searchForm" id="searchForm" method="post">
-    <div class="screenlet">
-        <div class="screenlet-title-bar">
-            <ul>
-                <li class="h3">${uiLabelMap.permission}</li>
-            </ul>
-        </div>
-        <div class="screenlet-body">
+<div class="screenlet">
+    <div class="screenlet-title-bar">
+        <ul>
+            <li class="h3">${uiLabelMap.permission}</li>
+        </ul>
+    </div>
+    <div class="screenlet-body no-padding">
+        <div id="search-options">
+            <form name="searchForm" id="searchForm" method="post" class="basic-form">
             <table class="basic-table" cellspacing="0">
-                <tr>
-                    <td class="label" align="right" >
-                        ${uiLabelMap.permissionId}
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                    <td>
-                        <input type="text" name="permissionId" id="permissionId" maxlength="255"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label" align="right">
-                        &nbsp;
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                    <td>
-                        <input type="button" id="searchBtn" value="${uiLabelMap.CommonFind}" class="buttontext" />
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td class="label" align="right" >
+                            ${uiLabelMap.permissionId}
+                        </td>
+                        <td width="2%">&nbsp;</td>
+                        <td>
+                            <input type="text" name="permissionId" id="permissionId" maxlength="255"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label" align="right">
+                            &nbsp;
+                        </td>
+                        <td width="2%">&nbsp;</td>
+                        <td>
+                            <input type="button" id="searchBtn" value="${uiLabelMap.CommonFind}" class="buttontext" />
+                        </td>
+                    </tr>
+                </tbody>
             </table>
+            </form>
         </div>
     </div>
-</form>
+</div>
 
 <!-- Search Result -->
 <div class="screenlet">
+    <div>
+        <ul style="text-align:right;">
+            <input id="addGroupBtn" type="button" value="${uiLabelMap.confirm}" class="buttontext"/>
+        </ul>
+    </div>
+    <br/>
     <table id="permissionList" class="hover cell-border stripe" style="width:100%">
         <thead>
             <tr>
@@ -130,10 +134,6 @@ under the License.
         <tbody>
         </tbody>
         <tfoot>
-            <tr>
-                <th style="vertical-align: middle;">${uiLabelMap.permissionId}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.description}</th>
-            </tr>
         </tfoot>
     </table>
 </div>

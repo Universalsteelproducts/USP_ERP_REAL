@@ -3,16 +3,16 @@
         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
  	<!-- Main화면의 PO리스트 -->
-    <screen name="purchaseMain">
+	<screen name="orderMain">
         <section>
-            <actions>
-                <set field="headerItem" value="PurchaseMain"/>
-                <set field="titleProperty" value="Purchase Main"/>
-				<set field="appMenuNm" value="PurchaseMainAppBar"/>
-                <set field="poNo" from-field="parameters.poNo"/>
-                <entity-one entity-name="PoMaster" value-field="poMaster"/>
-                <script location="component://uspErp/groovyScript/purchase/PoMain.groovy"/>
-            </actions>
+			<condition>
+				<if-has-permission permission="USPERP" action="_VIEW"/>
+			</condition>
+			<actions>
+				<set field="headerItem" value="main"/>
+				<set field="titleProperty" value="Order Main"/>
+				<set field="appMenuNm" value="OrderMainAppBar"/>
+			</actions>
             <widgets>
                 <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">

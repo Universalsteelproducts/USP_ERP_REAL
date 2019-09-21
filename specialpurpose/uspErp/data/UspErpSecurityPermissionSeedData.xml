@@ -6,6 +6,7 @@
     <SecurityPermission description="Delete operations in the UspErp Component." permissionId="USPERP_DELETE"/>
     <SecurityPermission description="ALL operations in the UspErp Component." permissionId="USPERP_ADMIN"/>
 
+    <SecurityGroupPermission groupId="SUPER" permissionId="USPERPADMIN"/>
     <SecurityGroupPermission groupId="SUPER" permissionId="USPERP_ADMIN"/>
 
 </entity-engine-xml>

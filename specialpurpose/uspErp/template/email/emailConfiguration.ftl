@@ -105,6 +105,11 @@ under the License.
 		${uiLabelMap.employeeManagement}
 	</span>
 </div>
+<div class="button-bar">
+    <a class="buttontext create" href="/uspErp/control/createEmployeeDetailForm">
+        ${uiLabelMap.createEmployee}
+    </a>
+</div>
 
 <form name="searchForm" id="searchForm" method="post">
 	<!-- Search Condition -->
@@ -153,12 +158,6 @@ under the License.
 		</div>
 	</div>
 </form>
-
-<div class="button-bar" align="right">
-    <a class="buttontext create" href="/uspErp/control/createEmployeeDetailForm">
-        ${uiLabelMap.createEmployee}
-    </a>
-</div>
 
 <!-- Search Result -->
 <div class="screenlet">

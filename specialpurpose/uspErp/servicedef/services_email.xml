@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>UspErp Email Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="successMessage" engine="simple" auth="true"
+             location="component://uspErp/minilang/email/EmailManagementServices.xml"
+             invoke="successMessage">
+        <description>
+            Generic Service to Render success message
+        </description>
+        <attribute name="errorMessageList" type="List" mode="IN" optional="true" />
+        <attribute name="successMessageList" type="List" mode="IN" optional="true" />
+        <attribute name="warningMessageList" type="List" mode="IN" optional="true" />
+        <attribute name="uspErpSuccessMessageList" type="List" mode="OUT" optional="true" />
+        <attribute name="warningMessageList" type="List" mode="OUT" optional="true" />
+    </service>
+
+    <service name="searchEmailTemplateList" default-entity-name="Content" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchEmailTemplateList">
+        <attribute name="productStoreId" mode="IN" type="String" optional="true"/>
+        <attribute name="contentTypeId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+
+    <service name="createEmailTemplateGroup" engine="group" auth="false">
+        <description>
+            Create a Security Group
+            DataResource
+            Content
+            ElectronicText
+            ContentPurpose
+        </description>
+        <group>
+            <invoke name="createEmailTemplate" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="createEmailTemplate" engine="simple" auth="false"
+             location="component://uspErp/minilang/email/EmailManagementServices.xml"
+             invoke="createEmailTemplate">
+        <description>Create a Email Template</description>
+        <implements service="createTextContent"/>
+        <attribute name="contentTypeId" type="String" mode="IN" optional="false"/>
+        <override name="description" allow-html="any"/>
+    </service>
+
+    <service name="updateEmailTemplateGroup" engine="group" auth="false">
+        <description>
+            Create a Security Group
+
+        </description>
+        <group>
+            <invoke name="updateEmailTemplate" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="updateEmailTemplate" engine="simple" auth="false"
+             location="component://uspErp/minilang/email/EmailManagementServices.xml"
+             invoke="updateEmailTemplate">
+        <description>Update a Email Template</description>
+        <implements service="updateContent"/>
+        <attribute name="textData" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="description" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="objectInfo" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="dataResourceTypeId" type="String" mode="IN" optional="true" allow-html="any"/>
+    </service>
+
+</services>

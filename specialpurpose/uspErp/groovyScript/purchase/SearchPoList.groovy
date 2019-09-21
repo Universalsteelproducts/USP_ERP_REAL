@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+import org.apache.commons.lang.StringUtils
 import org.apache.ofbiz.base.util.StringUtil
 import org.apache.ofbiz.base.util.UtilDateTime
 import org.apache.ofbiz.base.util.UtilValidate

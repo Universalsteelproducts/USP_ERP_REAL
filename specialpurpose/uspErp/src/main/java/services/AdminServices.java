@@ -20,21 +20,31 @@ package services;
 
 import org.apache.commons.collections.FastArrayList;
 import org.apache.commons.collections.FastHashMap;
-import org.apache.ofbiz.base.util.Debug;
-import org.apache.ofbiz.base.util.UtilDateTime;
-import org.apache.ofbiz.base.util.UtilMisc;
-import org.apache.ofbiz.base.util.UtilValidate;
+import org.apache.ofbiz.base.util.*;
+import org.apache.ofbiz.base.util.string.FlexibleStringExpander;
 import org.apache.ofbiz.entity.Delegator;
 import org.apache.ofbiz.entity.GenericEntityException;
 import org.apache.ofbiz.entity.GenericValue;
 import org.apache.ofbiz.entity.condition.EntityCondition;
 import org.apache.ofbiz.entity.condition.EntityFunction;
 import org.apache.ofbiz.entity.condition.EntityOperator;
+import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.ofbiz.entity.util.EntityUtil;
+import org.apache.ofbiz.entity.util.EntityUtilProperties;
 import org.apache.ofbiz.product.category.CategoryWorker;
 import org.apache.ofbiz.service.DispatchContext;
+import org.apache.ofbiz.service.LocalDispatcher;
 import org.apache.ofbiz.service.ServiceUtil;
+import org.jdom.JDOMException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.math.BigDecimal;
+import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -110,7 +120,7 @@ public class AdminServices {
 		return categories;
 	}
 
-	public static Map<String, Object> searchEmployee(DispatchContext dctx, Map<String, ?> context) {
+    public static Map<String, Object> searchEmployee(DispatchContext dctx, Map<String, ?> context) {
 		Delegator delegator = dctx.getDelegator();
 		Locale locale = (Locale) context.get("locale");
 		Map<String, Object> result = ServiceUtil.returnSuccess();
@@ -276,4 +286,99 @@ public class AdminServices {
 		return result;
 	}
 
+	public static Map<String, Object> searchSecurityGroupPermissionList(DispatchContext dctx, Map<String, ?> context) {
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String groupId = context.get("groupId") == null ? "" : (String) context.get("groupId");
+
+		List<GenericValue> resultList = new LinkedList<GenericValue>();
+		if (userLogin != null) {
+			try {
+				List<EntityCondition> entityExprList = new LinkedList<EntityCondition>();
+				if(UtilValidate.isNotEmpty(groupId)) {
+					entityExprList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("groupId"), EntityOperator.LIKE, "%" + groupId.toUpperCase() + "%"));
+				}
+
+				EntityCondition prodCond = null;
+				if (UtilValidate.isNotEmpty(entityExprList)) {
+					prodCond = EntityCondition.makeCondition(entityExprList, EntityOperator.AND);
+				}
+
+				resultList = delegator.findList("SecurityGroupPermission", prodCond, null, null, null, false);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot searchSecurityGroupPermissionList ", module);
+			}
+		}
+
+		result.put("data", resultList);
+		result.put("recordsTotal", resultList.size());
+		result.put("recordsFiltered", resultList.size());
+
+		return result;
+	}
+
+	public static Map<String, Object> searchPermissionList(DispatchContext dctx, Map<String, ?> context) {
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String permissionId = context.get("permissionId") == null ? "" : (String) context.get("permissionId");
+
+		List<GenericValue> resultList = new LinkedList<GenericValue>();
+		if (userLogin != null) {
+			try {
+				List<EntityCondition> entityExprList = new LinkedList<EntityCondition>();
+				if(UtilValidate.isNotEmpty(permissionId)) {
+					entityExprList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("permissionId"), EntityOperator.LIKE, "%" + permissionId.toUpperCase() + "%"));
+				}
+
+				EntityCondition prodCond = null;
+				if (UtilValidate.isNotEmpty(entityExprList)) {
+					prodCond = EntityCondition.makeCondition(entityExprList, EntityOperator.AND);
+				}
+
+				resultList = delegator.findList("SecurityPermission", prodCond, null, null, null, false);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot SecurityPermission ", module);
+			}
+		}
+
+		result.put("data", resultList);
+		result.put("recordsTotal", resultList.size());
+		result.put("recordsFiltered", resultList.size());
+
+		return result;
+	}
+
+	public static Map<String, Object> searchEmailTemplateList(DispatchContext dctx, Map<String, ?> context) {
+		Delegator delegator = dctx.getDelegator();
+		Locale locale = (Locale) context.get("locale");
+		Map<String, Object> result = ServiceUtil.returnSuccess();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+
+		String contentTypeId = context.get("contentTypeId") == null ? "" : (String) context.get("contentTypeId");
+
+		List<GenericValue> resultList = new LinkedList<GenericValue>();
+		if (userLogin != null) {
+			try {
+				List<EntityCondition> entityExprList = new LinkedList<EntityCondition>();
+				entityExprList.add(EntityCondition.makeCondition(EntityFunction.UPPER_FIELD("contentTypeId"), EntityOperator.EQUALS, contentTypeId.toUpperCase()));
+				EntityCondition prodCond = EntityCondition.makeCondition(entityExprList, EntityOperator.AND);
+
+				resultList = delegator.findList("Content", prodCond, null, null, null, false);
+			} catch (GenericEntityException e){
+				Debug.logError(e, "Cannot SecurityPermission ", module);
+			}
+		}
+
+		result.put("data", resultList);
+		result.put("recordsTotal", resultList.size());
+		result.put("recordsFiltered", resultList.size());
+
+		return result;
+	}
 }

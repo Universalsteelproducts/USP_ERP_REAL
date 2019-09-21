@@ -122,36 +122,6 @@ var editPoInputInit = function(id) {
 	});
 };
 
-var inputInit = function(id) {
-	$("#" + id + " :input").each(function() {
-		if($(this).prop("type") == "select-one") {
-			$(this).find("option:eq(0)").attr("selected", true);
-		} else if($(this).prop("type") == "checkbox") {
-			$(this).prop("checked", false);
-		} else {
-			if($(this).prop("type") != "button") {
-				$(this).val("");
-			}
-		}
-	});
-};
-
-var makeArrayData = function(reqData) {
-	var reqArray = new Array();
-	for(var i=0 ; reqData.length > i ; i++) {
-		var reqMap = new Object();
-		var map = reqData[i];
-		for(var key in map) {
-			if(key != "undefined") {
-				reqMap[key] = $.trim(map[key]);
-			}
-		}
-		reqArray.push(reqMap);
-	}
-
-	return reqArray;
-};
-
 var totalPriceNQuantity = function(tableObj, totalQuantityId, totalPriceId) {
 		var tableSize = tableObj.rows().data().length;
 		var totalQuantity = 0;

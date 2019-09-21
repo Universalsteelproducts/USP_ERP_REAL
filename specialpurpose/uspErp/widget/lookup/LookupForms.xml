@@ -79,4 +79,12 @@ under the License.
         </field>
         <field name="customerName" title="${uiLabelMap.CustomerName}"><display/></field>
     </form>
+
+    <form name="LookupSecurityGroup" target="LookupSecurityGroup" title="${uiLabelMap.securityGroup}" type="single"
+          header-row-style="header-row" default-table-style="basic-table">
+        <field name="groupId" title="${uiLabelMap.groupId}"><text/></field>
+        <field name="" widget-style="buttontext">
+            <hyperlink description="${uiLabelMap.CommonFind}" also-hidden="false" target-type="plain"/>
+        </field>
+    </form>
 </forms>

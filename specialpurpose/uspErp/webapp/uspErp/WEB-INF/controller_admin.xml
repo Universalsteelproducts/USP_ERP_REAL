@@ -65,7 +65,7 @@
     <!-- Employee Security Group Management -->
     <!-- Employee Management -->
 
-    <!-- Security Management -->
+    <!-- Security Group Management -->
     <request-map uri="securityGroupManagement">
         <security https="true" auth="true"/>
         <response name="success" type="view" value="securityGroupManagement"/>
@@ -76,14 +76,107 @@
         <response name="success" type="request" value="json"/>
         <response name="error" type="request" value="json"/>
     </request-map>
-    <!-- Security Management -->
+    <request-map uri="createSecurityGroupForm">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="createSecurityGroupForm"/>
+    </request-map>
+    <request-map uri="createSecurityGroup">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createSecurityGroupGroup"/>
+        <response name="success" type="request-redirect" value="securityGroupManagement"/>
+        <response name="error" type="view" value="createSecurityGroupForm"/>
+    </request-map>
+    <request-map uri="updateSecurityGroupForm">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="updateSecurityGroupForm"/>
+    </request-map>
+    <request-map uri="updateSecurityGroup">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateSecurityGroupGroup"/>
+        <response name="success" type="request-redirect" value="securityGroupManagement"/>
+        <response name="error" type="view" value="updateSecurityGroupForm"/>
+    </request-map>
+    <!-- Security Group Permission Management -->
+    <request-map uri="securityGroupPermissionList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="securityGroupPermissionList"/>
+    </request-map>
+    <request-map uri="updateSecurityGroupPermission">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateSecurityGroupPermissionGroup"/>
+        <response name="success" type="request-redirect" value="securityGroupManagement"/>
+        <response name="error" type="view" value="securityGroupPermissionList"/>
+    </request-map>
+    <request-map uri="searchSecurityGroupPermission">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchSecurityGroupPermission"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- Security Group Permission Management -->
+    <!-- Security Group Management -->
 
     <!-- Permission Management -->
     <request-map uri="permissionManagement">
         <security https="true" auth="true"/>
         <response name="success" type="view" value="permissionManagement"/>
     </request-map>
+    <request-map uri="searchPermissionList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchPermissionList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
     <!-- Permission Management -->
+
+    <!-- Email Management -->
+    <request-map uri="emailManagement">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="emailManagement"/>
+    </request-map>
+    <request-map uri="emailTemplate">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="emailTemplate"/>
+    </request-map>
+    <request-map uri="searchEmailTemplateList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchEmailTemplateList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="createEmailDetailForm">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="createEmailDetailForm"/>
+    </request-map>
+    <request-map uri="createEmailTemplate">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createEmailTemplateGroup"/>
+        <response name="success" type="request-redirect" value="emailTemplate"/>
+        <response name="error" type="view" value="createEmailDetailForm"/>
+    </request-map>
+    <request-map uri="updateEmailDetailForm">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="updateEmailDetailForm"/>
+    </request-map>
+    <request-map uri="updateEmailTemplate">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateEmailTemplateGroup"/>
+        <response name="success" type="request-redirect" value="emailTemplate"/>
+        <response name="error" type="view" value="updateEmailDetailForm"/>
+    </request-map>
+    <request-map uri="sendTestEmailForm">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="sendTestEmailForm"/>
+    </request-map>
+    <request-map uri="emailConfiguration">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="emailConfiguration"/>
+    </request-map>
+    <request-map uri="emailParameter">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="emailParameter"/>
+    </request-map>
+    <!-- Email Management -->
 
     <!-- View Mappings -->
     <view-map name="adminMain" page="component://uspErp/widget/admin/AdminScreens.xml#adminMain" type="screen"/>
@@ -91,10 +184,22 @@
     <view-map name="employeeManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#employeeManagement"/>
     <view-map name="createEmployeeDetailForm" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#createEmployeeDetailForm"/>
     <view-map name="updateEmployeeDetailForm" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#updateEmployeeDetailForm"/>
-    <!-- Security Management -->
+    <!-- Security Group Management -->
     <view-map name="securityGroupManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#securityGroupManagement"/>
     <view-map name="employeeSecurityGroupList" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#employeeSecurityGroupList"/>
+    <view-map name="createSecurityGroupForm" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#createSecurityGroupForm"/>
+    <view-map name="updateSecurityGroupForm" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#updateSecurityGroupForm"/>
+    <view-map name="securityGroupDetail" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#securityGroupDetail"/>
+    <view-map name="securityGroupPermissionList" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#securityGroupPermissionList"/>
     <!-- Permission Management -->
     <view-map name="permissionManagement" type="screen" page="component://uspErp/widget/admin/AdminScreens.xml#permissionManagement"/>
+    <!-- Email Management -->
+    <view-map name="emailManagement" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#emailTemplate"/>
+    <view-map name="emailTemplate" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#emailTemplate"/>
+    <view-map name="createEmailDetailForm" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#createEmailDetailForm"/>
+    <view-map name="updateEmailDetailForm" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#updateEmailDetailForm"/>
+    <view-map name="sendTestEmailForm" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#sendTestEmailForm"/>
+    <view-map name="emailConfiguration" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#emailConfiguration"/>
+    <view-map name="emailParameter" type="screen" page="component://uspErp/widget/email/EmailScreens.xml#emailParameter"/>
 
 </site-conf>

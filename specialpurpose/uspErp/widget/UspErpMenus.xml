@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Menu" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Menu http://ofbiz.apache.org/dtds/widget-menu.xsd">
-    <menu name="PurchaseMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.PurchaseApplication}&amp;nbsp;"
+
+    <menu name="OrderMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.OrderApplication}&amp;nbsp;"
           default-selected-style="selected" menu-container-style="button-bar tab-bar" selected-menuitem-context-field-name="headerItem">
-        <menu-item name="main" title="${uiLabelMap.PurchaseMain}"><link target="purchaseMain" /></menu-item>
-        <menu-item name="po" title="${uiLabelMap.PurchaseOrder}"><link target="FindPoList" /></menu-item>
-        <menu-item name="document" title="${uiLabelMap.ProductionOrder}"><link target="shippingDocManage" /></menu-item>
+        <menu-item name="main" title="${uiLabelMap.OrderMain}"><link target="orderMain" /></menu-item>
+        <menu-item name="purchase" title="${uiLabelMap.PurchaseOrder}"><link target="schPoList" /></menu-item>
+        <menu-item name="processing" title="${uiLabelMap.ProcessingOrder}"><link target="schProcList" /></menu-item>
     </menu>
 
     <menu name="InventoryMainAppBar" default-menu-item-name="main" id="app-navigation" type="simple" title="${uiLabelMap.InventoryApplication}&amp;nbsp;"
@@ -44,5 +45,18 @@
         <menu-item name="employeeManagement" title="${uiLabelMap.employeeManagement}"><link target="employeeManagement" /></menu-item>
         <menu-item name="securityGroupManagement" title="${uiLabelMap.securityGroupManagement}"><link target="securityGroupManagement" /></menu-item>
         <menu-item name="permissionManagement" title="${uiLabelMap.permissionManagement}"><link target="permissionManagement" /></menu-item>
+        <menu-item name="emailManagement" title="${uiLabelMap.EmailManagement}"><link target="emailManagement" /></menu-item>
+    </menu>
+
+    <menu name="EmailButtonBar" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="emailTemplate" title="${uiLabelMap.EmailTemplate}">
+            <link target="emailTemplate"/>
+        </menu-item>
+        <menu-item name="emailConfiguration" title="${uiLabelMap.EmailConfiguration}">
+            <link target="emailConfiguration"/>
+        </menu-item>
+        <menu-item name="emailParameter" title="${uiLabelMap.EmailParameter}">
+            <link target="emailParameter"/>
+        </menu-item>
     </menu>
 </menus>

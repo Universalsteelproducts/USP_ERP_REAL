@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
     <!-- Admin Main 화면 -->
     <screen name="adminMain">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="headerItem" value="main"/>
@@ -28,7 +28,7 @@
     <screen name="employeeManagement">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
@@ -58,7 +58,7 @@
     <screen name="createEmployeeDetailForm">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="curdType" value="C"/>
@@ -73,7 +73,7 @@
     <screen name="updateEmployeeDetailForm">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="curdType" value="RU"/>
@@ -88,7 +88,7 @@
     <screen name="commonEmployeeDetailForm">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
@@ -148,7 +148,7 @@
     <screen name="securityGroupManagement">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>
@@ -172,13 +172,100 @@
             </widgets>
         </section>
     </screen>
+    <screen name="createSecurityGroupForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
+            </condition>
+            <actions>
+                <set field="curdType" value="C"/>
+                <set field="headerItem" value="securityGroupManagement"/>
+                <set field="titleProperty" value="Create Security Group"/>
+            </actions>
+            <widgets>
+                <include-screen name="commonSecurityGroupDetailForm" />
+            </widgets>
+        </section>
+    </screen>
+    <screen name="updateSecurityGroupForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
+            </condition>
+            <actions>
+                <set field="curdType" value="RU"/>
+                <set field="headerItem" value="securityGroupManagement"/>
+                <set field="titleProperty" value="Security Group Detail"/>
+            </actions>
+            <widgets>
+                <include-screen name="commonSecurityGroupDetailForm" />
+            </widgets>
+        </section>
+    </screen>
+    <screen name="commonSecurityGroupDetailForm">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
+            </condition>
+            <actions>
+                <set field="appMenuNm" value="AdminMainAppBar"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <script location="component://uspErp/groovyScript/admin/SecurityGroupDetail.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://uspErp/template/admin/securityGroupCRUD.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
     <!-- Security Group Management Screen -->
+
+    <!-- Security Group Permission Management Screen -->
+    <screen name="securityGroupPermissionList">
+        <section>
+            <condition>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
+            </condition>
+            <actions>
+                <set field="appMenuNm" value="AdminMainAppBar"/>
+                <set field="headerItem" value="securityGroupManagement"/>
+                <set field="titleProperty" value="Security Group Management"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <actions>
+                                <script location="component://uspErp/groovyScript/admin/SecurityGroupPermissionList.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://uspErp/template/admin/securityGroupPermissionList.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- Security Group Permission Management Screen -->
 
     <!-- Permission Management Screen -->
     <screen name="permissionManagement">
         <section>
             <condition>
-                <if-has-permission permission="USPERP" action="_ADMIN"/>
+                <if-has-permission permission="USPERP" action="_VIEW"/>
             </condition>
             <actions>
                 <set field="appMenuNm" value="AdminMainAppBar"/>

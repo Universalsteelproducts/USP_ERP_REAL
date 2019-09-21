@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Simple-Method" xsi:schemaLocation="http://ofbiz.apache.org/Simple-Method http://ofbiz.apache.org/dtds/simple-methods.xsd">
+
+	<simple-method method-name="updateSecurityGroupPermission" short-description="Method to update security group permissions">
+		<iterate-map key="permissionIdKey" value="permissionIdValue" map="parameters.permissionIdMap">
+			<field-to-list field="permissionIdValue" list="permissionIdList"/>
+		</iterate-map>
+		<if-not-empty field="permissionIdList">
+			<call-class-method class-name="util.UspErpCommonUtil"  method-name="getDuplicateList" ret-field="returnList">
+				<field field="permissionIdList" type="List"/>
+			</call-class-method>
+		</if-not-empty>
+		<if-not-empty field="returnList">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="DuplicatePermissionError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="permissionId"  list="error_list"/>
+		</if-not-empty>
+
+		<check-errors/>
+
+		<set field="securityGroupPermissionMap.groupId" from-field="parameters.groupId" />
+
+		<!-- delete all permissions from this security group -->
+		<set field="permissionDeleteMap.groupId" from-field="parameters.groupId" />
+		<find-by-and entity-name="SecurityGroupPermission" map="securityGroupPermissionMap" list="securityGroupPermissionList"/>
+		<call-object-method obj-field="securityGroupPermissionList" method-name="size" ret-field="securityGroupPermissionListSize"/>
+		<if-compare field="securityGroupPermissionListSize" operator="greater" value="0" type="Integer">
+			<iterate entry="perm" list="securityGroupPermissionList">
+				<set field="permissionDeleteMap.permissionId" from-field="perm.permissionId" />
+				<find-by-and entity-name="SecurityGroupPermission" map="permissionDeleteMap" list="permDeleteList"/>
+				<call-class-method class-name="org.apache.ofbiz.entity.util.EntityUtil" method-name="getFirst" ret-field="permToDeleteValue">
+					<field field="permDeleteList" type="List"/>
+				</call-class-method>
+				<remove-value value-field="permToDeleteValue"/>
+			</iterate>
+		</if-compare>
+
+		<!-- add selected security groups -->
+		<iterate-map key="permissionIdKey" value="permissionIdValue" map="parameters.permissionIdMap">
+			<set field="securityGroupPermissionMap.permissionId" from-field="permissionIdValue" />
+			<make-value value-field="createSecurityGroupPermissionEntity" entity-name="SecurityGroupPermission"/>
+			<set-pk-fields map="securityGroupPermissionMap" value-field="createSecurityGroupPermissionEntity"/>
+			<create-value value-field="createSecurityGroupPermissionEntity"/>
+		</iterate-map>
+
+		<if-not-empty field="createSecurityGroupPermissionEntity">
+			<set field="editGroup" from-field="parameters.groupId"/>
+			<property-to-field resource="UspErpUiLabels" property="EditSecurityGroupPermissionSuccess" field="editSecurityGroupSuccessMessage"/>
+			<string-to-list string="${editSecurityGroupSuccessMessage}" list="successMessageList"/>
+		</if-not-empty>
+
+	</simple-method>
+
+</simple-methods>

@@ -83,4 +83,104 @@ under the License.
 		</if-not-empty>
 	</simple-method>
 
+	<simple-method method-name="createSecurityGroup" short-description="Create a Security Group">
+		<!-- check for bad or missing values -->
+		<if-empty field="parameters.groupId">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BlankGroupIdError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="groupId"  list="error_list"/>
+			<else>
+				<call-class-method class-name="util.UspErpCommonUtil"  method-name="isValidId" ret-field="isValidId">
+					<field field="parameters.groupId"/>
+				</call-class-method>
+				<if-compare field="isValidId" operator="equals" value="false">
+					<set field="errorKey" from-field="parameters.groupId"/>
+					<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="ValidIdError"/>
+					<string-to-list string="${tempErrorMessage}" message-field="groupId"  list="error_list"/>
+					<else>
+						<call-object-method obj-field="parameters.groupId" method-name="toUpperCase" ret-field="parameters.groupId"/>
+						<entity-one entity-name="SecurityGroup" value-field="existingGroupId">
+							<field-map field-name="groupId" from-field="parameters.groupId"/>
+						</entity-one>
+						<if-not-empty field="existingGroupId">
+							<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="GroupIdExistError"/>
+							<string-to-list string="${tempErrorMessage}" message-field="groupId"  list="error_list"/>
+						</if-not-empty>
+					</else>
+				</if-compare>
+			</else>
+		</if-empty>
+
+		<if-empty field="parameters.description">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BlankSecurityGroupDescriptionError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="description"  list="error_list"/>
+		</if-empty>
+
+		<check-errors/>
+
+		<!-- create record in entities: SecurityGroup -->
+		<set-service-fields service-name="createSecurityGroup" map="parameters" to-map="createSecurityGroupMap"/>
+		<make-value value-field="createSecurityGroupEntity" entity-name="SecurityGroup"/>
+		<set-pk-fields map="createSecurityGroupMap" value-field="createSecurityGroupEntity"/>
+		<set-nonpk-fields map="createSecurityGroupMap" value-field="createSecurityGroupEntity"/>
+		<now-timestamp field="nowTimestamp"/>
+		<set from-field="nowTimestamp" field="createSecurityGroupEntity.createdTxStamp"/>
+		<set from-field="nowTimestamp" field="ccreateSecurityGroupEntity.createdStamp"/>
+		<set from-field="nowTimestamp" field="createSecurityGroupEntity.lastUpdatedTxStamp"/>
+		<set from-field="nowTimestamp" field="createSecurityGroupEntity.lastUpdatedStamp"/>
+		<create-value value-field="createSecurityGroupEntity"/>
+
+		<if-not-empty field="createSecurityGroupEntity">
+			<set field="editGroup" from-field="parameters.groupId"/>
+			<property-to-field resource="UspErpUiLabels" property="EditSecurityGroupSuccess" field="editSecurityGroupSuccessMessage"/>
+			<string-to-list string="${editSecurityGroupSuccessMessage}" list="successMessageList"/>
+		</if-not-empty>
+
+	</simple-method>
+
+
+	<simple-method method-name="updateSecurityGroup" short-description="Update a Security Group">
+		<!-- check for bad or missing values -->
+		<if-empty field="parameters.groupId">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BlankGroupIdError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="groupId"  list="error_list"/>
+			<else>
+				<call-class-method class-name="util.UspErpCommonUtil"  method-name="isValidId" ret-field="isValidId">
+					<field field="parameters.groupId"/>
+				</call-class-method>
+				<if-compare field="isValidId" operator="equals" value="false">
+					<set field="errorKey" from-field="parameters.groupId"/>
+					<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="ValidIdError"/>
+					<string-to-list string="${tempErrorMessage}" message-field="groupId"  list="error_list"/>
+					<else>
+						<call-object-method obj-field="parameters.groupId" method-name="toUpperCase" ret-field="parameters.groupId"/>
+					</else>
+				</if-compare>
+			</else>
+		</if-empty>
+
+		<if-empty field="parameters.description">
+			<property-to-field field="tempErrorMessage" resource="UspErpUiLabels" property="BlankSecurityGroupDescriptionError"/>
+			<string-to-list string="${tempErrorMessage}" message-field="description"  list="error_list"/>
+		</if-empty>
+
+		<check-errors/>
+
+		<!-- update record in entities: SecurityGroup -->
+		<make-value entity-name="SecurityGroup" value-field="lookupPKMap"/>
+		<set-pk-fields map="parameters" value-field="lookupPKMap"/>
+		<find-by-primary-key map="lookupPKMap" value-field="lookedUpValue"/>
+		<set-nonpk-fields map="parameters" value-field="lookedUpValue"/>
+		<now-timestamp field="nowTimestamp"/>
+		<set from-field="nowTimestamp" field="lookedUpValue.lastUpdatedTxStamp"/>
+		<set from-field="nowTimestamp" field="lookedUpValue.lastUpdatedStamp"/>
+		<store-value value-field="lookedUpValue"/>
+
+		<if-not-empty field="lookedUpValue">
+			<set field="editGroup" from-field="parameters.groupId"/>
+			<property-to-field resource="UspErpUiLabels" property="EditSecurityGroupSuccess" field="editSecurityGroupSuccessMessage"/>
+			<string-to-list string="${editSecurityGroupSuccessMessage}" list="successMessageList"/>
+		</if-not-empty>
+
+	</simple-method>
+
 </simple-methods>

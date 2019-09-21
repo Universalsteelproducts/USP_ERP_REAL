@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-engine-xml>
-    <SecurityGroupPermission groupId="FULLADMIN" permissionId="USPERP_ADMIN"/>
-    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="USPERP_CREATE"/>
-    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="USPERP_DELETE"/>
-    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="USPERP_UPDATE"/>
-    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="USPERP_VIEW"/>
-    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="USPERP_VIEW"/>
-    <SecurityGroupPermission groupId="BIZADMIN" permissionId="USPERP_ADMIN"/>
+
+    <!-- USP ERP -->
+    <!-- Security Group and Permission base Data -->
+    <!-- STEP 1 : SECURITY GROUP IN EACH DEPARTMENT -->
+    <SecurityGroup                  groupId="USPERP"                    description="USP ERP SYSTEM ADMIN" />
+    <SecurityGroup                  groupId="ERP_MANAGER"               description="USP ERP MANAGER" />
+
+    <!-- STEP 2 : BIND SECURITY GROUP AND SECURITY PERMISSION -->
+    <SecurityGroupPermission        groupId="USPERP"                    permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission        groupId="USPERP"                    permissionId="ERP_MANAGER_VIEW"/>
+    <SecurityGroupPermission        groupId="ERP_MANAGER"               permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission        groupId="ERP_MANAGER"               permissionId="ERP_MANAGER_VIEW"/>
+
+    <SecurityGroupPermission        groupId="FULLADMIN"                 permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission        groupId="FLEXADMIN"                 permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission        groupId="VIEWADMIN"                 permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission        groupId="BIZADMIN"                  permissionId="USPERP_VIEW"/>
+
+    <!-- STEP 3 : SET ACTION OF EACH SECURITY PERMISSION -->
+    <!-- 특수한 권한의 경우 추가 -->
+    <SecurityPermission             permissionId="USPERP_VIEW"          description="USP ERP SYSTEM ADMIN VIEW PERMISSION"/>
+    <SecurityPermission             permissionId="ERP_MANAGER_VIEW"     description="USP ERP SYSTEM ERP MANAGER VIEW PERMISSION"/>
+
+    <!-- party base Dat : create above Manager Permission -->
+    <!-- STEP 4 : Create Party -->
+    <Party                          partyId="uspErpAdmin"       partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="uspErpManager"     partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="purchaseManager"   partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="accountManager"    partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="salesManager"      partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="hrManager"         partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+    <Party                          partyId="inventoryManager"  partyTypeId="PERSON"    statusId="PARTY_ENABLED"    createdByUserLogin="admin" />
+
+    <!-- STEP 5 : set Party Role -->
+    <!-- 일반 직원들은 CONTENT_USER -->
+    <PartyRole                      partyId="uspErpAdmin"       roleTypeId="_NA_"/>
+    <PartyRole                      partyId="uspErpAdmin"       roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="uspErpAdmin"       roleTypeId="ADMIN"/>
+    <PartyRole                      partyId="uspErpManager"     roleTypeId="_NA_"/>
+    <PartyRole                      partyId="uspErpManager"     roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="uspErpManager"     roleTypeId="MANAGER"/>
+    <PartyRole                      partyId="purchaseManager"   roleTypeId="_NA_"/>
+    <PartyRole                      partyId="purchaseManager"   roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="purchaseManager"   roleTypeId="MANAGER"/>
+    <PartyRole                      partyId="accountManager"    roleTypeId="_NA_"/>
+    <PartyRole                      partyId="accountManager"    roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="accountManager"    roleTypeId="MANAGER"/>
+    <PartyRole                      partyId="salesManager"      roleTypeId="_NA_"/>
+    <PartyRole                      partyId="salesManager"      roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="salesManager"      roleTypeId="MANAGER"/>
+    <PartyRole                      partyId="hrManager"         roleTypeId="_NA_"/>
+    <PartyRole                      partyId="hrManager"         roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="hrManager"         roleTypeId="MANAGER"/>
+    <PartyRole                      partyId="inventoryManager"  roleTypeId="_NA_"/>
+    <PartyRole                      partyId="inventoryManager"  roleTypeId="EMPLOYEE"/>
+    <PartyRole                      partyId="inventoryManager"  roleTypeId="MANAGER"/>
+
+
+    <!-- STEP 6 : create Person -->
+    <Person                         partyId="uspErpAdmin"       firstName="USP"  lastName="ERPAdmin"/>
+    <Person                         partyId="uspErpManager"     firstName="USP"  lastName="ERPManager"/>
+    <Person                         partyId="purchaseManager"   firstName="USP"  lastName="PurchaseManager"/>
+    <Person                         partyId="accountManager"    firstName="USP"  lastName="AccountManager"/>
+    <Person                         partyId="salesManager"      firstName="USP"  lastName="SalesManager"/>
+    <Person                         partyId="hrManager"         firstName="USP"  lastName="HRManager"/>
+    <Person                         partyId="inventoryManager"  firstName="USP"  lastName="InventoryManager"/>
+
+    <!-- STEP 7 : create User Login -->
+    <UserLogin                      userLoginId="uspErpAdmin"       currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="uspErpAdmin"/>
+    <UserLogin                      userLoginId="uspErpManager"     currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="uspErpManager"/>
+    <UserLogin                      userLoginId="purchaseManager"   currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="purchaseManager"/>
+    <UserLogin                      userLoginId="accountManager"    currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="accountManager"/>
+    <UserLogin                      userLoginId="salesManager"      currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="salesManager"/>
+    <UserLogin                      userLoginId="hrManager"         currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="hrManager"/>
+    <UserLogin                      userLoginId="inventoryManager"  currentPassword="{SHA}47ca69ebb4bdc9ae0adec130880165d2cc05db1a"     requirePasswordChange="N"   partyId="inventoryManager"/>
+
+    <!-- STEP 8 : set Accesse -->
+    <UserLoginSecurityGroup         userLoginId="uspErpAdmin"       groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="uspErpAdmin"       groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="uspErpAdmin"       groupId="FULLADMIN"     fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="uspErpManager"     groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="uspErpManager"     groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="purchaseManager"   groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="purchaseManager"   groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="accountManager"    groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="accountManager"    groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="salesManager"      groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="salesManager"      groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="hrManager"         groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="hrManager"         groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="inventoryManager"  groupId="USPERP"        fromDate="2019-08-13 00:00:00.000"/>
+    <UserLoginSecurityGroup         userLoginId="inventoryManager"  groupId="ERP_MANAGER"   fromDate="2019-08-13 00:00:00.000"/>
+
+    <!-- original Data -->
+    <SecurityGroupPermission    groupId="FULLADMIN" permissionId="USPERP_ADMIN"/>
+    <SecurityGroupPermission    groupId="FLEXADMIN" permissionId="USPERP_CREATE"/>
+    <SecurityGroupPermission    groupId="FLEXADMIN" permissionId="USPERP_DELETE"/>
+    <SecurityGroupPermission    groupId="FLEXADMIN" permissionId="USPERP_UPDATE"/>
+    <SecurityGroupPermission    groupId="FLEXADMIN" permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission    groupId="VIEWADMIN" permissionId="USPERP_VIEW"/>
+    <SecurityGroupPermission    groupId="BIZADMIN" permissionId="USPERP_ADMIN"/>
+
 </entity-engine-xml>

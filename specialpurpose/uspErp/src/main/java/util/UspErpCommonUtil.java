@@ -82,4 +82,28 @@ public class UspErpCommonUtil {
         list.clear();
         list.addAll(set);
     }
+
+    public static String makeValidId(String id, String spaceReplacement, boolean makeUpCase) {
+        return makeValidId(id, null, spaceReplacement, makeUpCase);
+    }
+
+    public static String makeValidId(String id, Integer length, String spaceReplacement, boolean makeUpCase) {
+
+        if (spaceReplacement == null) {
+            spaceReplacement = " ";
+        }
+        if (UtilValidate.isEmpty(id)) {
+            return null;
+        }
+        id = id.trim().replaceAll("\\s{1,}", spaceReplacement);
+        if (makeUpCase) {
+            id = id.toUpperCase();
+        }
+        if (UtilValidate.isNotEmpty(length)) {
+            if (id.length() > length) {
+                return null;
+            }
+        }
+        return id;
+    }
 }

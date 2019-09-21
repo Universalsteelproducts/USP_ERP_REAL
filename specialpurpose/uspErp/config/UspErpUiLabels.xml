@@ -159,6 +159,12 @@
     <property key="deleteSecurityGroupBtn">
         <value xml:lang="en">Delete Security Group</value>
     </property>
+    <property key="addPermissionBtn">
+        <value xml:lang="en">Add Permission</value>
+    </property>
+    <property key="deletePermissionBtn">
+        <value xml:lang="en">Delete Permission</value>
+    </property>
     <!-- BUTTON LABEL END-->
 
     <!-- PURCHASE VIEW LABEL START-->
@@ -180,14 +186,14 @@
     <!-- REPORT VIEW LABEL END-->
 
     <!-- ADMIN VIEW LABEL START-->
+    <property key="employeeDetail">
+        <value xml:lang="en">Employee Detail</value>
+    </property>
     <property key="createEmployee">
         <value xml:lang="en">Create Employee</value>
     </property>
     <property key="employeeId">
         <value xml:lang="en">Employee ID</value>
-    </property>
-    <property key="securityGroup">
-        <value xml:lang="en">Security Group</value>
     </property>
     <property key="securityGroup">
         <value xml:lang="en">Security Group</value>
@@ -229,15 +235,228 @@
     <property key="reqPasswdChange">
         <value xml:lang="en">Require Password Change</value>
     </property>
-    <property key="hasLoginOut">
-        <value xml:lang="en">Has Login Out</value>
+    <property key="hasLoggedOut">
+        <value xml:lang="en">Has Logged Out</value>
     </property>
     <property key="disabledDate">
         <value xml:lang="en">Disabled Date</value>
     </property>
+    <property key="groupId">
+        <value xml:lang="en">Security Group ID</value>
+    </property>
+    <property key="fromDate">
+        <value xml:lang="en">From Date</value>
+    </property>
+    <property key="thruDate">
+        <value xml:lang="en">Thru Date</value>
+    </property>
+    <property key="description">
+        <value xml:lang="en">Description</value>
+    </property>
+    <property key="employeeSecurityGroup">
+        <value xml:lang="en">Employee Security Group</value>
+    </property>
+    <property key="employeeGroupId">
+        <value xml:lang="en">Security Group For Employee</value>
+    </property>
+    <property key="selectGroupId">
+        <value xml:lang="en">Select Security Group</value>
+    </property>
+    <property key="searchGroupId">
+        <value xml:lang="en">Search Security Group</value>
+    </property>
+    <property key="securityGroupDetail">
+        <value xml:lang="en">Security Group Detail</value>
+    </property>
+    <property key="securityGroupCreate">
+        <value xml:lang="en">Create Security Group</value>
+    </property>
+    <property key="employeeList">
+        <value xml:lang="en">Employee List</value>
+    </property>
+    <property key="permissionList">
+        <value xml:lang="en">PermissionList List</value>
+    </property>
+    <property key="securityGroupPermission">
+        <value xml:lang="en">Permissions for Security Group</value>
+    </property>
+    <property key="permissionList">
+        <value xml:lang="en">Permissions List</value>
+    </property>
+    <property key="permissionId">
+        <value xml:lang="en">Permissions Id</value>
+    </property>
+    <property key="permission">
+        <value xml:lang="en">Permissions</value>
+    </property>
+
     <property key="successFailedLogins">
         <value xml:lang="en">Successive Failed Logins</value>
     </property>
+    <property key="BadUserLoginIdError">
+        <value xml:lang="en">User Login ID cannot be blank and must be at least 5 characters</value>
+    </property>
+    <property key="UserLoginIdExistError">
+        <value xml:lang="en">User Login ID has already been allocated</value>
+    </property>
+    <property key="ValidIdError">
+        <value xml:lang="en">Your entry ${errorKey} is not valid. Employee ID
+            attributes must contain alpha, number digits, hyphens or underscores.
+            Spaces and other special characters are not allowed.</value>
+    </property>
+    <property key="UserLoginIdEmailAddressError">
+        <value xml:lang="en">Employee Login ID cannot be an email address.</value>
+    </property>
+    <property key="UserLoginPasswordError">
+        <value xml:lang="en">The New Password cannot be blank, must be at least 6 characters,
+            And it must match the Confirm Password</value>
+    </property>
+    <property key="BlankPasswordHintError">
+        <value xml:lang="en">The Password Hint cannot be blank</value>
+    </property>
+    <property key="EditUserSuccess">
+        <value xml:lang="en">Your changes to ${editUser} have been saved</value>
+    </property>
+    <property key="UpdatedSuccess">
+        <value xml:lang="en">You have Successfully Saved Your Information</value>
+    </property>
+    <property key="DisabledTimePassedError">
+        <value xml:lang="en">Disabled Date / Time must be in the future</value>
+    </property>
+    <property key="DuplicateSecurityGroupError">
+        <value xml:lang="en">You cannot associate a Security Group more than once for an Employee</value>
+    </property>
+    <property key="EditEmployeeSecurityGroupSuccess">
+        <value xml:lang="en">Your Security Group changes for Employee ${editEmployee} have been saved</value>
+    </property>
+    <property key="BlankGroupIdError">
+        <value xml:lang="en">Security Group ID cannot be blank</value>
+    </property>
+    <property key="GroupIdExistError">
+        <value xml:lang="en">Security Group ID has already been allocated</value>
+    </property>
+    <property key="BlankSecurityGroupDescriptionError">
+        <value xml:lang="en">The Description cannot be blank</value>
+    </property>
+    <property key="EditSecurityGroupSuccess">
+        <value xml:lang="en">Your changes to ${editGroup} have been saved</value>
+    </property>
+    <property key="EditSecurityGroupPermissionSuccess">
+        <value xml:lang="en">Security Group ${editGroup} has been updated</value>
+    </property>
+
+    <!-- Email VIEW LABEL END-->
+    <property key="EmailManagement">
+        <value xml:lang="en">Email Management</value>
+    </property>
+    <property key="EmailTemplate">
+        <value xml:lang="en">Email Template</value>
+    </property>
+    <property key="emailTemplateDetail">
+        <value xml:lang="en">Email Template Detail</value>
+    </property>
+    <property key="template">
+        <value xml:lang="en">Template Info</value>
+    </property>
+    <property key="EmailConfiguration">
+        <value xml:lang="en">Email Configuration</value>
+    </property>
+    <property key="EmailParameter">
+        <value xml:lang="en">Email Parameter</value>
+    </property>
+    <property key="contentId">
+        <value xml:lang="en">Content ID</value>
+    </property>
+    <property key="contentName">
+        <value xml:lang="en">Content Name</value>
+    </property>
+    <property key="statusId">
+        <value xml:lang="en">Status ID</value>
+    </property>
+    <property key="activeDate">
+        <value xml:lang="en">Active Date</value>
+    </property>
+    <property key="createDate">
+        <value xml:lang="en">Created Date</value>
+    </property>
+    <property key="createEmail">
+        <value xml:lang="en">Create Email Tamplate</value>
+    </property>
+    <property key="htmlCode">
+        <value xml:lang="en">Html Code</value>
+    </property>
+    <property key="contextFile">
+        <value xml:lang="en">Context File</value>
+    </property>
+    <property key="content">
+        <value xml:lang="en">Content</value>
+    </property>
+    <property key="file">
+        <value xml:lang="en">File Path</value>
+    </property>
+    <property key="status">
+        <value xml:lang="en">Status</value>
+    </property>
+    <property key="changeActive">
+        <value xml:lang="en">Change To Active</value>
+    </property>
+    <property key="changeInactive">
+        <value xml:lang="en">Change To Inactive</value>
+    </property>
+    <property key="sendTestEmail">
+        <value xml:lang="en">Send Test Email</value>
+    </property>
+    <property key="testMode">
+        <value xml:lang="en">Test Mode</value>
+    </property>
+    <property key="emailTemplate">
+        <value xml:lang="en">Email Template</value>
+    </property>
+    <property key="fromEmailAddr">
+        <value xml:lang="en">From Email Address</value>
+    </property>
+    <property key="toEmailAddr">
+        <value xml:lang="en">To Email Address</value>
+    </property>
+    <property key="subject">
+        <value xml:lang="en">Subject</value>
+    </property>
+    <property key="orderNum">
+        <value xml:lang="en">Order #</value>
+    </property>
+    <property key="emailText">
+        <value xml:lang="en">Text</value>
+    </property>
+
+    <property key="contentIdError">
+        <value xml:lang="en">The Content Id cannot be blank.</value>
+    </property>
+    <property key="contentIdLengthError">
+        <value xml:lang="en">The Content Id cannot be more than 20 characters.</value>
+    </property>
+    <property key="contentIdExistError">
+        <value xml:lang="en">Content ID ${contentId} is already available.
+            You can only add unique Content in this function.</value>
+    </property>
+    <property key="contentNameError">
+        <value xml:lang="en">The Name field cannot be blank.</value>
+    </property>
+    <property key="contentDescriptionError">
+        <value xml:lang="en">The Description field cannot be blank.</value>
+    </property>
+    <property key="contentTextDataError">
+        <value xml:lang="en">The Content field cannot be blank.</value>
+    </property>
+    <property key="contentFileNotExistError">
+        <value xml:lang="en">File [{0}] does not exist on the server. Please check and retry.</value>
+    </property>
+    <property key="filePathBlankError">
+        <value xml:lang="en">The File Path field cannot be blank.</value>
+    </property>
+    <property key="EditEmailTemplateSuccess">
+        <value xml:lang="en">Your changes to ${editContentId} have been saved</value>
+    </property>
+    <!-- Email VIEW LABEL END-->
     <!-- ADMIN VIEW LABEL END-->
 
     <property key="searchPoForm">

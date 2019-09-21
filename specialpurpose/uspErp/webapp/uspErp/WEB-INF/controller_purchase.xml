@@ -9,10 +9,10 @@
     <description>Purchase Component Site Configuration File</description>
 
     <!-- Request Mappings -->
-    <request-map uri="purchaseMain">
-    	<security https="true" auth="true"/>
-    	<response name="success" type="view" value="purchaseMain"/>
-    </request-map>
+	<request-map uri="orderMain">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="orderMain"/>
+	</request-map>
 
 	<request-map uri="FindPoList">
 		<security https="true" auth="true"/>
@@ -51,7 +51,7 @@
     </request-map>
 
     <!-- View Mappings -->
-	<view-map name="purchaseMain" page="component://uspErp/widget/purchase/PurchaseScreens.xml#purchaseMain" type="screen"/>
+	<view-map name="orderMain" page="component://uspErp/widget/purchase/PurchaseScreens.xml#orderMain" type="screen"/>
 	<view-map name="FindPoList" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#FindPoList"/>
 	<view-map name="EditPo" page="component://uspErp/widget/purchase/PurchaseScreens.xml#EditPo" type="screen"/>
 	<view-map name="shippingDocManage" page="component://uspErp/widget/purchase/PurchaseScreens.xml#shippingDocManage" type="screen"/>

@@ -5,16 +5,6 @@
     <vendor></vendor>
     <version>1.0</version>
 
-    <service name="searchEmployee" default-entity-name="UserLogin" engine="java" auth="true"
-             location="services.AdminServices" invoke="searchEmployee">
-        <attribute name="productStoreId" mode="IN" type="String" optional="true"/>
-        <attribute name="srchEmployeeId" mode="IN" type="String" optional="true"/>
-        <attribute name="searchGroupId" mode="IN" type="String" optional="true"/>
-        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
-        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
-        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
-    </service>
-
     <service name="successMessage" engine="simple" auth="true"
              location="component://uspErp/minilang/admin/EmployeeManagementServices.xml"
              invoke="successMessage">
@@ -27,6 +17,18 @@
         <attribute name="uspErpSuccessMessageList" type="List" mode="OUT" optional="true" />
         <attribute name="warningMessageList" type="List" mode="OUT" optional="true" />
     </service>
+
+    <!-- Employee Security Group Management -->
+    <service name="searchEmployee" default-entity-name="UserLogin" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchEmployee">
+        <attribute name="productStoreId" mode="IN" type="String" optional="true"/>
+        <attribute name="srchEmployeeId" mode="IN" type="String" optional="true"/>
+        <attribute name="searchGroupId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+
     <service name="createEmployeeGroup" engine="group" auth="false">
         <description>
             Create an Employee
@@ -97,7 +99,9 @@
         <attribute name="employeeLoginId" mode="IN" type="String" optional="false"/>
         <attribute name="groupIdMap" type="Map" string-map-prefix="groupIdMap_" mode="IN" optional="true"/>
     </service>
+    <!-- Employee Security Group Management -->
 
+    <!-- Security Group Management -->
     <service name="searchSecurityGroupList" default-entity-name="SecurityGroup" engine="java" auth="true"
              location="services.AdminServices" invoke="searchSecurityGroupList">
         <attribute name="groupId" mode="IN" type="String" optional="true"/>
@@ -105,4 +109,72 @@
         <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
         <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
     </service>
+
+    <service name="createSecurityGroupGroup" engine="group" auth="false">
+        <description>
+            Create a Security Group
+        </description>
+        <group>
+            <invoke name="createSecurityGroup" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="createSecurityGroup" engine="simple" auth="false"
+             location="component://uspErp/minilang/admin/SecurityGroupManagementServices.xml"
+             invoke="createSecurityGroup">
+        <description>Create a Security Group</description>
+        <attribute name="groupId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="updateSecurityGroupGroup" engine="group" auth="false">
+        <description>
+            Update a User
+        </description>
+        <group>
+            <invoke name="updateSecurityGroup" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="updateSecurityGroup" engine="simple" auth="false"
+             location="component://uspErp/minilang/admin/SecurityGroupManagementServices.xml"
+             invoke="updateSecurityGroup">
+        <description>Update a Security Group</description>
+        <attribute name="groupId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="searchSecurityGroupPermission" default-entity-name="SecurityGroupPermission" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchSecurityGroupPermissionList">
+        <attribute name="groupId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+
+    <service name="updateSecurityGroupPermissionGroup" engine="group" auth="false" transaction-timeout="7200">
+        <group>
+            <invoke name="updateSecurityGroupPermission" result-to-context="true"/>
+            <invoke name="successMessage" result-to-context="true"/>
+        </group>
+    </service>
+    <service name="updateSecurityGroupPermission" engine="simple"
+             location="component://uspErp/minilang/admin/PermissionManagementServices.xml"
+             invoke="updateSecurityGroupPermission" auth="true">
+        <description>Update employee security groups</description>
+        <attribute name="groupId" mode="IN" type="String" optional="false"/>
+        <attribute name="permissionIdMap" type="Map" string-map-prefix="permissionIdMap_" mode="IN" optional="true"/>
+    </service>
+    <!-- Security Group Management -->
+
+    <!-- Permission Management -->
+    <service name="searchPermissionList" default-entity-name="SecurityPermission" engine="java" auth="true"
+             location="services.AdminServices" invoke="searchPermissionList">
+        <attribute name="permissionId" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+    <!-- Permission Management -->
+
 </services>
