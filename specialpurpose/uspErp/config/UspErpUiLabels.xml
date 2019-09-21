@@ -6,6 +6,9 @@
     <property key="PurchaseApplication">
         <value xml:lang="en">PURCHASE Application</value>
     </property>
+    <property key="OrderApplication">
+        <value xml:lang="en">ORDER Application</value>
+    </property>
     <property key="InventoryApplication">
         <value xml:lang="en">INVENTORY Application</value>
     </property>
@@ -36,6 +39,12 @@
     </property>
 
     <!-- MENU LABEL START-->
+    <property key="Order">
+        <value xml:lang="en">Order</value>
+    </property>
+    <property key="OrderMain">
+        <value xml:lang="en">Main</value>
+    </property>
     <property key="purchase">
         <value xml:lang="en">Purchase</value>
     </property>

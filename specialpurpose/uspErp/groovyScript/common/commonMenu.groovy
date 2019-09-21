@@ -22,9 +22,9 @@ import org.apache.ofbiz.base.util.*
 uiLabelMap = UtilProperties.getResourceBundleMap("UspErpUiLabels", locale)
 mainMenuList = [
         [
-                title : uiLabelMap.purchase,
-                target : "purchaseMain",
-                appMenuNm : "PurchaseMainAppBar",
+                title : uiLabelMap.Order,
+                target : "orderMain",
+                appMenuNm : "OrderMainAppBar",
                 permission : ""
         ],
         [
