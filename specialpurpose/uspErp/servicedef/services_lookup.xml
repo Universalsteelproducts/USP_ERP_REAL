@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>UspErp Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="schSupplier" default-entity-name="Vendor" engine="java" auth="true"
+             location="services.LookupServices" invoke="schSupplier">
+        <attribute name="supplierId" mode="IN" type="String" optional="true"/>
+        <attribute name="supplierNm" mode="IN" type="String" optional="true"/>
+        <attribute name="supplierInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="resultState" mode="OUT" type="String" optional="false"/>
+    </service>
+
+    <service name="schCustomer" default-entity-name="Customer" engine="java" auth="true"
+             location="services.LookupServices" invoke="schCustomer">
+        <attribute name="customerId" mode="IN" type="String" optional="false"/>
+        <attribute name="customerInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="resultState" mode="OUT" type="String" optional="false"/>
+    </service>
+    
+</services>

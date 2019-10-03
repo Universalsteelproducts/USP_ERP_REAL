@@ -3,166 +3,175 @@
         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
  	<!-- Main화면의 PO리스트 -->
-	<screen name="orderMain">
+    <screen name="orderMain">
         <section>
 			<condition>
 				<if-has-permission permission="USPERP" action="_VIEW"/>
 			</condition>
-			<actions>
+            <actions>
 				<set field="headerItem" value="main"/>
 				<set field="titleProperty" value="Order Main"/>
 				<set field="appMenuNm" value="OrderMainAppBar"/>
-			</actions>
-            <widgets>
-                <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
-                    <decorator-section name="body">
-                        <platform-specific>
-                            <html><html-template location="component://uspErp/template/purchase/poDataTable.ftl"/></html>
-                        </platform-specific>
-                    </decorator-section>
-                </decorator-screen>
-            </widgets>
-        </section>
-    </screen>
-
-    <screen name="OrgFindPoList">
-	    <section>
-	        <actions>
-	        	<!-- headerItem ==> xxx.Menu.xml의 서브메뉴 name과 동일해야함 -->
-	            <set field="headerItem" value="po"/>
-	            <!-- 페이지 상단의 화면 title -->
-	            <set field="titleProperty" value="PO Management"/>
-				<set field="appMenuNm" value="PurchaseMainAppBar"/>
-                <set field="purchaseCtx" from-field="parameters"/>
-	        </actions>
-	        <widgets>
-	            <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
-	                <decorator-section name="body">
-	                    <section>
-	                        <condition>
-	                            <if-has-permission permission="PURCHASE" action="_VIEW"/>
-	                        </condition>
-	                        <widgets>
-	                            <decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
-	                            	<decorator-section name="menu-bar">
-                                        <container style="button-bar">
-                                            <link target="EditPo" text="${uiLabelMap.newPo}" style="buttontext create"/>
-                                        </container>
-                                    </decorator-section>
-	                                <decorator-section name="search-options">
-	                                    <include-form name="FindPoList" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-	                                </decorator-section>
-	                                <decorator-section name="search-results">
-	                                    <include-form name="ListPoResult" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-	                                </decorator-section>
-	                            </decorator-screen>
-	                        </widgets>
-	                        <fail-widgets>
-	                            <label style="h3">${uiLabelMap.purchaseViewPermissionError}</label>
-	                       </fail-widgets>
-	                    </section>
-	                </decorator-section>
-	            </decorator-screen>
-	        </widgets>
-	    </section>
-	</screen>
-
-    <screen name="FindPoList">
-	    <section>
-	        <actions>
-	        	<!-- headerItem ==> xxx.Menu.xml의 서브메뉴 name과 동일해야함 -->
-	            <set field="headerItem" value="po"/>
-	            <!-- 페이지 상단의 화면 title -->
-	            <set field="titleProperty" value="PO Management"/>
-				<set field="appMenuNm" value="PurchaseMainAppBar"/>
-                <set field="purchaseCtx" from-field="parameters"/>
-                <script location="component://uspErp/groovyScript/purchase/SearchPoList.groovy"/>
-	        </actions>
-	        <widgets>
-	            <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
-	                <decorator-section name="body">
-	                    <section>
-	                        <condition>
-	                            <if-has-permission permission="PURCHASE" action="_VIEW"/>
-	                        </condition>
-	                        <widgets>
-	                            <platform-specific>
-		                            <html><html-template location="component://uspErp/template/purchase/PoListSearch.ftl"/></html>
-		                        </platform-specific>
-	                        </widgets>
-	                        <fail-widgets>
-	                            <label style="h3">${uiLabelMap.purchaseViewPermissionError}</label>
-	                       </fail-widgets>
-	                    </section>
-	                </decorator-section>
-	            </decorator-screen>
-	        </widgets>
-	    </section>
-	</screen>
-
-	<screen name="shippingDocManage">
-	    <section>
-	        <actions>
-	        	<!-- headerItem ==> xxx.Menu.xml의 서브메뉴 name과 동일해야함 -->
-	            <set field="headerItem" value="document"/>
-	            <!-- 페이지 상단의 화면 title -->
-	            <set field="titleProperty" value="Shipping Document Management"/>
-				<set field="appMenuNm" value="PurchaseMainAppBar"/>
-                <set field="purchaseCtx" from-field="parameters"/>
-	        </actions>
-	        <widgets>
-                <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
-	                <decorator-section name="body">
-	                    <screenlet title="${uiLabelMap.poInfo}">
-                            <include-form name="PoInfo" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.blDoc}">
-                            <include-form name="BLDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.commercialInvoiceDoc}">
-                            <include-form name="CommercialInvoiceDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.packingListDoc}">
-                            <include-form name="PackingListDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.weightListDoc}">
-                            <include-form name="WeightListDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.mtcDoc}">
-                            <include-form name="MTCDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-                        <screenlet title="${uiLabelMap.shipmentAdviceDoc}">
-                            <include-form name="ShipmentAdviceDoc" location="component://uspErp/widget/purchase/PurchasePoForms.xml"/>
-                        </screenlet>
-	                </decorator-section>
-	            </decorator-screen>
-	        </widgets>
-	    </section>
-	</screen>
-
-	<screen name="EditPo">
-        <section>
-            <actions>
-                <set field="titleProperty" value="New PO Issue"/>
-                <set field="tabButtonItem" value="EditPo"/>
-                <!--<set field="labelTitleProperty" value="ProductProductBom"/>-->
-				<set field="appMenuNm" value="PurchaseMainAppBar"/>
-                <set field="headerItem" value="po"/>
-                <set field="poNo" from-field="parameters.poNo"/>
-                <set field="crudMode" from-field="parameters.crudMode"/>
-                <entity-one entity-name="PoMaster" value-field="poMaster"/>
-                <script location="component://uspErp/groovyScript/purchase/EditPoList.groovy"/>
+                <script location="component://uspErp/groovyScript/purchase/orderMain.groovy"/>
             </actions>
             <widgets>
                 <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
                         <platform-specific>
-                            <html><html-template location="component://uspErp/template/purchase/EditPo.ftl"/></html>
+                            <html><html-template location="component://uspErp/template/purchase/orderMain.ftl"/></html>
                         </platform-specific>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
         </section>
     </screen>
+
+    <screen name="schPoList">
+	    <section>
+	        <actions>
+				<set field="headerItem" value="purchase"/>
+				<set field="titleProperty" value="Purchase Order"/>
+				<set field="appMenuNm" value="OrderMainAppBar"/>
+	        </actions>
+	        <widgets>
+				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<section>
+							<actions>
+								<script location="component://uspErp/groovyScript/purchase/SchPoList.groovy"/>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/SchPoList.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+	        </widgets>
+	    </section>
+	</screen>
+
+	<screen name="newNEditPo">
+		<section>
+			<actions>
+				<set field="headerItem" value="purchase"/>
+				<set field="titleProperty" value="Purchase Order"/>
+				<set field="appMenuNm" value="OrderMainAppBar"/>
+				<set field="poNo" from-field="parameters.poNo"/>
+				<set field="pageAction" from-field="parameters.pageAction" />
+			</actions>
+			<widgets>
+				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<section>
+							<actions>
+								<script location="component://uspErp/groovyScript/purchase/NewNEditPo.groovy"/>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/commonPoInfo.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+						<section>
+							<condition>
+								<if-compare field="pageAction" operator="equals" value="new"/>
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/newPoDetail.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+						<section>
+							<condition>
+								<if-compare field="pageAction" operator="equals" value="edit"/>
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/editPoDetail.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="schProcList">
+		<section>
+			<actions>
+				<set field="headerItem" value="processing"/>
+				<set field="titleProperty" value="Processing Order"/>
+				<set field="appMenuNm" value="OrderMainAppBar"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<section>
+							<actions>
+								<script location="component://uspErp/groovyScript/purchase/SchProcList.groovy"/>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/SchProcList.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="newNEditProc">
+		<section>
+			<actions>
+				<set field="headerItem" value="processing"/>
+				<set field="titleProperty" value="Processing Order"/>
+				<set field="appMenuNm" value="OrderMainAppBar"/>
+				<set field="procNo" value="parameters.procNo" />
+				<set field="pageAction" from-field="parameters.pageAction" />
+			</actions>
+			<widgets>
+				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<section>
+							<actions>
+								<script location="component://uspErp/groovyScript/purchase/NewNEditProc.groovy"/>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/commonPoInfo.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+						<section>
+							<condition>
+								<if-compare field="pageAction" operator="equals" value="new"/>
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/newPoDetail.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+						<section>
+							<condition>
+								<if-compare field="pageAction" operator="equals" value="edit"/>
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html><html-template location="component://uspErp/template/purchase/editPoDetail.ftl"/></html>
+								</platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
 
 </screens>

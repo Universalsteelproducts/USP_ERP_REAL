@@ -19,13 +19,13 @@ under the License.
 -->
 
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
-    <screen name="LookupVendor">
+    <screen name="LookupSupplier">
         <section>
             <actions>
-                <property-map resource="PurchaseUiLabels" map-name="uiLabelMap" global="true"/>
-                <set field="title" value="${uiLabelMap.LookupVendor}"/>
+                <property-map resource="UspErpUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.LookupSupplier}"/>
                 <set field="queryString" from-field="result.queryString"/>
                 <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
                 <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
@@ -36,12 +36,24 @@ under the License.
             <widgets>
                 <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
                     <decorator-section name="search-options">
-                        <include-form name="LookupVendor" location="component://uspErp/widget/lookup/LookupForms.xml"/>
+                        <include-form name="LookupSupplier" location="component://uspErp/widget/lookup/LookupForms.xml"/>
                     </decorator-section>
                     <decorator-section name="search-results">
-                        <include-form name="ListVendor" location="component://uspErp/widget/lookup/LookupForms.xml"/>
+                        <include-form name="ListSupplier" location="component://uspErp/widget/lookup/LookupForms.xml"/>
                     </decorator-section>
                 </decorator-screen>
+                <!--
+                <decorator-section name="body">
+                    <platform-specific>
+                        <html><html-template location="component://uspErp/template/lookup/supplierLookup.ftl"/></html>
+                    </platform-specific>
+                </decorator-section>
+                <decorator-section name="body">
+                    <platform-specific>
+                        <html><html-template location="component://uspErp/template/lookup/customerLookup.ftl"/></html>
+                    </platform-specific>
+                </decorator-section>
+                -->
             </widgets>
         </section>
     </screen>
@@ -49,7 +61,7 @@ under the License.
     <screen name="LookupCustomer">
         <section>
             <actions>
-                <property-map resource="PurchaseUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="UspErpUiLabels" map-name="uiLabelMap" global="true"/>
                 <set field="title" value="${uiLabelMap.LookupCustomer}"/>
                 <set field="queryString" from-field="result.queryString"/>
                 <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>

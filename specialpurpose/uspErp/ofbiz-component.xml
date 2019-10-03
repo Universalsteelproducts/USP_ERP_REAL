@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ofbiz-component name="uspErp"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
     <!-- define resource loaders; most common is to use the component resource loader -->
     <resource-loader name="main" type="component"/>
 
@@ -16,7 +16,8 @@
     <entity-resource type="data" reader-name="seed" loader="main" location="data/UspErpSecurityPermissionSeedData.xml"/>
     <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpSecurityGroupDemoData.xml"/>
     <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpDemoData.xml"/>
-    <entity-resource type="data" reader-name="demo" loader="main" location="data/UspErpEmailData.xml"/>
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/UspErpEmailData.xml"/>
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/UspErpCodeData.xml"/>
 
     <!-- service resources: model(s), eca(s) and group definitions -->
     <service-resource type="model" loader="main" location="servicedef/services.xml"/>
@@ -28,6 +29,7 @@
     <service-resource type="model" loader="main" location="servicedef/services_report.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_purchase.xml"/>
     <service-resource type="model" loader="main" location="servicedef/services_logistics.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/services_lookup.xml"/>
     <!--
     <service-resource type="eca" loader="main" location="servicedef/secas.xml"/>
     <service-resource type="group" loader="main" location="servicedef/groups.xml"/>
@@ -37,9 +39,9 @@
 
     <!-- web applications; will be mounted when using the embedded container -->
     <webapp name="uspErp"
-        title="UspErp"
-        server="default-server"
-        location="webapp/uspErp"
-        base-permission="USPERP"
-        mount-point="/uspErp"/>
+            title="UspErp"
+            server="default-server"
+            location="webapp/uspErp"
+            base-permission="USPERP"
+            mount-point="/uspErp"/>
 </ofbiz-component>

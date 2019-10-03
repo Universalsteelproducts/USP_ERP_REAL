@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+           xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
     <!-- The controller elements that are common to all OFBiz components
          can be found in the following xml file. A component can override the
          elements found in the common-controller.xml file. -->
@@ -8,9 +8,9 @@
 
     <description>Purchase Component Site Configuration File</description>
 
-    <request-map uri="LookupVendor">
+    <request-map uri="LookupSupplier">
         <security auth="true" https="true"/>
-        <response name="success" type="view" value="LookupVendor"/>
+        <response name="success" type="view" value="LookupSupplier"/>
     </request-map>
 
     <request-map uri="LookupCustomer">
@@ -23,23 +23,23 @@
         <response name="success" type="view" value="LookupPo"/>
     </request-map>
 
-    <request-map uri="searchVendor">
+    <request-map uri="schSupplier">
         <security https="true" auth="true"/>
-        <event type="service" invoke="searchVendor"/>
+        <event type="service" invoke="schSupplier"/>
         <response name="success" type="request" value="json"/>
         <response name="error" type="request" value="json"/>
     </request-map>
 
-    <request-map uri="searchCustomer">
+    <request-map uri="schCustomer">
         <security https="true" auth="true"/>
-        <event type="service" invoke="searchCustomer"/>
+        <event type="service" invoke="schCustomer"/>
         <response name="success" type="request" value="json"/>
         <response name="error" type="request" value="json"/>
     </request-map>
 
-    <request-map uri="searchPo">
+    <request-map uri="schPo">
         <security https="true" auth="true"/>
-        <event type="service" invoke="searchPo"/>
+        <event type="service" invoke="schPo"/>
         <response name="success" type="request" value="json"/>
         <response name="error" type="request" value="json"/>
     </request-map>
@@ -53,8 +53,8 @@
         <response name="success" type="view" value="lookupSecurityGroupPermission"/>
     </request-map>
 
-    <view-map name="LookupVendor" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupVendor"/>
-    <view-map name="LookupCustomer" type="screen" page="component://uspErp/widget/lookup/widget/LookupScreens.xml#LookupCustomer"/>
+    <view-map name="LookupSupplier" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupSupplier"/>
+    <view-map name="LookupCustomer" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupCustomer"/>
     <view-map name="LookupPo" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#LookupPo"/>
     <view-map name="lookupEmployeeSecurityGroup" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#lookupEmployeeSecurityGroup"/>
     <view-map name="lookupSecurityGroupPermission" type="screen" page="component://uspErp/widget/lookup/LookupScreens.xml#lookupSecurityGroupPermission"/>

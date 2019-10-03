@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <PoStatusCode poStatusId="PE" poStatusNm="PO Entered" sortSeq="1" description="" />
+    <PoStatusCode poStatusId="SC" poStatusNm="S/C Confirmed" sortSeq="2" description="" />
+    <PoStatusCode poStatusId="CC" poStatusNm="Canceled" sortSeq="3" description="" />
+    <PoStatusCode poStatusId="HO" poStatusNm="Hold" sortSeq="4" description="" />
+    <PoStatusCode poStatusId="CP" poStatusNm="Completed" sortSeq="5" description="" />
+
+    <ProcessingStatusCode ProcessingStatusId="PE" ProcessingStatusNm="PO Entered" sortSeq="1" description="" />
+    <ProcessingStatusCode ProcessingStatusId="PC" ProcessingStatusNm="PO Confirmed" sortSeq="2" description="" />
+    <ProcessingStatusCode ProcessingStatusId="IP" ProcessingStatusNm="In Processing" sortSeq="3" description="" />
+    <ProcessingStatusCode ProcessingStatusId="HO" ProcessingStatusNm="Hold" sortSeq="4" description="" />
+    <ProcessingStatusCode ProcessingStatusId="CC" ProcessingStatusNm="Canceled" sortSeq="5" description="" />
+    <ProcessingStatusCode ProcessingStatusId="CP" ProcessingStatusNm="Completed" sortSeq="6" description="" />
+
+    <TransferStatusCode ProcessingStatusId="IN" ProcessingStatusNm="Initiated" sortSeq="1" description="" />
+    <TransferStatusCode ProcessingStatusId="IT" ProcessingStatusNm="In Transit" sortSeq="2" description="" />
+    <TransferStatusCode ProcessingStatusId="PR" ProcessingStatusNm="Partially Received" sortSeq="3" description="" />
+    <TransferStatusCode ProcessingStatusId="HO" ProcessingStatusNm="Hold" sortSeq="4" description="" />
+    <TransferStatusCode ProcessingStatusId="CC" ProcessingStatusNm="Canceled" sortSeq="5" description="" />
+    <TransferStatusCode ProcessingStatusId="CP" ProcessingStatusNm="Completed" sortSeq="6" description="" />
+
+    <PoMaster
+        poNo="190118TM"
+        orderDate=""
+        lot="1"
+        supplierId="TERNIUM_USA_INC"
+        supplierNm="TERNIUM USA INC."
+        agentId=""
+        poStatus="OP"
+        priceTerm=""
+        paymentTerm=""
+        paymentMethod=""
+        downPayment=""
+        shipmentMonth="Sep"
+        purchaseClass=""
+        orderRemark=""
+        internalNote=""
+    />
+
+    <PoReference
+        referenceSeq="1"
+        poNo="190118TM"
+        referenceNo="1"
+        lotNo="1"
+        fobPoint="ADS"
+        destination="ADS"
+        salesNo=""
+        customerId=""
+        customerNm=""
+        productId="G5AAG2"
+        productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
+        paintCode=""
+        paintName=""
+        qty="200"
+        unitPrice="990"
+        amount="123456"
+        produced=""
+        invoiceRev=""
+        shipmentCreated=""
+    />
+
+    <PoMaster
+        poNo="190911DA"
+        orderDate="2019-10-03 08:25:00"
+        supplierId="TON_DONG_A_CORPORATION"
+        supplierNm="TON DONG A CORPORATION"
+        agentId=""
+        poStatus="CP"
+        priceTerm=""
+        paymentTerm=""
+        paymentMethod=""
+        downPayment=""
+        shipmentMonth="Jul"
+        purchaseClass=""
+        orderRemark=""
+        internalNote=""
+    />
+
+    <PoReference
+        referenceSeq="2"
+        poNo="190911DA"
+        referenceNo="2"
+        lotNo="1"
+        fobPoint="SAV"
+        destination="SAV"
+        salesNo="S1940599"
+        customerId=""
+        customerNm=""
+        productId="G5AAG2"
+        productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
+        paintCode=""
+        paintName=""
+        qty="50"
+        unitPrice="990"
+        amount="123456"
+        produced="49"
+        invoiceRev="49"
+        shipmentCreated="49"
+    />
+
+    <PoReference
+        referenceSeq="2"
+        poNo="190911DA"
+        referenceNo="2"
+        lotNo="2"
+        fobPoint="SAV"
+        destination="PMC"
+        salesNo=""
+        customerId=""
+        customerNm=""
+        productId="G5ABG2"
+        productNm="GRADE 50 AZ50 BTP GALVALUME 29GA x 41.56"
+        paintCode=""
+        paintName=""
+        qty="50"
+        unitPrice="990"
+        amount="123456"
+        produced="51"
+        invoiceRev="51"
+        shipmentCreated="51"
+    />
+
+    <PoReference
+        referenceSeq="2"
+        poNo="190911DA"
+        referenceNo="3"
+        lotNo="3"
+        fobPoint="SAV"
+        destination="JIT"
+        salesNo=""
+        customerId=""
+        customerNm=""
+        productId="G5AAG2"
+        productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
+        paintCode=""
+        paintName=""
+        qty="80"
+        unitPrice="990"
+        amount="123456"
+        produced="80"
+        invoiceRev="80"
+        shipmentCreated="80"
+    />
+
+</entity-engine-xml>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
     <!-- ========================================================= -->
     <!-- ======================== Defaults ======================= -->
     <!-- ========================================================= -->
@@ -9,110 +9,255 @@
     <copyright>USP</copyright>
     <version>1.0</version>
 
-    <!-- PO Master -->
-    <entity entity-name="PoMaster" package-name="org.apache.ofbiz.purchase" title="Purchase PoMaster Entity">
-        <field name="poNo" type="id-long-ne"></field>
-        <field name="vendorId" type="id-long"></field>
-        <field name="poStatus" type="id-long"></field>
-        <field name="orderDate" type="date-time"></field>
-        <field name="priceTerm" type="id-long"></field>
-        <field name="freightTerm" type="id-long"></field>
-        <field name="paymentTerm" type="id-long"></field>
-        <field name="downPayment" type="currency-amount"></field>
-        <field name="remark" type="comment"></field>
-        <field name="shipmentMonth" type="short-varchar"></field>
-        <field name="poType" type="id-long"></field>
-        <field name="billingAccountId" type="id-long"></field>
-        <field name="internalNote" type="comment"></field>
-        <field name="createUserId" type="id-long"></field>
-        <field name="lastUpdateUserId" type="id-long"></field>
+    <!--
+    ******************************************************
+                    Common Module Start
+    ******************************************************
+    -->
+    <entity entity-name="PoStatusCode" package-name="usperp.common" title="PO Status">
+        <field name="poStatusId" type="id-long-ne"></field>
+        <field name="poStatusNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
 
+        <prim-key field="poStatusId"/>
+    </entity>
+
+    <entity entity-name="ProcessingStatusCode" package-name="usperp.common" title="Processing Status">
+        <field name="ProcessingStatusId" type="id-long-ne"></field>
+        <field name="ProcessingStatusNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="ProcessingStatusId"/>
+    </entity>
+
+    <entity entity-name="TransferStatusCode" package-name="usperp.common" title="Processing Status">
+        <field name="TransferStatusId" type="id-long-ne"></field>
+        <field name="TransferStatusNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="TransferStatusId"/>
+    </entity>
+
+    <entity entity-name="PurchaseClassCode" package-name="usperp.common" title="Purchase Class">
+        <field name="purchaseClassId" type="id-long-ne"></field>
+        <field name="purchaseClassNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="purchaseClassId"/>
+    </entity>
+
+    <entity entity-name="QuantityUnitCode" package-name="usperp.common" title="Quantity Unit">
+        <field name="quantityUnitId" type="id-long-ne"></field>
+        <field name="quantityUnitNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="quantityUnitId"/>
+    </entity>
+
+    <entity entity-name="PriceUnitCode" package-name="usperp.common" title="Price Unit">
+        <field name="priceUnitId" type="id-long-ne"></field>
+        <field name="priceUnitNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="priceUnitId"/>
+    </entity>
+
+    <entity entity-name="DestinationCode" package-name="usperp.common" title="Destination">
+        <field name="destinationId" type="id-long-ne"></field>
+        <field name="destinationNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="destinationId"/>
+    </entity>
+
+    <entity entity-name="SteelTypeCode" package-name="usperp.common" title="Steel Type">
+        <field name="steelTypeId" type="id-long-ne"></field>
+        <field name="steelTypeNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="steelTypeId"/>
+    </entity>
+
+    <entity entity-name="SurfaceTypeCode" package-name="usperp.common" title="Surface Type">
+        <field name="surfaceTypeId" type="id-long-ne"></field>
+        <field name="surfaceTypeNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="surfaceTypeId"/>
+    </entity>
+
+    <entity entity-name="GradeCode" package-name="usperp.common" title="Grade">
+        <field name="gradeId" type="id-long-ne"></field>
+        <field name="gradeNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="gradeId"/>
+    </entity>
+
+    <entity entity-name="CoatingWeightCode" package-name="usperp.common" title="Coating Weight">
+        <field name="steelTypeId" type="id-long-ne"></field>
+        <field name="steelTypeNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="steelTypeId"/>
+    </entity>
+
+    <entity entity-name="GaugeCode" package-name="usperp.common" title="Gauge">
+        <field name="gaugeId" type="id-long-ne"></field>
+        <field name="gaugeNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="gaugeId"/>
+    </entity>
+
+    <entity entity-name="WidthCode" package-name="usperp.common" title="Width">
+        <field name="widthId" type="id-long-ne"></field>
+        <field name="widthNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="widthId"/>
+    </entity>
+
+    <entity entity-name="CoilMaxWeightCode" package-name="usperp.common" title="Coil Max Weight">
+        <field name="coilMaxWeightId" type="id-long-ne"></field>
+        <field name="coilMaxWeightNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="coilMaxWeightId"/>
+    </entity>
+
+    <entity entity-name="GaugeControlYieldCode" package-name="usperp.common" title="Gauge Control Yield">
+        <field name="gaugeControlYieldId" type="id-long-ne"></field>
+        <field name="gaugeControlYieldNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="gaugeControlYieldId"/>
+    </entity>
+
+    <entity entity-name="PackagingCode" package-name="usperp.common" title="Packaging">
+        <field name="packagingId" type="id-long-ne"></field>
+        <field name="packagingNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="packagingId"/>
+    </entity>
+
+    <entity entity-name="PaintCode" package-name="usperp.common" title="Paint Code">
+        <field name="paintCodeId" type="id-long-ne"></field>
+        <field name="paintBrand" type="id-long-ne"></field>
+        <field name="paintName" type="id-long-ne"></field>
+        <field name="paintType" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="paintCodeId"/>
+    </entity>
+    <!--
+    ******************************************************
+                    Common Module End
+    ******************************************************
+    -->
+
+    <!--
+    ******************************************************
+                    Order Module Start
+    ******************************************************
+    -->
+    <!-- PO Master -->
+    <entity entity-name="PoMaster" package-name="usperp.order" title="Order Purchase PoMaster Entity">
+        <field name="poNo" type="id-long-ne"></field>
+        <field name="orderDate" type="date-time"></field>
+        <field name="supplierId" type="id-long"></field>
+        <field name="supplierNm" type="id-long"></field>
+        <field name="agentId" type="id-long"></field>
+        <field name="poStatus" type="id-long"></field>
+        <field name="priceTerm" type="id-long"></field>
+        <field name="paymentTerm" type="id-long"></field>
+        <field name="paymentMethod" type="id-long"></field>
+        <field name="downPayment" type="currency-amount"></field>
+        <field name="shipmentMonth" type="short-varchar"></field>
+        <field name="purchaseClass" type="long-varchar"></field>
+        <field name="orderRemark" type="comment"></field>
+        <field name="internalNote" type="comment"></field>
         <prim-key field="poNo"/>
     </entity>
 
     <!-- PO Reference -->
-    <entity entity-name="Reference" package-name="org.apache.ofbiz.purchase" title="Purchase Reference Entity">
+    <entity entity-name="PoReference" package-name="usperp.order" title="Order Purchase Reference Entity">
+        <!-- Reference Common Info-->
         <field name="referenceSeq" type="numeric"></field>
+        <field name="poNo" type="id-long-ne"></field>
         <field name="referenceNo" type="id-long-ne"></field>
         <field name="lotNo" type="id-long-ne"></field>
-        <field name="poNo" type="id-long-ne"></field>
-        <field name="ppglNo" type="numeric"></field>
-        <field name="partialYN" type="indicator"></field>
-        <field name="partialNo" type="id-long"></field>
-        <field name="port" type="short-varchar"></field>
+        <field name="fobPoint" type="id-long"></field>
+        <field name="fobPointEta" type="id-long"></field>
         <field name="destination" type="id-long"></field>
+        <field name="exw" type="id-long"></field>
+        <field name="exwEtd" type="id-long"></field>
+        <field name="barge" type="indicator"></field>
+        <field name="salesNo" type="id-long"></field>
+        <field name="shipmentNo" type="id-long-ne"></field>
+        <field name="customerId" type="id-long-ne"></field>
+        <field name="customerNm" type="id-long-ne"></field>
+        <field name="note" type="comment"></field>
+        <!-- Item Info-->
+        <field name="productId" type="id-long"></field>
+        <field name="productNm" type="id-long"></field>
+        <field name="itemId" type="id-long"></field>
+        <field name="itemNm" type="id-long"></field>
         <field name="steelType" type="id-long"></field>
+        <field name="surfaceType" type="id-long"></field>
         <field name="grade" type="id-long"></field>
         <field name="gradeDesc" type="description"></field>
         <field name="coatingWeight" type="id-long"></field>
         <field name="coatingWeightDesc" type="description"></field>
-        <field name="surfaceCoilType" type="id-long"></field>
-        <field name="surfaceCoilTypeDesc" type="description"></field>
         <field name="gauge" type="id-long"></field>
-        <field name="gaugeUnit" type="id-long"></field>
         <field name="gaugeDesc" type="description"></field>
         <field name="width" type="id-long"></field>
         <field name="widthDesc" type="description"></field>
-        <field name="coilMaxWeight" type="id-long"></field>
-        <field name="innerDiameter" type="id-long"></field>
-        <field name="gaugeControlYield" type="id-long"></field>
+        <field name="maxWeight" type="id-long"></field>
         <field name="packaging" type="id-long"></field>
         <field name="packagingDesc" type="description"></field>
-        <field name="barge" type="indicator"></field>
-        <field name="businessClass" type="id-long"></field>
-        <field name="customerId" type="id-long"></field>
-        <field name="customerName" type="id-long"></field>
-        <field name="otherDetail" type="description"></field>
-        <!-- 		<field name="orderQuantity" type="fixed-point"></field> -->
-        <field name="unitQuantity" type="fixed-point"></field>
-        <field name="quantityUnit" type="id-long"></field>
-        <field name="unitPrice" type="currency-amount"></field>
-        <field name="commissionUnitPrice" type="currency-amount"></field>
-        <field name="priceUnit" type="id-long"></field>
-        <field name="paintBrand" type="id-long"></field>
+        <field name="innerDiameter" type="id-long"></field>
+        <field name="gaugeControl" type="id-long"></field>
         <field name="paintCode" type="id-long"></field>
-        <field name="paintColor" type="id-long"></field>
+        <field name="paintBrand" type="id-long"></field>
         <field name="paintType" type="id-long"></field>
-        <field name="paintCoatingThickness" type="id-long"></field>
-        <field name="paintCoatingThicknessDesc" type="description"></field>
-        <field name="lcPaymentYn" type="indicator"></field>
-        <field name="etd" type="date-time"></field>
-        <field name="eta" type="date-time"></field>
-        <field name="createUserId" type="id-long"></field>
-        <field name="lastUpdateUserId" type="id-long"></field>
-
-        <field name="blDocFileYN" type="indicator"></field>
-        <field name="blDocFilePath" type="description"></field>
-        <field name="vessel" type="id-long"></field>
+        <field name="paintName" type="id-long"></field>
+        <field name="qty" type="fixed-point"></field>
+        <field name="commissionPrice" type="currency-amount"></field>
+        <field name="unitPrice" type="currency-amount"></field>
+        <field name="amount" type="fixed-point"></field>
+        <field name="produced" type="id-long"></field>
+        <!-- Item Account Info-->
+        <field name="commercialInvoiceNo" type="id-long"></field>
+        <field name="commercialInvoiceDate" type="date-time"></field>
+        <field name="fobPrice" type="currency-amount"></field>
         <field name="blNo" type="id-long"></field>
         <field name="blDate" type="date-time"></field>
-        <field name="portOfLoading" type="id-long"></field>
-        <field name="shippingCarrier" type="description"></field>
-
-        <field name="ciDocFileYN" type="indicator"></field>
-        <field name="ciDocFilePath" type="description"></field>
-        <field name="contractNo" type="id-long"></field>
-        <field name="unitCost" type="currency-amount"></field>
-        <field name="civAmount" type="currency-amount"></field>
-
-        <field name="plDocFileYN" type="indicator"></field>
-        <field name="plDocFilePath" type="description"></field>
-        <field name="loadedQty" type="fixed-point"></field>
-        <field name="weight" type="fixed-point"></field>
-        <field name="linealFeet" type="id-long"></field>
-        <field name="coilQuantity" type="fixed-point"></field>
-
-        <field name="wlDocFileYN" type="indicator"></field>
-        <field name="wlDocFilePath" type="description"></field>
-
-        <field name="mtcDocFileYN" type="indicator"></field>
-        <field name="mtcDocFilePath" type="description"></field>
-        <field name="mtcVerified" type="indicator"></field>
-
-        <field name="shipmentAdviceDocFileYN" type="indicator"></field>
-        <field name="shipmentAdviceDocFilePath" type="description"></field>
+        <field name="shippingLine" type="id-long"></field>
         <field name="shippingAgent" type="id-long"></field>
-        <field name="email" type="description"></field>
+        <field name="mtcRequiredYN" type="indicator"></field>
+        <field name="mtcVerified" type="indicator"></field>
+        <!-- Relation Info-->
+        <field name="invoiceRev" type="id-long"></field>
+        <field name="shipmentCreated" type="id-long"></field>
 
         <prim-key field="referenceSeq"/>
 
@@ -122,7 +267,7 @@
     </entity>
 
     <!-- Vendor Master -->
-    <entity entity-name="Vendor" package-name="org.apache.ofbiz.purchase" title="Purchase Vendor Entity">
+    <entity entity-name="Vendor" package-name="usperp.order" title="Purchase Vendor Entity">
         <field name="vendorId" type="id-long-ne"></field>
         <field name="vendorNm" type="long-varchar"></field>
         <field name="vendorInitials" type="id"></field>
@@ -139,7 +284,7 @@
     </entity>
 
     <!-- Customer Master -->
-    <entity entity-name="Customer" package-name="org.apache.ofbiz.purchase" title="Purchase Customer Entity">
+    <entity entity-name="Customer" package-name="usperp.order" title="Purchase Customer Entity">
         <field name="customerId" type="id-long-ne"></field>
         <field name="customerName" type="long-varchar"></field>
         <field name="contactPerson" type="long-varchar"></field>
@@ -150,60 +295,9 @@
 
         <prim-key field="customerId"/>
     </entity>
-
-    <!-- code Master -->
-    <entity entity-name="Code" package-name="org.apache.ofbiz.purchase" title="Purchase Code Entity">
-        <field name="code" type="id-long-ne"></field>
-        <field name="codeName" type="long-varchar"></field>
-        <field name="codeGroup" type="id-long-ne"></field>
-        <field name="attribute1" type="long-varchar"></field>
-        <field name="attribute2" type="long-varchar"></field>
-        <field name="attribute3" type="long-varchar"></field>
-        <field name="attribute4" type="long-varchar"></field>
-        <field name="sort" type="id"></field>
-        <field name="remark" type="comment"></field>
-
-        <prim-key field="code"/>
-        <prim-key field="codeGroup"/>
-    </entity>
-
-    <view-entity entity-name="PoMasterNReference"
-                 package-name="org.apache.ofbiz.purchase"
-                 title="PoMaster and Reference">
-        <member-entity entity-alias="P" entity-name="PoMaster"/>
-        <member-entity entity-alias="R" entity-name="Reference"/>
-        <member-entity entity-alias="V" entity-name="Vendor"/>
-        <member-entity entity-alias="C" entity-name="Customer"/>
-        <member-entity entity-alias="CD" entity-name="Code"/>
-
-        <!-- 		<alias entity-alias="R" name="totalOrderQuantity" field="orderQuantity" function="sum"/> -->
-        <!-- 		<alias entity-alias="R" name="totalQuantity" field="unitQuantity" function="sum"/> -->
-        <!--         <alias entity-alias="R" name="totalPrice" field="unitPrice" function="sum"/> -->
-
-        <alias-all entity-alias="P"/>
-        <alias-all entity-alias="R"/>
-        <alias-all entity-alias="V"/>
-        <alias-all entity-alias="C"/>
-        <alias-all entity-alias="CD"/>
-
-        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
-            <key-map field-name="poNo"/>
-        </view-link>
-
-        <view-link entity-alias="P" rel-entity-alias="CD" rel-optional="true">
-            <key-map field-name="poStatus" rel-field-name="code" />
-            <entity-condition>
-                <condition-expr field-name="codeGroup" entity-alias="CD" value="PO_STATUS"/>
-            </entity-condition>
-        </view-link>
-
-        <view-link entity-alias="R" rel-entity-alias="C" rel-optional="true">
-            <key-map field-name="customerId"/>
-        </view-link>
-
-        <view-link entity-alias="P" rel-entity-alias="V" rel-optional="true">
-            <key-map field-name="vendorId"/>
-        </view-link>
-    </view-entity>
-
+    <!--
+    ******************************************************
+                    Order Module End
+    ******************************************************
+    -->
 </entitymodel>
