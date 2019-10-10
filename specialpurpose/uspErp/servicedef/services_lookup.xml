@@ -9,14 +9,21 @@
              location="services.LookupServices" invoke="schSupplier">
         <attribute name="supplierId" mode="IN" type="String" optional="true"/>
         <attribute name="supplierNm" mode="IN" type="String" optional="true"/>
-        <attribute name="supplierInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="returnDataInfo" mode="OUT" type="java.util.Map"/>
         <attribute name="resultState" mode="OUT" type="String" optional="false"/>
     </service>
 
     <service name="schCustomer" default-entity-name="Customer" engine="java" auth="true"
              location="services.LookupServices" invoke="schCustomer">
         <attribute name="customerId" mode="IN" type="String" optional="false"/>
-        <attribute name="customerInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="returnDataInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="resultState" mode="OUT" type="String" optional="false"/>
+    </service>
+
+    <service name="schPaint" default-entity-name="PaintCode" engine="java" auth="true"
+             location="services.LookupServices" invoke="schPaint">
+        <attribute name="paintCode" mode="IN" type="String" optional="false"/>
+        <attribute name="returnDataInfo" mode="OUT" type="java.util.Map"/>
         <attribute name="resultState" mode="OUT" type="String" optional="false"/>
     </service>
     

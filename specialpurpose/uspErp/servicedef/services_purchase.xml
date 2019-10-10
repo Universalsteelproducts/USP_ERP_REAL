@@ -19,7 +19,20 @@
         <attribute name="reqData" mode="IN" type="String" optional="true"/>
         <attribute name="draw" mode="INOUT" type="String" optional="true"/>
         <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mod e="OUT" type="Integer" optional="true"/>
+    </service>
+
+    <service name="CRUPoList" default-entity-name="PoMaster" engine="java" auth="true"
+             location="services.PurchaseServices" invoke="CRUPoList">
+        <attribute name="crudMode" mode="IN" type="String" optional="false"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="poNo" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="reqData" mode="IN" type="String" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
         <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="successStr" mode="OUT" type="String" optional="true"/>
     </service>
 
 </services>

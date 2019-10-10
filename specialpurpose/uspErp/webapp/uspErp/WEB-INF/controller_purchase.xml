@@ -24,9 +24,20 @@
 		<response name="error" type="request" value="json"/>
 	</request-map>
 
+	<request-map uri="newPo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="newPo"/>
+	</request-map>
+	<request-map uri="CRUPoList">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="CRUPoList"/>
+		<response name="success" type="request" value="json"/>
+		<response name="error" type="request" value="json"/>
+	</request-map>
 
 	<!-- View Mappings -->
 	<view-map name="orderMain" page="component://uspErp/widget/purchase/PurchaseScreens.xml#orderMain" type="screen"/>
 	<view-map name="schPoList" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#schPoList"/>
+	<view-map name="newPo" page="component://uspErp/widget/purchase/PurchaseScreens.xml#newNEditPo" type="screen"/>
 
 </site-conf>

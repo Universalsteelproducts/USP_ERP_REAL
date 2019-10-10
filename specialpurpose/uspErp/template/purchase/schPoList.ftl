@@ -40,7 +40,7 @@ under the License.
 	            	d.schProductId = $("#schProductId").val();
 	            	d.schCustomerId = $("input[name=schCustomerId]").val();
 	            	d.schOrderFromDate = $("#schOrderFromDate").val();
-	            	d.schOrderToDate = $("#schOrderToDate").val();
+	            	d.schOrderToDate = $("#schOrderToDate").val() + " 23:59:59";
 	            }
 	        },
 	        columns : [
@@ -95,7 +95,7 @@ under the License.
                     "width" : "60px"
                 },
                 {
-                    "data" : "salesNo",
+                    "data" : "soNo",
                     "render": function ( data, type, row ) {
                         return data;
                     },
@@ -223,26 +223,16 @@ under the License.
 		 ******************			SelectBox Control			********************
 		 ***************************************************************************/
 		$("#poList").on("change", "select.poStatus",function() {
-			var reqData = poListTable.rows(this).data();
+			var reqData = poListTable.rows($(this).parent().parent()).data();
 			var reqArray = new Array();
-			for(var i=0 ; reqData.length > i ; i++) {
-				var reqMap = new Object();
-				var map = reqData[i];
-				for(var key in map) {
-					if(key == "poStatus") {
-						reqMap[key] = $(this).val();
-					} else {
-						reqMap[key] = $.trim(map[key]);
-					}
-				}
-				reqArray.push(reqMap);
-			};
+			reqData[0]["poStatus"] = $(this).val();
+            reqArray.push(reqData[0]);
 
 			jQuery.ajax({
 				url: '<@ofbizUrl>RUPoList</@ofbizUrl>',
 				type: 'POST',
 				data: {
-					"crudMode" : "SU",
+					"crudMode" : "U",
 					"reqData" : JSON.stringify(reqArray)
 				},
 				error: function(msg) {
@@ -283,7 +273,7 @@ under the License.
 	</span>
 </div>
 <div class="button-bar">
-	<a class="buttontext create" href="/uspErp/control/EditPo">
+	<a class="buttontext create" href="/uspErp/control/newPo?pageAction=new">
 		${uiLabelMap.newPo}
 	</a>
 </div>

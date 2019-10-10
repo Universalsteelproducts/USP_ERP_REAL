@@ -105,12 +105,12 @@
     </entity>
 
     <entity entity-name="CoatingWeightCode" package-name="usperp.common" title="Coating Weight">
-        <field name="steelTypeId" type="id-long-ne"></field>
-        <field name="steelTypeNm" type="id-long-ne"></field>
+        <field name="coatingWeightId" type="id-long-ne"></field>
+        <field name="coatingWeightNm" type="id-long-ne"></field>
         <field name="sortSeq" type="id-long-ne"></field>
         <field name="description" type="comment"></field>
 
-        <prim-key field="steelTypeId"/>
+        <prim-key field="coatingWeightId"/>
     </entity>
 
     <entity entity-name="GaugeCode" package-name="usperp.common" title="Gauge">
@@ -122,13 +122,13 @@
         <prim-key field="gaugeId"/>
     </entity>
 
-    <entity entity-name="WidthCode" package-name="usperp.common" title="Width">
-        <field name="widthId" type="id-long-ne"></field>
-        <field name="widthNm" type="id-long-ne"></field>
+    <entity entity-name="ExwCode" package-name="usperp.common" title="Exw">
+        <field name="exwId" type="id-long-ne"></field>
+        <field name="exwNm" type="id-long-ne"></field>
         <field name="sortSeq" type="id-long-ne"></field>
         <field name="description" type="comment"></field>
 
-        <prim-key field="widthId"/>
+        <prim-key field="exwId"/>
     </entity>
 
     <entity entity-name="CoilMaxWeightCode" package-name="usperp.common" title="Coil Max Weight">
@@ -140,13 +140,31 @@
         <prim-key field="coilMaxWeightId"/>
     </entity>
 
-    <entity entity-name="GaugeControlYieldCode" package-name="usperp.common" title="Gauge Control Yield">
-        <field name="gaugeControlYieldId" type="id-long-ne"></field>
-        <field name="gaugeControlYieldNm" type="id-long-ne"></field>
+    <entity entity-name="PurchaseAgentCode" package-name="usperp.common" title="Purchase Agent Code">
+        <field name="purchaseAgentId" type="id-long-ne"></field>
+        <field name="purchaseAgentNm" type="id-long-ne"></field>
         <field name="sortSeq" type="id-long-ne"></field>
         <field name="description" type="comment"></field>
 
-        <prim-key field="gaugeControlYieldId"/>
+        <prim-key field="purchaseAgentId"/>
+    </entity>
+
+    <entity entity-name="PackagingCode" package-name="usperp.common" title="Packaging Code">
+        <field name="packagingId" type="id-long-ne"></field>
+        <field name="packagingNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="packagingId"/>
+    </entity>
+
+    <entity entity-name="ThicknessCode" package-name="usperp.common" title="Thickness">
+        <field name="thicknessId" type="id-long-ne"></field>
+        <field name="thicknessNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="thicknessId"/>
     </entity>
 
     <entity entity-name="PackagingCode" package-name="usperp.common" title="Packaging">
@@ -159,14 +177,59 @@
     </entity>
 
     <entity entity-name="PaintCode" package-name="usperp.common" title="Paint Code">
-        <field name="paintCodeId" type="id-long-ne"></field>
+        <field name="paintCode" type="id-long-ne"></field>
         <field name="paintBrand" type="id-long-ne"></field>
         <field name="paintName" type="id-long-ne"></field>
         <field name="paintType" type="id-long-ne"></field>
         <field name="sortSeq" type="id-long-ne"></field>
         <field name="description" type="comment"></field>
 
-        <prim-key field="paintCodeId"/>
+        <prim-key field="paintCode"/>
+    </entity>
+
+    <entity entity-name="ProductTmp" package-name="usperp.common" title="Product Tmp">
+        <field name="productId" type="id-long-ne"></field>
+        <field name="productNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="productId"/>
+    </entity>
+
+    <entity entity-name="FobPointTmp" package-name="usperp.common" title="FobPoint Tmp">
+        <field name="fobPointId" type="id-long-ne"></field>
+        <field name="fobPointNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="fobPointId"/>
+    </entity>
+
+    <entity entity-name="DestinationTmp" package-name="usperp.common" title="Destination Tmp">
+        <field name="destinationId" type="id-long-ne"></field>
+        <field name="destinationNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="destinationId"/>
+    </entity>
+
+    <entity entity-name="ShippingLineTmp" package-name="usperp.common" title="Shipping Line Tmp">
+        <field name="shippingLineId" type="id-long-ne"></field>
+        <field name="shippingLineNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="shippingLineId"/>
+    </entity>
+
+    <entity entity-name="ShippingAgentTmp" package-name="usperp.common" title="Shipping Agent Tmp">
+        <field name="shippingAgentId" type="id-long-ne"></field>
+        <field name="shippingAgentNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="shippingAgentId"/>
     </entity>
     <!--
     ******************************************************
@@ -195,6 +258,8 @@
         <field name="purchaseClass" type="long-varchar"></field>
         <field name="orderRemark" type="comment"></field>
         <field name="internalNote" type="comment"></field>
+        <field name="totalOrderQty" type="fixed-point"></field>
+        <field name="totalOrderAmount" type="currency-amount"></field>
         <prim-key field="poNo"/>
     </entity>
 
@@ -211,7 +276,7 @@
         <field name="exw" type="id-long"></field>
         <field name="exwEtd" type="id-long"></field>
         <field name="barge" type="indicator"></field>
-        <field name="salesNo" type="id-long"></field>
+        <field name="soNo" type="id-long"></field>
         <field name="shipmentNo" type="id-long-ne"></field>
         <field name="customerId" type="id-long-ne"></field>
         <field name="customerNm" type="id-long-ne"></field>
@@ -227,6 +292,7 @@
         <field name="gradeDesc" type="description"></field>
         <field name="coatingWeight" type="id-long"></field>
         <field name="coatingWeightDesc" type="description"></field>
+        <field name="thickness" type="id-long"></field>
         <field name="gauge" type="id-long"></field>
         <field name="gaugeDesc" type="description"></field>
         <field name="width" type="id-long"></field>
@@ -243,8 +309,9 @@
         <field name="qty" type="fixed-point"></field>
         <field name="commissionPrice" type="currency-amount"></field>
         <field name="unitPrice" type="currency-amount"></field>
-        <field name="amount" type="fixed-point"></field>
+        <field name="amount" type="currency-amount"></field>
         <field name="produced" type="id-long"></field>
+        <field name="gaugeControlYield" type="id-long"></field>
         <!-- Item Account Info-->
         <field name="commercialInvoiceNo" type="id-long"></field>
         <field name="commercialInvoiceDate" type="date-time"></field>

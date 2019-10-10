@@ -43,6 +43,9 @@
     <property key="purchase">
         <value xml:lang="en">Purchase</value>
     </property>
+    <property key="order">
+        <value xml:lang="en">Order</value>
+    </property>
     <property key="OrderMain">
         <value xml:lang="en">Main</value>
     </property>
@@ -190,6 +193,9 @@
     <property key="addToOrderBtn">
         <value xml:lang="en">Add To Order Detail</value>
     </property>
+    <property key="savePo">
+        <value xml:lang="en">Savev Purchase Order</value>
+    </property>
     <!-- BUTTON LABEL END-->
 
     <!-- PURCHASE VIEW LABEL START-->
@@ -259,17 +265,32 @@
     <property key="customerName">
         <value xml:lang="en">Customer</value>
     </property>
-
-
+    <property key="internalRef">
+        <value xml:lang="en">Internal Ref #</value>
+    </property>
     <property key="item">
         <value xml:lang="en">Item</value>
     </property>
     <property key="itemId">
         <value xml:lang="en">Item ID</value>
     </property>
+    <property key="thickness">
+        <value xml:lang="en">Thickness(Inch)</value>
+    </property>
+    <property key="width">
+        <value xml:lang="en">Width(Inch)</value>
+    </property>
+    <property key="weight">
+        <value xml:lang="en">Weight(MT)</value>
+    </property>
+    <property key="commissionPrice">
+        <value xml:lang="en">Commission Price</value>
+    </property>
     <property key="qty">
         <value xml:lang="en">Qty</value>
     </property>
+
+
     <property key="searchPoForm">
         <value xml:lang="en">Search PO </value>
     </property>
@@ -401,9 +422,7 @@
     <property key="priceUnit">
         <value xml:lang="en">Price Unite</value>
     </property>
-    <property key="commissionUnitPrice">
-        <value xml:lang="en">Commission Unit Price</value>
-    </property>
+
     <property key="partialYN">
         <value xml:lang="en">Partial?</value>
     </property>
@@ -559,9 +578,6 @@
     </property>
     <property key="gauge">
         <value xml:lang="en">Gauge</value>
-    </property>
-    <property key="width">
-        <value xml:lang="en">Width</value>
     </property>
     <property key="mt">
         <value xml:lang="en">MT</value>
@@ -958,6 +974,9 @@
     </property>
     <property key="LookupCustomer">
         <value xml:lang="en">Lookup Customer</value>
+    </property>
+    <property key="LookupPaint">
+        <value xml:lang="en">Lookup Paint</value>
     </property>
     <!-- Lookup LABEL END -->
 </resource>

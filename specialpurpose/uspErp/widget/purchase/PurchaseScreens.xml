@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+		 xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
- 	<!-- Main화면의 PO리스트 -->
-    <screen name="orderMain">
-        <section>
+	<!-- Main화면의 PO리스트 -->
+	<screen name="orderMain">
+		<section>
 			<condition>
 				<if-has-permission permission="USPERP" action="_VIEW"/>
 			</condition>
-            <actions>
+			<actions>
 				<set field="headerItem" value="main"/>
 				<set field="titleProperty" value="Order Main"/>
 				<set field="appMenuNm" value="OrderMainAppBar"/>
-                <script location="component://uspErp/groovyScript/purchase/orderMain.groovy"/>
-            </actions>
-            <widgets>
-                <decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
-                    <decorator-section name="body">
-                        <platform-specific>
-                            <html><html-template location="component://uspErp/template/purchase/orderMain.ftl"/></html>
-                        </platform-specific>
-                    </decorator-section>
-                </decorator-screen>
-            </widgets>
-        </section>
-    </screen>
+				<script location="component://uspErp/groovyScript/purchase/orderMain.groovy"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<platform-specific>
+							<html><html-template location="component://uspErp/template/purchase/orderMain.ftl"/></html>
+						</platform-specific>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
 
-    <screen name="schPoList">
-	    <section>
-	        <actions>
+	<screen name="schPoList">
+		<section>
+			<actions>
 				<set field="headerItem" value="purchase"/>
 				<set field="titleProperty" value="Purchase Order"/>
 				<set field="appMenuNm" value="OrderMainAppBar"/>
-	        </actions>
-	        <widgets>
+			</actions>
+			<widgets>
 				<decorator-screen name="UspErpCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<section>
@@ -48,8 +48,8 @@
 						</section>
 					</decorator-section>
 				</decorator-screen>
-	        </widgets>
-	    </section>
+			</widgets>
+		</section>
 	</screen>
 
 	<screen name="newNEditPo">

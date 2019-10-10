@@ -1,0 +1,862 @@
+<#--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<script type="text/javascript">
+	var initCrudMode = "${crudMode}";
+	jQuery(document).ready(function() {
+		/***************************************************************************
+	     ******************			Common Control				********************
+	     ***************************************************************************/
+
+		/***************************************************************************
+	     ******************				Init Table				********************
+	     ***************************************************************************/
+	    var poListTable = $("#lotColoList").DataTable({
+			//dom: "Bfrtip",
+			//dom : "frtip",
+			dom : "lfrtip",
+			processing : true,
+			scrollY : true,
+			scrollX : true,
+			fixedHeader : true,
+			ajax : {
+				"type"	: "POST",
+				"url"	: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
+				"data"	: function(d) {
+					d.crudMode = $("#crudMode").val();
+					d.poNo = $("#poNo").val();
+				}
+			},
+			columns : [
+                {
+                    "data" : "soNo",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        return "<input type='text' id='soNo' name='soNo' value='" + data + "'/>";
+                    },
+                    "width": "60px",
+                    "className" : "align-middle"
+                },
+	            {
+					"data" : "lotNo",
+					"render" : function ( data, type, row ) {
+						return "LOT" + checkNull(data);
+	  				},
+	  				"width": "45px",
+	  				"className" : "align-middle"
+	            },
+	            {
+                    "data" : "referenceNo",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        return "<input type='text' id='referenceNo' name='referenceNo' value='" + data + "'/>";
+                    },
+                    "width": "100px",
+                    "className" : "align-middle"
+                },
+	            {
+					"data" : "itemId",
+	  				"width" : "100px",
+	  				"className" : "align-middle"
+	            },
+	            {
+					"data" : "productId",
+	  				"width" : "200px",
+	  				"className" : "align-middle"
+	            },
+                {
+	            	"data" : "paintCode",
+	  				"width" : "100px"
+	            },
+	            {
+	            	"data" : "thickness",
+	                "render": function ( data, type, row ) {
+	                	data = checkNull(data);
+		            	var $select = $("<select></select>", {
+			            	"id" : "thickness",
+			            	"value" : data
+		            	});
+		            	var $option = "<option value=''></option>";
+		            <#if thickness??>
+		            	<#list thickness as thicknessInfo>
+		            	$option += "<option value='${thicknessInfo.thicknessId!}'>${thicknessInfo.thicknessNm!}</option>";
+		            	</#list>
+		            </#if>
+
+		            	$select.append($option);
+		            	$select.find("[value='" + data + "']").attr("selected", "selected");
+		            	$select.attr("class", "thickness");
+		            	return $select.prop("outerHTML");
+					},
+	  				"width" : "150px"
+	            },
+	            {
+	            	"data" : "width",
+	            	"render": function ( data, type, row ) {
+		            	return "<input type='text' name='width' id='width' value='" + data + "' />";
+	            	},
+	  				"width" : "50px"
+	            },
+	            {
+	            	"data" : "fobPoint",
+	            	"render": function ( data, type, row ) {
+	            		data = checkNull(data);
+		            	var $select = $("<select></select>", {
+			            	"id" : "fobPoint",
+			            	"value" : data
+		            	});
+		            	var $option = "<option value=''></option>";
+		            <#if fobPointTmp??>
+		            	<#list fobPointTmp as fobPointTmpInfo>
+		            	$option += "<option value='${fobPointTmpInfo.fobPointId!}'>${fobPointTmpInfo.fobPointNm!}</option>";
+		            	</#list>
+		            </#if>
+
+		            	$select.append($option);
+		            	$select.find("[value='" + data + "']").attr("selected", "selected");
+		            	$select.attr("class", "fobPoint");
+		            	return $select.prop("outerHTML");
+	            	},
+	  				"width" : "50px"
+	            },
+	            {
+                    "data" : "coilMaxWeight",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        var $select = $("<select></select>", {
+                            "id" : "coilMaxWeight",
+                            "value" : data
+                        });
+                        var $option = "<option value=''></option>";
+                    <#if coatingWeight??>
+                        <#list coatingWeight as coatingWeightInfo>
+                        $option += "<option value='${coatingWeightInfo.coatingWeightId!}'>${coatingWeightInfo.coatingWeightNm!}</option>";
+                        </#list>
+                    </#if>
+
+                        $select.append($option);
+                        $select.find("[value='" + data + "']").attr("selected", "selected");
+                        $select.attr("class", "coilMaxWeight");
+                        return $select.prop("outerHTML");
+                    },
+                    "width" : "100px"
+                },
+	            {
+                    "data" : "unitPrice",
+                    "render": function ( data, type, row ) {
+                        if(data != null && data != "") {
+                            data =  checkNull(data).format(2);
+                        } else {
+                            data =  "";
+                        }
+                        return "<input type='text' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + data + "'/>";
+                    },
+                    "width" : "100px"
+                },
+	            {
+					"data" : "referenceSeq",
+					"visible": false
+	            },
+                {
+                    "data" : "amount",
+                    "visible": false
+                },
+                {
+                    "data" : "barge",
+                    "visible": false
+                },
+                {
+                    "data" : "coatingWeight",
+                    "visible": false
+                },
+                {
+                    "data" : "coilMaxWeight",
+                    "visible": false
+                },
+                {
+                    "data" : "destination",
+                    "visible": false
+                },
+                {
+                    "data" : "exw",
+                    "visible": false
+                },
+                {
+                    "data" : "fobPointEta",
+                    "visible": false
+                },
+                {
+                    "data" : "gaugeControlYield",
+                    "visible": false
+                },
+                {
+                    "data" : "grade",
+                    "visible": false
+                },
+                {
+                    "data" : "innerDiameter",
+                    "visible": false
+                },
+                {
+                    "data" : "note",
+                    "visible": false
+                },
+                {
+                    "data" : "packaging",
+                    "visible": false
+                },
+                {
+                    "data" : "paintBrand",
+                    "visible": false
+                },
+                {
+                    "data" : "paintName",
+                    "visible": false
+                },
+                {
+                    "data" : "paintType",
+                    "visible": false
+                },
+                {
+                    "data" : "poStatus",
+                    "visible": false
+                },
+                {
+                    "data" : "qty",
+                    "visible": false
+                },
+                {
+                    "data" : "steelType",
+                    "visible": false
+                },
+                {
+                    "data" : "surfaceCoilType",
+                    "visible": false
+                }
+			],
+			rowCallback : function( row, data, displayNum, displayIndex, dataIndex ) {
+			},
+			drawCallback : function(settings) {
+				//totalPriceNQuantity(this.api(), "totalQuantity", "totalPoAmount");
+			}
+	    });
+
+		// 그리드 Row 클릭 이벤트
+		$('#lotColoList tbody').on( 'dblclick', 'tr', function () {
+	        $(this).toggleClass('selected');
+	    } );
+
+		// 그리드 Column 클릭 이벤트
+		$("#lotColoList tbody").on( 'click', 'td', function () {
+		    var idx = poListTable.cell( this ).index().column;
+		    var title = poListTable.column( idx ).header();
+		});
+
+		// column value update
+		$("#lotColoList").on("change", ":input,textarea,select", function() {
+			var val;
+			var valType = typeof $(this).val();
+			var type = typeof poListTable.cell( $(this).parent() ).data();
+			if(type == "number") {
+				if(valType == "string") {
+					val = Number($(this).val().replace(/\,/g, ""));
+				} else {
+					val = Number($(this).val());
+				}
+			} else {
+				val = $(this).val();
+			}
+			poListTable.cell( $(this).parent() ).data(val).draw();
+		});
+
+		// column value update
+		$("#lotColoList").on("keyup", ":input", function() {
+			var id = $(this).attr("id");
+			if(id == "unitQuantity") {
+				$(this).objectFormat({format : "int"});
+				var colIdx = poListTable.cell( $(this).parent() ).index().column;
+			}
+		});
+
+	    /***************************************************************************
+	     ******************			InputBox Control			********************
+	     ***************************************************************************/
+	    $("input[name=paintCode]").on("change lookup:changed", function() {
+    	    var paintColArry = new Array();
+            paintColArry.push("paintBrand");
+            paintColArry.push("paintName");
+            paintColArry.push("paintType");
+            var schPaint = "<@ofbizUrl>/schPaint</@ofbizUrl>";
+	        setLookupVal($(this).val(), schPaint, paintColArry);
+	    });
+
+	    /***************************************************************************
+	     ******************			SelectBox Control			********************
+	     ***************************************************************************/
+
+	    /***************************************************************************
+	     ******************				Button Control			********************
+	     ***************************************************************************/
+        $("#createLot").on("click", function() {
+            var lotIdx = $("#lotNo option").size();
+            lotIdx = lotIdx >= 10 ? lotIdx : '0' + lotIdx;
+            $("#lotCommonInfo #lotNo").append("<option value='" + lotIdx + "'>LOT" + lotIdx + "</option>");
+
+            inputInit("lotDetail");
+            inputInit("productDetail");
+
+            $("#lotCommonInfo #lotNo option:eq(" + lotIdx + ")").attr("selected", true);
+        });
+
+        $("#deleteLot").on("click", function() {
+            var curValue = $("#lotNo option:selected").val();
+            var curIndex = $("#lotNo option:selected").index() - 1;
+
+            if(curValue != "") {
+                $("#lotNo option:selected").remove();
+                $("#lotNo option:eq(" + curIndex + ")").prop('selected', true);
+            }
+        });
+
+        $("#clearBtn").on("click", function() {
+            inputInit("lotDetail");
+            inputInit("productDetail");
+            //$("#lotColoList tbody").children().remove();
+        });
+
+        $("#addToOrderBtn").on("click", function() {
+            if($("input[name=supplierId]").val() == null || $("input[name=supplierId]").val() == "") {
+                alert("Select Supplier");
+                return false;
+            }
+
+            if($("#poNo").val() == null || $("#poNo").val() == "") {
+                alert("Select Supplier");
+                return false;
+            }
+
+            if($("#lotNo").val() == "") {
+                alert("Select LOT");
+                return false;
+            }
+
+            var rowMap = new Object();
+            rowMap = addToOrder("lotCommonInfo", rowMap);
+            rowMap = addToOrder("productSpec", rowMap);
+            rowMap = addToOrder("productAttr", rowMap);
+            rowMap = addToOrder("itemInfo", rowMap);
+
+            inputInit("lotDetail");
+            inputInit("productDetail");
+
+            poListTable.row.add(rowMap).columns.adjust().draw();
+
+            var index = 0,
+            rowCount = poListTable.data().length-1,
+            insertedRow = poListTable.row(rowCount).data(),
+            tempRow;
+
+            for (var i=rowCount;i>index;i--) {
+                tempRow = poListTable.row(i-1).data();
+                poListTable.row(i).data(tempRow);
+                poListTable.row(i-1).data(insertedRow);
+            }
+            //refresh the page
+            poListTable.page(0).draw(false);
+
+            //totalPriceNQuantity(poListTable, "totalQuantity", "totalPoAmount");
+        });
+
+        $("#submitBtn").on("click", function() {
+            var reqData = poListTable.rows().data();
+            var reqArray = makeArrayData(reqData);
+            $("#crudMode").val("C");
+
+            jQuery.ajax({
+                url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
+                type: 'POST',
+                data: $("#poInfoForm").serialize() + "&reqData=" + JSON.stringify(reqArray),
+                error: function(msg) {
+                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                },
+                success: function(data, status) {
+                    if(data.successStr == "success") {
+                        alert("PO Create Completed");
+
+                        /*$("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "</@ofbizUrl>");
+                        $("#pageMoveForm").submit();*/
+                    } else {
+                        alert("PO Create Fail");
+                    }
+                }
+            });
+        });
+
+        $("#moveListBtn").on("click", function() {
+            $("#pageMoveForm").attr("action", "<@ofbizUrl>schPoList</@ofbizUrl>");
+            $("#pageMoveForm").submit();
+        });
+	});
+</script>
+
+<!-- LOT Info -->
+<div class="screenlet">
+	<div class="screenlet-title-bar">
+		<ul>
+			<li class="h3">
+				${uiLabelMap.lotInfo}
+			</li>
+		</ul>
+		<br class="clear"/>
+	</div>
+	<div class="screenlet-body">
+		<table class="basic-table" cellspacing="0" id="lotCommonInfo">
+			<tr>
+				<td class="label" width="12%" align="right">
+					${uiLabelMap.lot}
+				</td>
+				<td width="1%"></td>
+				<td width="20%">
+					<select name="lotNo" id="lotNo" size="1">
+						<option value="">--Select</option>
+						<option value="01">LOT01</option>
+					</select>
+					<input type="button" id="createLot" value="${uiLabelMap.createLotBtn}" class="buttontext" />
+					<input type="button" id="deleteLot" value="${uiLabelMap.deleteBtn}" class="buttontext" />
+				</td>
+				<td class="label" width="12%" align="right">
+                    ${uiLabelMap.fobPoint}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <select name="fobPoint" id="fobPoint">
+                        <option value="">--Select</option>
+                    <#if fobPointTmp??>
+                        <#list fobPointTmp as fobPointTmpInfo>
+                        <option value="${fobPointTmpInfo.fobPointId!}">${fobPointTmpInfo.fobPointNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.fobPointEta}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <input type="text" name="fobPointEta" id="fobPointEta" value="" size="25" maxlength="255"/>
+                </td>
+			</tr>
+			<tr>
+				<td class="label" width="12%" align="right">
+					${uiLabelMap.destination}
+				</td>
+				<td width="1%">&nbsp;</td>
+				<td width="20%">
+					<select name="destination" id="destination">
+						<option value="">--Select</option>
+					<#if destinationTmp??>
+						<#list destinationTmp as destinationTmpInfo>
+						<option value="${destinationTmpInfo.destinationId!}">${destinationTmpInfo.destinationNm!}</option>
+						</#list>
+					</#if>
+					</select>
+				</td>
+				<td class="label" width="12%" align="right">
+                    ${uiLabelMap.product}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <select name="productId" id="productId">
+                        <option value="">--Select</option>
+                    <#if productTmp??>
+                        <#list productTmp as productTmpInfo>
+                        <option value="${productTmpInfo.productId!}">${productTmpInfo.productNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.exw}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <select name="exw" id="exw">
+                        <option value="">--Select</option>
+                    <#if exw??>
+                        <#list exw as exwInfo>
+                        <option value="${exwInfo.exwId!}">${exwInfo.exwNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.exwEtd}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <input type="text" name="fobPointEta" id="fobPointEta" value="" size="25" maxlength="255"/>
+                </td>
+                <td class="label" width="13%" align="right" >
+                    ${uiLabelMap.importSO}
+                </td>
+                <td width="2%">&nbsp;</td>
+                <td width="20%">
+                    <!-- set_multivalues -->
+                    <form name="salesOrderForm" id="salesOrderForm" method="post">
+                        <@htmlTemplate.lookupField value="${poCommonInfo.salesOrderNum!}" formName="salesOrderForm" name="soNo" id="soNo" fieldFormName="LookupSalesOrder" position="center" />
+                    </form>
+                </td>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.barge}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <input type="checkbox" id="barge" name="barge" value="Y">
+                </td>
+            </tr>
+            <tr>
+                <td class="label" width="13%" align="right">
+                    ${uiLabelMap.note}
+                </td>
+                <td width="2%">&nbsp;</td>
+                <td colspan="7">
+                    <textarea name="note" id="note" rows="3">${poCommonInfo.note!}</textarea>
+                </td>
+            </tr>
+		</table>
+    </div>
+</div>
+
+<div class="left7" id="lotDetail">
+    <div class="screenlet">
+        <div class="screenlet-title-bar">
+            <ul>
+                <li class="h3">
+                    ${uiLabelMap.productSpecification}
+                </li>
+            </ul>
+            <br class="clear">
+        </div>
+        <div class="screenlet-body no-padding">
+            <table class="basic-table" cellspacing="0" id="productSpec">
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.steelType}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name=steelType id="steelType" style="width:19%;">
+                            <option value="">--Select</option>
+                        <#if steelType??>
+                            <#list steelType as steelTypeInfo>
+                            <option value="${steelTypeInfo.steelTypeId!}" >${steelTypeInfo.steelTypeNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.coilMaxWeight}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name="coilMaxWeight" id="coilMaxWeight">
+                            <option value="">--Selecet</option>
+                        <#if coilMaxWeight??>
+                            <#list coilMaxWeight as coilMaxWeightInfo>
+                            <option value="${coilMaxWeightInfo.coilMaxWeightId!}">${coilMaxWeightInfo.coilMaxWeightNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.surfaceCoilType}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name="surfaceCoilType" id="surfaceCoilType" style="width:20%;">
+                            <option value="">--SURFACE TYPE</option>
+                        <#if surfaceType??>
+                            <#list surfaceType as surfaceTypeInfo>
+                            <option value="${surfaceTypeInfo.surfaceTypeId!}">${surfaceTypeInfo.surfaceTypeNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.packaging}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name="packaging" id="packaging" style="width:30%;">
+                            <option value="">--Select</option>
+                        <#if packaging??>
+                            <#list packaging as packagingInfo>
+                            <option value="${packagingInfo.packagingId!}">${packagingInfo.packagingNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.grade}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name="grade" id="grade">
+                            <option value="">--GRADE</option>
+                        <#if grade??>
+                            <#list grade as gradeInfo>
+                            <option value="${gradeInfo.gradeId!}">${gradeInfo.gradeNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.coilId}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <input type="text" name="innerDiameter" id="innerDiameter" value="" size="25" maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.coatingWeight}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <select name="coatingWeight" id="coatingWeight" style="width:20%;">
+                            <option value="">--COATING WEIGHT</option>
+                        <#if coatingWeight??>
+                            <#list coatingWeight as coatingWeightInfo>
+                            <option value="${coatingWeightInfo.coatingWeightId!}">${coatingWeightInfo.coatingWeightNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.gaugeControlYield}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="35%">
+                        <input type="text" name="gaugeControlYield" id="gaugeControlYield" value="" maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.thickness}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td colspan="4">
+                        <select name="thickness" id="thickness">
+                            <option value="">--Thickness</option>
+                        <#if thickness??>
+                            <#list thickness as thicknessInfo>
+                            <option value="${thicknessInfo.thicknessId!}">${thicknessInfo.thicknessNm!}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="12%" align="right">
+                        ${uiLabelMap.width}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td colspan="4">
+                        <input type="text" name="width" id="width" value="" maxlength="255"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="right3" id="productDetail">
+    <div class="screenlet">
+        <div class="screenlet-title-bar">
+            <ul>
+                <li class="h3">
+                    ${uiLabelMap.productAttribute}
+                </li>
+            </ul>
+            <br class="clear">
+        </div>
+        <div class="screenlet-body no-padding">
+            <table class="basic-table" cellspacing="0" id="productAttr">
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.paintCode}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <form name="paintCodeForm" id="paintCodeForm" method="post">
+                            <@htmlTemplate.lookupField value="" formName="paintCodeForm" name="paintCode" id="paintCode" fieldFormName="LookupPaint" position="center" />
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.paintBrand}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="paintBrand" id="paintBrand" disabled="disabled" maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%">
+                        ${uiLabelMap.paintType}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="paintType" id="paintType" disabled="disabled" maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.paintName}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="paintName" id="paintName" disabled="disabled" maxlength="255"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="screenlet">
+        <div class="screenlet-title-bar">
+            <ul>
+                <li class="h3">
+                    ${uiLabelMap.item}
+                </li>
+            </ul>
+            <br class="clear">
+        </div>
+        <div class="screenlet-body no-padding">
+            <table class="basic-table" cellspacing="0" id="itemInfo">
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.itemId}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="itemId" id="itemId"  maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.qty}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="qty" id="qty"  maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.commissionPrice}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="commissionPrice" id="commissionPrice"  maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.unitPrice}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="unitPrice" id="unitPrice"  maxlength="255"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label" width="40%" align="right">
+                        ${uiLabelMap.amount}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="59%" >
+                        <input type="text" name="amount" id="amount"  maxlength="255"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>
+<div align="right">
+    <ul>
+        <input id="clearBtn" type="button" value="${uiLabelMap.clearBtn}" class="buttontext"/>
+        <input id="addToOrderBtn" type="button" value="${uiLabelMap.addToOrderBtn}" class="buttontext"/>
+    </ul>
+</div>
+<br />
+<div class="screenlet">
+	<form name="lotInfo" id="lotInfo" method="post">
+		<table class="display cell-border stripe" id="lotColoList" name="lotColoList">
+			<thead>
+				<tr>
+					<th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.lot}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.internalRef}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.itemId}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.productId}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.width}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.weight}</th>
+					<th style="vertical-align: middle;">${uiLabelMap.unitCost}</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.lot}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.internalRef}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.itemId}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.productId}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.width}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.weight}</th>
+                    <th style="vertical-align: middle;">${uiLabelMap.unitCost}</th>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+</div>
+<div>
+	<ul>
+	    <input id="moveListBtn" type="button" value="${uiLabelMap.list}" class="buttontext"/>
+		<input id="submitBtn" type="button" value="${uiLabelMap.savePo}" class="buttontext"/>
+	</ul>
+</div>
+
+<form name="pageMoveForm" id="pageMoveForm" method="post">

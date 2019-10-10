@@ -16,6 +16,8 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 */
+Date.CultureInfo.formatPatterns.shortDate = "yyyy-MM-dd";
+
 var openDialog = (function($, undefined){
     var default_option = {
         httpType : "POST",
@@ -114,4 +116,187 @@ var inputInit = function(id) {
 			}
 		}
 	});
+};
+
+var setLookupVal = function(curVal, schUrl, setColNmArry) {
+    var map = new Object();
+    map[elementNm] = curVal;
+    if(curVal != null && curVal != "") {
+        jQuery.ajax({
+            url: schUrl,
+            type: 'POST',
+            data: map,
+            error: function(msg) {
+                showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+            },
+            success: function(data) {
+                if(data.resultState == "success") {
+                    if(data.returnDataInfo != null) {
+                        $.each(data.returnDataInfo, function(index, value) {
+                            for(var i=0 ; setColNmArry.length > i ; i++) {
+                                var colNm = setColNmArry[i];
+                                if(index == colNm) {
+                                    $("input[name=" + index + "]").val("");
+                                    $("input[name=" + index + "]").val(value);
+                                    $("input[name=" + index + "]").effect("highlight", {}, 3000);
+                                }
+                            }
+                        });
+                    } else {
+                        for(var i=0 ; setColNmArry.length > i ; i++) {
+                            var colNm = setColNmArry[i];
+                            $("input[name=" + colNm + "]").val("");
+                        }
+                    }
+                }
+            }
+        });
+    } else {
+        for(var i=0 ; setColNmArry.length > i ; i++) {
+            var colNm = setColNmArry[i];
+            $("input[name=" + colNm + "]").val("");
+        }
+    }
+};
+
+function set_value(poNo, lotNo) {
+	if (GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP)) {
+        obj_caller.target = GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP).target;
+    } else {
+        obj_caller.target = jQuery(obj_caller.targetW);
+    }
+
+    var target = obj_caller.target;
+    write_value(poNo, target);
+    write_value(lotNo, $("#lotNo"));
+
+    closeLookup();
+}
+
+/**
+ * emailFormat
+ * 정규식 사용하여 이메일 check
+ * @param options
+ */
+$.fn.emailFormat = function (options) {
+	var filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+	if(filter.test($(this).val())) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * objectFormat
+ * 정규식 사용하여 입력한 포멧만 허용
+ * @param options -> format : Object type
+ */
+$.fn.objectFormat = function (options) {
+	var params = $.extend({
+        format: 'int',
+        fixLeng : 0
+    }, options);
+
+	var filter, rep, reg;
+	if(params.format == "int") {
+		filter = /^-?\d*$/;
+		reg = /^(-?)([0-9]*)([^0-9]*)([0-9]*)([^0-9]*)/;
+		rep = "$1$2$4";
+	} else if(params.format == "float") {
+		filter = /^-?\d*[.,]?\d*$/;
+		reg = /^(-?)([0-9]*)(\.?)([^0-9]*)([0-9]*)([^0-9]*)/;
+		rep = "$1$2$3$5";
+	} else if(params.format == "en") {
+		filter = /^[a-zA-Z\s]+$/;
+		reg = /[^a-zA-Z\s]+$/;
+		rep = "";
+	} else if(params.format == "sd") {
+		filter = /^[a-zA-Z0-9\s]+$/;
+		reg = /[^a-zA-Z0-9\s]+$/;
+		rep = "";
+	}
+
+	if(filter != null && filter != "") {
+		if(filter.test($(this).val().replace(/\,/g, ""))) {
+			return true;
+		} else {
+			alert("Invalid Format");
+			$(this).val($(this).val().replace(reg, rep));
+			$(this).focus();
+			return false;
+		}
+	}
+}
+
+/**
+ * Number.prototype.format(n, x)
+ *
+ * @param integer n: length of decimal
+ * @param integer x: length of sections
+ */
+Number.prototype.format = function(n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
+String.prototype.format = function(n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return Number(this.replace(/\,/g, "")).toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
+var checkNull = function(str) {
+	if(str == null || str == undefined || str == "undefined" || str == "") {
+		return "";
+	} else {
+		return str;
+	}
+};
+
+var inputInit = function(elementId) {
+	$("#" + elementId + " :input").each(function() {
+        if($(this).prop("type") == "select-one") {
+            $(this).find("option:eq(0)").attr("selected", true);
+            if($(this).attr("name") == "steelType") {
+                $(this).trigger("change");
+            }
+        } else if($(this).prop("type") == "checkbox") {
+            $(this).prop("checked", false);
+        } else {
+            if($(this).prop("type") != "button") {
+                $(this).val("");
+
+//                if($(this).attr("name") == "orderQuantity" || $(this).attr("name") == "unitPrice"
+//                    || $(this).attr("name") == "commissionUnitPrice" || $(this).attr("name") == "unitQuantity") {
+//                    $(this).val("0");
+//                } else if($(this).attr("name") != "customerId") {
+//                    $(this).val("");
+//                }
+            }
+        }
+	});
+};
+
+var addToOrder = function(id, rowMap) {
+	var tagTmp = "";
+	$("#" + id + " :input").each(function() {
+	    if($(this).prop("type") != "button") {
+            if($(this).prop("type") == "checkbox") {
+                if($(this).is(":checked")) {
+                    rowMap[$(this).attr("name")] = "Y";
+                } else {
+                    rowMap[$(this).attr("name")] = "N";
+                }
+            } else {
+                rowMap[$(this).attr("name")] = $(this).val();
+            }
+        }
+	});
+
+	rowMap["referenceSeq"] = "";
+	var referenceNo = $("#poNo").val() + $("#lotNo").val() + "00";
+	rowMap["referenceNo"] = referenceNo;
+	rowMap["poStatus"] = "PE";
+
+	return rowMap;
 };

@@ -144,31 +144,29 @@ public class PurchaseServices {
 						}
 					}
 					// PO Management List 화면에서 poStatus값 update
-				} else if("SU".equals(crudMode)) {
+				} else if("U".equals(crudMode)) {
 					String reqData = (String) context.get("reqData");
 					JSONArray data = new JSONArray(reqData);//jsonarray 형태로
 					Map<String, Object> resultMap = new HashMap<String, Object>();
 
 					GenericValue createNUpdatePoInfo = delegator.makeValue("PoMaster");
-					GenericValue createNUpdateReferenceInfo = delegator.makeValue("Reference");
+					GenericValue createNUpdateReferenceInfo = delegator.makeValue("PoReference");
 					if(data.length() > 0) {
 						for(int i=0 ; data.length() > i ; i++) {
 							JSONObject jsonobj = data.getJSONObject(i);
 
 							createNUpdatePoInfo.set("poNo", jsonobj.getString("poNo"));
 							createNUpdatePoInfo.set("poStatus", jsonobj.getString("poStatus"));
-							createNUpdatePoInfo.set("lastUpdateUserId", userLoginId);
 							createNUpdatePoInfo.set("lastUpdatedStamp", UtilDateTime.nowTimestamp());
 							createNUpdatePoInfo.set("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
 							createNUpdatePoInfo = delegator.createOrStore(createNUpdatePoInfo);
 
 							Map<String, Object> conditionMap = new HashMap<String, Object>();
 							conditionMap.put("poNo", jsonobj.getString("poNo"));
-							List<GenericValue> referenceList = createNUpdatePoInfo.getRelated("Reference", conditionMap, null, false);
+							List<GenericValue> referenceList = createNUpdatePoInfo.getRelated("PoReference", conditionMap, null, false);
 							if(referenceList.size() > 0) {
 								for(GenericValue referenceInfo : referenceList) {
 									createNUpdateReferenceInfo.set("referenceSeq", referenceInfo.getLong("referenceSeq"));
-									createNUpdateReferenceInfo.set("lastUpdateUserId", userLoginId);
 									createNUpdateReferenceInfo.set("lastUpdatedStamp", UtilDateTime.nowTimestamp());
 									createNUpdateReferenceInfo.set("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
 									createNUpdateReferenceInfo = delegator.createOrStore(createNUpdateReferenceInfo);
@@ -211,7 +209,7 @@ public class PurchaseServices {
 			try {
 				// PO Management List 화면에서 PONO로 edit화면 open시
 				// onload할때 그리드 리스트 호출
-				if("UR".equals(crudMode)) {
+				if("R".equals(crudMode)) {
 					GenericValue poMasterInfo = EntityQuery.use(delegator)
 							.from("PoMaster")
 							.where("poNo", poNo)
@@ -219,7 +217,7 @@ public class PurchaseServices {
 
 					Map<String, Object> conditionMap = new HashMap<String, Object>();
 					conditionMap.put("poNo", poNo);
-					List<GenericValue> referenceList = poMasterInfo.getRelated("Reference", conditionMap, null, false);
+					List<GenericValue> referenceList = poMasterInfo.getRelated("PoReference", conditionMap, null, false);
 					if(referenceList.size() > 0) {
 						for(GenericValue referenceInfo : referenceList) {
 							Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -228,31 +226,6 @@ public class PurchaseServices {
 							resultList.add(resultMap);
 						}
 					}
-					// 기존 PO 복제 onload 시 사용
-				} else if("CL".equals(crudMode)) {
-					GenericValue poMasterInfo = EntityQuery.use(delegator)
-							.from("PoMaster")
-							.where("poNo", poNo)
-							.queryOne();
-
-					Map<String, Object> conditionMap = new HashMap<String, Object>();
-					conditionMap.put("poNo", poNo);
-					List<GenericValue> referenceList = poMasterInfo.getRelated("Reference", conditionMap, null, false);
-					if(referenceList.size() > 0) {
-						for(GenericValue referenceInfo : referenceList) {
-							Map<String, Object> resultMap = new HashMap<String, Object>();
-							resultMap.putAll(poMasterInfo);
-							resultMap.putAll(referenceInfo);
-							resultList.add(resultMap);
-						}
-					}
-					// PO번호 입력 시 중복체크
-				} else if("DP".equals(crudMode)) {
-					GenericValue poMasterInfo = EntityQuery.use(delegator)
-							.from("PoMaster")
-							.where("poNo", poNo)
-							.queryOne();
-					resultList.add(poMasterInfo);
 					// PO create 및 update 시 호출
 				} else if("C".equals(crudMode) || "U".equals(crudMode)) {
 					Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -264,7 +237,7 @@ public class PurchaseServices {
 					resultMap.putAll(createNUpdatePoInfo);
 					resultList.add(resultMap);
 
-					GenericValue createNUpdateReferenceInfo = delegator.makeValue("Reference");
+					GenericValue createNUpdateReferenceInfo = delegator.makeValue("PoReference");
 					JSONArray data = new JSONArray(reqData);//jsonarray 형태로
 
 					int resultInt = 0;
@@ -281,16 +254,11 @@ public class PurchaseServices {
 								String key = keysItr.next();
 								Object value = new Object();
 								if(jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
-									if("unitQuantity".equals(key)) {
+									if("qty".equals(key)) {
 										String str = jsonobj.getString(key);
 										long lStr = Long.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(lStr);
-									} else if("unitCost".equals(key) || "civAmount".equals(key)
-											|| "loadedQty".equals(key) || "weight".equals(key)
-											|| "coilQuantity".equals(key)) {
-										long str = jsonobj.getLong(key);
-										value = BigDecimal.valueOf(str);
-									} else if("unitPrice".equals(key) || "commissionUnitPrice".equals(key)) {
+									} else if("amount".equals(key) || "unitPrice".equals(key) || "commissionPrice".equals(key)) {
 										String str = jsonobj.getString(key);
 										double dbl = Double.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(dbl);
@@ -307,7 +275,7 @@ public class PurchaseServices {
 
 							if(jsonobj.isNull("referenceSeq") || "".equals(jsonobj.get("referenceSeq"))) {
 								if(seqNum == 0L) {
-									GenericValue seqNumInfo = EntityQuery.use(delegator).select("referenceSeq").from("Reference").orderBy("referenceSeq DESC").queryFirst();
+									GenericValue seqNumInfo = EntityQuery.use(delegator).select("referenceSeq").from("PoReference").orderBy("referenceSeq DESC").queryFirst();
 									if(seqNumInfo != null) {
 										seqNum = seqNumInfo.getLong("referenceSeq");
 									} else {
@@ -321,40 +289,22 @@ public class PurchaseServices {
 							} else {
 								referenceMap.put("referenceSeq", jsonobj.getLong("referenceSeq"));
 								GenericValue referenceInfo = EntityQuery.use(delegator)
-										.from("Reference")
+										.from("PoReference")
 										.where("referenceSeq", referenceMap.get("referenceSeq"))
 										.queryOne();
-								referenceMap.put("createUserId", referenceInfo.getString("createUserId"));
+
 								referenceMap.put("createdStamp", referenceInfo.getTimestamp("createdStamp"));
 								referenceMap.put("createdTxStamp", referenceInfo.getTimestamp("createdTxStamp"));
 							}
 
-							if(jsonobj.isNull("ppglNo") || "".equals(jsonobj.get("ppglNo"))) {
-								if(ppglNo == 0L) {
-									GenericValue ppglNoInfo = EntityQuery.use(delegator).select("ppglNo").from("Reference")
-											.where("lotNo", referenceMap.get("lotNo"), "poNo", referenceMap.get("poNo"), "referenceNo", referenceMap.get("referenceNo")).orderBy("ppglNo DESC").queryFirst();
-									if(ppglNoInfo != null) {
-										ppglNo = ppglNoInfo.getLong("ppglNo");
-									} else {
-										ppglNo = 0;
-									}
-								}
-								ppglNo = ppglNo + 1;
-								Map<String, Long> ppglNumVal = UtilMisc.toMap("ppglNo", ppglNo);
-								referenceMap.putAll(ppglNumVal);
-							} else {
-								referenceMap.put("ppglNo", jsonobj.getLong("ppglNo"));
-							}
-
 							if("C".equals(crudMode)) {
-								referenceMap.put("createUserId", userLoginId);
 								referenceMap.put("createdStamp", UtilDateTime.nowTimestamp());
 								referenceMap.put("createdTxStamp", UtilDateTime.nowTimestamp());
 							}
 
-							referenceMap.put("lastUpdateUserId", userLoginId);
 							referenceMap.put("lastUpdatedStamp", UtilDateTime.nowTimestamp());
 							referenceMap.put("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
+
 							createNUpdateReferenceInfo.setPKFields(referenceMap);
 							createNUpdateReferenceInfo.setNonPKFields(referenceMap);
 							createNUpdateReferenceInfo = delegator.createOrStore(createNUpdateReferenceInfo);
@@ -375,14 +325,14 @@ public class PurchaseServices {
 					}
 					// PO Reference 삭제 시 호출
 				} else if("D".equals(crudMode)) {
-					GenericValue createNUpdateReferenceInfo = delegator.makeValue("Reference");
+					GenericValue createNUpdateReferenceInfo = delegator.makeValue("PoReference");
 					JSONArray data = new JSONArray(reqData);//jsonarray 형태로
 					int resultInt = 0;
 					if(data.length() > 0) {
 						for(int i=0 ; data.length() > i ; i++) {
 							JSONObject jsonobj = data.getJSONObject(i);
 							createNUpdateReferenceInfo.set("referenceSeq", jsonobj.getLong("referenceSeq"));
-							resultInt += delegator.removeByAnd("Reference", createNUpdateReferenceInfo);
+							resultInt += delegator.removeByAnd("PoReference", createNUpdateReferenceInfo);
 						}
 					}
 					if(resultInt > 0) {
@@ -390,6 +340,31 @@ public class PurchaseServices {
 					} else {
 						result.put("successStr", "fail");
 					}
+					// 기존 PO 복제 onload 시 사용
+				} else if("CL".equals(crudMode)) {
+					GenericValue poMasterInfo = EntityQuery.use(delegator)
+							.from("PoMaster")
+							.where("poNo", poNo)
+							.queryOne();
+
+					Map<String, Object> conditionMap = new HashMap<String, Object>();
+					conditionMap.put("poNo", poNo);
+					List<GenericValue> referenceList = poMasterInfo.getRelated("PoReference", conditionMap, null, false);
+					if(referenceList.size() > 0) {
+						for(GenericValue referenceInfo : referenceList) {
+							Map<String, Object> resultMap = new HashMap<String, Object>();
+							resultMap.putAll(poMasterInfo);
+							resultMap.putAll(referenceInfo);
+							resultList.add(resultMap);
+						}
+					}
+					// PO번호 입력 시 중복체크
+				} else if("DP".equals(crudMode)) {
+					GenericValue poMasterInfo = EntityQuery.use(delegator)
+							.from("PoMaster")
+							.where("poNo", poNo)
+							.queryOne();
+					resultList.add(poMasterInfo);
 				}
 			} catch (GenericEntityException e){
 				Debug.logError(e, "Cannot CRUDPoList ", module);
@@ -479,7 +454,7 @@ public class PurchaseServices {
 
 		try {
 			List<GenericValue> referenceInfoList = EntityQuery.use(delegator)
-					.from("Reference")
+					.from("PoReference")
 					.where(
 							"poNo", poNo,
 							"lotNo", lotNo
