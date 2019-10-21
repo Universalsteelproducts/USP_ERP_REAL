@@ -23,8 +23,10 @@ nowTs = UtilDateTime.nowTimestamp()
 orderFromDate = StringUtils.trimToEmpty(parameters.orderFromDate) == "" ? UtilDateTime.getYearStart(nowTs) : parameters.orderFromDate
 orderToDate = StringUtils.trimToEmpty(parameters.orderToDate) == "" ? UtilDateTime.getDayStart(nowTs) : parameters.orderToDate
 
-poStatus = from("PoStatusCode").queryList()
+poStatus = from("PoStatusCode").orderBy("sortSeq").queryList()
+productTmp = from("ProductTmp").orderBy("sortSeq").queryList()
 
 context.orderFromDate = orderFromDate
 context.orderToDate = orderToDate
 context.poStatus = poStatus
+context.productTmp = productTmp

@@ -22,6 +22,12 @@ under the License.
 		/***************************************************************************
 		 ******************			Common Control				********************
 		 ***************************************************************************/
+		/*$('#poList tfoot th').each( function (index) {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+        });*/
+
 		var poListTable = $("#poList").DataTable({
 			dom : "lfrtip",
 			processing : true,
@@ -51,10 +57,19 @@ under the License.
         	                "id" : "poStatus",
         	                "value" : data
         	            });
-        				var $option = $("#poStatusTemp").html();
+        				var $option;
+        				<#if poStatus??>
+                            <#list poStatus as poStatusInfo>
+                        if("${poStatusInfo.poStatusId!}" == data) {
+                            $option += "<option value='${poStatusInfo.poStatusId!}' selected='selected'>${poStatusInfo.poStatusNm!}</option>";
+                        } else {
+                            $option += "<option value='${poStatusInfo.poStatusId!}'>${poStatusInfo.poStatusNm!}</option>";
+                        }
+                            </#list>
+                        </#if>
+
        	                $select.append($option);
-       	             	$select.find("[value='" + data + "']").attr("selected", "selected");
-       	             	$select.attr("class", "poStatus");
+       	             	$select.addClass("poStatus");
             			return $select.prop("outerHTML");
 	                },
                     "width" : "60px"
@@ -62,7 +77,7 @@ under the License.
 	        	{
 	        		"data" : "poNo",
 	        		"render": function ( data, type, row ) {
-	        			return "<a href='<@ofbizUrl>editPo?poNo=" + data + "</@ofbizUrl>' class='buttontext'>" + data + "</a>";
+	        			return "<a href='<@ofbizUrl>editPo?poNo=" + data + "&pageAction=new</@ofbizUrl>' class='buttontext'>" + data + "</a>";
 	                },
                     "width" : "60px"
 	        	},
@@ -132,9 +147,12 @@ under the License.
 	        	{
                     "data" : "qty",
                     "render": function ( data, type, row ) {
+                        if(row.qtyUnit == "LB") {
+                            data = data / 2204.62;
+                        }
                         return data;
                     },
-                    "width" : "60px",
+                    "width" : "90px",
                     "className" : "dt-body-right"
                 },
 	        	{
@@ -151,6 +169,17 @@ under the License.
                         return data;
                     },
                     "width" : "60px",
+                    "className" : "dt-body-right"
+                },
+                {
+                    "data" : "qty",
+                    "render": function ( data, type, row ) {
+                        if(row.qtyUnit == "MT") {
+                            data = data * 2204.62;
+                        }
+                        return data;
+                    },
+                    "width" : "90px",
                     "className" : "dt-body-right"
                 },
 	        	{
@@ -213,7 +242,34 @@ under the License.
 	        		"visible": false
 	        	}
 	        ]
+	        /*,
+            initComplete: function () {
+                this.api().column(0).every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column.search( val ? '^'+val+'$' : '', true, false ).draw();
+                        });
+
+                    var $option = $("#poStatusTemp").html();
+                    select.append($option);
+                } );
+            }*/
 		});
+
+		/*poListTable.columns().every( function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change clear', function() {
+                if(that.search() !== this.value) {
+                    that.search(this.value).draw();
+                }
+            });
+        });*/
 
 		/***************************************************************************
 		 ******************			Table change Event			********************
@@ -222,32 +278,7 @@ under the License.
 		/***************************************************************************
 		 ******************			SelectBox Control			********************
 		 ***************************************************************************/
-		$("#poList").on("change", "select.poStatus",function() {
-			var reqData = poListTable.rows($(this).parent().parent()).data();
-			var reqArray = new Array();
-			reqData[0]["poStatus"] = $(this).val();
-            reqArray.push(reqData[0]);
 
-			jQuery.ajax({
-				url: '<@ofbizUrl>RUPoList</@ofbizUrl>',
-				type: 'POST',
-				data: {
-					"crudMode" : "U",
-					"reqData" : JSON.stringify(reqArray)
-				},
-				error: function(msg) {
-		            showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
-		        },
-				success: function(data) {
-					if(data.data.length > 0) {
-						alert("PO Status Update Complete.");
-						$("#searchBtn").click();
-					} else {
-						alert("PO Status Update Fail.");
-					}
-				}
-			});
-		});
 
 		/***************************************************************************
 		 ******************				Button Control			********************
@@ -315,6 +346,17 @@ under the License.
                         <!-- set_multivalues -->
                         <@htmlTemplate.lookupField value="" formName="searchForm" name="schSupplierId" id="schSupplierId" fieldFormName="LookupSupplier" position="center" />
                     </td>
+                    <td class="label" align="right" >
+                        ${uiLabelMap.orderDate}
+                    </td>
+                    <td width="2%">&nbsp;</td>
+                    <td width="35%">
+                        <@htmlTemplate.renderDateTimeField name="schOrderFromDate" id="schOrderFromDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd" value="${orderFromDate?string('yyyy-MM-dd')}" size="10" maxlength="10" dateType="date" shortDateInput=true timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                        &nbsp;~&nbsp;
+                        <@htmlTemplate.renderDateTimeField name="schOrderToDate" id="schOrderToDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd" value="${orderToDate?string('yyyy-MM-dd')}" size="10" maxlength="10" dateType="date" shortDateInput=true timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                    </td>
+				</tr>
+				<tr>
 					<td class="label" align="right" >
 						${uiLabelMap.poNo}
 					</td>
@@ -323,22 +365,18 @@ under the License.
 						<!-- set_multivalues -->
 						<input type="text" name="schPoNo" id="schPoNo" maxlength="255"/>
 					</td>
-				</tr>
-				<tr>
 					<td class="label" align="right" >
 						${uiLabelMap.product}
 					</td>
 					<td width="2%">&nbsp;</td>
 					<td>
 					    <select name="schProductId" id="schProductId">
-						<#if productList??>
-                            <#list productList as productInfo>
-                            <option value="${productInfo.code!}">${productInfo.codeName!}</option>
+					        <option value="">--Select</option>
+						<#if productTmp??>
+                            <#list productTmp as productTmpInfo>
+                            <option value="${productTmpInfo.productId!}">${productTmpInfo.productNm!}</option>
                             </#list>
                         </#if>
-                            <option value="">--Select</option>
-                            <option value="G5AAG2">GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56</option>
-                            <option value="G5ABG2">GRADE 50 AZ50 BTP GALVALUME 29GA x 41.56</option>
                         </select>
 					</td>
 					<td class="label" align="right" >
@@ -348,15 +386,6 @@ under the License.
 					<td>
 						<!-- set_multivalues -->
 						<@htmlTemplate.lookupField value="" formName="searchForm" name="schCustomerId" id="schCustomerId" fieldFormName="LookupCustomer" position="center" />
-					</td>
-					<td class="label" align="right" >
-						${uiLabelMap.orderDate}
-					</td>
-					<td width="2%">&nbsp;</td>
-					<td width="35%">
-						<@htmlTemplate.renderDateTimeField name="schOrderFromDate" id="schOrderFromDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd" value="${orderFromDate?string('yyyy-MM-dd')}" size="10" maxlength="10" dateType="date" shortDateInput=true timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
-						&nbsp;~&nbsp;
-						<@htmlTemplate.renderDateTimeField name="schOrderToDate" id="schOrderToDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd" value="${orderToDate?string('yyyy-MM-dd')}" size="10" maxlength="10" dateType="date" shortDateInput=true timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
 					</td>
 				</tr>
 				<tr>
@@ -389,9 +418,10 @@ under the License.
 				<th style="vertical-align: middle;">${uiLabelMap.productId}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-				<th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.orderQtyMT}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.amount}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.produced}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.invoicedRev}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.shipmentCreated}</th>
@@ -412,9 +442,10 @@ under the License.
                 <th style="vertical-align: middle;">${uiLabelMap.productId}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
+                <th style="vertical-align: middle;">${uiLabelMap.orderQtyMT}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.amount}</th>
+                <th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.produced}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.invoicedRev}</th>
                 <th style="vertical-align: middle;">${uiLabelMap.shipmentCreated}</th>

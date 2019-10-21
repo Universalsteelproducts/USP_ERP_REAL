@@ -241,8 +241,14 @@
     <property key="paintName">
         <value xml:lang="en">Paint Name</value>
     </property>
-    <property key="orderQty">
-        <value xml:lang="en">Order Qty</value>
+    <property key="paintBrand">
+        <value xml:lang="en">Paint Brand</value>
+    </property>
+    <property key="paintType">
+        <value xml:lang="en">Paint Type</value>
+    </property>
+    <property key="orderQtyMT">
+        <value xml:lang="en">Order Qty(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
@@ -250,11 +256,20 @@
     <property key="amount">
         <value xml:lang="en">Amount</value>
     </property>
+    <property key="orderQtyLB">
+        <value xml:lang="en">Order Qty(LB)</value>
+    </property>
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
+    <property key="producedQty">
+        <value xml:lang="en">Produced Qty(MT)</value>
+    </property>
     <property key="invoicedRev">
         <value xml:lang="en">Invoiced Rev.</value>
+    </property>
+    <property key="invoicedQty">
+        <value xml:lang="en">Invoiced Qty</value>
     </property>
     <property key="shipmentCreated">
         <value xml:lang="en">Shipment Created</value>
@@ -281,7 +296,10 @@
         <value xml:lang="en">Width(Inch)</value>
     </property>
     <property key="weight">
-        <value xml:lang="en">Weight(MT)</value>
+        <value xml:lang="en">Weight</value>
+    </property>
+    <property key="weightUnit">
+        <value xml:lang="en">Weight Unit</value>
     </property>
     <property key="commissionPrice">
         <value xml:lang="en">Commission Price</value>
@@ -289,6 +307,17 @@
     <property key="qty">
         <value xml:lang="en">Qty</value>
     </property>
+    <property key="unitCost">
+        <value xml:lang="en">Unit Cost</value>
+    </property>
+    <property key="costUnit">
+        <value xml:lang="en">Cost Unit</value>
+    </property>
+
+
+
+
+
 
 
     <property key="searchPoForm">
@@ -457,9 +486,7 @@
     <property key="contractNo">
         <value xml:lang="en">Contract#</value>
     </property>
-    <property key="unitCost">
-        <value xml:lang="en">Unit Cost</value>
-    </property>
+
     <property key="civAmount">
         <value xml:lang="en">CIV Amount</value>
     </property>

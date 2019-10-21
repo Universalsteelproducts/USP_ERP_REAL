@@ -300,3 +300,82 @@ var addToOrder = function(id, rowMap) {
 
 	return rowMap;
 };
+
+function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.target.className += " active";
+}
+
+// csv파일 import 시 동기화 위하여 promise사용
+const readFileAsCsv = (inputFile) => {
+  const temporaryFileReader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    temporaryFileReader.onerror = () => {
+      temporaryFileReader.abort();
+      reject(new DOMException("Parsing Error"));
+    };
+
+    temporaryFileReader.onload = () => {
+      resolve(temporaryFileReader.result);
+    };
+    temporaryFileReader.readAsText(inputFile);
+  });
+};
+
+// csv파일 import 시 동기화 위하여 promise사용
+var covertFileToData = async (event) => {
+    //var f = $("#" + fileElementId).get(0).files[0];
+    var f = event.target.files[0];
+
+    if (f) {
+        var data = await readFileAsCsv(f);
+        var csvData = $.csv.toObjects(data);
+        if (csvData && csvData.length > 0) {
+            return csvData;
+        } else {
+            return null;
+        }
+    } else {
+        return null;
+    }
+};
+
+var totalPriceNQuantity = function(tableObj, totalQuantityId, totalPriceId) {
+    var tableSize = tableObj.rows().data().length;
+    var totalQuantity = 0;
+    var totalPrice = 0;
+    var groupUnitQuantity = 0;
+
+    var totalQuantityUnit = "";
+    var totalPriceUnit = "";
+
+    if(tableSize > 0) {
+        for(var i=0 ; tableSize > i ; i++) {
+            var gridUnitQuantity = Number(tableObj.rows(i).data().pluck("qty")[0] != "" ? tableObj.rows(i).data().pluck("qty")[0] : 0);
+            var gridUnitPrice = parseFloat(tableObj.rows(i).data().pluck("unitPrice")[0] != "" ? tableObj.rows(i).data().pluck("unitPrice")[0] : 0);
+
+            totalQuantity += gridUnitQuantity;
+            totalPrice += (gridUnitQuantity*gridUnitPrice);
+        }
+    }
+
+    $("#" + totalQuantityId).val(totalQuantity.format());
+    $("#" + totalPriceId).val(totalPrice.format(2));
+};

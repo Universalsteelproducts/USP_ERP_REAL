@@ -251,15 +251,17 @@
         <field name="agentId" type="id-long"></field>
         <field name="poStatus" type="id-long"></field>
         <field name="priceTerm" type="id-long"></field>
+        <field name="freightTerm" type="id-long"></field>
         <field name="paymentTerm" type="id-long"></field>
         <field name="paymentMethod" type="id-long"></field>
         <field name="downPayment" type="currency-amount"></field>
         <field name="shipmentMonth" type="short-varchar"></field>
-        <field name="purchaseClass" type="long-varchar"></field>
         <field name="orderRemark" type="comment"></field>
         <field name="internalNote" type="comment"></field>
         <field name="totalOrderQty" type="fixed-point"></field>
+        <field name="totalQtyUnit" type="id-long"></field>
         <field name="totalOrderAmount" type="currency-amount"></field>
+        <field name="totalOrderAmountUnit" type="id-long"></field>
         <prim-key field="poNo"/>
     </entity>
 
@@ -273,6 +275,7 @@
         <field name="fobPoint" type="id-long"></field>
         <field name="fobPointEta" type="id-long"></field>
         <field name="destination" type="id-long"></field>
+        <field name="purchaseClass" type="long-varchar"></field>
         <field name="exw" type="id-long"></field>
         <field name="exwEtd" type="id-long"></field>
         <field name="barge" type="indicator"></field>
@@ -306,10 +309,14 @@
         <field name="paintBrand" type="id-long"></field>
         <field name="paintType" type="id-long"></field>
         <field name="paintName" type="id-long"></field>
+        <field name="qtyUnit" type="id-long"></field>
         <field name="qty" type="fixed-point"></field>
+        <field name="itemLength" type="fixed-point"></field>
         <field name="commissionPrice" type="currency-amount"></field>
+        <field name="priceUnit" type="id-long"></field>
         <field name="unitPrice" type="currency-amount"></field>
         <field name="amount" type="currency-amount"></field>
+        <field name="amountUnit" type="id-long"></field>
         <field name="produced" type="id-long"></field>
         <field name="gaugeControlYield" type="id-long"></field>
         <!-- Item Account Info-->

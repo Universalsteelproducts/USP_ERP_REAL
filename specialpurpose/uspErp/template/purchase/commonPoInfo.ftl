@@ -76,7 +76,7 @@ under the License.
 	<!-- Purchase Order Info -->
 	<div>
 		<ul align="right">
-		<#if crudMode == "UR">
+		<#if pageAction == "edit">
 			<label class="label">
 				Issue Date : ${poCommonInfo.createdStamp!?string("yyyy-MM-dd")},
 				Last Updated Date : ${poCommonInfo.lastUpdatedStamp!?string("yyyy-MM-dd")}
@@ -107,8 +107,8 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%">
-                        <select name="priceTerm" id="priceTerm">
-                            <option value=""></option>
+                        <select name="priceTerm" id="priceTerm" style="min-width:60px">
+                            <option value="">--Select</option>
                         <#if priceTerm??>
                             <#list priceTerm as priceTermInfo>
                             <option value="${priceTermInfo.termTypeId!}">${priceTermInfo.description!}</option>
@@ -121,13 +121,13 @@ under the License.
 					</td>
 					<td width="2%">&nbsp;</td>
 					<td width="20%">
-					<#if crudMode == "UR">
-						${poCommonInfo.vendorId!}
+					<#if pageAction == "edit">
+						${poCommonInfo.supplierId!}
 					<#else>
 						<!-- set_multivalues -->
 						<@htmlTemplate.lookupField value="${poCommonInfo.supplierId!}" formName="poInfoForm" name="supplierId" id="supplierId" fieldFormName="LookupSupplier" position="center" />
 					</#if>
-						<input type="hidden" name="supplierInitials" id="supplierInitials" value="${poCommonInfo.supplierInitials!}" size="25" maxlength="255"/>
+						<input type="hidden" name="supplierInitials" id="supplierInitials" value="" size="25" maxlength="255"/>
 					</td>
 				</tr>
 				<tr>
@@ -136,7 +136,7 @@ under the License.
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
-                    <#if crudMode == "UR">
+                    <#if pageAction == "edit">
                         ${poCommonInfo.orderDate!}
                     <#else>
                         <!-- set_multivalues -->
@@ -144,12 +144,12 @@ under the License.
                     </#if>
                     </td>
                     <td class="label" width="13%" align="right">
-                        ${uiLabelMap.paymentTerm}
+                        ${uiLabelMap.freightTerm}
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
-                        <select name="paymentMethodType" id="paymentMethodType">
-                            <option value=""></option>
+                        <select name="freightTerm" id="freightTerm" style="min-width:60px">
+                            <option value="">--Select</option>
                         <#if paymentMethodType??>
                             <#list paymentMethodType as paymentMethodTypeInfo>
                             <option value="${paymentMethodTypeInfo.paymentMethodTypeId!}">${paymentMethodTypeInfo.description!}</option>
@@ -162,7 +162,7 @@ under the License.
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
-                        <select name="productId" id="productId">
+                        <select name="agentId" id="agentId" style="min-width:60px">
                             <option value="">--Select</option>
                         <#if purchaseAgent??>
                             <#list purchaseAgent as purchaseAgentInfo>
@@ -177,12 +177,18 @@ under the License.
 						${uiLabelMap.poStatus}
 					</td>
 					<td width="2%">&nbsp;</td>
-					<td width="35%">
-					<#if crudMode == "R" || crudMode == "CR" || crudMode == "CL">
+					<td width="20%">
+					<#if pageAction == "new">
 					    PO Entered
                         <input type="hidden" name="poStatus" id="poStatus" value="PE" />
                     <#else>
-                        <input type="text" name="poStatus" id="poStatus" value="${poCommonInfo.poStatus!}"/>
+                        <#if poStatus??>
+                            <#list poStatus as poStatusInfo>
+                                <#if poStatusInfo.poStatusId == poCommonInfo.poStatus>
+                                ${poStatusInfo.poStatusNm}
+                                </#if>
+                            </#list>
+                        </#if>
                     </#if>
 					</td>
                     <td class="label" width="13%" align="right">
@@ -190,8 +196,8 @@ under the License.
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
-                        <select name="paymentTerm" id="paymentTerm">
-                            <option value=""></option>
+                        <select name="paymentTerm" id="paymentTerm" style="min-width:60px">
+                            <option value="">--Select</option>
                         <#if paymentMethodType??>
                             <#list paymentMethodType as paymentMethodTypeInfo>
                             <option value="${paymentMethodTypeInfo.paymentMethodTypeId!}">${paymentMethodTypeInfo.description!}</option>
@@ -204,16 +210,11 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%">
-                        <input type="text" name="totalQuantity" id="totalQuantity" value="${totalQuantity!}" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
-                        <select name="quantityUnit" id="quantityUnit" disabled="disabled" style="width:30px;">
+                        <input type="text" name="totalOrderQty" id="totalOrderQty" value="${totalQuantity!}" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
+                        <select name="totalQtyUnit" id="totalQtyUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
-                        <#if codeList??>
-                            <#list codeList as codeInfo>
-                                <#if codeInfo.codeGroup == "QUANTITY_UNIT">
-                            <option value="${codeInfo.code!}" <#if codeInfo.code == totalQuantityUnit! >selected="selected"</#if>>${codeInfo.codeName!}</option>
-                                </#if>
-                            </#list>
-                        </#if>
+                            <option value="MT">MT</option>
+                            <option value="LB">LB</option>
                         </select>
                     </td>
 				</tr>
@@ -223,21 +224,17 @@ under the License.
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
-                    <#if crudMode == "UR">
-                        ${poCommonInfo.shipmentMonth!}
-                    <#else>
-                        <input type="text" name="shipmentMonth" id="shipmentMonth" value='' size="5" maxlength="5" />
-                    </#if>
+                        <input type="text" name="shipmentMonth" id="shipmentMonth" size="25" value='' />
                     </td>
                     <td class="label" width="13%" align="right">
 						${uiLabelMap.downPayment}
 					</td>
 					<td width="2%">&nbsp;</td>
 					<td width="20%">
-					<#if crudMode == "UR">
+					<#if pageAction == "edit">
 						${poCommonInfo.downPayment?default(0)?string(',##0.00')}
 					<#else>
-						$ <input type="text" name="downPayment" id="downPayment" value='' maxlength="255" style="text-align:right;" />
+						$ <input type="text" name="downPayment" id="downPayment" value='' size="17" maxlength="255" style="text-align:right;" />
 					</#if>
 					</td>
                     <td class="label" width="12%" align="right">
@@ -245,34 +242,13 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%">
-                        <input type="text" name="totalPoAmount" id="totalPoAmount" value="${totalPrice!}" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
-                        <select name="priceUnit" id="priceUnit" disabled="disabled" style="width:30px;">
+                        <input type="text" name="totalOrderAmount" id="totalOrderAmount" value="${totalPrice!}" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
+                        <select name="totalOrderAmountUnit" id="totalOrderAmountUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
-                        <#if codeList??>
-                            <#list codeList as codeInfo>
-                                <#if codeInfo.codeGroup == "PRICE_UNIT">
-                            <option value="${codeInfo.code!}" <#if codeInfo.code == totalPriceUnit! >selected="selected"</#if>>${codeInfo.codeName!}</option>
-                                </#if>
-                            </#list>
-                        </#if>
+                            <option value="MT">$/MT</option>
+                            <option value="LB">$/LB</option>
                         </select>
                     </td>
-				</tr>
-				<tr>
-					<td class="label" width="13%" align="right">
-						${uiLabelMap.purchaseClass}
-					</td>
-					<td width="2%">&nbsp;</td>
-					<td colspan="7">
-                        <select name="purchaseClass" id="purchaseClass" title="">
-                            <option value="">-- Purchase Class</option>
-                        <#if purchaseClass??>
-                            <#list purchaseClass as purchaseClassInfo>
-                            <option value="${purchaseClassInfo.purchaseClassId!}">${purchaseClassInfo.purchaseClassNm!}</option>
-                            </#list>
-                        </#if>
-                        </select>
-					</td>
 				</tr>
 				<tr>
 					<td class="label" width="13%" align="right">
