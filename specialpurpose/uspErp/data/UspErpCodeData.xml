@@ -94,6 +94,7 @@
     <ExwCode exwId="WTH" exwNm="WTH" sortSeq="8" description="" />
     <ExwCode exwId="PMC" exwNm="PMC" sortSeq="9" description="" />
     <ExwCode exwId="PMH" exwNm="PMH" sortSeq="10" description="" />
+    <ExwCode exwId="JIT" exwNm="JIT" sortSeq="11" description="" />
 
 
 
