@@ -67,7 +67,7 @@ under the License.
             </service>
         </actions>
         <field name="customerId" widget-style="buttontext">
-            <hyperlink description="${customerId}" target="javascript:set_customer('${customerId}', '${customerNm}')" also-hidden="false" target-type="plain"/>
+            <hyperlink description="${customerId}" target="javascript:set_customer('${customerId}', '${customerName}')" also-hidden="false" target-type="plain"/>
         </field>
         <field name="customerName" title="${uiLabelMap.CustomerName}"><display/></field>
     </form>
