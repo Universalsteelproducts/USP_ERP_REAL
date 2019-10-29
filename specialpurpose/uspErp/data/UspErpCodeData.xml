@@ -25,18 +25,33 @@
     <PaintCode paintCode="WXR0077L" paintBrand="Valspar" paintName="WXL Rustic Red" paintType="SMP" sortSeq="13" description="" />
     <PaintCode paintCode="WXD0038L" paintBrand="Valspar" paintName="WXL Light Stone" paintType="SMP" sortSeq="14" description="" />
 
+    <PriceTermCode priceTermId="CFR" priceTermNm="CFR" sortSeq="1" description="" />
+    <PriceTermCode priceTermId="CIF" priceTermNm="CIF" sortSeq="2" description="" />
+    <PriceTermCode priceTermId="FOB" priceTermNm="FOB" sortSeq="3" description="" />
+    <PriceTermCode priceTermId="DDP" priceTermNm="DDP" sortSeq="4" description="" />
+    <PriceTermCode priceTermId="EXW" priceTermNm="EXW" sortSeq="5" description="" />
+
+    <PaymentTermCode paymentTermId="NET 30" paymentTermNm="Net 30" sortSeq="1" description="" />
+    <PaymentTermCode paymentTermId="NET 60" paymentTermNm="Net 60" sortSeq="2" description="" />
+    <PaymentTermCode paymentTermId="NET 90" paymentTermNm="Net 90" sortSeq="3" description="" />
+    <PaymentTermCode paymentTermId="CASH IN ADVANCE" paymentTermNm="Cash In Advance" sortSeq="4" description="" />
+    <PaymentTermCode paymentTermId="LETTER OF CREDIT" paymentTermNm="Letter of Credit" sortSeq="5" description="" />
+    <PaymentTermCode paymentTermId="DUE ON RECEIPT" paymentTermNm="Due on Receipt" sortSeq="6" description="" />
+
+
+
     <SteelTypeCode steelTypeId="GI" steelTypeNm="GI" sortSeq="1" description="" />
     <SteelTypeCode steelTypeId="GL" steelTypeNm="GL" sortSeq="2" description="" />
     <SteelTypeCode steelTypeId="PPGI" steelTypeNm="PPGI" sortSeq="3" description="" />
     <SteelTypeCode steelTypeId="PPGL" steelTypeNm="PPGL" sortSeq="4" description="" />
     <SteelTypeCode steelTypeId="PGL" steelTypeNm="PGL" sortSeq="5" description="" />
     <SteelTypeCode steelTypeId="PGI" steelTypeNm="PGI" sortSeq="6" description="" />
-    <SteelTypeCode steelTypeId="OTHER" steelTypeNm="Other" sortSeq="7" description="" />
+    <SteelTypeCode steelTypeId="QUICK ADD" steelTypeNm="Quick Add" sortSeq="7" description="" />
 
     <GradeCode gradeId="GR80" gradeNm="GR80" sortSeq="1" description="" />
     <GradeCode gradeId="GR50" gradeNm="GR50" sortSeq="2" description="" />
     <GradeCode gradeId="CSB" gradeNm="CSB" sortSeq="3" description="" />
-    <GradeCode gradeId="OTHER" gradeNm="Other" sortSeq="4" description="" />
+    <GradeCode gradeId="QUICK ADD" gradeNm="Quick Add" sortSeq="4" description="" />
 
     <CoatingWeightCode coatingWeightId="G90" coatingWeightNm="G90" sortSeq="1" description="" />
     <CoatingWeightCode coatingWeightId="G60" coatingWeightNm="G60" sortSeq="2" description="" />
@@ -44,14 +59,14 @@
     <CoatingWeightCode coatingWeightId="AZ55" coatingWeightNm="AZ55" sortSeq="4" description="" />
     <CoatingWeightCode coatingWeightId="AZ50" coatingWeightNm="AZ50" sortSeq="5" description="" />
     <CoatingWeightCode coatingWeightId="AZ35" coatingWeightNm="AZ35" sortSeq="6" description="" />
-    <CoatingWeightCode coatingWeightId="OTHER" coatingWeightNm="Other" sortSeq="7" description="" />
+    <CoatingWeightCode coatingWeightId="QUICK ADD" coatingWeightNm="Quick Add" sortSeq="7" description="" />
 
     <SurfaceTypeCode surfaceTypeId="BARE" surfaceTypeNm="Bare" sortSeq="1" description="" />
     <SurfaceTypeCode surfaceTypeId="ACRYLIC" surfaceTypeNm="Acrylic" sortSeq="2" description="" />
     <SurfaceTypeCode surfaceTypeId="PAINTED" surfaceTypeNm="Painted" sortSeq="3" description="" />
     <SurfaceTypeCode surfaceTypeId="CHECMICAL" surfaceTypeNm="Chemical Treated" sortSeq="4" description="" />
     <SurfaceTypeCode surfaceTypeId="PREPAINT" surfaceTypeNm="Pre-Painted" sortSeq="5" description="" />
-    <SurfaceTypeCode surfaceTypeId="OTHER" surfaceTypeNm="Other" sortSeq="6" description="" />
+    <SurfaceTypeCode surfaceTypeId="QUICK ADD" surfaceTypeNm="Quick Add" sortSeq="6" description="" />
 
     <ThicknessCode thicknessId="014" thicknessNm="0.014" sortSeq="1" description="" />
     <ThicknessCode thicknessId="0142" thicknessNm="0.0142" sortSeq="2" description="" />
@@ -59,7 +74,7 @@
     <ThicknessCode thicknessId="0144" thicknessNm="0.0144" sortSeq="4" description="" />
     <ThicknessCode thicknessId="0145" thicknessNm="0.0145" sortSeq="5" description="" />
     <ThicknessCode thicknessId="016" thicknessNm="0.016" sortSeq="6" description="" />
-    <ThicknessCode thicknessId="OTHER" thicknessNm="Other" sortSeq="7" description="" />
+    <ThicknessCode thicknessId="QUICK ADD" thicknessNm="Quick Add" sortSeq="7" description="" />
 
     <GaugeCode gaugeId="014" gaugeNm="0.014" sortSeq="1" description="" />
     <GaugeCode gaugeId="0142" gaugeNm="0.0142" sortSeq="2" description="" />
@@ -67,12 +82,20 @@
     <GaugeCode gaugeId="0144" gaugeNm="0.0144" sortSeq="4" description="" />
     <GaugeCode gaugeId="0145" gaugeNm="0.0145" sortSeq="5" description="" />
     <GaugeCode gaugeId="016" gaugeNm="0.016" sortSeq="6" description="" />
-    <GaugeCode gaugeId="OTHER" gaugeNm="Other" sortSeq="7" description="" />
+    <GaugeCode gaugeId="QUICK ADD" gaugeNm="Quick Add" sortSeq="7" description="" />
 
     <ExwCode exwId="DA" exwNm="DA" sortSeq="1" description="" />
     <ExwCode exwId="YE" exwNm="YE" sortSeq="2" description="" />
-    <ExwCode exwId="TMSHR" exwNm="TM-SHR" sortSeq="3" description="" />
+    <ExwCode exwId="TM" exwNm="TM" sortSeq="3" description="" />
     <ExwCode exwId="GD" exwNm="GD" sortSeq="4" description="" />
+    <ExwCode exwId="TU" exwNm="TU" sortSeq="5" description="" />
+    <ExwCode exwId="PT" exwNm="PT" sortSeq="6" description="" />
+    <ExwCode exwId="YC" exwNm="YC" sortSeq="7" description="" />
+    <ExwCode exwId="WTH" exwNm="WTH" sortSeq="8" description="" />
+    <ExwCode exwId="PMC" exwNm="PMC" sortSeq="9" description="" />
+    <ExwCode exwId="PMH" exwNm="PMH" sortSeq="10" description="" />
+
+
 
     <PurchaseAgentCode purchaseAgentId="PD" purchaseAgentNm="Podong" sortSeq="1" description="" />
     <PurchaseAgentCode purchaseAgentId="SM" purchaseAgentNm="Simon" sortSeq="2" description="" />
@@ -81,16 +104,31 @@
     <CoilMaxWeightCode coilMaxWeightId="12000" coilMaxWeightNm="12,000lb Max" sortSeq="2" description="" />
     <CoilMaxWeightCode coilMaxWeightId="24000" coilMaxWeightNm="24,000lb Max" sortSeq="3" description="" />
     <CoilMaxWeightCode coilMaxWeightId="48000" coilMaxWeightNm="48,000lb Max" sortSeq="4" description="" />
-    <CoilMaxWeightCode coilMaxWeightId="OTHER" coilMaxWeightNm="Other" sortSeq="5" description="" />
+    <CoilMaxWeightCode coilMaxWeightId="QUICK ADD" coilMaxWeightNm="Quick Add" sortSeq="5" description="" />
 
     <PackagingCode packagingId="ETSWCOS" packagingNm="EYE TO SKY WITH CORE ON SKID" sortSeq="1" description="" />
     <PackagingCode packagingId="ETHWC" packagingNm="EYE TO HORIZON WITH CORE" sortSeq="2" description="" />
-    <PackagingCode packagingId="OTHER" packagingNm="Other" sortSeq="3" description="" />
+    <PackagingCode packagingId="QUICK ADD" packagingNm="Quick Add" sortSeq="3" description="" />
 
     <!-- TEMP TABLE DATA -->
-    <ProductTmp productId="G5AAG" productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56" sortSeq="1" description="" />
-    <ProductTmp productId="G5APG" productNm="GRADE 50 AZ50 PPGL GALVALUME 29GA x 41.56" sortSeq="2" description="" />
-    <ProductTmp productId="G5ABG" productNm="GRADE 50 AZ50 BTP GALVALUME 29GA x 41.56" sortSeq="3" description="" />
+    <ProductTmp productId="G5A55AG2641" productNm="GR50 AZ55 Acrylic GL 26GA x 41.56" sortSeq="1" description="" />
+    <ProductTmp productId="G8A55AG2641" productNm="GR80 AZ55 Acrylic GL 26GA x 41.56" sortSeq="2" description="" />
+    <ProductTmp productId="G8A55AG2643" productNm="GR80 AZ55 Acrylic GL 26GA x 43" sortSeq="3" description="" />
+    <ProductTmp productId="G8A55AG2940" productNm="GR80 AZ55 Acrylic GL 29GA x 40.875" sortSeq="4" description="" />
+
+    <ProductTmp productId="G5A50BG2443" productNm="GR50 AZ50 BTP GL 24GA x 43" sortSeq="5" description="" />
+    <ProductTmp productId="G5A50BG2641" productNm="GR50 AZ50 BTP GL 26GA x 41.56" sortSeq="6" description="" />
+    <ProductTmp productId="G8A50BG2643" productNm="GR80 AZ50 BTP GL 26GA x 43" sortSeq="7" description="" />
+    <ProductTmp productId="G8A50BG2940" productNm="GR80 AZ50 BTP GL 29GA x 40.875" sortSeq="8" description="" />
+
+    <ProductTmp productId="G5A50PG2641" productNm="GR50 AZ50 Painted GL 26GA x 41.56" sortSeq="9" description="" />
+    <ProductTmp productId="G8A35PG2643" productNm="GR80 AZ35 Painted GL 26GA x 43" sortSeq="10" description="" />
+    <ProductTmp productId="G8A50PG2643" productNm="GR80 AZ50 Painted GL 26GA x 43" sortSeq="11" description="" />
+    <ProductTmp productId="G8A50PG2940" productNm="GR80 AZ50 Painted GL 29GA x 40.875" sortSeq="12" description="" />
+
+
+
+
 
     <!--TermType termTypeId="CIA" parentTypeId="PAYMENT" hasTable="N" description="Cash In Advance" />
     <TermType termTypeId="TERM" parnentTypeId="PAYMENT" hasTable="N" description="Term" />
@@ -100,6 +138,9 @@
     <FobPointTmp fobPointId="SAV" fobPointNm="SAV" sortSeq="2" description="" />
     <FobPointTmp fobPointId="NOLA" fobPointNm="NOLA" sortSeq="3" description="" />
     <FobPointTmp fobPointId="ADS" fobPointNm="ADS" sortSeq="4" description="" />
+    <FobPointTmp fobPointId="TAM" fobPointNm="TAM" sortSeq="5" description="" />
+    <FobPointTmp fobPointId="CMA" fobPointNm="CMA" sortSeq="6" description="" />
+
 
     <DestinationTmp destinationId="WTH" destinationNm="WTH" sortSeq="1" description="" />
     <DestinationTmp destinationId="PMC" destinationNm="PMC" sortSeq="2" description="" />
