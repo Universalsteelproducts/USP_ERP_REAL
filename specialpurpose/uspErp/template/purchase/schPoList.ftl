@@ -285,7 +285,7 @@ under the License.
                     .reduce( function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0 );
-                    console.log(pageOrderQtyLBTotal);
+
                 // Update footer
                 $( api.column( 14 ).footer() ).html(
                     '<font color="red">Order Qty(MT) Total</font> : ' +
