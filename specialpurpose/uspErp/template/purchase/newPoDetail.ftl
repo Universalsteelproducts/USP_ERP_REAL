@@ -391,6 +391,11 @@ under the License.
             $("#commissionPriceUnit").val($(this).val());
         });
 
+        $("#productId").on("change", function() {
+            var curNm = $("#productId option:selected").text();
+            $("#productNm").val(curNm);
+        });
+
 	    /***************************************************************************
 	     ******************				Button Control			********************
 	     ***************************************************************************/
@@ -615,7 +620,7 @@ under the License.
                     <form name="customerForm" id="customerForm" method="post">
                         <@htmlTemplate.lookupField value="" formName="customerForm" name="customerId" id="customerId" fieldFormName="LookupCustomer" position="center" />
                     </form>
-                    <input type="hidden" id="customerName" name="customerName" value="">
+                    <input type="hidden" id="customerNm" name="customerNm" value="">
                 </td>
                 <td class="label" width="13%" align="right" >
                     ${uiLabelMap.importSO}
@@ -642,6 +647,7 @@ under the License.
                         </#list>
                     </#if>
                     </select>
+                    <input type="hidden" id="productNm" name="productNm" value="">
                 </td>
                 <td class="label" width="12%" align="right">
                     ${uiLabelMap.barge}

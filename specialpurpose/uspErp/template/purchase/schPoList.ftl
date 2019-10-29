@@ -175,26 +175,32 @@ under the License.
 	        	{
                     "data" : "producedQty",
                     "render": function ( data, type, row ) {
-                        return data;
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
-                    "width" : "60px",
-                    "className" : "dt-body-center"
+                    "width" : "90px",
+                    "className" : "dt-body-right"
                 },
 	        	{
                     "data" : "invoiceRev",
                     "render": function ( data, type, row ) {
-                        return data;
+                        if(row.commercialInvoiceNo != null && row.commercialInvoiceNo != "") {
+                            data = row.producedQty
+                        }
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "80px",
-                    "className" : "dt-body-center"
+                    "className" : "dt-body-right"
                 },
 	        	{
                     "data" : "shipmentCreated",
                     "render": function ( data, type, row ) {
-                        return data;
+                        if(data != null && data != "") {
+                            data = row.producedQty
+                        }
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "120px",
-                    "className" : "dt-body-center"
+                    "className" : "dt-body-right"
                 },
 	        	{
 	        		"data" : "referenceNo",
@@ -504,11 +510,11 @@ under the License.
 				<th style="vertical-align: middle;">${uiLabelMap.productId}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.orderQtyMT}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.amount}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
-				<th style="vertical-align: middle;">${uiLabelMap.produced}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.invoicedRev}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.shipmentCreated}</th>
 			</tr>

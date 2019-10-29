@@ -184,6 +184,20 @@ function set_values(poNo, lotNo) {
     closeLookup();
 }
 
+function set_customer(customerId, customerNm) {
+	if (GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP)) {
+        obj_caller.target = GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP).target;
+    } else {
+        obj_caller.target = jQuery(obj_caller.targetW);
+    }
+
+    var target = obj_caller.target;
+    write_value(customerId, target);
+    write_value(customerNm, $("#customerNm"));
+
+    closeLookup();
+}
+
 /**
  * emailFormat
  * 정규식 사용하여 이메일 check
