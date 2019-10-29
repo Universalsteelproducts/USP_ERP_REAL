@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		   xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
-	<!-- The controller elements that are common to all OFBiz components
+        xmlns="http://ofbiz.apache.org/Site-Conf" xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
          can be found in the following xml file. A component can override the
          elements found in the common-controller.xml file. -->
-	<include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
 
-	<description>Purchase Component Site Configuration File</description>
+    <description>Purchase Component Site Configuration File</description>
 
-	<!-- Request Mappings -->
-	<request-map uri="orderMain">
-		<security https="true" auth="true"/>
-		<response name="success" type="view" value="orderMain"/>
-	</request-map>
+    <!-- Request Mappings -->
+    <request-map uri="orderMain">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="orderMain"/>
+    </request-map>
 	<request-map uri="schPoList">
 		<security https="true" auth="true"/>
 		<response name="success" type="view" value="schPoList"/>
@@ -28,16 +28,58 @@
 		<security https="true" auth="true"/>
 		<response name="success" type="view" value="newPo"/>
 	</request-map>
+	<request-map uri="editPo">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="editPo"/>
+	</request-map>
 	<request-map uri="CRUPoList">
 		<security https="true" auth="true"/>
 		<event type="service" invoke="CRUPoList"/>
 		<response name="success" type="request" value="json"/>
 		<response name="error" type="request" value="json"/>
 	</request-map>
+	<request-map uri="fullfillmentList">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="fullfillmentList"/>
+		<response name="success" type="request" value="json"/>
+		<response name="error" type="request" value="json"/>
+	</request-map>
 
-	<!-- View Mappings -->
-	<view-map name="orderMain" page="component://uspErp/widget/purchase/PurchaseScreens.xml#orderMain" type="screen"/>
+
+	<request-map uri="schProcList">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="schProcList"/>
+	</request-map>
+	<request-map uri="newProc">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="newProc"/>
+	</request-map>
+	<request-map uri="editProc">
+		<security https="true" auth="true"/>
+		<response name="success" type="view" value="editProc"/>
+	</request-map>
+
+
+
+    <request-map uri="shippingDocManage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="shippingDocManage"/>
+    </request-map>
+    <request-map uri="createNupdateShippingDoc">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createNupdateShippingDoc"/>
+        <response name="success" type="view" value="shippingDocManage"/>
+        <response name="error" type="view" value="shippingDocManage"/>
+    </request-map>
+
+    <!-- View Mappings -->
+	<view-map name="orderMain" page="component://uspErp/widget/purchase/PurchaseScreens.xml#schPoList" type="screen"/>
 	<view-map name="schPoList" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#schPoList"/>
 	<view-map name="newPo" page="component://uspErp/widget/purchase/PurchaseScreens.xml#newNEditPo" type="screen"/>
+	<view-map name="editPo" page="component://uspErp/widget/purchase/PurchaseScreens.xml#newNEditPo" type="screen"/>
+
+	<view-map name="schProcList" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#schProcList"/>
+	<view-map name="newProc" page="component://uspErp/widget/purchase/PurchaseScreens.xml#newNEditProc" type="screen"/>
+	<view-map name="editProc" page="component://uspErp/widget/purchase/PurchaseScreens.xml#newNEditProc" type="screen"/>
 
 </site-conf>

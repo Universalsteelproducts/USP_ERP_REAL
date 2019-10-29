@@ -21,6 +21,7 @@
                 <set field="layoutSettings.javaScripts[+0]" value="/images/jquery/plugins/jquery-comfirm/jquery-confirm.min.js" global="true"/>
                 <set field="layoutSettings.styleSheets[+0]" value="/images/jquery/plugins/DataTables/datatables.min.css" global="true"/>
                 <set field="layoutSettings.styleSheets[+0]" value="/images/jquery/plugins/jquery-comfirm/jquery-confirm.min.css" global="true"/>
+                <set field="layoutSettings.javaScripts[+0]" value="/images/jquery/plugins/jquery.csv.min.js" global="true"/>
 
                 <set field="uspErpTF" value="true" global="true"/>
                 <script location="component://uspErp/groovyScript/common/commonGlobalValSet.groovy"/>

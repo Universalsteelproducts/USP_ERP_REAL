@@ -16,30 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-poNReferenceList = []
-poNReference = [:]
-
-poList = []
-referenceList = []
-
-poList = from("PoMasterNReference").queryList()
-/*
-poList.each { poInfo ->
-	poNReference.putAll(poInfo)
-
-	//referenceList = from("PoReference").where("poNo", poInfo.poNo).queryList()
-	referenceList = poInfo.getRelated("PoReference", null, null, false)
-	if(referenceList.size() > 0) {
-		referenceList.each { referenceInfo ->
-			poNReference.putAll(referenceInfo)
-			poNReferenceList.add(poNReference)
-		}
-	} else {
-		poNReference.putAll(referenceInfo)
-		poNReferenceList.add(poNReference)
-	}
-	poNReference = [:]
-}
-*/
-context.poNReferenceList = poList
+import org.apache.commons.lang.StringUtils
+import org.apache.ofbiz.base.util.StringUtil
+import org.apache.ofbiz.base.util.UtilDateTime
+import org.apache.ofbiz.base.util.UtilValidate
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.Date
+import org.apache.ofbiz.entity.condition.EntityCondition
+import org.apache.ofbiz.entity.condition.EntityOperator
+import org.apache.ofbiz.entity.util.EntityUtil

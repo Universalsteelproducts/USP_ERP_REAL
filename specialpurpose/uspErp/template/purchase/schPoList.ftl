@@ -54,30 +54,21 @@ under the License.
 	        		"data" : "poStatus",
         			"render": function ( data, type, row ) {
         				var $select = $("<select></select>", {
-        	                "id" : "poStatus",
-        	                "value" : data
-        	            });
-        				var $option;
-        				<#if poStatus??>
-                            <#list poStatus as poStatusInfo>
-                        if("${poStatusInfo.poStatusId!}" == data) {
-                            $option += "<option value='${poStatusInfo.poStatusId!}' selected='selected'>${poStatusInfo.poStatusNm!}</option>";
-                        } else {
-                            $option += "<option value='${poStatusInfo.poStatusId!}'>${poStatusInfo.poStatusNm!}</option>";
-                        }
-                            </#list>
-                        </#if>
-
-       	                $select.append($option);
-       	             	$select.addClass("poStatus");
-            			return $select.prop("outerHTML");
+                            "id" : "poStatus",
+                            "value" : data
+                        });
+                        var $option = $("#poStatusTemp").html();
+                        $select.append($option);
+                        $select.find("[value='" + data + "']").attr("selected", "selected");
+                        $select.attr("class", "poStatus");
+                        return $select.prop("outerHTML");
 	                },
                     "width" : "60px"
 	        	},
 	        	{
 	        		"data" : "poNo",
 	        		"render": function ( data, type, row ) {
-	        			return "<a href='<@ofbizUrl>editPo?poNo=" + data + "&pageAction=new</@ofbizUrl>' class='buttontext'>" + data + "</a>";
+	        			return "<a href='<@ofbizUrl>editPo?poNo=" + data + "&poStatus=" + row.poStatus + "&pageAction=edit</@ofbizUrl>' class='buttontext'>" + data + "</a>";
 	                },
                     "width" : "60px"
 	        	},
@@ -145,12 +136,14 @@ under the License.
                     "width" : "70px"
                 },
 	        	{
-                    "data" : "qty",
+                    "data" : "orderQty",
                     "render": function ( data, type, row ) {
                         if(row.qtyUnit == "LB") {
                             data = data / 2204.62;
+                            return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        } else {
+                            return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                         }
-                        return data;
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
@@ -158,7 +151,7 @@ under the License.
 	        	{
                     "data" : "unitPrice",
                     "render": function ( data, type, row ) {
-                        return data;
+                        return $.fn.dataTable.render.number( ',', '.', 2, '$').display(data);
                     },
                     "width" : "60px",
                     "className" : "dt-body-right"
@@ -166,24 +159,21 @@ under the License.
 	        	{
                     "data" : "amount",
                     "render": function ( data, type, row ) {
-                        return data;
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "60px",
                     "className" : "dt-body-right"
                 },
                 {
-                    "data" : "qty",
+                    "data" : "orderQtyLB",
                     "render": function ( data, type, row ) {
-                        if(row.qtyUnit == "MT") {
-                            data = data * 2204.62;
-                        }
-                        return data;
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "produced",
+                    "data" : "producedQty",
                     "render": function ( data, type, row ) {
                         return data;
                     },
@@ -241,7 +231,65 @@ under the License.
 	        		},
 	        		"visible": false
 	        	}
-	        ]
+	        ],
+	        footerCallback : function ( row, data, start, end, display ) {
+                var api = this.api(), data;
+
+                // Total over all pages
+                var orderQtyMTTotal = api
+                    .column( 11 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Total over all pages
+                var amountTotal = api
+                    .column( 13 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                var orderQtyLBTotal = api
+                    .column( 14 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                // Total over this page
+                var pageOrderQtyMTTotal = api
+                    .column( 11, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                var pageAmountTotal = api
+                    .column( 13, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+
+                var pageOrderQtyLBTotal = api
+                    .column( 14, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+                    console.log(pageOrderQtyLBTotal);
+                // Update footer
+                $( api.column( 14 ).footer() ).html(
+                    '<font color="red">Order Qty(MT) Total</font> : ' +
+                    $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyMTTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyMTTotal) + ' MT), ' +
+                    '<font color="red">Amount Total</font> : ' +
+                    $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ' MT), ' +
+                    '<font color="red">Order Qty(LB) Total</font> : ' +
+                    $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyLBTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyLBTotal) + ' MT)'
+                );
+            }
 	        /*,
             initComplete: function () {
                 this.api().column(0).every( function () {
@@ -270,6 +318,44 @@ under the License.
                 }
             });
         });*/
+
+        $("#poList").on("change", "select.poStatus",function() {
+            var rowIdx = poListTable.cell( $(this).parent() ).index().row;
+            var reqData = poListTable.rows(rowIdx).data();
+            var reqArray = new Array();
+            for(var i=0 ; reqData.length > i ; i++) {
+                var reqMap = new Object();
+                var map = reqData[i];
+                for(var key in map) {
+                    if(key == "poStatus") {
+                        reqMap[key] = $(this).val();
+                    } else {
+                        reqMap[key] = $.trim(map[key]);
+                    }
+                }
+                reqArray.push(reqMap);
+            }
+
+            jQuery.ajax({
+                url: '<@ofbizUrl>RUPoList</@ofbizUrl>',
+                type: 'POST',
+                data: {
+                    "crudMode" : "U",
+                    "reqData" : JSON.stringify(reqArray)
+                },
+                error: function(msg) {
+                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                },
+                success: function(data) {
+                    if(data.data.length > 0) {
+                        alert("PO Status Update Complete.");
+                        $("#searchBtn").click();
+                    } else {
+                        alert("PO Status Update Fail.");
+                    }
+                }
+            });
+        });
 
 		/***************************************************************************
 		 ******************			Table change Event			********************
@@ -304,7 +390,7 @@ under the License.
 	</span>
 </div>
 <div class="button-bar">
-	<a class="buttontext create" href="/uspErp/control/newPo?pageAction=new">
+	<a class="buttontext create" href="/uspErp/control/newPo?pageAction=new&poStatus=PE">
 		${uiLabelMap.newPo}
 	</a>
 </div>
@@ -418,7 +504,7 @@ under the License.
 				<th style="vertical-align: middle;">${uiLabelMap.productId}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-				<th style="vertical-align: middle;">${uiLabelMap.orderQtyMT}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.amount}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
@@ -430,26 +516,10 @@ under the License.
 		<tbody>
 		</tbody>
 		<tfoot>
-			<tr>
-				<th style="vertical-align: middle;">${uiLabelMap.poStatus}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.poNo}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.lotNo}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.shipmentMonth}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.destination}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.customer}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.productId}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.orderQtyMT}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.amount}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.produced}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.invoicedRev}</th>
-                <th style="vertical-align: middle;">${uiLabelMap.shipmentCreated}</th>
-			</tr>
+            <tr>
+                <th colspan="15" style="text-align:right"></th>
+                <th colspan="3"></th>
+            </tr>
 		</tfoot>
 	</table>
 </div>

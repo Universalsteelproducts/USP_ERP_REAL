@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
     <!-- ========================================================= -->
     <!-- ======================== Defaults ======================= -->
     <!-- ========================================================= -->
@@ -85,7 +85,7 @@
 
         <prim-key field="priceUnitId"/>
     </entity>
-
+    <!--
     <entity entity-name="DestinationCode" package-name="usperp.common" title="Destination">
         <field name="destinationId" type="id-long-ne"></field>
         <field name="destinationNm" type="id-long-ne"></field>
@@ -94,7 +94,7 @@
 
         <prim-key field="destinationId"/>
     </entity>
-
+    -->
     <entity entity-name="SteelTypeCode" package-name="usperp.common" title="Steel Type">
         <field name="steelTypeId" type="id-long-ne"></field>
         <field name="steelTypeNm" type="id-long-ne"></field>
@@ -183,15 +183,6 @@
         <field name="description" type="comment"></field>
 
         <prim-key field="thicknessId"/>
-    </entity>
-
-    <entity entity-name="PackagingCode" package-name="usperp.common" title="Packaging">
-        <field name="packagingId" type="id-long-ne"></field>
-        <field name="packagingNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
-        <field name="description" type="comment"></field>
-
-        <prim-key field="packagingId"/>
     </entity>
 
     <entity entity-name="PaintCode" package-name="usperp.common" title="Paint Code">

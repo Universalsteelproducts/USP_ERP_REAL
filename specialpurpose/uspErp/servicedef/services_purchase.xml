@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
     <description>UspErp Services</description>
     <vendor></vendor>
     <version>1.0</version>
@@ -19,7 +19,7 @@
         <attribute name="reqData" mode="IN" type="String" optional="true"/>
         <attribute name="draw" mode="INOUT" type="String" optional="true"/>
         <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
-        <attribute name="recordsFiltered" mod e="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
     </service>
 
     <service name="CRUPoList" default-entity-name="PoMaster" engine="java" auth="true"
@@ -35,4 +35,79 @@
         <attribute name="successStr" mode="OUT" type="String" optional="true"/>
     </service>
 
+    <service name="searchPo" default-entity-name="PoReference" engine="java" auth="true"
+             location="services.PurchaseServices" invoke="searchPo">
+        <attribute name="poNo" mode="IN" type="String" optional="false"/>
+        <attribute name="lotNo" mode="IN" type="String" optional="false"/>
+        <attribute name="poInfo" mode="OUT" type="java.util.Map"/>
+        <attribute name="resultState" mode="OUT" type="String" optional="false"/>
+    </service>
+
+    <service name="fullfillmentList" default-entity-name="PoSubtotal" engine="java" auth="true"
+             location="services.PurchaseServices" invoke="fullfillmentList">
+        <attribute name="poNo" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="reqData" mode="IN" type="String" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="successStr" mode="OUT" type="String" optional="true"/>
+    </service>
+
+    <service name="createNupdateShippingDoc" engine="simple"
+             location="component://purchase/minilang/shippingdocmanage/ShippingDocManageServices.xml" invoke="UploadShippingDoc" auth="true">
+        <description>Multiple upload Images For Product</description>
+        <attribute name="poNo" type="String" mode="INOUT" optional="false"/>
+        <attribute name="lotNo" type="String" mode="INOUT" optional="false"/>
+        <attribute name="docClass" type="String" mode="IN" optional="true"/>
+        <attribute name="blDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_blDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_blDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="blDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="vessel" type="String" mode="IN" optional="true"/>
+        <attribute name="blNo" type="String" mode="IN" optional="true"/>
+        <attribute name="blDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="portOfLoading" type="String" mode="IN" optional="true"/>
+        <attribute name="shippingCarrier" type="String" mode="IN" optional="true"/>
+        <attribute name="ciDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_ciDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_ciDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="ciDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="contractNo" type="String" mode="IN" optional="true"/>
+        <attribute name="unitCost" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="civAmount" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="packingListDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_packingListDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_packingListDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="plDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="loadedQty" type="Integer" mode="IN" optional="true"/>
+        <attribute name="weight" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="linealFeet" type="String" mode="IN" optional="true"/>
+        <attribute name="coilQty" type="Integer" mode="IN" optional="true"/>
+        <attribute name="yield" type="String" mode="IN" optional="true"/>
+        <attribute name="weightListDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_weightListDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_weightListDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="wlDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="mtcDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_mtcDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_mtcDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="mtcDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="mtcVerified" type="String" mode="IN" optional="true"/>
+        <attribute name="shipmentAdviceDocFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_shipmentAdviceDocFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_shipmentAdviceDocFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="shipmentAdviceDocFileYN" type="String" mode="IN" optional="true"/>
+        <attribute name="shippingAgent" type="String" mode="IN" optional="true"/>
+        <attribute name="email" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="multipleUploadShippingDoc" default-entity-name="PoReference" engine="java"
+             location="services.PurchaseServices" invoke="multipleUploadShippingDoc" auth="true">
+        <implements service="uploadFileInterface"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute mode="INOUT" name="poNo" optional="false" type="String"/>
+        <attribute mode="INOUT" name="lotNo" optional="false" type="String"/>
+        <attribute mode="IN" name="docClass" optional="true" type="String"/>
+    </service>
+    
 </services>

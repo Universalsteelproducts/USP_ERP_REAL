@@ -13,6 +13,7 @@
     <include location="component://uspErp/webapp/uspErp/WEB-INF/controller_accounting.xml"/>
     <include location="component://uspErp/webapp/uspErp/WEB-INF/controller_report.xml"/>
     <include location="component://uspErp/webapp/uspErp/WEB-INF/controller_admin.xml"/>
+    <include location="component://uspErp/webapp/uspErp/WEB-INF/controller_lookup.xml"/>
 
     <description>UspErp Component Site Configuration File</description>
 
@@ -23,5 +24,5 @@
     </request-map>
     
     <!-- View Mappings -->
-    <view-map name="main" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#orderMain"/>
+    <view-map name="main" type="screen" page="component://uspErp/widget/purchase/PurchaseScreens.xml#schPoList"/>
 </site-conf>

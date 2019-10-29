@@ -86,7 +86,7 @@
         <field name="lastUpdateDate" title="${uiLabelMap.lastUpdatedStamp}" sort-field="true"><display/></field>
     </form>
 
-    <form name="PoInfo" type="single" target="shippingDocManage" default-entity-name="Reference">
+    <form name="PoInfo" type="single" target="shippingDocManage" default-entity-name="PoReference">
 	    <field name="poNo" title="${uiLabelMap.poNo}" position="1">
 	    	<lookup target-form-name="LookupPo"/>
 	    </field>
@@ -96,7 +96,7 @@
 	    <field name="submitButton"><submit/></field>
 	</form>
 
-	<form name="BLDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	<form name="BLDoc" type="single" target="shippingDocManage" default-entity-name="PoReference">
     	<field name="blFile" position="1"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
 	    <field name="vessel" title="${uiLabelMap.vessel}" position="1">
@@ -117,7 +117,7 @@
 	    <field name="submitButton"><submit/></field>
 	</form>
 
-	<form name="CommercialInvoiceDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	<form name="CommercialInvoiceDoc" type="single" target="shippingDocManage" default-entity-name="PoReference">
 	    <field name="commercialInvoiceFile" position="1"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
 	    <field name="contractNo" title="${uiLabelMap.contractNo}" position="1">
@@ -132,7 +132,7 @@
 	    <field name="submitButton"><submit/></field>
 	</form>
 
-	<form name="PackingListDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	<form name="PackingListDoc" type="single" target="shippingDocManage" default-entity-name="PoReference">
 	    <field name="packingListFile" position="1"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
 	    <field name="loadedQty" title="${uiLabelMap.loadedQty}" position="1">
@@ -153,13 +153,13 @@
 	    <field name="submitButton"><submit/></field>
 	</form>
 
-	<form name="WeightListDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	<form name="WeightListDoc" type="single" target="shippingDocManage" default-entity-name="PoReference">
 	    <field name="weightListFile" position="1" widget-area-style="fieldWidth100"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" widget-area-style="fieldWidth100" position="2"><check /></field>
     	<field name="submitButton" position="1"><submit/></field>
 	</form>
 
-	<form name="MTCDoc" type="single" target="FindPoList" default-entity-name="Reference">
+	<form name="MTCDoc" type="single" target="FindPoList" default-entity-name="PoReference">
 	    <field name="mtcFile" title="${uiLabelMap.mtcFile}" position="1"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
 	    <field name="mtcVerified" title="${uiLabelMap.mtcVerified}" position="1">
@@ -168,7 +168,7 @@
 	    <field name="submitButton"><submit/></field>
 	</form>
 
-	<form name="ShipmentAdviceDoc" type="single" target="shippingDocManage" default-entity-name="Reference">
+	<form name="ShipmentAdviceDoc" type="single" target="shippingDocManage" default-entity-name="PoReference">
 	    <field name="shipmentAdviceFile" title="${uiLabelMap.shipmentAdviceFile}" position="1"><file/></field>
     	<field name="" tooltip="${uiLabelMap.na}" tooltip-style="button-text" position="2"><check /></field>
 	    <field name="shppingAgent" title="${uiLabelMap.shppingAgent}" position="1">

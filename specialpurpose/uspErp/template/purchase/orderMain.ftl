@@ -1,8 +1,4 @@
 <#--
-	total / orderquantity control 다시
-	function 들 공통화 작업
--->
-<#--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
 distributed with this work for additional information
@@ -67,7 +63,7 @@ under the License.
 	            },
 	            {
 	                "render": function ( data, type, row ) {
-	                    return "<a href='<@ofbizUrl>EditPo?poNo=" + data + "</@ofbizUrl>' class='buttontext'>" + data + "</a>";
+	                    return "<a href='<@ofbizUrl>editPo?poNo=" + data + "&pageAction=edit</@ofbizUrl>' class='buttontext'>" + data + "</a>";
 	                },
 	                "targets": 1
 	            },
@@ -152,10 +148,7 @@ under the License.
 			<th style="vertical-align: middle;">${uiLabelMap.poStatus}</th>
 			<th style="vertical-align: middle;">${uiLabelMap.poNo}</th>
 			<th style="vertical-align: middle;">${uiLabelMap.lotNo}</th>
-			<th style="vertical-align: middle;">${uiLabelMap.etd}</th>
-			<th style="vertical-align: middle;">${uiLabelMap.eta}</th>
-			<th style="vertical-align: middle;">${uiLabelMap.vessel}</th>
-			<th style="vertical-align: middle;">${uiLabelMap.port}</th>
+			<th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
 			<th style="vertical-align: middle;">${uiLabelMap.steelType}</th>
 			<th style="vertical-align: middle;">${uiLabelMap.grade}</th>
 			<th style="vertical-align: middle;">${uiLabelMap.coatingWeight}</th>
@@ -200,16 +193,7 @@ under the License.
 				${lotInfo.lotNo!}
 			</td>
 			<td>
-				${lotInfo.etd!}
-			</td>
-			<td>
-				${lotInfo.eta!}
-			</td>
-			<td>
-				${lotInfo.vessel!}
-			</td>
-			<td>
-				${lotInfo.port!}
+				${lotInfo.fobPoint!}
 			</td>
 			<td>
 				<#if codeList??>

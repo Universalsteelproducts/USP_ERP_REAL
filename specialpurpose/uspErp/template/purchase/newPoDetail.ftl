@@ -59,6 +59,24 @@ under the License.
 	            },
 	            {
 					"data" : "productId",
+					"render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        var $select = $("<select></select>", {
+                            "id" : "productId",
+                            "value" : data
+                        });
+                        var $option = "<option value=''></option>";
+                    <#if productTmp??>
+                        <#list productTmp as productTmpInfo>
+                        $option += "<option value='${productTmpInfo.productId!}'>${productTmpInfo.productNm!}</option>";
+                        </#list>
+                    </#if>
+
+                        $select.append($option);
+                        $select.find("[value='" + data + "']").attr("selected", "selected");
+                        $select.attr("class", "productId");
+                        return $select.prop("outerHTML");
+                    },
 	  				"width" : "200px",
 	  				"className" : "align-middle"
 	            },
@@ -67,16 +85,16 @@ under the License.
 	  				"width" : "100px"
 	            },
 	            {
-	            	"data" : "thickness",
+	            	"data" : "orderThickness",
 	                "render": function ( data, type, row ) {
-	                	return "<input type='text' name='thickness' id='thickness' value='" + data + "' />";
+	                	return "<input type='text' name='orderThickness' id='orderThickness' value='" + data + "' />";
 					},
 	  				"width" : "150px"
 	            },
 	            {
-	            	"data" : "width",
+	            	"data" : "orderWidth",
 	            	"render": function ( data, type, row ) {
-		            	return "<input type='text' name='width' id='width' value='" + data + "' />";
+		            	return "<input type='text' name='orderWidth' id='orderWidth' value='" + data + "' />";
 	            	},
 	  				"width" : "50px"
 	            },
@@ -103,7 +121,7 @@ under the License.
 	  				"width" : "60px"
 	            },
 	            {
-                    "data" : "qty",
+                    "data" : "orderQty",
                     "width" : "60px"
                 },
                 {
@@ -168,7 +186,7 @@ under the License.
                     "visible": false
                 },
                 {
-                    "data" : "coilMaxWeight",
+                    "data" : "maxWeight",
                     "visible": false
                 },
                 {
@@ -216,7 +234,7 @@ under the License.
                     "visible": false
                 },
                 {
-                    "data" : "qty",
+                    "data" : "orderQty",
                     "visible": false
                 },
                 {
@@ -224,7 +242,7 @@ under the License.
                     "visible": false
                 },
                 {
-                    "data" : "surfaceCoilType",
+                    "data" : "surfaceType",
                     "visible": false
                 },
                 {
@@ -235,6 +253,10 @@ under the License.
                     "data" : "amountUnit",
                     "visible": false
                 },
+                {
+                    "data" : "orderQtyLB",
+                    "visible": false
+                }
 			],
 			rowCallback : function( row, data, displayNum, displayIndex, dataIndex ) {
 
@@ -244,14 +266,6 @@ under the License.
 			},
 			footerCallback : function ( row, data, start, end, display ) {
                 var api = this.api(), data;
-
-                // Remove the formatting to get integer data for summation
-                var intVal = function ( i ) {
-                    return typeof i === 'string' ?
-                        i.replace(/[\$,]/g, '')*1 :
-                        typeof i === 'number' ?
-                            i : 0;
-                };
 
                 // Total over all pages
                 var weightTotal = api
@@ -344,19 +358,19 @@ under the License.
             paintColArry.push("paintName");
             paintColArry.push("paintType");
             var schPaint = "<@ofbizUrl>/schPaint</@ofbizUrl>";
-	        setLookupVal($(this).val(), schPaint, paintColArry);
+	        setLookupVal("paintCode", $(this).val(), schPaint, paintColArry);
 	    });
 
-	    $("#unitPrice,#qty").on("change, keyup", function(event) {
+	    $("#unitPrice,#orderQty").on("change, keyup", function(event) {
 	        $(this).objectFormat({format : "float"});
 	        var elementId = $(this).prop("id");
             if(elementId == "unitPrice") {
-                var qty = Number($("#qty").val()) >= 0 ? Number($("#qty").val()) : 0;
+                var qty = Number($("#orderQty").val()) >= 0 ? Number($("#orderQty").val()) : 0;
                 var curVal = parseFloat($(this).val());
                 var amount = qty * curVal;
 
                 $("#amount").val(amount);
-            } else if(elementId == "qty") {
+            } else if(elementId == "orderQty") {
                 var unitPrice = parseFloat($("#unitPrice").val()) >= 0 ? parseFloat($("#unitPrice").val()) : 0;
                 var curVal = parseFloat($(this).val());
                 var amount = unitPrice * curVal;
@@ -374,7 +388,9 @@ under the License.
             $("#priceUnit").val($(this).val());
             $("#priceUnitText").val($("#priceUnit option:selected").text());
             $("#amountUnit").val($(this).val());
+            $("#commissionPriceUnit").val($(this).val());
         });
+
 	    /***************************************************************************
 	     ******************				Button Control			********************
 	     ***************************************************************************/
@@ -429,22 +445,23 @@ under the License.
             rowMap = addToOrder("productAttr", rowMap);
             rowMap = addToOrder("itemInfo", rowMap);
 
+            rowMap["referenceNo"] = $("#poNo").val() + $("#lotNo").val() + "00";
+            if($("#paintCode").val() == "") {
+                rowMap["paintCode"] = "";
+            }
+            if($("#paintName").val() == "") {
+                rowMap["paintName"] = "";
+            }
+
+            var orderQtyLB = 0;
+            if($("#qtyUnit").val() == "MT") {
+                orderQtyLB = Number(rowMap["orderQty"]) * 2204.62;
+            } else if($("#qtyUnit").val() == "LB") {
+                orderQtyLB = Number(rowMap["orderQty"]);
+            }
+            rowMap["orderQtyLB"] = orderQtyLB;
+
             poListTable.row.add(rowMap).columns.adjust().draw();
-
-            var index = 0,
-            rowCount = poListTable.data().length-1,
-            insertedRow = poListTable.row(rowCount).data(),
-            tempRow;
-
-            /*for (var i=rowCount;i>index;i--) {
-                tempRow = poListTable.row(i-1).data();
-                poListTable.row(i).data(tempRow);
-                poListTable.row(i-1).data(insertedRow);
-            }*/
-            //refresh the page
-            //poListTable.page(0).draw(false);
-
-            //totalPriceNQuantity(poListTable, "totalQuantity", "totalPoAmount");
         });
 
         $("#submitBtn").on("click", function() {
@@ -463,8 +480,8 @@ under the License.
                     if(data.successStr == "success") {
                         alert("PO Create Completed");
 
-                        /*$("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "</@ofbizUrl>");
-                        $("#pageMoveForm").submit();*/
+                        $("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "&pageAction=edit&poStatus=PE</@ofbizUrl>");
+                        $("#pageMoveForm").submit();
                     } else {
                         alert("PO Create Fail");
                     }
@@ -490,7 +507,7 @@ under the License.
         });
 	});
 </script>
-
+<#if pageAction == "new">
 <!-- LOT Info -->
 <div class="screenlet">
 	<div class="screenlet-title-bar">
@@ -533,6 +550,20 @@ under the License.
 			</tr>
 			<tr>
                 <td class="label" width="12%" align="right">
+                    ${uiLabelMap.destination}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="20%">
+                    <select name="destination" id="destination" style="min-width:60px">
+                        <option value="">--Select</option>
+                    <#if destinationTmp??>
+                        <#list destinationTmp as destinationTmpInfo>
+                        <option value="${destinationTmpInfo.destinationId!}">${destinationTmpInfo.destinationNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+                <td class="label" width="12%" align="right">
                     ${uiLabelMap.exw}
                 </td>
                 <td width="1%">&nbsp;</td>
@@ -556,20 +587,6 @@ under the License.
                     <#if fobPointTmp??>
                         <#list fobPointTmp as fobPointTmpInfo>
                         <option value="${fobPointTmpInfo.fobPointId!}">${fobPointTmpInfo.fobPointNm!}</option>
-                        </#list>
-                    </#if>
-                    </select>
-                </td>
-                <td class="label" width="12%" align="right">
-                    ${uiLabelMap.destination}
-                </td>
-                <td width="1%">&nbsp;</td>
-                <td width="20%">
-                    <select name="destination" id="destination" style="min-width:60px">
-                        <option value="">--Select</option>
-                    <#if destinationTmp??>
-                        <#list destinationTmp as destinationTmpInfo>
-                        <option value="${destinationTmpInfo.destinationId!}">${destinationTmpInfo.destinationNm!}</option>
                         </#list>
                     </#if>
                     </select>
@@ -607,7 +624,7 @@ under the License.
                 <td width="20%">
                     <!-- set_multivalues -->
                     <form name="salesOrderForm" id="salesOrderForm" method="post">
-                        <@htmlTemplate.lookupField value="${poCommonInfo.salesOrderNum!}" formName="salesOrderForm" name="soNo" id="soNo" fieldFormName="LookupSalesOrder" position="center" />
+                        <@htmlTemplate.lookupField value="" formName="salesOrderForm" name="soNo" id="soNo" fieldFormName="LookupSalesOrder" position="center" />
                     </form>
                 </td>
             </tr>
@@ -674,11 +691,11 @@ under the License.
                     </select>
                 </td>
                 <td class="label" width="12%" align="right">
-                    ${uiLabelMap.coilMaxWeight}
+                    ${uiLabelMap.thickness}
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="35%">
-                    <input type="text" name="coilMaxWeight" id="coilMaxWeight" value="" size="25" maxlength="255"/>
+                    <input type="text" name="orderThickness" id="orderThickness" value="" size="25" maxlength="255"/>
                 </td>
             </tr>
             <tr>
@@ -687,11 +704,57 @@ under the License.
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="35%">
-                    <select name="surfaceCoilType" id="surfaceCoilType" style="min-width:60px">
+                    <select name="surfaceType" id="surfaceType" style="min-width:60px">
                         <option value="">--Select</option>
                     <#if surfaceType??>
                         <#list surfaceType as surfaceTypeInfo>
                         <option value="${surfaceTypeInfo.surfaceTypeId!}">${surfaceTypeInfo.surfaceTypeNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.width}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="35%">
+                    <input type="text" name="orderWidth" id="orderWidth" value="" size="25" maxlength="255"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.grade}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="35%">
+                    <select name="grade" id="grade" style="min-width:60px">
+                        <option value="">--Select</option>
+                    <#if grade??>
+                        <#list grade as gradeInfo>
+                        <option value="${gradeInfo.gradeId!}">${gradeInfo.gradeNm!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+                </td>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.coilMaxWeight}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="35%">
+                    <input type="text" name="maxWeight" id="maxWeight" value="" size="25" maxlength="255"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="label" width="12%" align="right">
+                    ${uiLabelMap.coatingWeight}
+                </td>
+                <td width="1%">&nbsp;</td>
+                <td width="35%">
+                    <select name="coatingWeight" id="coatingWeight" style="min-width:60px">
+                        <option value="">--Select</option>
+                    <#if coatingWeight??>
+                        <#list coatingWeight as coatingWeightInfo>
+                        <option value="${coatingWeightInfo.coatingWeightId!}">${coatingWeightInfo.coatingWeightNm!}</option>
                         </#list>
                     </#if>
                     </select>
@@ -713,41 +776,11 @@ under the License.
             </tr>
             <tr>
                 <td class="label" width="12%" align="right">
-                    ${uiLabelMap.grade}
-                </td>
-                <td width="1%">&nbsp;</td>
-                <td width="35%">
-                    <select name="grade" id="grade" style="min-width:60px">
-                        <option value="">--Select</option>
-                    <#if grade??>
-                        <#list grade as gradeInfo>
-                        <option value="${gradeInfo.gradeId!}">${gradeInfo.gradeNm!}</option>
-                        </#list>
-                    </#if>
-                    </select>
-                </td>
-                <td class="label" width="12%" align="right">
                     ${uiLabelMap.coilId}
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="35%">
                     <input type="text" name="innerDiameter" id="innerDiameter" value="" size="25" maxlength="255"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="label" width="12%" align="right">
-                    ${uiLabelMap.coatingWeight}
-                </td>
-                <td width="1%">&nbsp;</td>
-                <td width="35%">
-                    <select name="coatingWeight" id="coatingWeight" style="min-width:60px">
-                        <option value="">--Select</option>
-                    <#if coatingWeight??>
-                        <#list coatingWeight as coatingWeightInfo>
-                        <option value="${coatingWeightInfo.coatingWeightId!}">${coatingWeightInfo.coatingWeightNm!}</option>
-                        </#list>
-                    </#if>
-                    </select>
                 </td>
                 <td class="label" width="12%" align="right">
                     ${uiLabelMap.gaugeControlYield}
@@ -755,22 +788,6 @@ under the License.
                 <td width="1%">&nbsp;</td>
                 <td width="35%">
                     <input type="text" name="gaugeControlYield" id="gaugeControlYield" size="25" value="" maxlength="255"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="label" width="12%" align="right">
-                    ${uiLabelMap.thickness}
-                </td>
-                <td width="1%">&nbsp;</td>
-                <td width="35%">
-                    <input type="text" name="thickness" id="thickness" value="" size="25" maxlength="255"/>
-                </td>
-                <td class="label" width="12%" align="right">
-                    ${uiLabelMap.width}
-                </td>
-                <td width="1%">&nbsp;</td>
-                <td width="35%">
-                    <input type="text" name="width" id="width" value="" size="25" maxlength="255"/>
                 </td>
             </tr>
         </table>
@@ -789,15 +806,6 @@ under the License.
         </div>
         <div class="screenlet-body no-padding">
             <table class="basic-table" cellspacing="0" id="productAttr">
-                <tr>
-                    <td class="label" width="15%" align="right">
-                        ${uiLabelMap.itemId}
-                    </td>
-                    <td width="1%">&nbsp;</td>
-                    <td width="34%" colspan="4">
-                        <input type="text" name="itemId" id="itemId"  maxlength="255"/>
-                    </td>
-                </tr>
                 <tr>
                     <td class="label" width="15%" align="right">
                         ${uiLabelMap.paintCode}
@@ -832,6 +840,15 @@ under the License.
                         <input type="text" name="paintType" id="paintType" disabled="disabled" maxlength="255"/>
                     </td>
                 </tr>
+                <tr>
+                    <td class="label" width="15%" align="right">
+                        ${uiLabelMap.itemId}
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                    <td width="34%" colspan="4">
+                        <input type="text" name="itemId" id="itemId"  maxlength="255"/>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -854,7 +871,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="qty" id="qty" size="16" maxlength="255" style="text-align:right;" />
+                        <input type="text" name="orderQty" id="orderQty" size="16" maxlength="255" style="text-align:right;" />
                         <select name="qtyUnit" id="qtyUnit" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">MT</option>
@@ -866,7 +883,12 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="commissionPrice" id="commissionPrice"  maxlength="255"/>
+                        <input type="text" name="commissionPrice" id="commissionPrice" size="16" maxlength="255"/>
+                        <select name="commissionPriceUnit" id="commissionPriceUnit" disabled="disabled" style="width:45px;">
+                            <option value=""></option>
+                            <option value="MT">$/MT</option>
+                            <option value="LB">$/LB</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>
@@ -907,6 +929,7 @@ under the License.
 </div>
 <div class="clear">
 </div>
+</#if>
 <div class="screenlet">
 	<form name="lotInfo" id="lotInfo" method="post">
 		<table class="display cell-border stripe" id="lotColoList" name="lotColoList">
@@ -944,7 +967,9 @@ under the License.
 <div>
 	<ul>
 	    <input id="moveListBtn" type="button" value="${uiLabelMap.list}" class="buttontext"/>
+	<#if pageAction == "new">
 		<input id="submitBtn" type="button" value="${uiLabelMap.savePo}" class="buttontext"/>
+	</#if>
 	</ul>
 </div>
 

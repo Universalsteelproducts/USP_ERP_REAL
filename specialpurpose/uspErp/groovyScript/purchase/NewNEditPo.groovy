@@ -19,11 +19,12 @@
 import org.apache.ofbiz.base.util.UtilDateTime
 import org.apache.ofbiz.entity.GenericValue
 import java.text.SimpleDateFormat
+import org.apache.ofbiz.entity.model.DynamicViewEntity
 
 poCommonInfo = [:]
 lotList = []
+poSubtotal = []
 
-poNo = parameters.poNo
 crudMode = "INIT"
 nowTs = UtilDateTime.nowTimestamp()
 poCommonInfo.put("orderDate", nowTs)
@@ -31,8 +32,10 @@ poCommonInfo.put("orderDate", nowTs)
 poStatus = from("PoStatusCode").orderBy("sortSeq").queryList()
 purchaseClass = from("PurchaseClassCode").orderBy("sortSeq").queryList()
 
-priceTerm = from("TermType").where("parentTypeId", "INCO_TERM").queryList()
-paymentTerm = from("TermType").where("parentTypeId", "PAYMENT").queryList()
+//priceTerm = from("TermType").where("parentTypeId", "INCO_TERM").queryList()
+priceTerm = from("PriceTermCode").orderBy("sortSeq").queryList()
+//paymentTerm = from("TermType").where("parentTypeId", "PAYMENT").queryList()
+paymentTerm = from("PaymentTermCode").orderBy("sortSeq").queryList()
 paymentMethodType = from("PaymentMethodType").queryList()
 
 productTmp = from("ProductTmp").orderBy("sortSeq").queryList()
@@ -43,17 +46,32 @@ steelType = from("SteelTypeCode").orderBy("sortSeq").queryList()
 grade = from("GradeCode").orderBy("sortSeq").queryList()
 coatingWeight = from("CoatingWeightCode").orderBy("sortSeq").queryList()
 surfaceType = from("SurfaceTypeCode").orderBy("sortSeq").queryList()
-thickness = from("ThicknessCode").orderBy("sortSeq").queryList()
+thickness = [] //from("ThicknessCode").orderBy("sortSeq").queryList()
 
 exw = from("ExwCode").orderBy("sortSeq").queryList()
 purchaseAgent = from("PurchaseAgentCode").orderBy("sortSeq").queryList()
 coilMaxWeight = from("CoilMaxWeightCode").orderBy("sortSeq").queryList()
 packaging = from("PackagingCode").orderBy("sortSeq").queryList()
 
+poNo = parameters.poNo
+pageAction = "new"
+if(poNo != null && poNo != "") {
+    shippingLine = from("ShippingLineTmp").orderBy("sortSeq").queryList()
+    shippingAgent = from("ShippingAgentTmp").orderBy("sortSeq").queryList()
+    context.shippingLine = shippingLine
+    context.shippingAgent = shippingAgent
+
+    pageAction = "edit"
+    crudMode = "R"
+    poCommonInfo = from("PoMaster").where("poNo", poNo).queryOne()
+    context.poStatus = parameters.poStatus
+}
+
+context.pageAction = pageAction
 context.poCommonInfo = poCommonInfo
 context.crudMode =  crudMode
 context.lotList =  lotList
-context.poStatus =  poStatus
+context.poStatusList =  poStatus
 context.purchaseClass =  purchaseClass
 
 context.priceTerm =  priceTerm

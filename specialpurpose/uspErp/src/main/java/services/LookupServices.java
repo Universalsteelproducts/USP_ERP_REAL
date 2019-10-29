@@ -81,25 +81,25 @@ public class LookupServices {
     }
 
     public static Map<String, Object> schCustomer(DispatchContext dctx, Map<String, ?> context) {
-        Delegator delegator = dctx.getDelegator();
+    	Delegator delegator = dctx.getDelegator();
         Map<String, Object> result = ServiceUtil.returnSuccess();
 
         try {
             // Check if the country is a country group and get recursively the
             // states
-            Map<String, Object> customerInfo = new HashMap<String, Object>();
-            customerInfo = EntityQuery.use(delegator)
-                    .from("Customer")
-                    .where("customerId", context.get("customerId"))
-                    .queryOne();
-            if(customerInfo == null) {
-                customerInfo = new HashMap<String, Object>();
-                result.put("returnDataInfo", customerInfo);
-                result.put("resultState", "fail");
-            } else {
-                result.put("returnDataInfo", customerInfo);
-                result.put("resultState", "success");
-            }
+        	Map<String, Object> customerInfo = new HashMap<String, Object>();
+        	customerInfo = EntityQuery.use(delegator)
+		               .from("Customer")
+		               .where("customerId", context.get("customerId"))
+		               .queryOne();
+        	if(customerInfo == null) {
+        		customerInfo = new HashMap<String, Object>();
+        		result.put("returnDataInfo", customerInfo);
+        		result.put("resultState", "fail");
+        	} else {
+        		result.put("returnDataInfo", customerInfo);
+        		result.put("resultState", "success");
+        	}
 
         } catch (GenericEntityException e){
             Debug.logError(e, "Cannot lookup Customer ", module);
@@ -137,24 +137,24 @@ public class LookupServices {
     }
 
     public static Map<String, Object> schPo(DispatchContext dctx, Map<String, ?> context) {
-        Delegator delegator = dctx.getDelegator();
+    	Delegator delegator = dctx.getDelegator();
         Map<String, Object> result = ServiceUtil.returnSuccess();
 
         try {
             // Check if the country is a country group and get recursively the
             // states
-            List<GenericValue> poMasterList = EntityQuery.use(delegator)
-                    .from("Reference")
-                    .where("poNo", context.get("poNo"), "lotNo", context.get("lotNo"))
-                    .queryList();
-            if(poMasterList == null) {
-                poMasterList.clear();
-                result.put("returnDataInfo", poMasterList);
-                result.put("resultState", "fail");
-            } else {
-                result.put("returnDataInfo", poMasterList);
-                result.put("resultState", "success");
-            }
+        	List<GenericValue> poMasterList = EntityQuery.use(delegator)
+		               .from("Reference")
+		               .where("poNo", context.get("poNo"), "lotNo", context.get("lotNo"))
+		               .queryList();
+        	if(poMasterList == null) {
+        		poMasterList.clear();
+        		result.put("returnDataInfo", poMasterList);
+        		result.put("resultState", "fail");
+        	} else {
+        		result.put("returnDataInfo", poMasterList);
+        		result.put("resultState", "success");
+        	}
 
         } catch (GenericEntityException e){
             Debug.logError(e, "Cannot lookup PoMaste ", module);
@@ -164,7 +164,7 @@ public class LookupServices {
     }
 
     public static Map<String, Object> multipleUploadShippingDoc(DispatchContext dctx, Map<String, ? extends Object> context)
-            throws IOException, JDOMException {
+    throws IOException, JDOMException {
 
         Map<String, Object> result = new HashMap<String, Object>();
         LocalDispatcher dispatcher = dctx.getDispatcher();
@@ -239,81 +239,81 @@ public class LookupServices {
         }
 
         try {
-            List<GenericValue> referenceInfoList = EntityQuery.use(delegator)
-                    .from("Reference")
-                    .where(
-                            "poNo", poNo,
-                            "lotNo", lotNo
-                    ).queryList();
+        	List<GenericValue> referenceInfoList = EntityQuery.use(delegator)
+	    		.from("Reference")
+	    		.where(
+	    			"poNo", poNo,
+	    			"lotNo", lotNo
+    		).queryList();
 
-            if(referenceInfoList.size() > 0) {
-                for(GenericValue referenceInfo : referenceInfoList) {
-                    referenceInfo.put("lastUpdateUserId", userLogin.get("userLoginId"));
-                    referenceInfo.put("lastUpdatedStamp", UtilDateTime.nowTimestamp());
-                    referenceInfo.put("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
+        	if(referenceInfoList.size() > 0) {
+        		for(GenericValue referenceInfo : referenceInfoList) {
+        			referenceInfo.put("lastUpdateUserId", userLogin.get("userLoginId"));
+        			referenceInfo.put("lastUpdatedStamp", UtilDateTime.nowTimestamp());
+        			referenceInfo.put("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
 
-                    String docClass = (String) context.get("docClass");
-                    docClass = docClass.trim();
-                    if("BL".equals(docClass)) {
-                        String blDocFileYN = (String)context.get("blDocFileYN") == null ? "" : (String)context.get("blDocFileYN");
-                        String vessel = (String)context.get("vessel") == null ? "" : (String)context.get("vessel");
-                        String blNo = (String)context.get("blNo") == null ? "" : (String)context.get("blNo");
-                        String portOfLoading = (String)context.get("portOfLoading") == null ? "" : (String)context.get("portOfLoading");
-                        String shippingCarrier = (String)context.get("shippingCarrier") == null ? "" : (String)context.get("shippingCarrier");
+        			String docClass = (String) context.get("docClass");
+        			docClass = docClass.trim();
+        			if("BL".equals(docClass)) {
+        				String blDocFileYN = (String)context.get("blDocFileYN") == null ? "" : (String)context.get("blDocFileYN");
+        				String vessel = (String)context.get("vessel") == null ? "" : (String)context.get("vessel");
+        				String blNo = (String)context.get("blNo") == null ? "" : (String)context.get("blNo");
+        				String portOfLoading = (String)context.get("portOfLoading") == null ? "" : (String)context.get("portOfLoading");
+        				String shippingCarrier = (String)context.get("shippingCarrier") == null ? "" : (String)context.get("shippingCarrier");
 
-                        referenceInfo.put("blDocFileYN", context.get("blDocFileYN"));
-                        referenceInfo.put("blDocFilePath", pdfUrl);
-                        referenceInfo.put("vessel", context.get("vessel"));
-                        referenceInfo.put("blNo", context.get("blNo"));
-                        if(context.get("blDate") != null) {
-                            referenceInfo.put("blDate", context.get("blDate"));
-                        }
-                        referenceInfo.put("portOfLoading", portOfLoading);
-                        referenceInfo.put("shippingCarrier", shippingCarrier);
-                    } else if("CI".equals(docClass)) {
-                        String ciDocFileYN = (String)context.get("ciDocFileYN") == null ? "" : (String)context.get("ciDocFileYN");
-                        String contractNo = (String)context.get("contractNo") == null ? "" : (String)context.get("contractNo");
-                        String unitCost = (String)context.get("unitCost") == null ? "" : (String)context.get("unitCost");
-                        String civAmount = (String)context.get("civAmount") == null ? "" : (String)context.get("civAmount");
+        				referenceInfo.put("blDocFileYN", context.get("blDocFileYN"));
+        				referenceInfo.put("blDocFilePath", pdfUrl);
+        				referenceInfo.put("vessel", context.get("vessel"));
+        				referenceInfo.put("blNo", context.get("blNo"));
+        				if(context.get("blDate") != null) {
+        					referenceInfo.put("blDate", context.get("blDate"));
+        				}
+        				referenceInfo.put("portOfLoading", portOfLoading);
+        				referenceInfo.put("shippingCarrier", shippingCarrier);
+        			} else if("CI".equals(docClass)) {
+        				String ciDocFileYN = (String)context.get("ciDocFileYN") == null ? "" : (String)context.get("ciDocFileYN");
+        				String contractNo = (String)context.get("contractNo") == null ? "" : (String)context.get("contractNo");
+        				String unitCost = (String)context.get("unitCost") == null ? "" : (String)context.get("unitCost");
+        				String civAmount = (String)context.get("civAmount") == null ? "" : (String)context.get("civAmount");
 
-                        referenceInfo.put("ciDocFileYN", ciDocFileYN);
-                        referenceInfo.put("ciDocFilePath", pdfUrl);
-                        referenceInfo.put("contractNo", context.get("contractNo"));
-                        referenceInfo.put("unitCost", context.get("unitCost"));
-                        referenceInfo.put("civAmount", context.get("civAmount"));
-                    } else if("PL".equals(docClass)) {
-
-
-                        referenceInfo.put("plDocFileYN", context.get("plDocFileYN"));
-                        referenceInfo.put("plDocFilePath", pdfUrl);
-                        referenceInfo.put("loadedQty", context.get("loadedQty"));
-                        referenceInfo.put("weight", context.get("weight"));
-                        referenceInfo.put("linealFeet", context.get("linealFeet"));
-                        referenceInfo.put("coilQty", context.get("coilQty"));
-                        referenceInfo.put("yield", context.get("yield"));
-                    } else if("WL".equals(docClass)) {
+        				referenceInfo.put("ciDocFileYN", ciDocFileYN);
+        				referenceInfo.put("ciDocFilePath", pdfUrl);
+        				referenceInfo.put("contractNo", context.get("contractNo"));
+        				referenceInfo.put("unitCost", context.get("unitCost"));
+        				referenceInfo.put("civAmount", context.get("civAmount"));
+        			} else if("PL".equals(docClass)) {
 
 
-                        referenceInfo.put("wlDocFileYN", context.get("wlDocFileYN"));
-                        referenceInfo.put("wlDocFilePath", pdfUrl);
-                    } else if("MTC".equals(docClass)) {
+        				referenceInfo.put("plDocFileYN", context.get("plDocFileYN"));
+        				referenceInfo.put("plDocFilePath", pdfUrl);
+        				referenceInfo.put("loadedQty", context.get("loadedQty"));
+        				referenceInfo.put("weight", context.get("weight"));
+        				referenceInfo.put("linealFeet", context.get("linealFeet"));
+        				referenceInfo.put("coilQty", context.get("coilQty"));
+        				referenceInfo.put("yield", context.get("yield"));
+        			} else if("WL".equals(docClass)) {
 
 
-                        referenceInfo.put("mtcDocFileYN", context.get("mtcDocFileYN"));
-                        referenceInfo.put("mtcDocFilePath", pdfUrl);
-                        referenceInfo.put("mtcVerified", context.get("mtcVerified"));
-                    } else if("SA".equals(docClass)) {
+        				referenceInfo.put("wlDocFileYN", context.get("wlDocFileYN"));
+        				referenceInfo.put("wlDocFilePath", pdfUrl);
+        			} else if("MTC".equals(docClass)) {
 
 
-                        referenceInfo.put("shipmentAdviceDocFileYN", context.get("shipmentAdviceDocFileYN"));
-                        referenceInfo.put("shipmentAdviceDocFilePath", pdfUrl);
-                        referenceInfo.put("shippingAgent", context.get("shippingAgent"));
-                        referenceInfo.put("email", context.get("email"));
-                    }
-                    Debug.logInfo("############################## = " + referenceInfo.toString(), null);
-                    referenceInfo = delegator.createOrStore(referenceInfo);
-                }
-            }
+        				referenceInfo.put("mtcDocFileYN", context.get("mtcDocFileYN"));
+        				referenceInfo.put("mtcDocFilePath", pdfUrl);
+        				referenceInfo.put("mtcVerified", context.get("mtcVerified"));
+        			} else if("SA".equals(docClass)) {
+
+
+        				referenceInfo.put("shipmentAdviceDocFileYN", context.get("shipmentAdviceDocFileYN"));
+        				referenceInfo.put("shipmentAdviceDocFilePath", pdfUrl);
+        				referenceInfo.put("shippingAgent", context.get("shippingAgent"));
+        				referenceInfo.put("email", context.get("email"));
+        			}
+        			Debug.logInfo("############################## = " + referenceInfo.toString(), null);
+        			referenceInfo = delegator.createOrStore(referenceInfo);
+        		}
+        	}
         } catch (GenericEntityException e){
             Debug.logError(e, "Cannot createNupdateShippingDoc ", module);
         }

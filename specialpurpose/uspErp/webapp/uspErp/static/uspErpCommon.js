@@ -93,6 +93,17 @@ var makeArrayData = function(reqData) {
 	return reqArray;
 };
 
+var makeMapData = function(reqData) {
+    var reqMap = new Object();
+    for(var key in reqData) {
+        if(key != "undefined") {
+            reqMap[key] = $.trim(reqData[key]);
+        }
+    }
+
+	return reqMap;
+};
+
 var makeStringArrayData = function(reqData, colName) {
 	var reqArray = new Array();
 	for(var i=0 ; reqData.length > i ; i++) {
@@ -118,7 +129,7 @@ var inputInit = function(id) {
 	});
 };
 
-var setLookupVal = function(curVal, schUrl, setColNmArry) {
+var setLookupVal = function(elementNm, curVal, schUrl, setColNmArry) {
     var map = new Object();
     map[elementNm] = curVal;
     if(curVal != null && curVal != "") {
@@ -159,7 +170,7 @@ var setLookupVal = function(curVal, schUrl, setColNmArry) {
     }
 };
 
-function set_value(poNo, lotNo) {
+function set_values(poNo, lotNo) {
 	if (GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP)) {
         obj_caller.target = GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP).target;
     } else {
@@ -368,7 +379,7 @@ var totalPriceNQuantity = function(tableObj, totalQuantityId, totalPriceId) {
 
     if(tableSize > 0) {
         for(var i=0 ; tableSize > i ; i++) {
-            var gridUnitQuantity = Number(tableObj.rows(i).data().pluck("qty")[0] != "" ? tableObj.rows(i).data().pluck("qty")[0] : 0);
+            var gridUnitQuantity = Number(tableObj.rows(i).data().pluck("orderQty")[0] != "" ? tableObj.rows(i).data().pluck("orderQty")[0] : 0);
             var gridUnitPrice = parseFloat(tableObj.rows(i).data().pluck("unitPrice")[0] != "" ? tableObj.rows(i).data().pluck("unitPrice")[0] : 0);
 
             totalQuantity += gridUnitQuantity;
@@ -379,3 +390,43 @@ var totalPriceNQuantity = function(tableObj, totalQuantityId, totalPriceId) {
     $("#" + totalQuantityId).val(totalQuantity.format());
     $("#" + totalPriceId).val(totalPrice.format(2));
 };
+
+$.fn.dataTable.Api.register( 'selectedColSum()', function (colName) {
+    var data = this.rows(".selected").data();
+    var returnTotal = 0;
+    data.each( function ( value, index ) {
+        var x = parseFloat( value[colName] ) || 0;
+        returnTotal += x;
+    });
+    return returnTotal;
+});
+
+// Remove the formatting to get integer data for summation
+var intVal = function ( i ) {
+    return typeof i === 'string' ?
+        i.replace(/[\$,]/g, '')*1 :
+        typeof i === 'number' ?
+            i : 0;
+};
+
+var selectedColTotal = function(tableObj, setColNUnitNIdxArry) {
+    if(setColNUnitNIdxArry.length > 0) {
+        for(var i=0 ; setColNUnitNIdxArry.length > i ; i++) {
+            // Total over all pages
+            var setColNUnitNIdx = setColNUnitNIdxArry[i] + "";
+            var splitStr = setColNUnitNIdx.split(",");
+
+            var selectTotal = tableObj.selectedColSum(splitStr[0]);
+            var total = tableObj.column( splitStr[0]+":name" ).data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                });
+
+            $( tableObj.column( splitStr[2] ).footer() ).html(
+                $.fn.dataTable.render.number( ',', '.', 2, '').display(selectTotal ) +
+                ' ' + splitStr[1] + '( ' + $.fn.dataTable.render.number( ',', '.', 2, '').display(total ) +
+                ' ' + splitStr[1] + ')'
+            );
+        }
+    }
+}
