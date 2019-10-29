@@ -196,6 +196,27 @@
     <property key="savePo">
         <value xml:lang="en">Savev Purchase Order</value>
     </property>
+    <property key="applySelectedBtn">
+        <value xml:lang="en">Apply Selected</value>
+    </property>
+    <property key="applyAllBtn">
+        <value xml:lang="en">Apply All</value>
+    </property>
+    <property key="selectAll">
+        <value xml:lang="en">Select All</value>
+    </property>
+    <property key="uploadCSVFileBtn">
+        <value xml:lang="en">Upload CSV File</value>
+    </property>
+    <property key="createPurchaseShippmentBtn">
+        <value xml:lang="en">Create Purchase Shippment</value>
+    </property>
+    <property key="completeBtn">
+        <value xml:lang="en">Complete Order</value>
+    </property>
+    <property key="createBillBtn">
+        <value xml:lang="en">Create Bill</value>
+    </property>
     <!-- BUTTON LABEL END-->
 
     <!-- PURCHASE VIEW LABEL START-->
@@ -264,6 +285,15 @@
     </property>
     <property key="producedQty">
         <value xml:lang="en">Produced Qty(MT)</value>
+    </property>
+    <property key="producedThickness">
+        <value xml:lang="en">Produced Thickness</value>
+    </property>
+    <property key="producedWidth">
+        <value xml:lang="en">Produced Width</value>
+    </property>
+    <property key="itemLength">
+        <value xml:lang="en">Item Length</value>
     </property>
     <property key="invoicedRev">
         <value xml:lang="en">Invoiced Rev.</value>

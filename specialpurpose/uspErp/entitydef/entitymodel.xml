@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
     <!-- ========================================================= -->
     <!-- ======================== Defaults ======================= -->
     <!-- ========================================================= -->
@@ -30,6 +30,24 @@
         <field name="description" type="comment"></field>
 
         <prim-key field="ProcessingStatusId"/>
+    </entity>
+
+    <entity entity-name="PriceTermCode" package-name="usperp.common" title="Price Term">
+        <field name="priceTermId" type="id-long-ne"></field>
+        <field name="priceTermNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="priceTermId"/>
+    </entity>
+
+    <entity entity-name="PaymentTermCode" package-name="usperp.common" title="Payment Term">
+        <field name="paymentTermId" type="id-long-ne"></field>
+        <field name="paymentTermNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="paymentTermId"/>
     </entity>
 
     <entity entity-name="TransferStatusCode" package-name="usperp.common" title="Processing Status">
@@ -231,6 +249,24 @@
 
         <prim-key field="shippingAgentId"/>
     </entity>
+
+    <entity entity-name="ProcessingStatusCode" package-name="usperp.common" title="Processing Status">
+        <field name="processingStatusId" type="id-long-ne"></field>
+        <field name="processingStatusNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="processingStatusId"/>
+    </entity>
+
+    <entity entity-name="TransferStatusCode" package-name="usperp.common" title="Transfer Status">
+        <field name="transferStatusId" type="id-long-ne"></field>
+        <field name="transferStatusNm" type="id-long-ne"></field>
+        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="description" type="comment"></field>
+
+        <prim-key field="transferStatusId"/>
+    </entity>
     <!--
     ******************************************************
                     Common Module End
@@ -262,6 +298,7 @@
         <field name="totalQtyUnit" type="id-long"></field>
         <field name="totalOrderAmount" type="currency-amount"></field>
         <field name="totalOrderAmountUnit" type="id-long"></field>
+        <field name="voidYn" type="indicator"></field>
         <prim-key field="poNo"/>
     </entity>
 
@@ -295,10 +332,12 @@
         <field name="gradeDesc" type="description"></field>
         <field name="coatingWeight" type="id-long"></field>
         <field name="coatingWeightDesc" type="description"></field>
-        <field name="thickness" type="id-long"></field>
+        <field name="orderThickness" type="id-long"></field>
+        <field name="producedThickness" type="id-long"></field>
         <field name="gauge" type="id-long"></field>
         <field name="gaugeDesc" type="description"></field>
-        <field name="width" type="id-long"></field>
+        <field name="orderWidth" type="id-long"></field>
+        <field name="producedWidth" type="id-long"></field>
         <field name="widthDesc" type="description"></field>
         <field name="maxWeight" type="id-long"></field>
         <field name="packaging" type="id-long"></field>
@@ -310,14 +349,16 @@
         <field name="paintType" type="id-long"></field>
         <field name="paintName" type="id-long"></field>
         <field name="qtyUnit" type="id-long"></field>
-        <field name="qty" type="fixed-point"></field>
+        <field name="orderQty" type="fixed-point"></field>
+        <field name="orderQtyLB" type="fixed-point"></field>
+        <field name="producedQty" type="fixed-point"></field>
         <field name="itemLength" type="fixed-point"></field>
         <field name="commissionPrice" type="currency-amount"></field>
         <field name="priceUnit" type="id-long"></field>
+        <field name="priceUnitText" type="id-long"></field>
         <field name="unitPrice" type="currency-amount"></field>
         <field name="amount" type="currency-amount"></field>
         <field name="amountUnit" type="id-long"></field>
-        <field name="produced" type="id-long"></field>
         <field name="gaugeControlYield" type="id-long"></field>
         <!-- Item Account Info-->
         <field name="commercialInvoiceNo" type="id-long"></field>
@@ -339,6 +380,74 @@
             <key-map field-name="poNo"/>
         </relation>
     </entity>
+
+    <view-entity entity-name="PoMasterNReference"
+                 package-name="usperp.order"
+                 title="Po Master N Reference">
+        <member-entity entity-alias="P" entity-name="PoMaster"/>
+        <member-entity entity-alias="R" entity-name="PoReference"/>
+
+        <alias-all entity-alias="P" />
+        <alias-all entity-alias="R" />
+
+        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
+            <key-map field-name="poNo"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="PoSubtotal"
+                 package-name="usperp.order"
+                 title="Po Sub Total">
+        <member-entity entity-alias="PQUP" entity-name="PoQtyUnitPrice"/>
+        <member-entity entity-alias="PI" entity-name="PoInvoiceSubtotal"/>
+
+        <alias-all entity-alias="PQUP" />
+        <alias entity-alias="PI" field="invoicedQtySubTotal" name="invoicedQtySubTotal"/>
+
+        <view-link entity-alias="PQUP" rel-entity-alias="PI" rel-optional="true">
+            <key-map field-name="poNo"/>
+            <key-map field-name="lotNo"/>
+            <key-map field-name="referenceNo"/>
+            <key-map field-name="productId"/>
+            <key-map field-name="paintCode"/>
+            <key-map field-name="paintName"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="PoQtyUnitPrice"
+                 package-name="usperp.order"
+                 title="PoMaster and Reference">
+        <member-entity entity-alias="R" entity-name="PoReference"/>
+
+        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
+        <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
+        <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
+        <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
+        <alias entity-alias="R" field="orderQty" name="orderQtySubTotal" group-by="true"/>
+        <alias entity-alias="R" field="producedQty" name="producedQtySubTotal" function="sum"/>
+        <alias entity-alias="R" field="unitPrice" name="unitPriceSubTotal" function="sum"/>
+
+    </view-entity>
+
+    <view-entity entity-name="PoInvoiceSubtotal"
+                 package-name="usperp.order"
+                 title="PoMaster and Reference">
+        <member-entity entity-alias="R" entity-name="PoReference"/>
+
+        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
+        <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
+        <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
+        <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
+        <alias entity-alias="R" field="producedQty" name="invoicedQtySubTotal" function="sum"/>
+        <entity-condition>
+            <condition-expr field-name="commercialInvoiceNo" entity-alias="R" operator="not-equals" value=""/>
+        </entity-condition>
+
+    </view-entity>
 
     <!-- Vendor Master -->
     <entity entity-name="Vendor" package-name="usperp.order" title="Purchase Vendor Entity">

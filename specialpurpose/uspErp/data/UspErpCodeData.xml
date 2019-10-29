@@ -38,8 +38,6 @@
     <PaymentTermCode paymentTermId="LETTER OF CREDIT" paymentTermNm="Letter of Credit" sortSeq="5" description="" />
     <PaymentTermCode paymentTermId="DUE ON RECEIPT" paymentTermNm="Due on Receipt" sortSeq="6" description="" />
 
-
-
     <SteelTypeCode steelTypeId="GI" steelTypeNm="GI" sortSeq="1" description="" />
     <SteelTypeCode steelTypeId="GL" steelTypeNm="GL" sortSeq="2" description="" />
     <SteelTypeCode steelTypeId="PPGI" steelTypeNm="PPGI" sortSeq="3" description="" />
@@ -96,8 +94,6 @@
     <ExwCode exwId="PMH" exwNm="PMH" sortSeq="10" description="" />
     <ExwCode exwId="JIT" exwNm="JIT" sortSeq="11" description="" />
 
-
-
     <PurchaseAgentCode purchaseAgentId="PD" purchaseAgentNm="Podong" sortSeq="1" description="" />
     <PurchaseAgentCode purchaseAgentId="SM" purchaseAgentNm="Simon" sortSeq="2" description="" />
 
@@ -116,20 +112,14 @@
     <ProductTmp productId="G8A55AG2641" productNm="GR80 AZ55 Acrylic GL 26GA x 41.56" sortSeq="2" description="" />
     <ProductTmp productId="G8A55AG2643" productNm="GR80 AZ55 Acrylic GL 26GA x 43" sortSeq="3" description="" />
     <ProductTmp productId="G8A55AG2940" productNm="GR80 AZ55 Acrylic GL 29GA x 40.875" sortSeq="4" description="" />
-
     <ProductTmp productId="G5A50BG2443" productNm="GR50 AZ50 BTP GL 24GA x 43" sortSeq="5" description="" />
     <ProductTmp productId="G5A50BG2641" productNm="GR50 AZ50 BTP GL 26GA x 41.56" sortSeq="6" description="" />
     <ProductTmp productId="G8A50BG2643" productNm="GR80 AZ50 BTP GL 26GA x 43" sortSeq="7" description="" />
     <ProductTmp productId="G8A50BG2940" productNm="GR80 AZ50 BTP GL 29GA x 40.875" sortSeq="8" description="" />
-
     <ProductTmp productId="G5A50PG2641" productNm="GR50 AZ50 Painted GL 26GA x 41.56" sortSeq="9" description="" />
     <ProductTmp productId="G8A35PG2643" productNm="GR80 AZ35 Painted GL 26GA x 43" sortSeq="10" description="" />
     <ProductTmp productId="G8A50PG2643" productNm="GR80 AZ50 Painted GL 26GA x 43" sortSeq="11" description="" />
     <ProductTmp productId="G8A50PG2940" productNm="GR80 AZ50 Painted GL 29GA x 40.875" sortSeq="12" description="" />
-
-
-
-
 
     <!--TermType termTypeId="CIA" parentTypeId="PAYMENT" hasTable="N" description="Cash In Advance" />
     <TermType termTypeId="TERM" parnentTypeId="PAYMENT" hasTable="N" description="Term" />
@@ -141,7 +131,6 @@
     <FobPointTmp fobPointId="ADS" fobPointNm="ADS" sortSeq="4" description="" />
     <FobPointTmp fobPointId="TAM" fobPointNm="TAM" sortSeq="5" description="" />
     <FobPointTmp fobPointId="CMA" fobPointNm="CMA" sortSeq="6" description="" />
-
 
     <DestinationTmp destinationId="WTH" destinationNm="WTH" sortSeq="1" description="" />
     <DestinationTmp destinationId="PMC" destinationNm="PMC" sortSeq="2" description="" />
@@ -156,141 +145,85 @@
     <ShippingAgentTmp shippingAgentId="BC" shippingAgentNm="Biehlco" sortSeq="2" description="" />
     <!-- TEMP TABLE DATA -->
 
-    <ProcessingStatusCode ProcessingStatusId="PE" ProcessingStatusNm="PO Entered" sortSeq="1" description="" />
-    <ProcessingStatusCode ProcessingStatusId="PC" ProcessingStatusNm="PO Confirmed" sortSeq="2" description="" />
-    <ProcessingStatusCode ProcessingStatusId="IP" ProcessingStatusNm="In Processing" sortSeq="3" description="" />
-    <ProcessingStatusCode ProcessingStatusId="HO" ProcessingStatusNm="Hold" sortSeq="4" description="" />
-    <ProcessingStatusCode ProcessingStatusId="CC" ProcessingStatusNm="Canceled" sortSeq="5" description="" />
-    <ProcessingStatusCode ProcessingStatusId="CP" ProcessingStatusNm="Completed" sortSeq="6" description="" />
+    <ProcessingStatusCode processingStatusId="PE" processingStatusNm="PO Entered" sortSeq="1" description="" />
+    <ProcessingStatusCode processingStatusId="PC" processingStatusNm="PO Confirmed" sortSeq="2" description="" />
+    <ProcessingStatusCode processingStatusId="IP" processingStatusNm="In Processing" sortSeq="3" description="" />
+    <ProcessingStatusCode processingStatusId="HO" processingStatusNm="Hold" sortSeq="4" description="" />
+    <ProcessingStatusCode processingStatusId="CC" processingStatusNm="Canceled" sortSeq="5" description="" />
+    <ProcessingStatusCode processingStatusId="CP" processingStatusNm="Completed" sortSeq="6" description="" />
 
-    <TransferStatusCode ProcessingStatusId="IN" ProcessingStatusNm="Initiated" sortSeq="1" description="" />
-    <TransferStatusCode ProcessingStatusId="IT" ProcessingStatusNm="In Transit" sortSeq="2" description="" />
-    <TransferStatusCode ProcessingStatusId="PR" ProcessingStatusNm="Partially Received" sortSeq="3" description="" />
-    <TransferStatusCode ProcessingStatusId="HO" ProcessingStatusNm="Hold" sortSeq="4" description="" />
-    <TransferStatusCode ProcessingStatusId="CC" ProcessingStatusNm="Canceled" sortSeq="5" description="" />
-    <TransferStatusCode ProcessingStatusId="CP" ProcessingStatusNm="Completed" sortSeq="6" description="" />
+    <TransferStatusCode transferStatusId="IN" transferStatusNm="Initiated" sortSeq="1" description="" />
+    <TransferStatusCode transferStatusId="IT" transferStatusNm="In Transit" sortSeq="2" description="" />
+    <TransferStatusCode transferStatusId="PR" transferStatusNm="Partially Received" sortSeq="3" description="" />
+    <TransferStatusCode transferStatusId="HO" transferStatusNm="Hold" sortSeq="4" description="" />
+    <TransferStatusCode transferStatusId="CC" transferStatusNm="Canceled" sortSeq="5" description="" />
+    <TransferStatusCode transferStatusId="CP" transferStatusNm="Completed" sortSeq="6" description="" />
 
-    <PoMaster
-            poNo="190118TM"
-            orderDate="2019-10-03 08:25:00"
-            lot="1"
-            supplierId="TERNIUM_USA_INC"
-            supplierNm="TERNIUM USA INC."
-            agentId=""
-            poStatus="OP"
-            priceTerm=""
-            paymentTerm=""
-            paymentMethod=""
-            downPayment=""
-            shipmentMonth="Sep"
-            purchaseClass=""
-            orderRemark=""
-            internalNote=""
-    />
+    <!--<PoMaster
+                poNo=""
+                orderDate="2019-10-03 08:25:00"
+                supplierId="TON_DONG_A_CORPORATION"
+                supplierNm="TON DONG A CORPORATION"
+                agentId=""
+                poStatus=""
+                priceTerm=""
+                freightTerm=""
+                paymentTerm=""
+                paymentMethod=""
+                downPayment=""
+                shipmentMonth=""
+                orderRemark=""
+                internalNote=""
+                totalOrderQty=""
+                totalQtyUnit=""
+                totalOrderAmount=""
+                totalOrderAmountUnit=""
+        />
 
-    <PoReference
-            referenceSeq="1"
-            poNo="190118TM"
-            referenceNo="1"
-            lotNo="1"
-            fobPoint="ADS"
-            destination="ADS"
-            soNo=""
-            customerId=""
-            customerNm=""
-            productId="G5AAG2"
-            productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
-            paintCode=""
-            paintName=""
-            qty="200"
-            unitPrice="990"
-            amount="123456"
-            produced=""
-            invoiceRev=""
-            shipmentCreated=""
-    />
-
-    <PoMaster
-            poNo="190911DA"
-            orderDate="2019-10-03 08:25:00"
-            supplierId="TON_DONG_A_CORPORATION"
-            supplierNm="TON DONG A CORPORATION"
-            agentId=""
-            poStatus="CP"
-            priceTerm=""
-            paymentTerm=""
-            paymentMethod=""
-            downPayment=""
-            shipmentMonth="Jul"
-            purchaseClass=""
-            orderRemark=""
-            internalNote=""
-    />
-
-    <PoReference
-            referenceSeq="2"
-            poNo="190911DA"
-            referenceNo="2"
-            lotNo="1"
-            fobPoint="SAV"
-            destination="SAV"
-            soNo="S1940599"
-            customerId=""
-            customerNm=""
-            productId="G5AAG2"
-            productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
-            paintCode=""
-            paintName=""
-            qty="50"
-            unitPrice="990"
-            amount="123456"
-            produced="49"
-            invoiceRev="49"
-            shipmentCreated="49"
-    />
-
-    <PoReference
-            referenceSeq="2"
-            poNo="190911DA"
-            referenceNo="2"
-            lotNo="2"
-            fobPoint="SAV"
-            destination="PMC"
-            soNo=""
-            customerId=""
-            customerNm=""
-            productId="G5ABG2"
-            productNm="GRADE 50 AZ50 BTP GALVALUME 29GA x 41.56"
-            paintCode=""
-            paintName=""
-            qty="50"
-            unitPrice="990"
-            amount="123456"
-            produced="51"
-            invoiceRev="51"
-            shipmentCreated="51"
-    />
-
-    <PoReference
-            referenceSeq="3"
-            poNo="190911DA"
-            referenceNo="3"
-            lotNo="3"
-            fobPoint="SAV"
-            destination="JIT"
-            soNo=""
-            customerId=""
-            customerNm=""
-            productId="G5AAG2"
-            productNm="GRADE 50 AZ50 ACRYLIC GALVALUME 29GA x 41.56"
-            paintCode=""
-            paintName=""
-            qty="80"
-            unitPrice="990"
-            amount="123456"
-            produced="80"
-            invoiceRev="80"
-            shipmentCreated="80"
-    />
-
+        <PoReference
+                referenceSeq="입력안해도됩니다."
+                referenceNo=""
+                poNo=""
+                lotNo=""
+                fobPoint=""
+                fobPointEta=""
+                destination=""
+                purchaseClass=""
+                exw=""
+                exwEtd=""
+                barge=""
+                soNo=""
+                shipmentNo=""
+                customerId=""
+                customerNm=""
+                note=""
+                productId=""
+                productNm=""
+                itemId=""
+                itemNm=""
+                steelType=""
+                surfaceType=""
+                grade=""
+                coatingWeight=""
+                thickness=""
+                gauge=""
+                width=""
+                maxWeight=""
+                packaging=""
+                innerDiameter=""
+                gaugeControl=""
+                paintCode=""
+                paintBrand=""
+                paintName=""
+                paintType=""
+                orderQty=""
+                producedQty=""
+                itemLength=""
+                commissionPrice=""
+                unitPrice=""
+                priceUnit=""
+                amount=""
+                amountUnit=""
+        />
+    -->
 </entity-engine-xml>
