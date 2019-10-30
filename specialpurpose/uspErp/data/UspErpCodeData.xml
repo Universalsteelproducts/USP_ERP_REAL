@@ -159,7 +159,18 @@
     <TransferStatusCode transferStatusId="CC" transferStatusNm="Canceled" sortSeq="5" description="" />
     <TransferStatusCode transferStatusId="CP" transferStatusNm="Completed" sortSeq="6" description="" />
 
-    <Vendor vendorId="CP" vendorNm="Completed" vendorInitials="6" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" />
+    <Vendor vendorId="DA" vendorNm="Ton Dong A Corporation" vendorInitials="DA" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="1" description="" />
+    <Vendor vendorId="YE" vendorNm="Yieh Phui America Inc" vendorInitials="YE" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="2" description="" />
+    <Vendor vendorId="TM" vendorNm="Ternium USA Inc" vendorInitials="TM" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="3" description="" />
+    <Vendor vendorId="GD" vendorNm="Galvasid" vendorInitials="GD" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="4" description="" />
+
+    <Customer customerId="AMR" customerName="AMERICAN ROOFING PRODUCTS" contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="1" description="" />
+    <Customer customerId="CDC" customerName="CDC METALS INC." contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="2" description="" />
+    <Customer customerId="ETS" customerName="EAST TEXAS ARCHITECTURAL SHEETMETAL LLC." contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="3" description="" />
+    <Customer customerId="GAL" customerName="GALVAMET STEEL LLC" contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="4" description="" />
+    <Customer customerId="SBI" customerName="SUBURBAN BUILDERS, INC" contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="5" description="" />
+
+
 
     <!--<PoMaster
                 poNo=""
