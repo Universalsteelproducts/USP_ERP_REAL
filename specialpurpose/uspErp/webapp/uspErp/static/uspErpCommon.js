@@ -194,6 +194,22 @@ function set_customer(customerId, customerNm) {
     var target = obj_caller.target;
     write_value(customerId, target);
     write_value(customerNm, $("#customerNm"));
+    write_value(customerNm, $("#schCustomerNm"));
+
+    closeLookup();
+}
+
+function set_supplier(supplierId, supplierNm) {
+	if (GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP)) {
+        obj_caller.target = GLOBAL_LOOKUP_REF.getReference(ACTIVATED_LOOKUP).target;
+    } else {
+        obj_caller.target = jQuery(obj_caller.targetW);
+    }
+
+    var target = obj_caller.target;
+    write_value(supplierNm, target);
+    write_value(supplierId, $("#supplierId"));
+    write_value(supplierId, $("#schSupplierId"));
 
     closeLookup();
 }

@@ -310,7 +310,7 @@ public class PurchaseServices {
 								String key = keysItr.next();
 								Object value = new Object();
 								if (jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
-									if ("orderQty".equals(key) || "producedQty".equals(key) || "itemLength".equals(key)) {
+									if ("orderQty".equals(key) || "producedQty".equals(key) || "itemLength".equals(key) || "orderQtyLB".equals(key)) {
 										String str = jsonobj.getString(key);
 										long lStr = Long.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(lStr);
