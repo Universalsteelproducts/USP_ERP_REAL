@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-engine-xml>
+    <!--
+        <DataResource dataResourceId="E_HEAD_TAG" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
+        <DataResource dataResourceId="E_COMMON_STYLES" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
+        <DataResource dataResourceId="E_COMMON_HEADER" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
+        <DataResource dataResourceId="E_COMMON_FOOTER" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
+        <DataResource dataResourceId="E_TEST_EMAIL" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
 
-    <DataResource dataResourceId="E_HEAD_TAG" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
-    <DataResource dataResourceId="E_COMMON_STYLES" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
-    <DataResource dataResourceId="E_COMMON_HEADER" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
-    <DataResource dataResourceId="E_COMMON_FOOTER" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
-    <DataResource dataResourceId="E_TEST_EMAIL" dataResourceTypeId="ELECTRONIC_TEXT" dataTemplateTypeId="FTL" localeString="en_US"/>
+        <ElectronicText dataResourceId="E_HEAD_TAG"/>
+        <ElectronicText dataResourceId="E_COMMON_STYLES"/>
+        <ElectronicText dataResourceId="E_COMMON_HEADER"/>
+        <ElectronicText dataResourceId="E_COMMON_FOOTER"/>
+        <ElectronicText dataResourceId="E_TEST_EMAIL"/>
 
-    <ElectronicText dataResourceId="E_HEAD_TAG"/>
-    <ElectronicText dataResourceId="E_COMMON_STYLES"/>
-    <ElectronicText dataResourceId="E_COMMON_HEADER"/>
-    <ElectronicText dataResourceId="E_COMMON_FOOTER"/>
-    <ElectronicText dataResourceId="E_TEST_EMAIL"/>
+        <ContentType contentTypeId="USP_EMAIL_TEMPLATE" description="email template" hasTable="N" parentTypeId=""/>
 
-    <ContentType contentTypeId="USP_EMAIL_TEMPLATE" description="email template" hasTable="N" parentTypeId=""/>
-
-    <Content contentId="E_HEAD_TAG" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Common Email Head Tag Include" contentName="Email Head Tag" dataResourceId="E_HEAD_TAG" localeString="en_US"/>
-    <Content contentId="E_COMMON_STYLES" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Common Email Styles" contentName="Email Styles" dataResourceId="E_COMMON_STYLES" localeString="en_US"/>
-    <Content contentId="E_COMMON_HEADER" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Content that is included in the beginning of all BigFish generated emails. Use this to define standard heading information such as your logo and company information." contentName="Common Client Header" dataResourceId="E_COMMON_HEADER" localeString="en_US"/>
-    <Content contentId="E_COMMON_FOOTER" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Content that is included at the end of all BigFish generated emails. Use this to define standard closing information such as Yours-Sincerely and your company contact information. " contentName="Common Client Footer " dataResourceId="E_COMMON_FOOTER" localeString="en_US"/>
-    <Content contentId="E_TEST_EMAIL" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="The actual email content that will be used to send out a test email." contentName="Test Email" dataResourceId="E_TEST_EMAIL" localeString="en_US"/>
+        <Content contentId="E_HEAD_TAG" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Common Email Head Tag Include" contentName="Email Head Tag" dataResourceId="E_HEAD_TAG" localeString="en_US"/>
+        <Content contentId="E_COMMON_STYLES" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Common Email Styles" contentName="Email Styles" dataResourceId="E_COMMON_STYLES" localeString="en_US"/>
+        <Content contentId="E_COMMON_HEADER" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Content that is included in the beginning of all BigFish generated emails. Use this to define standard heading information such as your logo and company information." contentName="Common Client Header" dataResourceId="E_COMMON_HEADER" localeString="en_US"/>
+        <Content contentId="E_COMMON_FOOTER" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="Content that is included at the end of all BigFish generated emails. Use this to define standard closing information such as Yours-Sincerely and your company contact information. " contentName="Common Client Footer " dataResourceId="E_COMMON_FOOTER" localeString="en_US"/>
+        <Content contentId="E_TEST_EMAIL" statusId="EMAIL_PUBLISHED" contentTypeId="USP_EMAIL_TEMPLATE"  description="The actual email content that will be used to send out a test email." contentName="Test Email" dataResourceId="E_TEST_EMAIL" localeString="en_US"/>
 
 
-    <ContentPurpose contentId="E_COMMON_HEADER" contentPurposeTypeId="SECTION"/>
-    <ContentPurpose contentId="E_HEAD_TAG" contentPurposeTypeId="SECTION"/>
-    <ContentPurpose contentId="E_COMMON_STYLES" contentPurposeTypeId="SECTION"/>
-    <ContentPurpose contentId="E_COMMON_FOOTER" contentPurposeTypeId="SECTION"/>
-    <ContentPurpose contentId="E_TEST_EMAIL" contentPurposeTypeId="SECTION"/>
+        <ContentPurpose contentId="E_COMMON_HEADER" contentPurposeTypeId="SECTION"/>
+        <ContentPurpose contentId="E_HEAD_TAG" contentPurposeTypeId="SECTION"/>
+        <ContentPurpose contentId="E_COMMON_STYLES" contentPurposeTypeId="SECTION"/>
+        <ContentPurpose contentId="E_COMMON_FOOTER" contentPurposeTypeId="SECTION"/>
+        <ContentPurpose contentId="E_TEST_EMAIL" contentPurposeTypeId="SECTION"/>
 
-    <!-- Email Settings -->
+        Email Settings
     <Enumeration enumId="PRDS_TEST_EMAIL" enumTypeId="PRDS_EMAIL" description="TEST EMAIL" enumCode="TEST_EMAIL" sequenceId="17"/>
 
     <StatusItem statusId="EMAIL_DEACTIVATED" statusTypeId="CONTENT_STATUS" statusCode="DEACTIVATED" sequenceId="99" description="Inactive" />
@@ -37,5 +37,5 @@
     <StatusValidChange statusId="EMAIL_PUBLISHED" statusIdTo="EMAIL_IN_PROGRESS" transitionName="Available to publish again" />
 
     <ProductStoreEmailSetting productStoreId="10000" emailType="PRDS_TEST_EMAIL" bodyScreenLocation="component://uspErp/widget/EmailScreens.xml#contactTestEmail" xslfoAttachScreenLocation="" fromAddress="sylee@universal-steel.com" ccAddress="" bccAddress="sylee@universal-steel.com" subject="Test Email : Email Sending Test" contentType="" statusId="EMAIL_PUBLISHED"/>
-
+-->
 </entity-engine-xml>

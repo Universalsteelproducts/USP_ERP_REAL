@@ -159,6 +159,8 @@
     <TransferStatusCode transferStatusId="CC" transferStatusNm="Canceled" sortSeq="5" description="" />
     <TransferStatusCode transferStatusId="CP" transferStatusNm="Completed" sortSeq="6" description="" />
 
+    <Vendor vendorId="CP" vendorNm="Completed" vendorInitials="6" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" />
+
     <!--<PoMaster
                 poNo=""
                 orderDate="2019-10-03 08:25:00"
