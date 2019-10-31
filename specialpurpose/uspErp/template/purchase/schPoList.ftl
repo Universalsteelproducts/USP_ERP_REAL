@@ -173,7 +173,7 @@ under the License.
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "producedQty",
+                    "data" : "producedQtySubTotal",
                     "render": function ( data, type, row ) {
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
@@ -181,22 +181,16 @@ under the License.
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "invoiceRev",
+                    "data" : "invoicedQtySubTotal",
                     "render": function ( data, type, row ) {
-                        if(row.commercialInvoiceNo != null && row.commercialInvoiceNo != "") {
-                            data = row.producedQty
-                        }
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "80px",
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "shipmentCreated",
+                    "data" : "shipmentQtySubTotal",
                     "render": function ( data, type, row ) {
-                        if(data != null && data != "") {
-                            data = row.producedQty
-                        }
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "120px",
@@ -206,10 +200,6 @@ under the License.
 	        		"data" : "referenceNo",
 	        		"visible": false
 	        	},
-	        	{
-                    "data" : "referenceSeq",
-                    "visible": false,
-                },
 	        	/*{
 	        		"data" : "lastUpdateUserId",
 	  				"visible": false

@@ -131,14 +131,14 @@ public class PurchaseServices {
 
 					EntityCondition poListCondition = EntityCondition.makeCondition(poConditionList, EntityOperator.AND);
 
-					List<GenericValue> poList = EntityQuery.use(delegator).from("PoMasterNReference")
+					List<GenericValue> poList = EntityQuery.use(delegator).from("PoSubtotal")
 							.where(poListCondition)
-							.orderBy("lotNo ASC", "referenceNo ASC", "productId ASC", "paintCode ASC", "paintName ASC", "itemId ASC")
+							.orderBy("lotNo ASC", "referenceNo ASC", "productId ASC", "paintCode ASC", "paintName ASC")
 							.queryList();
 
-					Map<String, Object> conditionMap = new HashMap<String, Object>();
+					/*Map<String, Object> conditionMap = new HashMap<String, Object>();
 
-		        	/*for(GenericValue poMasterInfo : poMasterList) {
+		        	for(GenericValue poMasterInfo : poMasterList) {
 		        		List<GenericValue> referenceList = poMasterInfo.getRelated("PoReference", conditionMap, UtilMisc.toList("poNo","lotNo"), false);
 		        		if(referenceList.size() > 0) {
 			        		for(GenericValue referenceInfo : referenceList) {
