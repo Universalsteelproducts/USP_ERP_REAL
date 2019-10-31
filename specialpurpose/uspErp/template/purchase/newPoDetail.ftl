@@ -447,11 +447,15 @@ under the License.
                             }
 
                             var exwEtd = $("input[name=exwEtd]").val();
+                            if(exwEtd != "") {
+                                $("input[name=exwEtd]").val(timeTodateFormat(exwEtd));
+                                $("input[name=exwEtd]").change();
+                            }
                             var fobPointEta = $("input[name=exwEtd]").val();
-                            $("input[name=exwEtd]").val(timeTodateFormat(exwEtd));
-                            $("input[name=fobPointEta]").val(timeTodateFormat(fobPointEta));
-                            $("input[name=exwEtd]").change();
-                            $("input[name=fobPointEta]").change();
+                            if(fobPointEta != "") {
+                                $("input[name=fobPointEta]").val(timeTodateFormat(fobPointEta));
+                                $("input[name=fobPointEta]").change();
+                            }
 
                             /*$("#productDetail1 :input").each(function() {
                                 if($(this).prop("type") != "button") {
@@ -517,8 +521,31 @@ under the License.
             var curIndex = $("#lotNo option:selected").index() - 1;
 
             if(curValue != "") {
-                $("#lotNo option:selected").remove();
-                $("#lotNo option:eq(" + curIndex + ")").prop('selected', true);
+                var rowData = poListTable.rows().data();
+                var eqLotCnt = 0;
+
+                if(rowData.length  > 0) {
+                    for(var i=0 ; rowData.length > i ; i++) {
+                        var data = rowData[i];
+
+                        var lotNo = data["lotNo"];
+
+                        if(lotNo == curValue) {
+                            eqLotCnt++;
+                        }
+                    }
+
+                    if(eqLotCnt == 0) {
+                        $("#lotNo option:selected").remove();
+                        $("#lotNo option:eq(" + curIndex + ")").prop('selected', true);
+                    }
+                } else {
+                    if(curValue != "01") {
+                        $("#lotNo option:selected").remove();
+                        $("#lotNo option:eq(" + curIndex + ")").prop('selected', true);
+                    }
+                }
+
             }
         });
 
@@ -857,7 +884,7 @@ under the License.
                         <option value="${steelTypeInfo.steelTypeId!}" >${steelTypeInfo.steelTypeNm!}</option>
                         </#list>
                     </#if>
-                        <option value="OT" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">Other</option>
+                        <!--<option value="OT" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">Other</option>-->
                     </select>
                 </td>
                 <td class="label" width="12%" align="right">
