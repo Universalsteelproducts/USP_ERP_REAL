@@ -350,7 +350,7 @@
         <value xml:lang="en">QTY</value>
     </property>
     <property key="unitCost">
-        <value xml:lang="en">Unit Cost</value>
+        <value xml:lang="en">Unit Cost($/MT)</value>
     </property>
     <property key="costUnit">
         <value xml:lang="en">Cost Unit</value>
@@ -367,7 +367,7 @@
     </property>
 
     <property key="purchaseAgent">
-        <value xml:lang="en">Purchase Agent</value>
+        <value xml:lang="en">Buying Agent</value>
     </property>
     <property key="purchaseClass">
         <value xml:lang="en">Purchase Class</value>
@@ -455,7 +455,7 @@
         <value xml:lang="en">Width Description</value>
     </property>
     <property key="coilMaxWeight">
-        <value xml:lang="en">Coil Max Weight</value>
+        <value xml:lang="en">Coil Weight Control</value>
     </property>
     <property key="innerDiameter">
         <value xml:lang="en">Inner Diameter</value>
@@ -476,13 +476,13 @@
         <value xml:lang="en">Other Details</value>
     </property>
     <property key="orderQuantity">
-        <value xml:lang="en">Order Qty</value>
+        <value xml:lang="en">Order QTY</value>
     </property>
     <property key="unitQuantity">
-        <value xml:lang="en">Unit Qty</value>
+        <value xml:lang="en">Unit QTY</value>
     </property>
     <property key="quantityUnit">
-        <value xml:lang="en">Qty Unit</value>
+        <value xml:lang="en">QTY Unit</value>
     </property>
     <property key="unitPrice">
         <value xml:lang="en">Unit Price</value>
@@ -536,7 +536,7 @@
         <value xml:lang="en">P/L?</value>
     </property>
     <property key="loadedQty">
-        <value xml:lang="en">Loaded Qty</value>
+        <value xml:lang="en">Loaded QTY</value>
     </property>
     <property key="weight">
         <value xml:lang="en">Weight</value>
@@ -545,7 +545,7 @@
         <value xml:lang="en">Lineal Feet</value>
     </property>
     <property key="coilQuantity">
-        <value xml:lang="en">Coil Qty</value>
+        <value xml:lang="en">Coil QTY</value>
     </property>
     <property key="mtcFile">
         <value xml:lang="en">MTC File</value>
@@ -563,7 +563,7 @@
         <value xml:lang="en">Customer Name</value>
     </property>
     <property key="gaugeControlYield">
-        <value xml:lang="en">Gauge Control Yield</value>
+        <value xml:lang="en">Gauge Control (Yield Control:LB/FT)</value>
     </property>
     <property key="totalQuantity">
         <value xml:lang="en">Total Order QTY</value>
@@ -751,7 +751,7 @@
         <value xml:lang="en">MTC Required? Y/N</value>
     </property>
     <property key="producedQtyLB">
-        <value xml:lang="en">Produced Qty(LB)</value>
+        <value xml:lang="en">Produced QTY(LB)</value>
     </property>
     <property key="mtcVerified">
         <value xml:lang="en">MTC Verified</value>
@@ -759,8 +759,8 @@
     <property key="fobPrice">
         <value xml:lang="en">FOB Price($/LB)</value>
     </property>
-    <property key="fobPrice">
-        <value xml:lang="en">FOB Price($/LB)</value>
+    <property key="orderThickness">
+        <value xml:lang="en">Order Thickness(IN)</value>
     </property>
     <property key="fobPrice">
         <value xml:lang="en">FOB Price($/LB)</value>
