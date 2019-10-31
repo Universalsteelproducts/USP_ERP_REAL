@@ -39,6 +39,12 @@
         <value xml:lang="en">Search Condition</value>
     </property>
 
+    <!-- COMMON LABEL END-->
+    <property key="addCodeLookup">
+        <value xml:lang="en">Add Code</value>
+    </property>
+    <!-- COMMON LABEL END-->
+
     <!-- MENU LABEL START-->
     <property key="purchase">
         <value xml:lang="en">Purchase</value>
@@ -216,6 +222,9 @@
     </property>
     <property key="createBillBtn">
         <value xml:lang="en">Create Bill</value>
+    </property>
+    <property key="addCodeBtn">
+        <value xml:lang="en">Add Code</value>
     </property>
     <!-- BUTTON LABEL END-->
 
