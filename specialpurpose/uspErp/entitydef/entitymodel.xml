@@ -399,57 +399,83 @@
 
         <view-link entity-alias="PQUP" rel-entity-alias="PI" rel-optional="true">
             <key-map field-name="poNo"/>
+            <key-map field-name="voidYn"/>
             <key-map field-name="lotNo"/>
             <key-map field-name="referenceNo"/>
             <key-map field-name="productId"/>
             <key-map field-name="paintCode"/>
             <key-map field-name="paintName"/>
-            <key-map field-name="orderQty"/>
-            <key-map field-name="orderQtyLB"/>
-            <key-map field-name="unitPrice"/>
-            <key-map field-name="amount"/>
         </view-link>
 
         <view-link entity-alias="PQUP" rel-entity-alias="PS" rel-optional="true">
             <key-map field-name="poNo"/>
+            <key-map field-name="voidYn"/>
             <key-map field-name="lotNo"/>
             <key-map field-name="referenceNo"/>
             <key-map field-name="productId"/>
             <key-map field-name="paintCode"/>
             <key-map field-name="paintName"/>
-            <key-map field-name="orderQty"/>
-            <key-map field-name="orderQtyLB"/>
-            <key-map field-name="unitPrice"/>
-            <key-map field-name="amount"/>
         </view-link>
     </view-entity>
 
     <view-entity entity-name="PoQtyUnitPrice"
                  package-name="usperp.order"
                  title="PoMaster and Reference">
+        <member-entity entity-alias="P" entity-name="PoMaster"/>
         <member-entity entity-alias="R" entity-name="PoReference"/>
 
-        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poStatus" name="poStatus" group-by="true"/>
+        <alias entity-alias="P" field="supplierId" name="supplierId" group-by="true"/>
+        <alias entity-alias="P" field="supplierNm" name="supplierNm" group-by="true"/>
+        <alias entity-alias="P" field="orderDate" name="orderDate" group-by="true"/>
+        <alias entity-alias="P" field="shipmentMonth" name="shipmentMonth" group-by="true"/>
+        <alias entity-alias="P" field="voidYn" name="voidYn" group-by="true"/>
         <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
         <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
         <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="productNm" name="productNm" group-by="true"/>
+        <alias entity-alias="R" field="customerId" name="customerId" group-by="true"/>
+        <alias entity-alias="R" field="customerNm" name="customerNm" group-by="true"/>
+        <alias entity-alias="R" field="fobPoint" name="fobPoint" group-by="true"/>
+        <alias entity-alias="R" field="destination" name="destination" group-by="true"/>
+        <alias entity-alias="R" field="soNo" name="soNo" group-by="true"/>
         <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
         <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
-        <alias entity-alias="R" field="orderQty" name="orderQtySubTotal" group-by="true"/>
+        <alias entity-alias="R" field="orderQty" name="orderQty" group-by="true"/>
+        <alias entity-alias="R" field="orderQtyLB" name="orderQtyLB" group-by="true"/>
+        <alias entity-alias="R" field="unitPrice" name="unitPrice" group-by="true"/>
+        <alias entity-alias="R" field="amount" name="amount" group-by="true"/>
         <alias entity-alias="R" field="producedQty" name="producedQtySubTotal" function="sum"/>
-        <alias entity-alias="R" field="unitPrice" name="unitPriceSubTotal" function="sum"/>
+
+        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
+            <key-map field-name="poNo"/>
+        </view-link>
 
     </view-entity>
 
     <view-entity entity-name="PoInvoiceSubtotal"
                  package-name="usperp.order"
                  title="PoMaster and Reference">
+        <member-entity entity-alias="P" entity-name="PoMaster"/>
         <member-entity entity-alias="R" entity-name="PoReference"/>
 
-        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poStatus" name="poStatus" group-by="true"/>
+        <alias entity-alias="P" field="supplierId" name="supplierId" group-by="true"/>
+        <alias entity-alias="P" field="supplierNm" name="supplierNm" group-by="true"/>
+        <alias entity-alias="P" field="orderDate" name="orderDate" group-by="true"/>
+        <alias entity-alias="P" field="shipmentMonth" name="shipmentMonth" group-by="true"/>
+        <alias entity-alias="P" field="voidYn" name="voidYn" group-by="true"/>
         <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
         <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
         <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="productNm" name="productNm" group-by="true"/>
+        <alias entity-alias="R" field="customerId" name="customerId" group-by="true"/>
+        <alias entity-alias="R" field="customerNm" name="customerNm" group-by="true"/>
+        <alias entity-alias="R" field="fobPoint" name="fobPoint" group-by="true"/>
+        <alias entity-alias="R" field="destination" name="destination" group-by="true"/>
+        <alias entity-alias="R" field="soNo" name="soNo" group-by="true"/>
         <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
         <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
         <alias entity-alias="R" field="orderQty" name="orderQty" group-by="true"/>
@@ -461,17 +487,33 @@
             <condition-expr field-name="commercialInvoiceNo" entity-alias="R" operator="not-equals" value=""/>
         </entity-condition>
 
+        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
+            <key-map field-name="poNo"/>
+        </view-link>
     </view-entity>
 
     <view-entity entity-name="PoShipmentSubtotal"
                  package-name="usperp.order"
                  title="Reference">
+        <member-entity entity-alias="P" entity-name="PoMaster"/>
         <member-entity entity-alias="R" entity-name="PoReference"/>
 
-        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="P" field="poStatus" name="poStatus" group-by="true"/>
+        <alias entity-alias="P" field="supplierId" name="supplierId" group-by="true"/>
+        <alias entity-alias="P" field="supplierNm" name="supplierNm" group-by="true"/>
+        <alias entity-alias="P" field="orderDate" name="orderDate" group-by="true"/>
+        <alias entity-alias="P" field="shipmentMonth" name="shipmentMonth" group-by="true"/>
+        <alias entity-alias="P" field="voidYn" name="voidYn" group-by="true"/>
         <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
         <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
         <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="productNm" name="productNm" group-by="true"/>
+        <alias entity-alias="R" field="customerId" name="customerId" group-by="true"/>
+        <alias entity-alias="R" field="customerNm" name="customerNm" group-by="true"/>
+        <alias entity-alias="R" field="fobPoint" name="fobPoint" group-by="true"/>
+        <alias entity-alias="R" field="destination" name="destination" group-by="true"/>
+        <alias entity-alias="R" field="soNo" name="soNo" group-by="true"/>
         <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
         <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
         <alias entity-alias="R" field="orderQty" name="orderQty" group-by="true"/>
@@ -483,6 +525,9 @@
             <condition-expr field-name="shipmentCreated" entity-alias="R" operator="not-equals" value=""/>
         </entity-condition>
 
+        <view-link entity-alias="P" rel-entity-alias="R" rel-optional="true">
+            <key-map field-name="poNo"/>
+        </view-link>
     </view-entity>
 
     <!-- Vendor Master -->

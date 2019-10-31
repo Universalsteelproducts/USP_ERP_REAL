@@ -173,7 +173,7 @@ under the License.
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "producedQty",
+                    "data" : "producedQtySubTotal",
                     "render": function ( data, type, row ) {
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
@@ -181,22 +181,16 @@ under the License.
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "invoiceRev",
+                    "data" : "invoicedQtySubTotal",
                     "render": function ( data, type, row ) {
-                        if(row.commercialInvoiceNo != null && row.commercialInvoiceNo != "") {
-                            data = row.producedQty
-                        }
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "80px",
                     "className" : "dt-body-right"
                 },
 	        	{
-                    "data" : "shipmentCreated",
+                    "data" : "shipmentQtySubTotal",
                     "render": function ( data, type, row ) {
-                        if(data != null && data != "") {
-                            data = row.producedQty
-                        }
                         return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "120px",
@@ -206,10 +200,6 @@ under the License.
 	        		"data" : "referenceNo",
 	        		"visible": false
 	        	},
-	        	{
-                    "data" : "referenceSeq",
-                    "visible": false,
-                },
 	        	/*{
 	        		"data" : "lastUpdateUserId",
 	  				"visible": false
@@ -288,11 +278,11 @@ under the License.
 
                 // Update footer
                 $( api.column( 14 ).footer() ).html(
-                    '<font color="red">Order Qty(MT) Total</font> : ' +
+                    '<font color="red">Order Qty(MT) #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyMTTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyMTTotal) + ' MT), ' +
-                    '<font color="red">Amount Total</font> : ' +
+                    '<font color="red">Amount #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ' MT), ' +
-                    '<font color="red">Order Qty(LB) Total</font> : ' +
+                    '<font color="red">Order Qty(LB) #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyLBTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyLBTotal) + ' MT)'
                 );
             }
@@ -379,6 +369,15 @@ under the License.
 			$("#crudMode").val("R");
 			poListTable.ajax.reload();
 		});
+
+		$("#allClearBtn").on("click", function() {
+		    inputInit("schCondition");
+
+		    $("input[name=schOrderFromDate]").val("${orderFromDate?string('yyyy-MM-dd')}");
+		    $("input[name=schOrderFromDate]").change();
+		    $("input[name=schOrderToDate]").val("${orderToDate?string('yyyy-MM-dd')}");
+		    $("input[name=schOrderToDate]").change();
+		});
 	});
 </script>
 
@@ -414,7 +413,7 @@ under the License.
 			</ul>
 		</div>
 		<div class="screenlet-body">
-			<table class="basic-table" cellspacing="0">
+			<table class="basic-table" cellspacing="0" id="schCondition">
 				<tr>
 				    <td class="label" align="right" >
                         ${uiLabelMap.poStatus}
@@ -487,6 +486,7 @@ under the License.
 					<td width="2%">&nbsp;</td>
 					<td colspan="7">
 						<input type="button" id="searchBtn" value="${uiLabelMap.CommonFind}" class="buttontext" />
+						<input type="button" id="allClearBtn" value="${uiLabelMap.allClear}" class="buttontext" />
 					</td>
 				</tr>
 			</table>
@@ -514,7 +514,7 @@ under the License.
 				<th style="vertical-align: middle;">${uiLabelMap.unitPrice}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.amount}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
-				<th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
+				<th style="vertical-align: middle;">${uiLabelMap.producedQtyLB}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.invoicedRev}</th>
 				<th style="vertical-align: middle;">${uiLabelMap.shipmentCreated}</th>
 			</tr>

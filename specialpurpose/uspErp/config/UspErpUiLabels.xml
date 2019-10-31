@@ -39,6 +39,12 @@
         <value xml:lang="en">Search Condition</value>
     </property>
 
+    <!-- COMMON LABEL END-->
+    <property key="addCodeLookup">
+        <value xml:lang="en">Add Code</value>
+    </property>
+    <!-- COMMON LABEL END-->
+
     <!-- MENU LABEL START-->
     <property key="purchase">
         <value xml:lang="en">Purchase</value>
@@ -217,6 +223,9 @@
     <property key="createBillBtn">
         <value xml:lang="en">Create Bill</value>
     </property>
+    <property key="addCodeBtn">
+        <value xml:lang="en">Add Code</value>
+    </property>
     <!-- BUTTON LABEL END-->
 
     <!-- PURCHASE VIEW LABEL START-->
@@ -283,11 +292,14 @@
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
-    <property key="producedQty">
-        <value xml:lang="en">Produced Qty(LBS)</value>
+    <property key="producedQtyMT">
+        <value xml:lang="en">Produced Qty(MT)</value>
+    </property>
+    <property key="producedQtyLB">
+        <value xml:lang="en">Produced Qty(LB)</value>
     </property>
     <property key="producedThickness">
-        <value xml:lang="en">Produced Thickness(IN)</value>
+        <value xml:lang="en">Produced Thickness</value>
     </property>
     <property key="producedWidth">
         <value xml:lang="en">Produced Width</value>
@@ -320,10 +332,10 @@
         <value xml:lang="en">Item ID</value>
     </property>
     <property key="thickness">
-        <value xml:lang="en">Thickness(IN)</value>
+        <value xml:lang="en">Thickness(Inch)</value>
     </property>
     <property key="width">
-        <value xml:lang="en">Width(IN)</value>
+        <value xml:lang="en">Width(Inch)</value>
     </property>
     <property key="weight">
         <value xml:lang="en">Weight</value>
@@ -399,7 +411,7 @@
         <value xml:lang="en">Product Attribute</value>
     </property>
     <property key="orderRemark">
-        <value xml:lang="en">External Remark</value>
+        <value xml:lang="en">Order Remark</value>
     </property>
     <property key="poType">
         <value xml:lang="en">PO Type</value>
@@ -443,7 +455,7 @@
         <value xml:lang="en">Width Description</value>
     </property>
     <property key="coilMaxWeight">
-        <value xml:lang="en">Coil Max Weight(LBS)</value>
+        <value xml:lang="en">Coil Max Weight</value>
     </property>
     <property key="innerDiameter">
         <value xml:lang="en">Inner Diameter</value>
@@ -551,7 +563,7 @@
         <value xml:lang="en">Customer Name</value>
     </property>
     <property key="gaugeControlYield">
-        <value xml:lang="en">Gauge Control(Yield Control: LB/FT)</value>
+        <value xml:lang="en">Gauge Control Yield</value>
     </property>
     <property key="totalQuantity">
         <value xml:lang="en">Total Order Qty</value>
@@ -607,7 +619,7 @@
         <value xml:lang="en">Stage</value>
     </property>
     <property key="lotNo">
-        <value xml:lang="en">Lot</value>
+        <value xml:lang="en">LOT</value>
     </property>
     <property key="etd">
         <value xml:lang="en">ETD</value>
