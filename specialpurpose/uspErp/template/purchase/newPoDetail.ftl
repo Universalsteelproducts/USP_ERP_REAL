@@ -481,9 +481,6 @@ under the License.
                 rowMap["paintName"] = "";
             }
 
-            rowMap["commercialInvoiceNo"] = "";
-            rowMap["shipmentCreated"] = "";
-
             var orderQtyLB = 0;
             if($("#qtyUnit").val() == "MT") {
                 orderQtyLB = Number(rowMap["orderQty"]) * 2204.62;
