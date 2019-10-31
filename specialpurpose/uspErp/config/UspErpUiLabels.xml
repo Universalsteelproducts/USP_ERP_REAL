@@ -278,43 +278,43 @@
         <value xml:lang="en">Paint Type</value>
     </property>
     <property key="orderQtyMT">
-        <value xml:lang="en">Order Qty(MT)</value>
+        <value xml:lang="en">Order QTY(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
     </property>
     <property key="amount">
-        <value xml:lang="en">Amount</value>
+        <value xml:lang="en">Amount($)</value>
     </property>
     <property key="orderQtyLB">
-        <value xml:lang="en">Order Qty(LBS)</value>
+        <value xml:lang="en">Order QTY(LB)</value>
     </property>
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
     <property key="producedQtyMT">
-        <value xml:lang="en">Produced Qty(MT)</value>
+        <value xml:lang="en">Produced QTY(MT)</value>
     </property>
     <property key="producedQtyLB">
-        <value xml:lang="en">Produced Qty(LB)</value>
+        <value xml:lang="en">Produced QTY(LB)</value>
     </property>
     <property key="producedThickness">
-        <value xml:lang="en">Produced Thickness</value>
+        <value xml:lang="en">Produced Thickness(IN)</value>
     </property>
     <property key="producedWidth">
-        <value xml:lang="en">Produced Width</value>
+        <value xml:lang="en">Produced Width(IN)</value>
     </property>
     <property key="itemLength">
-        <value xml:lang="en">Item Length</value>
+        <value xml:lang="en">Item Length(FT)</value>
     </property>
     <property key="invoicedRev">
-        <value xml:lang="en">Invoiced Rev.</value>
+        <value xml:lang="en">Acquired QTY(LB)</value>
     </property>
     <property key="invoicedQty">
-        <value xml:lang="en">Invoiced Qty</value>
+        <value xml:lang="en">Invoiced QTY(LB)</value>
     </property>
     <property key="shipmentCreated">
-        <value xml:lang="en">Shipment Created Qty(LBS)</value>
+        <value xml:lang="en">Shipment Created QTY(LB)</value>
     </property>
     <property key="customerId">
         <value xml:lang="en">Customer</value>
@@ -323,7 +323,7 @@
         <value xml:lang="en">Customer</value>
     </property>
     <property key="internalRef">
-        <value xml:lang="en">Internal Ref Number </value>
+        <value xml:lang="en">Internal REF Number </value>
     </property>
     <property key="item">
         <value xml:lang="en">Item</value>
@@ -332,10 +332,10 @@
         <value xml:lang="en">Item ID</value>
     </property>
     <property key="thickness">
-        <value xml:lang="en">Thickness(Inch)</value>
+        <value xml:lang="en">Thickness(IN)</value>
     </property>
     <property key="width">
-        <value xml:lang="en">Width(Inch)</value>
+        <value xml:lang="en">Width(IN)</value>
     </property>
     <property key="weight">
         <value xml:lang="en">Weight</value>
@@ -347,7 +347,7 @@
         <value xml:lang="en">Commission Price</value>
     </property>
     <property key="qty">
-        <value xml:lang="en">Qty</value>
+        <value xml:lang="en">QTY</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost</value>
@@ -420,7 +420,7 @@
         <value xml:lang="en">Billing Account</value>
     </property>
     <property key="referenceNo">
-        <value xml:lang="en">Reference# </value>
+        <value xml:lang="en">Reference Number </value>
     </property>
     <property key="product">
         <value xml:lang="en">Product</value>
@@ -511,7 +511,7 @@
         <value xml:lang="en">B/L Doc File</value>
     </property>
     <property key="blNo">
-        <value xml:lang="en">B/L#</value>
+        <value xml:lang="en">B/L Number</value>
     </property>
     <property key="blDate">
         <value xml:lang="en">B/L Date</value>
@@ -530,7 +530,7 @@
     </property>
 
     <property key="civAmount">
-        <value xml:lang="en">CIV Amount</value>
+        <value xml:lang="en">CIV Amount($)</value>
     </property>
     <property key="plDocFileYN">
         <value xml:lang="en">P/L?</value>
@@ -566,7 +566,7 @@
         <value xml:lang="en">Gauge Control Yield</value>
     </property>
     <property key="totalQuantity">
-        <value xml:lang="en">Total Order Qty</value>
+        <value xml:lang="en">Total Order QTY</value>
     </property>
     <property key="vendorAddr">
         <value xml:lang="en">Address</value>
@@ -581,7 +581,7 @@
         <value xml:lang="en">Fax</value>
     </property>
     <property key="totalPoAmount">
-        <value xml:lang="en">Total Order Amount</value>
+        <value xml:lang="en">Total Order Amount($)</value>
     </property>
     <property key="internalNote">
         <value xml:lang="en">Internal Note</value>
@@ -619,7 +619,7 @@
         <value xml:lang="en">Stage</value>
     </property>
     <property key="lotNo">
-        <value xml:lang="en">LOT</value>
+        <value xml:lang="en">Lot</value>
     </property>
     <property key="etd">
         <value xml:lang="en">ETD</value>
@@ -667,7 +667,7 @@
         <value xml:lang="en">Steel Cost($/MT)</value>
     </property>
     <property key="civAmount">
-        <value xml:lang="en">CIV Amount</value>
+        <value xml:lang="en">CIV Amount($)</value>
     </property>
     <property key="shippingDoc">
         <value xml:lang="en">Shipping DOC,Received Status</value>
@@ -713,6 +713,65 @@
         <value xml:lang="en">Purchase Order Information</value>
     </property>
 
+    <property key="createBill">
+        <value xml:lang="en">Create Bill</value>
+    </property>
+
+    <property key="fullFillMent">
+        <value xml:lang="en">Fulfillment</value>
+    </property>
+
+    <property key="Fullfillment">
+        <value xml:lang="en">Fulfillment</value>
+    </property>
+
+    <property key="producedQtyLB">
+        <value xml:lang="en">Produced QTY(LB)</value>
+    </property>
+
+    <property key="itemList">
+        <value xml:lang="en">Item List</value>
+    </property>
+
+    <property key="shippingLine">
+        <value xml:lang="en">Shipping Line</value>
+    </property>
+    <property key="fobPrice">
+        <value xml:lang="en">FOB Price($/LB)</value>
+    </property>
+
+
+    <property key="commercialInvoice">
+        <value xml:lang="en">Acquirement Document Number</value>
+    </property>
+    <property key="commercialInvoiceDate">
+        <value xml:lang="en">Acquired Date </value>
+    </property>
+    <property key="mtcRequiredYN">
+        <value xml:lang="en">MTC Required? Y/N</value>
+    </property>
+    <property key="producedQtyLB">
+        <value xml:lang="en">Produced Qty(LB)</value>
+    </property>
+    <property key="mtcVerified">
+        <value xml:lang="en">MTC Verified</value>
+    </property>
+    <property key="fobPrice">
+        <value xml:lang="en">FOB Price($/LB)</value>
+    </property>
+    <property key="fobPrice">
+        <value xml:lang="en">FOB Price($/LB)</value>
+    </property>
+    <property key="fobPrice">
+        <value xml:lang="en">FOB Price($/LB)</value>
+    </property>
+
+
+
+
+
+
+
     <property key="blDoc">
         <value xml:lang="en">B/L Document</value>
     </property>
@@ -746,7 +805,19 @@
     <property key="shipmentAdviceDocFile">
         <value xml:lang="en">Shipment Advice File</value>
     </property>
+
+
+
+
+
     <!-- PURCHASE VIEW LABEL END-->
+
+
+
+
+
+
+
 
     <!-- INVENTORY VIEW LABEL START-->
     <!-- INVENTORY VIEW LABEL END-->
