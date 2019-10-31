@@ -28,13 +28,10 @@ under the License.
 	     ******************				Init Table				********************
 	     ***************************************************************************/
 	    var poListTable = $("#lotColoList").DataTable({
-			//dom: "Bfrtip",
-			//dom : "frtip",
 			dom : "lfrtip",
 			processing : true,
 			scrollY : true,
 			scrollX : true,
-			fixedHeader : true,
 			ajax : {
 				"type"	: "POST",
 				"url"	: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
@@ -260,83 +257,6 @@ under the License.
                     "visible": false
                 }
 			],
-			buttons: [
-                {
-                    extend: 'selected',
-                    className: "buttonsToHide",
-                    name: 'selected',
-                    text: "${uiLabelMap.applySelectedBtn}",
-                    action: function ( e, dt, button, config ) {
-                        var selectRow = dt.rows( '.selected' ).data();
-console.log(selectRow);
-                        /*if(selectRow.length  > 0) {
-                            for(var i=0 ; selectRow.length > i ; i++) {
-                                var rowIdx = selectRow[i];
-                                var data = dt.row(rowIdx).data();
-
-                                var producedThickness = $("#inputDataForm #producedThickness").val();
-                                var producedWidth = $("#inputDataForm #producedWidth").val();
-                                var producedQty = $("#inputDataForm #producedQty").val();
-                                var itemLength = $("#inputDataForm #itemLength").val();
-                                var commercialInvoice = $("#inputDataForm #commercialInvoice").val();
-                                var commercialInvoiceDate = $("#inputDataForm #commercialInvoiceDate").val();
-                                var blNo = $("#inputDataForm #blNo").val();
-                                var blDate = $("#inputDataForm #blDate").val();
-                                var shippingLine = $("#inputDataForm #shippingLine").val();
-                                var shippingAgent = $("#inputDataForm #shippingAgent").val();
-                                var mtcRequiredYN = $("#inputDataForm #mtcRequiredYN").val();
-                                var mtcVerified = "N";
-                                if($("#inputDataForm #mtcVerified").is("checked")) {
-                                    mtcVerified = "Y";
-                                }
-                                var fobPrice = $("#inputDataForm #fobPrice").val();
-
-                                if(producedThickness != "") {
-                                    data["producedThickness"] = producedThickness;
-                                }
-                                if(producedWidth != "") {
-                                    data["producedWidth"] = producedWidth;
-                                }
-                                if(producedQty != "") {
-                                    data["producedQty"] = producedQty;
-                                }
-                                if(itemLength != "") {
-                                    data["itemLength"] = itemLength;
-                                }
-                                if(commercialInvoice != "") {
-                                    data["commercialInvoice"] = commercialInvoice;
-                                }
-                                if(commercialInvoiceDate != "") {
-                                    data["commercialInvoiceDate"] = commercialInvoiceDate;
-                                }
-                                if(blNo != "") {
-                                    data["blNo"] = blNo;
-                                }
-                                if(blDate != "") {
-                                    data["blDate"] = blDate;
-                                }
-                                if(shippingLine != "") {
-                                    data["shippingLine"] = shippingLine;
-                                }
-                                if(shippingAgent != "") {
-                                    data["shippingAgent"] = shippingAgent;
-                                }
-                                if(mtcRequiredYN != "") {
-                                    data["mtcRequiredYN"] = mtcRequiredYN;
-                                }
-                                if(mtcVerified != "") {
-                                    data["mtcVerified"] = mtcVerified;
-                                }
-                                if(fobPrice != "") {
-                                    data["fobPrice"] = fobPrice;
-                                }
-                                dt.row(rowIdx).data(data).draw();
-                            }
-                        }*/
-                        //itemListTable.$('tr.selected').removeClass('selected');
-                    }
-                }
-            ],
 			drawCallback : function(settings) {
 				totalPriceNQuantity(this.api(), "totalOrderQty", "totalOrderAmount");
 			},
@@ -390,6 +310,14 @@ console.log(selectRow);
 		// 그리드 Row 클릭 이벤트
 		$('#lotColoList tbody').on( 'dblclick', 'tr', function () {
 	        $(this).toggleClass('selected');
+	        if ( $(this).hasClass('selected') ) {
+                poListTable.button( 'selected:name' ).enable();
+            }
+
+            var selectedRowCnt = poListTable.rows(".selected").data().length;
+            if(selectedRowCnt == 0) {
+                poListTable.button( 'selected:name' ).disable();
+            }
 	    } );
 
 		// 그리드 Column 클릭 이벤트
@@ -455,6 +383,25 @@ console.log(selectRow);
             }
 	    });
 
+	    // customer Id 변경시 실행
+        $("input[name=customerId]").on("change lookup:changed", function() {
+            var customerId = $(this).val();
+
+            jQuery.ajax({
+                url: '<@ofbizUrl>/schCustomer</@ofbizUrl>',
+                type: 'POST',
+                data: {"customerId" : customerId},
+                error: function(msg) {
+                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                },
+                success: function(data) {
+                    if(data.resultState == "success") {
+                        $("input[name=customerNm]").val(data.returnDataInfo.customerName);
+                    }
+                }
+            });
+        });
+
 	    /***************************************************************************
 	     ******************			SelectBox Control			********************
 	     ***************************************************************************/
@@ -470,6 +417,55 @@ console.log(selectRow);
         $("#productId").on("change", function() {
             var curNm = $("#productId option:selected").text();
             $("#productNm").val(curNm);
+        });
+
+        $("#lotNo").on("change", function() {
+            var lotNo = $(this).val();
+            if($(this).val() == "") {
+                inputInit("lotCommonInfo");
+                inputInit("productDetail1");
+                inputInit("productDetail2");
+                $(this).val("").prop("selected", "selected");
+            } else {
+                var tableSize = poListTable.rows().data().length;
+                var count = 0;
+                if(tableSize > 0) {
+                    for(var i=0 ; tableSize > i ; i++) {
+                        if(count > 0) {
+                            break;
+                        }
+
+                        var rowLotNo = poListTable.rows(i).data().pluck("lotNo")[0];
+                        if(lotNo == rowLotNo) {
+                            $("#lotCommonInfo :input").each(function() {
+                                if($(this).prop("type") != "button") {
+                                    $(this).val(poListTable.rows(i).data().pluck($(this).attr("name"))[0]);
+                                }
+                            });
+
+                            $("input[name=customerId]").change();
+
+                            $("#productDetail1 :input").each(function() {
+                                if($(this).prop("type") != "button") {
+                                    $(this).val(poListTable.rows(i).data().pluck($(this).attr("name"))[0]);
+                                }
+                            });
+
+                            $("input[name=paintCode]").change();
+
+                            $("#productDetail2 :input").each(function() {
+                                if($(this).prop("type") != "button") {
+                                    $(this).val(poListTable.rows(i).data().pluck($(this).attr("name"))[0]);
+                                }
+                            });
+
+                            count++;
+                        }
+                    }
+                }
+
+                $(this).val( lotNo ).prop("selected", "selected");
+            }
         });
 
 	    /***************************************************************************
@@ -545,6 +541,56 @@ console.log(selectRow);
             poListTable.row.add(rowMap).columns.adjust().draw();
         });
 
+        $("#deleteOrderBtn").on("click", function() {
+            var selectRow = poListTable.rows( '.selected' ).indexes();
+            var deleteNewRow = new Array();
+            var deleteOrgRow = new Array();
+            var reqArray = new Array();
+
+            if(selectRow.length  > 0) {
+                for(var i=0 ; selectRow.length > i ; i++) {
+                    var rowIdx = selectRow[i];
+                    var data = poListTable.row(rowIdx).data();
+
+                    var referenceSeq = data["referenceSeq"];
+
+                    if(referenceSeq == null || referenceSeq == "") {
+                        deleteNewRow.push(rowIdx);
+                    } else {
+                        deleteOrgRow.push(rowIdx);
+                    }
+                }
+
+                if(deleteNewRow.length > 0) {
+                    poListTable.rows(deleteNewRow).remove().draw();
+                }
+
+                if(deleteOrgRow.length > 0) {
+                    reqArray = makeArrayData(poListTable.rows(deleteOrgRow).data());
+                    poListTable.rows(deleteOrgRow).remove().draw();
+
+                    jQuery.ajax({
+                        url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
+                        type: 'POST',
+                        data: {
+                            "crudMode" : "D",
+                            "reqData" : JSON.stringify(reqArray)
+                        },
+                        error: function(msg) {
+                            showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                        },
+                        success: function(data, status) {
+                            /*if(data.successStr == "success") {
+                                alert("PO Reference Delete Completed");
+                            } else {
+                                alert("PO Reference Delete Fail");
+                            }*/
+                        }
+                    });
+                }
+            }
+        });
+
         $("#submitBtn").on("click", function() {
             var reqData = poListTable.rows().data();
             var reqArray = makeArrayData(reqData);
@@ -607,10 +653,21 @@ console.log(selectRow);
 				</td>
 				<td width="1%"></td>
 				<td width="20%">
+				<#if poStatus == "PE">
+				    <select name="lotNo" id="lotNo" style="min-width:60px">
+                        <option value="">--Select</option>
+                    <#if lotList??>
+                        <#list lotList as codeInfo>
+                        <option value="${codeInfo.lotNo!}">LOT${codeInfo.lotNo!}</option>
+                        </#list>
+                    </#if>
+                    </select>
+				<#else>
 					<select name="lotNo" id="lotNo" style="min-width:60px">
 						<option value="">--Select</option>
 						<option value="01">LOT01</option>
 					</select>
+				</#if>
 					<input type="button" id="createLot" value="${uiLabelMap.createLotBtn}" class="buttontext" />
 					<input type="button" id="deleteLot" value="${uiLabelMap.deleteBtn}" class="buttontext" />
 				</td>
@@ -739,7 +796,7 @@ console.log(selectRow);
                 </td>
                 <td width="2%">&nbsp;</td>
                 <td colspan="7">
-                    <textarea name="note" id="note" rows="3">${poCommonInfo.note!}</textarea>
+                    <textarea name="note" id="note" rows="3"></textarea>
                 </td>
             </tr>
 		</table>
@@ -1007,6 +1064,7 @@ console.log(selectRow);
     <ul align="right">
         <input id="clearBtn" type="button" value="${uiLabelMap.clearBtn}" class="buttontext"/>
         <input id="addToOrderBtn" type="button" value="${uiLabelMap.addToOrderBtn}" class="buttontext"/>
+        <input id="deleteOrderBtn" type="button" value="${uiLabelMap.deleteRow}" class="buttontext"/>
     </ul>
 </div>
 <div class="clear">
@@ -1014,7 +1072,7 @@ console.log(selectRow);
 </#if>
 <div class="screenlet">
 	<form name="lotInfo" id="lotInfo" method="post">
-		<table class="display cell-border stripe" id="lotColoList" name="lotColoList">
+		<table class="display cell-border stripe" id="lotColoList" name="lotColoList" style="width:100%">
 			<thead>
 				<tr>
 					<th style="vertical-align: middle;">${uiLabelMap.lot}</th>
