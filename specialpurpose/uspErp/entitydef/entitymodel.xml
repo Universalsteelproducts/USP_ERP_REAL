@@ -391,9 +391,11 @@
                  title="Po Sub Total">
         <member-entity entity-alias="PQUP" entity-name="PoQtyUnitPrice"/>
         <member-entity entity-alias="PI" entity-name="PoInvoiceSubtotal"/>
+        <member-entity entity-alias="PS" entity-name="PoShipmentSubtotal"/>
 
         <alias-all entity-alias="PQUP" />
         <alias entity-alias="PI" field="invoicedQtySubTotal" name="invoicedQtySubTotal"/>
+        <alias entity-alias="PS" field="shipmentQtySubTotal" name="shipmentQtySubTotal"/>
 
         <view-link entity-alias="PQUP" rel-entity-alias="PI" rel-optional="true">
             <key-map field-name="poNo"/>
@@ -402,6 +404,23 @@
             <key-map field-name="productId"/>
             <key-map field-name="paintCode"/>
             <key-map field-name="paintName"/>
+            <key-map field-name="orderQty"/>
+            <key-map field-name="orderQtyLB"/>
+            <key-map field-name="unitPrice"/>
+            <key-map field-name="amount"/>
+        </view-link>
+
+        <view-link entity-alias="PQUP" rel-entity-alias="PS" rel-optional="true">
+            <key-map field-name="poNo"/>
+            <key-map field-name="lotNo"/>
+            <key-map field-name="referenceNo"/>
+            <key-map field-name="productId"/>
+            <key-map field-name="paintCode"/>
+            <key-map field-name="paintName"/>
+            <key-map field-name="orderQty"/>
+            <key-map field-name="orderQtyLB"/>
+            <key-map field-name="unitPrice"/>
+            <key-map field-name="amount"/>
         </view-link>
     </view-entity>
 
@@ -433,9 +452,35 @@
         <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
         <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
         <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
+        <alias entity-alias="R" field="orderQty" name="orderQty" group-by="true"/>
+        <alias entity-alias="R" field="orderQtyLB" name="orderQtyLB" group-by="true"/>
+        <alias entity-alias="R" field="unitPrice" name="unitPrice" group-by="true"/>
+        <alias entity-alias="R" field="amount" name="amount" group-by="true"/>
         <alias entity-alias="R" field="producedQty" name="invoicedQtySubTotal" function="sum"/>
         <entity-condition>
             <condition-expr field-name="commercialInvoiceNo" entity-alias="R" operator="not-equals" value=""/>
+        </entity-condition>
+
+    </view-entity>
+
+    <view-entity entity-name="PoShipmentSubtotal"
+                 package-name="usperp.order"
+                 title="Reference">
+        <member-entity entity-alias="R" entity-name="PoReference"/>
+
+        <alias entity-alias="R" field="poNo" name="poNo" group-by="true"/>
+        <alias entity-alias="R" field="lotNo" name="lotNo" group-by="true"/>
+        <alias entity-alias="R" field="referenceNo" name="referenceNo" group-by="true"/>
+        <alias entity-alias="R" field="productId" name="productId" group-by="true"/>
+        <alias entity-alias="R" field="paintCode" name="paintCode" group-by="true"/>
+        <alias entity-alias="R" field="paintName" name="paintName" group-by="true"/>
+        <alias entity-alias="R" field="orderQty" name="orderQty" group-by="true"/>
+        <alias entity-alias="R" field="orderQtyLB" name="orderQtyLB" group-by="true"/>
+        <alias entity-alias="R" field="unitPrice" name="unitPrice" group-by="true"/>
+        <alias entity-alias="R" field="amount" name="amount" group-by="true"/>
+        <alias entity-alias="R" field="producedQty" name="shipmentQtySubTotal" function="sum"/>
+        <entity-condition>
+            <condition-expr field-name="shipmentCreated" entity-alias="R" operator="not-equals" value=""/>
         </entity-condition>
 
     </view-entity>

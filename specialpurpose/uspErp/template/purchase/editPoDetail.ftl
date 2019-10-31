@@ -215,7 +215,7 @@
                     "name" : "orderThickness",
                     "data" : "orderThickness",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
                     },
                     "width" : "100px",
                     "className" : "dt-body-center"
@@ -224,7 +224,7 @@
                     "name" : "producedThickness",
                     "data" : "producedThickness",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
                     },
                     "width" : "100px",
                     "className" : "dt-body-center"
@@ -233,7 +233,12 @@
                     "name" : "orderWidth",
                     "data" : "orderWidth",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        data = checkNull(data);
+                        if(data.indexOf(".") == -1) {
+                            return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                        } else {
+                            return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
+                        }
                     },
                     "width" : "50px",
                     "className" : "dt-body-center"
@@ -242,7 +247,12 @@
                     "name" : "producedWidth",
                     "data" : "producedWidth",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        data = checkNull(data);
+                        if(data.indexOf(".") == -1) {
+                            return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                        } else {
+                            return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
+                        }
                     },
                     "width" : "50px",
                     "className" : "dt-body-center"
@@ -265,15 +275,6 @@
                     },
                     "width" : "90px",
                     "className" : "dt-body-center"
-                },
-                {
-                    "name" : "orderQty",
-                    "data" : "orderQty",
-                    "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
-                    },
-                    "width" : "90px",
-                    "className" : "dt-body-right"
                 },
                 {
                     "name" : "producedQty",
@@ -363,6 +364,11 @@
                 {
                     "name" : "qtyUnit",
                     "data" : "qtyUnit",
+                    "visible": false
+                },
+                {
+                    "name" : "orderQty",
+                    "data" : "orderQty",
                     "visible": false
                 }
             ],
@@ -466,7 +472,7 @@
                     text: 'Download CSV Upload Form',
                     className: "buttonsToHide",
                     exportOptions: {
-                            columns: [16, 1, 2, 3, 19, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+                            columns: [15, 1, 2, 3, 18, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                     },
                     //Function which customize the CSV (input : csv is the object that you can preprocesss)
                     customize: function (csv) {
@@ -475,7 +481,7 @@
 
                         //Remove the row one to personnalize the headers
                         var newSplit_csv = "".split("\n");
-                        newSplit_csv[0] = 'poNo,lotNo,referenceNo,itemId,productId,productNm,paintCode,paintName,orderThickness,producedThickness,orderWidth,producedWidth,fobPoint,orderQty,producedQty,itemLength,unitPrice';
+                        newSplit_csv[0] = 'poNo,lotNo,referenceNo,itemId,productId,productNm,paintCode,paintName,orderThickness,producedThickness,orderWidth,producedWidth,fobPoint,producedQty,itemLength,unitPrice';
 
                         //For each row except the first one (header)
                         var newIdx = 1;
@@ -485,8 +491,8 @@
                                 console.log(index);
                             if(csv_cell_array[9] == ""
                                 && csv_cell_array[11] == ""
-                                && csv_cell_array[14] == ""
-                                && csv_cell_array[15] == "") {
+                                && csv_cell_array[13] == ""
+                                && csv_cell_array[14] == "") {
                                 //Remove replace the two quotes which are left at the beginning and the end (first and last cell)
                                 csv_cell_array[0] = csv_cell_array[0].replace(/"/g, '');
                                 csv_cell_array[(csv_cell_array.length-1)] = csv_cell_array[(csv_cell_array.length-1)].replace(/"/g, '');
@@ -540,7 +546,7 @@
 
             var tableData = itemListTable.row(this).data();
             var qtyUnit = tableData["qtyUnit"];
-            selectedColTotal(itemListTable, ["producedThickness,,2", "producedWidth,,6", "producedQty," + qtyUnit + ",10", "itemLength,,14"]);
+            selectedColTotal(itemListTable, ["producedThickness,,2", "producedWidth,,6", "producedQty," + "LB" + ",10", "itemLength,,14"]);
         });
 
         var shipmentSatusList = $("#shipmentSatusList").DataTable({
@@ -773,6 +779,8 @@
                                     }
                                 }
                             }
+
+                            console.log(eqDataCnt);
 
                             if(eqDataCnt == 0) {
                                 if(rowIdxArry != "") {
@@ -1043,7 +1051,7 @@
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.thickness}</th>
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.width}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.fobPoint}</th>
-                        <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.qty}</th>
+                        <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.producedQty}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.itemLength}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.unitCost}</th>
                     </tr>
@@ -1052,8 +1060,6 @@
                         <th style="vertical-align: middle;">${uiLabelMap.producedThickness}</th>
                         <th style="vertical-align: middle;">${uiLabelMap.orderWidth}</th>
                         <th style="vertical-align: middle;">${uiLabelMap.producedWidth}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
                     </tr>
                 </thead>
                 <tbody>
