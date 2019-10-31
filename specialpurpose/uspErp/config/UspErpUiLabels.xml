@@ -485,7 +485,7 @@
         <value xml:lang="en">QTY Unit</value>
     </property>
     <property key="unitPrice">
-        <value xml:lang="en">Unit Price</value>
+        <value xml:lang="en">Unit Cost ($/MT)</value>
     </property>
     <property key="totalPrice">
         <value xml:lang="en">Total Price</value>
@@ -566,7 +566,7 @@
         <value xml:lang="en">Gauge Control (Yield Control:LB/FT)</value>
     </property>
     <property key="totalQuantity">
-        <value xml:lang="en">Total Order QTY</value>
+        <value xml:lang="en">Total Order QTY(MT)</value>
     </property>
     <property key="vendorAddr">
         <value xml:lang="en">Address</value>
