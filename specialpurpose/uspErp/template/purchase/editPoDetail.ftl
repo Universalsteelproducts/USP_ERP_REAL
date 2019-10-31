@@ -122,7 +122,7 @@
                     "data" : "orderQty",
                     "width" : "90px",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data*2204.62);
                     },
                     "className" : "dt-body-right"
                 },
@@ -887,28 +887,14 @@
     					<!--<th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.width}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>-->
-    					<th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
-    					<th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
+    					<th style="vertical-align: middle;">${uiLabelMap.orderQtyLB}</th>
+    					<th style="vertical-align: middle;">${uiLabelMap.producedQtyLB}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.invoicedQty}</th>
     				</tr>
     			</thead>
     			<tbody>
     			</tbody>
     			<tfoot>
-    				<tr>
-    					<th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.lot}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.internalRef}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.productId}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-                        <!--<th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.width}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>-->
-                        <th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.invoicedQty}</th>
-    				</tr>
     			</tfoot>
     		</table>
     	</form>
@@ -942,7 +928,7 @@
                         <input type="text" name="producedWidth" id="producedWidth" />
                     </td>
                     <td class="label" width="13%" align="right">
-                        ${uiLabelMap.producedQty}
+                        ${uiLabelMap.producedQtyLB}
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
@@ -1063,7 +1049,7 @@
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.thickness}</th>
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.width}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.fobPoint}</th>
-                        <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.producedQty}</th>
+                        <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.producedQtyLB}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.itemLength}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.unitCost}</th>
                     </tr>
@@ -1134,27 +1120,13 @@
                         <th style="vertical-align: middle;">${uiLabelMap.width}</th>
                         <th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
                         <th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
+                        <th style="vertical-align: middle;">${uiLabelMap.producedQtyLB}</th>
                         <th style="vertical-align: middle;">${uiLabelMap.invoicedQty}</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.lot}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.internalRef}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.productId}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.width}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.orderQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.producedQty}</th>
-                        <th style="vertical-align: middle;">${uiLabelMap.invoicedQty}</th>
-                    </tr>
                 </tfoot>
             </table>
         </form>

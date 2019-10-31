@@ -241,24 +241,24 @@ under the License.
                     </#if>
                     </td>
                     <td class="label" width="13%" align="right">
-                        ${uiLabelMap.freightTerm}
+                        ${uiLabelMap.paymentTerm}
                     </td>
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
                     <#if pageAction == "edit">
-                        <#if paymentMethodType??>
-                            <#list paymentMethodType as paymentMethodTypeInfo>
-                                <#if poCommonInfo.freightTerm! == paymentMethodTypeInfo.paymentMethodTypeId!>
-                                    ${paymentMethodTypeInfo.description!}
+                        <#if paymentTerm??>
+                            <#list paymentTerm as paymentTermInfo>
+                                <#if poCommonInfo.paymentTerm! == paymentTerm.paymentTermId!>
+                                    ${paymentTerm.paymentTermNm!}
                                 </#if>
                             </#list>
                         </#if>
                     <#else>
-                        <select name="freightTerm" id="freightTerm" style="min-width:60px">
+                        <select name="paymentTerm" id="paymentTerm" style="min-width:60px">
                             <option value="">--Select</option>
-                        <#if paymentMethodType??>
-                            <#list paymentMethodType as paymentMethodTypeInfo>
-                            <option value="${paymentMethodTypeInfo.paymentMethodTypeId!}">${paymentMethodTypeInfo.description!}</option>
+                        <#if paymentTerm??>
+                            <#list paymentTerm as paymentTermInfo>
+                            <option value="${paymentTermInfo.paymentTermId!}">${paymentTermInfo.paymentTermNm!}</option>
                             </#list>
                         </#if>
                         </select>
@@ -303,29 +303,16 @@ under the License.
                     </#if>
 					</td>
                     <td class="label" width="13%" align="right">
-                        ${uiLabelMap.paymentTerm}
-                    </td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="20%">
-                    <#if pageAction == "edit">
-                        <#if paymentTerm??>
-                            <#list paymentTerm as paymentTermInfo>
-                                <#if poCommonInfo.paymentTerm! == paymentTerm.paymentTermId!>
-                                    ${paymentTerm.paymentTermNm!}
-                                </#if>
-                            </#list>
-                        </#if>
-                    <#else>
-                        <select name="paymentTerm" id="paymentTerm" style="min-width:60px">
-                            <option value="">--Select</option>
-                        <#if paymentTerm??>
-                            <#list paymentTerm as paymentTermInfo>
-                            <option value="${paymentTermInfo.paymentTermId!}">${paymentTermInfo.paymentTermNm!}</option>
-                            </#list>
-                        </#if>
-                        </select>
-                    </#if>
-                    </td>
+						${uiLabelMap.downPayment}
+					</td>
+					<td width="2%">&nbsp;</td>
+					<td width="20%">
+					<#if pageAction == "edit">
+						${poCommonInfo.downPayment?default(0)?string(',##0.00')}
+					<#else>
+						$ <input type="text" name="downPayment" id="downPayment" value='' size="17" maxlength="255" style="text-align:right;" />
+					</#if>
+					</td>
                     <td class="label" width="12%" align="right">
                         ${uiLabelMap.totalQuantity}
                     </td>
@@ -356,15 +343,9 @@ under the License.
                     </#if>
                     </td>
                     <td class="label" width="13%" align="right">
-						${uiLabelMap.downPayment}
 					</td>
 					<td width="2%">&nbsp;</td>
 					<td width="20%">
-					<#if pageAction == "edit">
-						${poCommonInfo.downPayment?default(0)?string(',##0.00')}
-					<#else>
-						$ <input type="text" name="downPayment" id="downPayment" value='' size="17" maxlength="255" style="text-align:right;" />
-					</#if>
 					</td>
                     <td class="label" width="12%" align="right">
                         ${uiLabelMap.totalPoAmount}

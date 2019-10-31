@@ -260,9 +260,83 @@ under the License.
                     "visible": false
                 }
 			],
-			rowCallback : function( row, data, displayNum, displayIndex, dataIndex ) {
+			buttons: [
+                {
+                    extend: 'selected',
+                    className: "buttonsToHide",
+                    name: 'selected',
+                    text: "${uiLabelMap.applySelectedBtn}",
+                    action: function ( e, dt, button, config ) {
+                        var selectRow = dt.rows( '.selected' ).data();
+console.log(selectRow);
+                        /*if(selectRow.length  > 0) {
+                            for(var i=0 ; selectRow.length > i ; i++) {
+                                var rowIdx = selectRow[i];
+                                var data = dt.row(rowIdx).data();
 
-			},
+                                var producedThickness = $("#inputDataForm #producedThickness").val();
+                                var producedWidth = $("#inputDataForm #producedWidth").val();
+                                var producedQty = $("#inputDataForm #producedQty").val();
+                                var itemLength = $("#inputDataForm #itemLength").val();
+                                var commercialInvoice = $("#inputDataForm #commercialInvoice").val();
+                                var commercialInvoiceDate = $("#inputDataForm #commercialInvoiceDate").val();
+                                var blNo = $("#inputDataForm #blNo").val();
+                                var blDate = $("#inputDataForm #blDate").val();
+                                var shippingLine = $("#inputDataForm #shippingLine").val();
+                                var shippingAgent = $("#inputDataForm #shippingAgent").val();
+                                var mtcRequiredYN = $("#inputDataForm #mtcRequiredYN").val();
+                                var mtcVerified = "N";
+                                if($("#inputDataForm #mtcVerified").is("checked")) {
+                                    mtcVerified = "Y";
+                                }
+                                var fobPrice = $("#inputDataForm #fobPrice").val();
+
+                                if(producedThickness != "") {
+                                    data["producedThickness"] = producedThickness;
+                                }
+                                if(producedWidth != "") {
+                                    data["producedWidth"] = producedWidth;
+                                }
+                                if(producedQty != "") {
+                                    data["producedQty"] = producedQty;
+                                }
+                                if(itemLength != "") {
+                                    data["itemLength"] = itemLength;
+                                }
+                                if(commercialInvoice != "") {
+                                    data["commercialInvoice"] = commercialInvoice;
+                                }
+                                if(commercialInvoiceDate != "") {
+                                    data["commercialInvoiceDate"] = commercialInvoiceDate;
+                                }
+                                if(blNo != "") {
+                                    data["blNo"] = blNo;
+                                }
+                                if(blDate != "") {
+                                    data["blDate"] = blDate;
+                                }
+                                if(shippingLine != "") {
+                                    data["shippingLine"] = shippingLine;
+                                }
+                                if(shippingAgent != "") {
+                                    data["shippingAgent"] = shippingAgent;
+                                }
+                                if(mtcRequiredYN != "") {
+                                    data["mtcRequiredYN"] = mtcRequiredYN;
+                                }
+                                if(mtcVerified != "") {
+                                    data["mtcVerified"] = mtcVerified;
+                                }
+                                if(fobPrice != "") {
+                                    data["fobPrice"] = fobPrice;
+                                }
+                                dt.row(rowIdx).data(data).draw();
+                            }
+                        }*/
+                        //itemListTable.$('tr.selected').removeClass('selected');
+                    }
+                }
+            ],
 			drawCallback : function(settings) {
 				totalPriceNQuantity(this.api(), "totalOrderQty", "totalOrderAmount");
 			},
@@ -406,7 +480,7 @@ under the License.
             lotIdx = lotIdx >= 10 ? lotIdx : '0' + lotIdx;
             $("#lotCommonInfo #lotNo").append("<option value='" + lotIdx + "'>LOT" + lotIdx + "</option>");
 
-            inputInit("lotDetail");
+            inputInit("lotCommonInfo");
             inputInit("productDetail1");
             inputInit("productDetail2");
 
@@ -424,7 +498,7 @@ under the License.
         });
 
         $("#clearBtn").on("click", function() {
-            inputInit("lotDetail");
+            inputInit("lotCommonInfo");
             inputInit("productDetail1");
             inputInit("productDetail2");
             //$("#lotColoList tbody").children().remove();
@@ -514,7 +588,7 @@ under the License.
         });
 	});
 </script>
-<#if pageAction == "new">
+<#if poStatus == "PE" || poStatus == "">
 <!-- LOT Info -->
 <div class="screenlet">
 	<div class="screenlet-title-bar">
