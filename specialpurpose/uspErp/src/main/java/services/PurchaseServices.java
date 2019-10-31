@@ -43,6 +43,8 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ofbiz.base.conversion.ConversionException;
+import org.apache.ofbiz.base.conversion.DateTimeConverters;
 import org.apache.ofbiz.base.conversion.JSONConverters;
 import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.StringUtil;
@@ -318,8 +320,10 @@ public class PurchaseServices {
 										String str = jsonobj.getString(key);
 										double dbl = Double.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(dbl);
-									} else if ("etd".equals(key) || "eta".equals(key) || "blDate".equals(key)) {
-										value = (Timestamp) jsonobj.get(key);
+									} else if ("exwEtd".equals(key) || "fobPointEta".equals(key) || "blDate".equals(key)) {
+										String test = jsonobj.getString(key);
+										DateTimeConverters.StringToTimestamp stringToTimestamp = new DateTimeConverters.StringToTimestamp();
+										value = stringToTimestamp.convert(test);
 									} else {
 										value = jsonobj.getString(key);
 									}
@@ -414,7 +418,7 @@ public class PurchaseServices {
 							.queryOne();
 					resultList.add(poMasterInfo);
 				}
-			} catch (GenericEntityException e){
+			} catch (GenericEntityException | ConversionException e){
 				Debug.logError(e, "Cannot CRUDPoList ", module);
 			}
 		}

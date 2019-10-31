@@ -442,9 +442,18 @@ under the License.
                                 }
                             });
 
-                            $("input[name=customerId]").change();
+                            if($("input[name=customerId]").val() != "") {
+                                $("input[name=customerId]").change();
+                            }
 
-                            $("#productDetail1 :input").each(function() {
+                            var exwEtd = $("input[name=exwEtd]").val();
+                            var fobPointEta = $("input[name=exwEtd]").val();
+                            $("input[name=exwEtd]").val(timeTodateFormat(exwEtd));
+                            $("input[name=fobPointEta]").val(timeTodateFormat(fobPointEta));
+                            $("input[name=exwEtd]").change();
+                            $("input[name=fobPointEta]").change();
+
+                            /*$("#productDetail1 :input").each(function() {
                                 if($(this).prop("type") != "button") {
                                     $(this).val(poListTable.rows(i).data().pluck($(this).attr("name"))[0]);
                                 }
@@ -456,7 +465,7 @@ under the License.
                                 if($(this).prop("type") != "button") {
                                     $(this).val(poListTable.rows(i).data().pluck($(this).attr("name"))[0]);
                                 }
-                            });
+                            });*/
 
                             count++;
                         }
@@ -464,6 +473,27 @@ under the License.
                 }
 
                 $(this).val( lotNo ).prop("selected", "selected");
+            }
+        });
+
+        $("select").on("change", function() {
+            var entityName = $(this).find("option:selected").attr("entity-name");
+            var codeId = $(this).find("option:selected").attr("code-id");
+            var codeNm = $(this).find("option:selected").attr("code-nm");
+            if($(this).val() == "OT") {
+                var option = {
+                    url : "/uspErp/control/LookupAddCode",
+                    width : 600,
+                    height : 630,
+                    title : "${uiLabelMap.addCodeLookup}",
+                    formId : "lookupForm",
+                    data : {
+                        "entityName": entityName,
+                        "codeId": codeId,
+                        "codeNm": codeNm
+                    }
+                };
+                openDialog.open(option);
             }
         });
 
@@ -592,6 +622,7 @@ under the License.
 
         $("#submitBtn").on("click", function() {
             var reqData = poListTable.rows().data();
+            console.log(reqData);
             var reqArray = makeArrayData(reqData);
             $("#crudMode").val("C");
 
@@ -652,7 +683,7 @@ under the License.
 				</td>
 				<td width="1%"></td>
 				<td width="20%">
-				<#if poStatus == "PE">
+				<#if pageAction == "edit">
 				    <select name="lotNo" id="lotNo" style="min-width:60px">
                         <option value="">--Select</option>
                     <#if lotList??>
@@ -675,14 +706,14 @@ under the License.
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="20%">
-                    <input type="text" name="exwEtd" id="exwEtd" value="" size="25" maxlength="255"/>
+                    <@htmlTemplate.renderDateTimeField name="exwEtd" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="exwEtd" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                 </td>
                 <td class="label" width="12%" align="right">
                     ${uiLabelMap.fobPointEta}
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="20%">
-                    <input type="text" name="fobPointEta" id="fobPointEta" value="" size="25" maxlength="255"/>
+                    <@htmlTemplate.renderDateTimeField name="fobPointEta" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="fobPointEta" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                 </td>
 			</tr>
 			<tr>
@@ -826,6 +857,7 @@ under the License.
                         <option value="${steelTypeInfo.steelTypeId!}" >${steelTypeInfo.steelTypeNm!}</option>
                         </#list>
                     </#if>
+                        <option value="OT" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">Other</option>
                     </select>
                 </td>
                 <td class="label" width="12%" align="right">

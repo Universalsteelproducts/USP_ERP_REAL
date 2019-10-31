@@ -301,11 +301,11 @@
         <field name="referenceNo" type="id-long-ne"></field>
         <field name="lotNo" type="id-long-ne"></field>
         <field name="fobPoint" type="id-long"></field>
-        <field name="fobPointEta" type="id-long"></field>
+        <field name="fobPointEta" type="date-time"></field>
         <field name="destination" type="id-long"></field>
         <field name="purchaseClass" type="long-varchar"></field>
         <field name="exw" type="id-long"></field>
-        <field name="exwEtd" type="id-long"></field>
+        <field name="exwEtd" type="date-time"></field>
         <field name="barge" type="indicator"></field>
         <field name="soNo" type="id-long"></field>
         <field name="shipmentNo" type="id-long-ne"></field>

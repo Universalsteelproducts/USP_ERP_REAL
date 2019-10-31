@@ -460,3 +460,32 @@ var selectedColTotal = function(tableObj, setColNUnitNIdxArry) {
         }
     }
 }
+
+var timeTodateFormat = function(inputDate) {
+    var date = new Date();
+    date.setTime(inputDate);
+    var d = date.getDate();
+    if(d < 10) {
+        d = "0" + d;
+    }
+    var m = date.getMonth();
+    m += 1;
+    if(m < 10) {
+        m = "0" + m;
+    }
+    var y = date.getFullYear();
+    var h = date.getHours();
+    if(h < 10) {
+        h = "0" + h;
+    }
+    var M = date.getMinutes();
+    if(M < 10) {
+        M = "0" + M;
+    }
+    var s = date.getSeconds();
+    if(s < 10) {
+        s = "0" + s;
+    }
+
+    return y + "-" + m + "-" + d  + " " + h + ":" + M + ":" + s;
+}
