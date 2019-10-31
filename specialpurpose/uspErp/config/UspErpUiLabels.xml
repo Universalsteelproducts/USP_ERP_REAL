@@ -284,7 +284,7 @@
         <value xml:lang="en">Unit Cost($/MT)</value>
     </property>
     <property key="amount">
-        <value xml:lang="en">Amount</value>
+        <value xml:lang="en">Amount($)</value>
     </property>
     <property key="orderQtyLB">
         <value xml:lang="en">Order QTY(LB)</value>
@@ -530,7 +530,7 @@
     </property>
 
     <property key="civAmount">
-        <value xml:lang="en">CIV Amount</value>
+        <value xml:lang="en">CIV Amount($)</value>
     </property>
     <property key="plDocFileYN">
         <value xml:lang="en">P/L?</value>
@@ -581,7 +581,7 @@
         <value xml:lang="en">Fax</value>
     </property>
     <property key="totalPoAmount">
-        <value xml:lang="en">Total Order Amount</value>
+        <value xml:lang="en">Total Order Amount($)</value>
     </property>
     <property key="internalNote">
         <value xml:lang="en">Internal Note</value>
@@ -619,7 +619,7 @@
         <value xml:lang="en">Stage</value>
     </property>
     <property key="lotNo">
-        <value xml:lang="en">LOT</value>
+        <value xml:lang="en">Lot</value>
     </property>
     <property key="etd">
         <value xml:lang="en">ETD</value>
@@ -667,7 +667,7 @@
         <value xml:lang="en">Steel Cost($/MT)</value>
     </property>
     <property key="civAmount">
-        <value xml:lang="en">CIV Amount</value>
+        <value xml:lang="en">CIV Amount($)</value>
     </property>
     <property key="shippingDoc">
         <value xml:lang="en">Shipping DOC,Received Status</value>
@@ -725,7 +725,7 @@
         <value xml:lang="en">Fulfillment</value>
     </property>
 
-    <property key="producedQty">
+    <property key="producedQtyLB">
         <value xml:lang="en">Produced QTY(LB)</value>
     </property>
 
