@@ -163,6 +163,7 @@
     <Vendor vendorId="YE" vendorNm="Yieh Phui America Inc" vendorInitials="YE" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="2" description="" />
     <Vendor vendorId="TM" vendorNm="Ternium USA Inc" vendorInitials="TM" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="3" description="" />
     <Vendor vendorId="GD" vendorNm="Galvasid" vendorInitials="GD" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="4" description="" />
+    <Vendor vendorId="FLK" vendorNm="Flack" vendorInitials="FLK" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="5" description="" />
 
     <Customer customerId="AMR" customerName="AMERICAN ROOFING PRODUCTS" contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="1" description="" />
     <Customer customerId="CDC" customerName="CDC METALS INC." contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="2" description="" />

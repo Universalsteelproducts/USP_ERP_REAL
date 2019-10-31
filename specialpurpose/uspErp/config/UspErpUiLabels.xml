@@ -56,7 +56,7 @@
         <value xml:lang="en">Processing Order</value>
     </property>
     <property key="ShippingDocumentManagement">
-        <value xml:lang="en">Shipping Document Managemen</value>
+        <value xml:lang="en">Shipping Document Management</value>
     </property>
 
     <property key="Inventory">
@@ -194,7 +194,7 @@
         <value xml:lang="en">Add To Order Detail</value>
     </property>
     <property key="savePo">
-        <value xml:lang="en">Savev Purchase Order</value>
+        <value xml:lang="en">Save Purchase Order</value>
     </property>
     <property key="applySelectedBtn">
         <value xml:lang="en">Apply Selected</value>
@@ -209,7 +209,7 @@
         <value xml:lang="en">Upload CSV File</value>
     </property>
     <property key="createPurchaseShippmentBtn">
-        <value xml:lang="en">Create Purchase Shippment</value>
+        <value xml:lang="en">Create Purchase Shipment</value>
     </property>
     <property key="completeBtn">
         <value xml:lang="en">Complete Order</value>
@@ -224,7 +224,7 @@
         <value xml:lang="en">PO Status</value>
     </property>
     <property key="poNo">
-        <value xml:lang="en">PO #</value>
+        <value xml:lang="en">PO Number</value>
     </property>
     <property key="lot">
         <value xml:lang="en">Lot</value>
@@ -239,7 +239,7 @@
         <value xml:lang="en">Destination</value>
     </property>
     <property key="soNo">
-        <value xml:lang="en">Sales Order #</value>
+        <value xml:lang="en">Sales Order Number</value>
     </property>
     <property key="supplier">
         <value xml:lang="en">Supplier</value>
@@ -260,7 +260,7 @@
         <value xml:lang="en">Paint Code</value>
     </property>
     <property key="paintName">
-        <value xml:lang="en">Paint Name</value>
+        <value xml:lang="en">Paint Color</value>
     </property>
     <property key="paintBrand">
         <value xml:lang="en">Paint Brand</value>
@@ -269,7 +269,7 @@
         <value xml:lang="en">Paint Type</value>
     </property>
     <property key="orderQtyMT">
-        <value xml:lang="en">Order Qty(MT)</value>
+        <value xml:lang="en">Order Quantity(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
@@ -278,13 +278,13 @@
         <value xml:lang="en">Amount</value>
     </property>
     <property key="orderQtyLB">
-        <value xml:lang="en">Order Qty(LB)</value>
+        <value xml:lang="en">Order Quantity(LB)</value>
     </property>
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
     <property key="producedQty">
-        <value xml:lang="en">Produced Qty(MT)</value>
+        <value xml:lang="en">Produced Quantity(MT)</value>
     </property>
     <property key="producedThickness">
         <value xml:lang="en">Produced Thickness</value>
@@ -302,7 +302,7 @@
         <value xml:lang="en">Invoiced Qty</value>
     </property>
     <property key="shipmentCreated">
-        <value xml:lang="en">Shipment Created</value>
+        <value xml:lang="en">Shipment Created Amount (LB)</value>
     </property>
     <property key="customerId">
         <value xml:lang="en">Customer</value>
