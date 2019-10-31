@@ -296,13 +296,12 @@ under the License.
                     }, 0 );
 
                 // Update footer
-                var qtyUnit = $("#qtyUnit").val();
-                var priceUnitText = $("#priceUnitText").val();
+                var qtyUnit = $("#qtyUnitText").val();
                 $( api.column( 7 ).footer() ).html(
-                    'Weight Total : '+pageWeightTotal + ' ' + qtyUnit + '('+ weightTotal + ' ' + qtyUnit + ' total)'
+                    'Weight # : '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(pageWeightTotal) + ' ' + qtyUnit + '('+ $.fn.dataTable.render.number( ',', '.', 2, '').display(weightTotal) + ' ' + qtyUnit + ')'
                 );
                 $( api.column( 11 ).footer() ).html(
-                    'Amount Total : '+pageAmountTotal +' ' + priceUnitText + '( '+ amountTotal + ' ' + priceUnitText + ' total)'
+                    'Amount # : $ '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) +' ( $ '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ')'
                 );
             }
 	    });
