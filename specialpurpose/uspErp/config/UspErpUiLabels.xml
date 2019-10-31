@@ -269,7 +269,7 @@
         <value xml:lang="en">Paint Type</value>
     </property>
     <property key="orderQtyMT">
-        <value xml:lang="en">Order Quantity(MT)</value>
+        <value xml:lang="en">Order Qty(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
@@ -278,13 +278,13 @@
         <value xml:lang="en">Amount</value>
     </property>
     <property key="orderQtyLB">
-        <value xml:lang="en">Order Quantity(LB)</value>
+        <value xml:lang="en">Order Qty(LBS)</value>
     </property>
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
     <property key="producedQty">
-        <value xml:lang="en">Produced Quantity(MT)</value>
+        <value xml:lang="en">Produced Qty(MT)</value>
     </property>
     <property key="producedThickness">
         <value xml:lang="en">Produced Thickness</value>
@@ -302,7 +302,7 @@
         <value xml:lang="en">Invoiced Qty</value>
     </property>
     <property key="shipmentCreated">
-        <value xml:lang="en">Shipment Created Amount (LB)</value>
+        <value xml:lang="en">Shipment Created Qty(LBS)</value>
     </property>
     <property key="customerId">
         <value xml:lang="en">Customer</value>
@@ -311,7 +311,7 @@
         <value xml:lang="en">Customer</value>
     </property>
     <property key="internalRef">
-        <value xml:lang="en">Internal Ref #</value>
+        <value xml:lang="en">Internal Ref Number </value>
     </property>
     <property key="item">
         <value xml:lang="en">Item</value>
@@ -551,7 +551,7 @@
         <value xml:lang="en">Customer Name</value>
     </property>
     <property key="gaugeControlYield">
-        <value xml:lang="en">Guage Control Yield</value>
+        <value xml:lang="en">Gauge Control Yield</value>
     </property>
     <property key="totalQuantity">
         <value xml:lang="en">Total Order Qty</value>
@@ -600,14 +600,14 @@
         <value xml:lang="en">Coil Grade</value>
     </property>
     <property key="gaugeControlYield">
-        <value xml:lang="en">Guage Control Yield</value>
+        <value xml:lang="en">Gauge Control Yield</value>
     </property>
 
     <property key="stage">
         <value xml:lang="en">Stage</value>
     </property>
     <property key="lotNo">
-        <value xml:lang="en">LOT#</value>
+        <value xml:lang="en">LOT</value>
     </property>
     <property key="etd">
         <value xml:lang="en">ETD</value>
@@ -682,7 +682,7 @@
         <value xml:lang="en">New Purchase Order</value>
     </property>
     <property key="newProc">
-        <value xml:lang="en">New Processint Order</value>
+        <value xml:lang="en">New Processing Order</value>
     </property>
     <property key="lastUpdateUserId">
         <value xml:lang="en">Last Update User</value>
@@ -695,7 +695,7 @@
     </property>
 
     <property key="lotInfo">
-        <value xml:lang="en">LOT Detail</value>
+        <value xml:lang="en">Lot Detail</value>
     </property>
     <property key="poInfo">
         <value xml:lang="en">Purchase Order Information</value>
