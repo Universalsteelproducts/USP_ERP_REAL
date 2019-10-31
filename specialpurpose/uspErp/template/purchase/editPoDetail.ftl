@@ -1066,9 +1066,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="2" style="text-align:right">Produced Thickness :</th>
                         <th colspan="2" style="text-align:right"></th>
-                        <th colspan="2" style="text-align:right">Produced Width :</th>
+                        <th colspan="2" style="text-align:right"></th>
+                        <th colspan="2" style="text-align:right"></th>
                         <th colspan="2" style="text-align:right"></th>
                         <th colspan="2" style="text-align:right">Produced Qty :</th>
                         <th colspan="2" style="text-align:right"></th>
