@@ -49,6 +49,26 @@ under the License.
             });
         });
 
+        // customer Id 변경시 실행
+        $("input[name=supplierId]").on("change lookup:changed", function() {
+            var supplierId = $(this).val();
+
+            jQuery.ajax({
+                url: '<@ofbizUrl>/schSupplier</@ofbizUrl>',
+                type: 'POST',
+                data: {"supplierId" : supplierId},
+                error: function(msg) {
+                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                },
+                success: function(data) {
+                    if(data.resultState == "success") {
+                        $("#supplierNm").val(data.returnDataInfo.vendorNm);
+                        $("#supplierInitials").val(data.returnDataInfo.vendorInitials);
+                    }
+                }
+            });
+        });
+
 	    /***************************************************************************
 	     ******************			SelectBox Control			********************
 	     ***************************************************************************/
@@ -219,12 +239,14 @@ under the License.
 					<td width="2%">&nbsp;</td>
 					<td width="20%">
 					<#if pageAction == "edit">
-						${poCommonInfo.supplierId!}
+						${poCommonInfo.supplierNm!}
+						<input type="hidden" name="supplierId" id="supplierNm" value="${poCommonInfo.supplierId!}" />
 					<#else>
 						<!-- set_multivalues -->
 						<@htmlTemplate.lookupField value="${poCommonInfo.supplierId!}" formName="poInfoForm" name="supplierId" id="supplierId" fieldFormName="LookupSupplier" position="center" />
 					</#if>
-						<input type="hidden" name="supplierInitials" id="supplierInitials" value="" size="25" maxlength="255"/>
+						<input type="hidden" name="supplierNm" id="supplierNm" value="" />
+						<input type="hidden" name="supplierInitials" id="supplierInitials" value="" />
 					</td>
 				</tr>
 				<tr>

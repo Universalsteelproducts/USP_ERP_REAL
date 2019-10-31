@@ -278,11 +278,11 @@ under the License.
 
                 // Update footer
                 $( api.column( 14 ).footer() ).html(
-                    '<font color="red">Order Qty(MT) #</font> : ' +
+                    '<font color="red">Order Qty(MT) Total</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyMTTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyMTTotal) + ' MT), ' +
-                    '<font color="red">Amount #</font> : ' +
+                    '<font color="red">Amount Total</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ' MT), ' +
-                    '<font color="red">Order Qty(LB) #</font> : ' +
+                    '<font color="red">Order Qty(LB) Total</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyLBTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyLBTotal) + ' MT)'
                 );
             }
@@ -371,13 +371,13 @@ under the License.
 		});
 
 		$("#allClearBtn").on("click", function() {
-		    inputInit("schCondition");
+            inputInit("schCondition");
 
-		    $("input[name=schOrderFromDate]").val("${orderFromDate?string('yyyy-MM-dd')}");
-		    $("input[name=schOrderFromDate]").change();
-		    $("input[name=schOrderToDate]").val("${orderToDate?string('yyyy-MM-dd')}");
-		    $("input[name=schOrderToDate]").change();
-		});
+            $("input[name=schOrderFromDate]").val("${orderFromDate?string('yyyy-MM-dd')}");
+            $("input[name=schOrderFromDate]").change();
+            $("input[name=schOrderToDate]").val("${orderToDate?string('yyyy-MM-dd')}");
+            $("input[name=schOrderToDate]").change();
+        });
 	});
 </script>
 

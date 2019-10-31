@@ -65,6 +65,11 @@ if(poNo != null && poNo != "") {
     crudMode = "R"
     poCommonInfo = from("PoMaster").where("poNo", poNo).queryOne()
     context.poStatus = parameters.poStatus
+
+    lotList = select("lotNo").from("PoReference").where("poNo", poNo).orderBy("lotNo ASC").distinct().queryList()
+
+    PoInvoiceSubtotal = from("PoInvoiceSubtotal").where("poNo", poNo).queryList()
+    println PoInvoiceSubtotal.toString()
 }
 
 context.pageAction = pageAction
