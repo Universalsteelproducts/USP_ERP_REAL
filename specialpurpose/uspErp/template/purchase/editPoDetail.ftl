@@ -546,7 +546,7 @@
 
             var tableData = itemListTable.row(this).data();
             var qtyUnit = tableData["qtyUnit"];
-            selectedColTotal(itemListTable, ["producedThickness,,2", "producedWidth,,6", "producedQty," + "LB" + ",10", "itemLength,,14"]);
+            selectedColTotal(itemListTable, ["producedQty," + "LB" + ",10", "itemLength,,14"]);
         });
 
         var shipmentSatusList = $("#shipmentSatusList").DataTable({
