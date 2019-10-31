@@ -341,7 +341,7 @@ under the License.
                     <td width="1%">&nbsp;</td>
                     <td width="20%">
                     <#if pageAction == "edit">
-                        ${poCommonInfo.totalOrderQty?default(0)?string(',##0.00')} ${poCommonInfo.totalQtyUnit!}
+                        ${poCommonInfo.totalOrderQty?default(0)?string(',##0.00')}
                     <#else>
                         <input type="text" name="totalOrderQty" id="totalOrderQty" value="${totalQuantity!}" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
                         <select name="totalQtyUnit" id="totalQtyUnit" style="text-align:right;background-color:#EEEEEE;width:45px;" readonly="readonly">
@@ -375,7 +375,7 @@ under the License.
                     <td width="1%">&nbsp;</td>
                     <td width="20%">
                     <#if pageAction == "edit">
-                        ${poCommonInfo.totalOrderAmount?default(0)?string(',##0.00')} ${poCommonInfo.totalOrderAmountUnit!}
+                        ${poCommonInfo.totalOrderAmount?default(0)?string(',##0.00')}
                         <input type="hidden" id="qtyUnitText" name="qtyUnitText" value="${poCommonInfo.totalQtyUnit!}" />
                         <input type="hidden" id="priceUnitText" name="priceUnitText" value="$/${poCommonInfo.totalQtyUnit!}" />
                     <#else>
