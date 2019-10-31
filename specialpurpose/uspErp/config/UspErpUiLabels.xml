@@ -292,8 +292,11 @@
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
-    <property key="producedQty">
+    <property key="producedQtyMT">
         <value xml:lang="en">Produced Qty(MT)</value>
+    </property>
+    <property key="producedQtyLB">
+        <value xml:lang="en">Produced Qty(LB)</value>
     </property>
     <property key="producedThickness">
         <value xml:lang="en">Produced Thickness</value>
