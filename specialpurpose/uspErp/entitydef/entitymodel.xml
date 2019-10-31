@@ -399,52 +399,22 @@
 
         <view-link entity-alias="PQUP" rel-entity-alias="PI" rel-optional="true">
             <key-map field-name="poNo"/>
-            <key-map field-name="poStatus"/>
-            <key-map field-name="supplierId"/>
-            <key-map field-name="supplierNm"/>
-            <key-map field-name="orderDate"/>
-            <key-map field-name="shipmentMonth"/>
             <key-map field-name="voidYn"/>
             <key-map field-name="lotNo"/>
             <key-map field-name="referenceNo"/>
             <key-map field-name="productId"/>
-            <key-map field-name="productNm"/>
-            <key-map field-name="customerId"/>
-            <key-map field-name="customerNm"/>
-            <key-map field-name="fobPoint"/>
-            <key-map field-name="destination"/>
-            <key-map field-name="soNo"/>
             <key-map field-name="paintCode"/>
             <key-map field-name="paintName"/>
-            <key-map field-name="orderQty"/>
-            <key-map field-name="orderQtyLB"/>
-            <key-map field-name="unitPrice"/>
-            <key-map field-name="amount"/>
         </view-link>
 
         <view-link entity-alias="PQUP" rel-entity-alias="PS" rel-optional="true">
             <key-map field-name="poNo"/>
-            <key-map field-name="poStatus"/>
-            <key-map field-name="supplierId"/>
-            <key-map field-name="supplierNm"/>
-            <key-map field-name="orderDate"/>
-            <key-map field-name="shipmentMonth"/>
             <key-map field-name="voidYn"/>
             <key-map field-name="lotNo"/>
             <key-map field-name="referenceNo"/>
             <key-map field-name="productId"/>
-            <key-map field-name="productNm"/>
-            <key-map field-name="customerId"/>
-            <key-map field-name="customerNm"/>
-            <key-map field-name="fobPoint"/>
-            <key-map field-name="destination"/>
-            <key-map field-name="soNo"/>
             <key-map field-name="paintCode"/>
             <key-map field-name="paintName"/>
-            <key-map field-name="orderQty"/>
-            <key-map field-name="orderQtyLB"/>
-            <key-map field-name="unitPrice"/>
-            <key-map field-name="amount"/>
         </view-link>
     </view-entity>
 

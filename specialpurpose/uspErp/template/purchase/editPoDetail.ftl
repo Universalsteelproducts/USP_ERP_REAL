@@ -120,15 +120,27 @@
                 },
                 {
                     "data" : "orderQty",
-                    "width" : "90px"
+                    "width" : "90px",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                    },
+                    "className" : "dt-body-right"
                 },
                 {
                     "data" : "producedQtySubTotal",
-                    "width" : "120px"
+                    "width" : "120px",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                    },
+                    "className" : "dt-body-right"
                 },
                 {
                     "data" : "invoicedQtySubTotal",
-                    "width" : "80px"
+                    "width" : "80px",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                    },
+                    "className" : "dt-body-right"
                 }
             ]
         });

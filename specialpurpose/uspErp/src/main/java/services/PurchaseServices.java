@@ -133,7 +133,7 @@ public class PurchaseServices {
 
 					List<GenericValue> poList = EntityQuery.use(delegator).from("PoSubtotal")
 							.where(poListCondition)
-							.orderBy("lotNo ASC", "referenceNo ASC", "productId ASC", "paintCode ASC", "paintName ASC")
+							.orderBy("poNo ASC", "lotNo ASC", "referenceNo ASC", "productId ASC", "paintCode ASC", "paintName ASC")
 							.queryList();
 
 					/*Map<String, Object> conditionMap = new HashMap<String, Object>();
