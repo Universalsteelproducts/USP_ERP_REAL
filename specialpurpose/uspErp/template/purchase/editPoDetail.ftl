@@ -119,7 +119,7 @@
                     "width" : "150px"
                 },
                 {
-                    "data" : "orderQtySubTotal",
+                    "data" : "orderQty",
                     "width" : "90px"
                 },
                 {
