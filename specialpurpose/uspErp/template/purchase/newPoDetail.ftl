@@ -87,6 +87,7 @@ under the License.
 	            {
 	            	"data" : "orderThickness",
 	                "render": function ( data, type, row ) {
+	                    data = checkNull(data);
 	                	return "<input type='text' name='orderThickness' id='orderThickness' value='" + data + "' />";
 					},
 	  				"width" : "150px"
@@ -94,6 +95,7 @@ under the License.
 	            {
 	            	"data" : "orderWidth",
 	            	"render": function ( data, type, row ) {
+	            	    data = checkNull(data);
 		            	return "<input type='text' name='orderWidth' id='orderWidth' value='" + data + "' />";
 	            	},
 	  				"width" : "50px"

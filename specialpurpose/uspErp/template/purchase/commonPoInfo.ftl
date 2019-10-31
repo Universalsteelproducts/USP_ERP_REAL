@@ -248,7 +248,7 @@ under the License.
                     <#if pageAction == "edit">
                         <#if paymentMethodType??>
                             <#list paymentMethodType as paymentMethodTypeInfo>
-                                <#if poCommonInfo.freightTerm == paymentMethodTypeInfo.paymentMethodTypeId>
+                                <#if poCommonInfo.freightTerm! == paymentMethodTypeInfo.paymentMethodTypeId!>
                                     ${paymentMethodTypeInfo.description!}
                                 </#if>
                             </#list>
@@ -350,7 +350,7 @@ under the License.
                     <td width="2%">&nbsp;</td>
                     <td width="20%">
                     <#if pageAction == "edit">
-                        ${poCommonInfo.shipmentMonth}
+                        ${poCommonInfo.shipmentMonth!}
                     <#else>
                         <input type="text" name="shipmentMonth" id="shipmentMonth" size="25" value='' />
                     </#if>
