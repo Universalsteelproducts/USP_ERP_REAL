@@ -398,27 +398,6 @@ under the License.
             $("#productNm").val(curNm);
         });
 
-        $("select").on("change", function() {
-            var entityName = $(this).find("option:selected").attr("entity-name");
-            var codeId = $(this).find("option:selected").attr("code-id");
-            var codeNm = $(this).find("option:selected").attr("code-nm");
-            if($(this).val() == "OT") {
-                var option = {
-                    url : "/uspErp/control/LookupAddCode",
-                    width : 600,
-                    height : 630,
-                    title : "${uiLabelMap.addCodeLookup}",
-                    formId : "lookupForm",
-                    data : {
-                        "entityName": entityName,
-                        "codeId": codeId,
-                        "codeNm": codeNm
-                    }
-                };
-                openDialog.open(option);
-            }
-        });
-
 	    /***************************************************************************
 	     ******************				Button Control			********************
 	     ***************************************************************************/
@@ -717,7 +696,6 @@ under the License.
                         <option value="${steelTypeInfo.steelTypeId!}" >${steelTypeInfo.steelTypeNm!}</option>
                         </#list>
                     </#if>
-                        <option value="OT" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">Other</option>
                     </select>
                 </td>
                 <td class="label" width="12%" align="right">
