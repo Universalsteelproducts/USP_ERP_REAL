@@ -278,11 +278,11 @@ under the License.
 
                 // Update footer
                 $( api.column( 14 ).footer() ).html(
-                    '<font color="red">Order Qty(MT) Total</font> : ' +
+                    '<font color="red">Order Qty(MT) #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyMTTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyMTTotal) + ' MT), ' +
-                    '<font color="red">Amount Total</font> : ' +
+                    '<font color="red">Amount #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ' MT), ' +
-                    '<font color="red">Order Qty(LB) Total</font> : ' +
+                    '<font color="red">Order Qty(LB) #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyLBTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyLBTotal) + ' MT)'
                 );
             }

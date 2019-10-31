@@ -376,6 +376,8 @@ under the License.
                     <td width="20%">
                     <#if pageAction == "edit">
                         ${poCommonInfo.totalOrderAmount?default(0)?string(',##0.00')} ${poCommonInfo.totalOrderAmountUnit!}
+                        <input type="hidden" id="qtyUnitText" name="qtyUnitText" value="${poCommonInfo.totalQtyUnit!}" />
+                        <input type="hidden" id="priceUnitText" name="priceUnitText" value="$/${poCommonInfo.totalQtyUnit!}" />
                     <#else>
                         <input type="text" name="totalOrderAmount" id="totalOrderAmount" value="" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
                         <select name="totalOrderAmountUnit" id="totalOrderAmountUnit" style="text-align:right;background-color:#EEEEEE;width:45px;" readonly="readonly">
