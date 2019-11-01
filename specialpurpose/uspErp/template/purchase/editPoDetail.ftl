@@ -310,7 +310,7 @@
                     "name" : "unitPrice",
                     "data" : "unitPrice",
                     "render": function ( data, type, row ) {
-                        return "$ " + $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
