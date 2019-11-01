@@ -604,7 +604,7 @@ under the License.
             } else if($("#qtyUnit").val() == "LB") {
                 orderQtyLB = Number(rowMap["orderQty"]);
             }
-            rowMap["orderQtyLB"] = orderQtyLB.format(2);
+            rowMap["orderQtyLB"] = orderQtyLB.toFixed(2);
 
             poListTable.row.add(rowMap).columns.adjust().draw();
         });
@@ -662,27 +662,38 @@ under the License.
         $("#submitBtn").on("click", function() {
             var reqData = poListTable.rows().data();
 
-            var reqArray = makeArrayData(reqData);
-            $("#crudMode").val("C");
+            if(reqData.length > 0) {
+                for(var i=0 ; reqData.length > i ; i++) {
+                    var data = reqData[i];
 
-            jQuery.ajax({
-                url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
-                type: 'POST',
-                data: $("#poInfoForm").serialize() + "&reqData=" + JSON.stringify(reqArray),
-                error: function(msg) {
-                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
-                },
-                success: function(data, status) {
-                    if(data.successStr == "success") {
-                        alert("PO Create Completed");
-
-                        $("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "&pageAction=edit&poStatus=PE</@ofbizUrl>");
-                        $("#pageMoveForm").submit();
-                    } else {
-                        alert("PO Create Fail");
-                    }
+                    data["orderQty"] = parseFloat(data["orderQty"]);
+                    data["unitPrice"] = parseFloat(data["unitPrice"]);
+                    data["amount"] = parseFloat(data["amount"]);
+                    data["orderQtyLB"] = parseFloat(data["orderQtyLB"]);
                 }
-            });
+
+                var reqArray = makeArrayData(reqData);
+                $("#crudMode").val("C");
+
+                jQuery.ajax({
+                    url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
+                    type: 'POST',
+                    data: $("#poInfoForm").serialize() + "&reqData=" + JSON.stringify(reqArray),
+                    error: function(msg) {
+                        showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                    },
+                    success: function(data, status) {
+                        if(data.successStr == "success") {
+                            alert("PO Create Completed");
+
+                            $("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "&pageAction=edit&poStatus=PE</@ofbizUrl>");
+                            $("#pageMoveForm").submit();
+                        } else {
+                            alert("PO Create Fail");
+                        }
+                    }
+                });
+            }
         });
 
         $("#moveListBtn").on("click", function() {

@@ -449,7 +449,7 @@
                                     data["itemLength"] = itemLength;
                                 }
                                 if(commercialInvoice != "") {
-                                    data["commercialInvoice"] = commercialInvoice;
+                                    data["commercialInvoiceNo"] = commercialInvoice;
                                 }
                                 if(commercialInvoiceDate != "") {
                                     data["commercialInvoiceDate"] = commercialInvoiceDate;
@@ -478,6 +478,7 @@
                                 dt.row(rowIdx).data(data).draw();
                             }
                         }
+
                         itemListTable.$('tr.selected').removeClass('selected');
                     }
                 },

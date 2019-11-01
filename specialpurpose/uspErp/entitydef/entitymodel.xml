@@ -341,7 +341,7 @@
         <field name="paintName" type="id-long"></field>
         <field name="qtyUnit" type="id-long"></field>
         <field name="orderQty" type="fixed-point"></field>
-        <field name="orderQtyLB" type="fixed-point"></field>
+        <field name="orderQtyLB" type="currency-amount"></field>
         <field name="producedQty" type="fixed-point"></field>
         <field name="itemLength" type="fixed-point"></field>
         <field name="commissionPrice" type="currency-amount"></field>

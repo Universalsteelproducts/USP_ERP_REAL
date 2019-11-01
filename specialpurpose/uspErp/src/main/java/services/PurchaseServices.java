@@ -312,18 +312,22 @@ public class PurchaseServices {
 								String key = keysItr.next();
 								Object value = new Object();
 								if (jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
-									if ("orderQty".equals(key) || "producedQty".equals(key) || "itemLength".equals(key) || "orderQtyLB".equals(key)) {
+									if ("orderQty".equals(key) || "producedQty".equals(key) || "itemLength".equals(key)) {
 										String str = jsonobj.getString(key);
 										long lStr = Long.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(lStr);
-									} else if ("amount".equals(key) || "unitPrice".equals(key) || "commissionPrice".equals(key)) {
+									} else if ("amount".equals(key) || "unitPrice".equals(key) || "commissionPrice".equals(key) || "orderQtyLB".equals(key)) {
 										String str = jsonobj.getString(key);
 										double dbl = Double.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(dbl);
 									} else if ("exwEtd".equals(key) || "fobPointEta".equals(key) || "blDate".equals(key)) {
 										String test = jsonobj.getString(key);
-										DateTimeConverters.StringToTimestamp stringToTimestamp = new DateTimeConverters.StringToTimestamp();
-										value = stringToTimestamp.convert(test);
+										Date aa = new Date();
+										aa.setTime(Long.valueOf(test));
+										value = new Timestamp(aa.getTime());
+										//DateTimeConverters.StringToTimestamp stringToTimestamp = new DateTimeConverters.StringToTimestamp();
+										Debug.logInfo("@@@@@ = " + value, null);
+										//value = stringToTimestamp.convert(test);
 									} else {
 										value = jsonobj.getString(key);
 									}
@@ -418,7 +422,7 @@ public class PurchaseServices {
 							.queryOne();
 					resultList.add(poMasterInfo);
 				}
-			} catch (GenericEntityException | ConversionException e){
+			} catch (GenericEntityException e){
 				Debug.logError(e, "Cannot CRUDPoList ", module);
 			}
 		}
