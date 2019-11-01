@@ -122,7 +122,11 @@
                     "data" : "orderQty",
                     "width" : "90px",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data*2204.62);
+                        if(data == null || data == "") {
+                            data = 0;
+                        }
+                        data = data*2204.62;
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "className" : "dt-body-right"
                 },
@@ -619,7 +623,7 @@
                         } else {
                             return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
                         }
-                    }
+                    },
                     "width" : "100px"
                 },
                 {
@@ -940,21 +944,21 @@
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <input type="number" name="producedThickness" id="producedThickness" />
+                        <input type="text" name="producedThickness" id="producedThickness" />
                     </td>
                     <td class="label" width="13%" align="right">
                         ${uiLabelMap.producedWidth}
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <input type="number" name="producedWidth" id="producedWidth" />
+                        <input type="text" name="producedWidth" id="producedWidth" />
                     </td>
                     <td class="label" width="13%" align="right">
                         ${uiLabelMap.producedQtyLB}
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <input type="number" name="producedQty" id="producedQty" />
+                        <input type="text" name="producedQty" id="producedQty" />
                     </td>
                 </tr>
                 <tr>
@@ -963,7 +967,7 @@
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <input type="number" name="itemLength" id="itemLength" />
+                        <input type="text" name="itemLength" id="itemLength" />
                     </td>
                     <td class="label" width="13%" align="right">
                         ${uiLabelMap.commercialInvoice}

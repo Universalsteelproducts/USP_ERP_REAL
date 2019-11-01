@@ -85,7 +85,7 @@ under the License.
 	            	"data" : "orderThickness",
 	                "render": function ( data, type, row ) {
 	                    data = checkNull(data);
-	                	return "<input type='number' name='orderThickness' id='orderThickness' value='" + data + "' />";
+	                	return "<input type='text' name='orderThickness' id='orderThickness' value='" + data + "' />";
 					},
 	  				"width" : "150px"
 	            },
@@ -93,7 +93,7 @@ under the License.
 	            	"data" : "orderWidth",
 	            	"render": function ( data, type, row ) {
 	            	    data = checkNull(data);
-		            	return "<input type='number' name='orderWidth' id='orderWidth' value='" + data + "' />";
+		            	return "<input type='text' name='orderWidth' id='orderWidth' value='" + data + "' />";
 	            	},
 	  				"width" : "50px"
 	            },
@@ -134,7 +134,11 @@ under the License.
 	            {
                     "data" : "unitPrice",
                     "render": function ( data, type, row ) {
-                        return "<input type='number' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + $.fn.dataTable.render.number( ',', '.', 2, '').display(data) + "'/>";
+                        if(data == null || data == "") {
+                            data = 0;
+                        }
+                        data = Number(data).format(2);
+                        return "<input type='text' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + data + "'/>";
                     },
                     "width" : "60px"
                 },
@@ -145,7 +149,7 @@ under the License.
                 {
                     "data" : "amount",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.text( ',', '.', 2, '').display(data);
                     },
                     "width" : "60px",
                     "className" : "dt-body-right"
@@ -229,10 +233,6 @@ under the License.
                 },
                 {
                     "data" : "poStatus",
-                    "visible": false
-                },
-                {
-                    "data" : "orderQty",
                     "visible": false
                 },
                 {
@@ -362,14 +362,14 @@ under the License.
 	        setLookupVal("paintCode", $(this).val(), schPaint, paintColArry);
 	    });
 
-	    $("#unitPrice,#orderQty").on("change, keyup", function(event) {
+	    $("#itemInfo #unitPrice,#orderQty").on("change, keyup", function(event) {
 	        var elementId = $(this).prop("id");
             if(elementId == "unitPrice") {
                 var qty = Number($("#orderQty").val()) >= 0 ? Number($("#orderQty").val()) : 0;
                 var curVal = parseFloat($(this).val());
                 var amount = qty * curVal;
 
-                $("#amount").val(amount);
+                $("#amount").val(amount.format(2));
             } else if(elementId == "orderQty") {
                 var unitPrice = parseFloat($("#unitPrice").val()) >= 0 ? parseFloat($("#unitPrice").val()) : 0;
                 var curVal = parseFloat($(this).val());
@@ -569,6 +569,21 @@ under the License.
                 return false;
             }
 
+            if($("#orderQty").val() == "") {
+                alert("Input Order Quantity.");
+                return false;
+            }
+
+            if($("#unitPrice").val() == "") {
+                alert("Input Unit Price.");
+                return false;
+            }
+
+            if($("#qtyUnit").val() == "") {
+                alert("Select Order Quantity Unit.");
+                return false;
+            }
+
             var rowMap = new Object();
             rowMap = addToOrder("lotCommonInfo", rowMap);
             rowMap = addToOrder("productSpec", rowMap);
@@ -589,7 +604,7 @@ under the License.
             } else if($("#qtyUnit").val() == "LB") {
                 orderQtyLB = Number(rowMap["orderQty"]);
             }
-            rowMap["orderQtyLB"] = orderQtyLB;
+            rowMap["orderQtyLB"] = orderQtyLB.format(2);
 
             poListTable.row.add(rowMap).columns.adjust().draw();
         });
@@ -646,7 +661,7 @@ under the License.
 
         $("#submitBtn").on("click", function() {
             var reqData = poListTable.rows().data();
-            console.log(reqData);
+
             var reqArray = makeArrayData(reqData);
             $("#crudMode").val("C");
 
@@ -1065,7 +1080,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="number" name="orderQty" id="orderQty" size="16" maxlength="255" style="text-align:right;" />
+                        <input type="text" name="orderQty" id="orderQty" size="16" maxlength="255" style="text-align:right;" />
                         <select name="qtyUnit" id="qtyUnit" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">MT</option>
@@ -1077,7 +1092,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="number" name="commissionPrice" id="commissionPrice" size="16" maxlength="255"/>
+                        <input type="text" name="commissionPrice" id="commissionPrice" size="16" maxlength="255"/>
                         <select name="commissionPriceUnit" id="commissionPriceUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
@@ -1091,7 +1106,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="number" name="unitPrice" id="unitPrice" size="16" maxlength="255" style="text-align:right;" />
+                        <input type="text" name="unitPrice" id="unitPrice" size="16" maxlength="255" style="text-align:right;" />
                         <select name="priceUnit" id="priceUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
@@ -1104,7 +1119,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="number" name="amount" id="amount" size="22" disabled="disabled" maxlength="255" style="text-align:right;" />
+                        <input type="text" name="amount" id="amount" size="22" disabled="disabled" maxlength="255" style="text-align:right;" />
                         <!--<select name="amountUnit" id="amountUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
@@ -1162,7 +1177,7 @@ under the License.
 <div>
 	<ul>
 	    <input id="moveListBtn" type="button" value="${uiLabelMap.list}" class="buttontext"/>
-	<#if pageAction == "new">
+	<#if pageAction == "new" || (poStatus == "PE" || poStatus == "")>
 		<input id="submitBtn" type="button" value="${uiLabelMap.savePo}" class="buttontext"/>
 	</#if>
 	</ul>
