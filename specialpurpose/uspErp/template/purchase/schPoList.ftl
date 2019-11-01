@@ -25,12 +25,9 @@ under the License.
 		var poListTable = $("#poList").DataTable({
 			dom : "lfrtip",
 			processing : true,
+			fixedHeader: true,
 			scrollY : true,
 	        scrollX : true,
-	        fixedHeader : true,
-            fixedColumns : {
-                leftColumns: 2
-            },
 	        ajax : {
 	        	"type"		: "POST",
 	            "url"		: '<@ofbizUrl>RUPoList</@ofbizUrl>',
@@ -149,7 +146,7 @@ under the License.
 	        	{
                     "data" : "unitPrice",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '$').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "60px",
                     "className" : "dt-body-right"
@@ -165,7 +162,7 @@ under the License.
                 {
                     "data" : "orderQtyLB",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
@@ -173,7 +170,7 @@ under the License.
 	        	{
                     "data" : "producedQtySubTotal",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
@@ -181,7 +178,7 @@ under the License.
 	        	{
                     "data" : "invoicedQtySubTotal",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "80px",
                     "className" : "dt-body-right"
@@ -189,7 +186,7 @@ under the License.
 	        	{
                     "data" : "shipmentQtySubTotal",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "120px",
                     "className" : "dt-body-right"
@@ -226,25 +223,91 @@ under the License.
 	        		"visible": false
 	        	}
 	        ],
+	        order: [[1, 'asc']],
 	        rowGroup: {
                 startRender: null,
                 endRender: function ( rows, group ) {
-                    var sumUnitPrice = rows
+                    var sumOrderQty = rows
                         .data()
-                        .pluck(22)
+                        .pluck("orderQty")
                         .reduce( function (a, b) {
                             a = (a == null || a == "") ? 0 : a;
                             b = (b == null || b == "") ? 0 : b;
                             return parseFloat(a) + parseFloat(b);
                         }, 0);
-                    sumUnitPrice = $.fn.dataTable.render.number(',', '.', 2, '$').display( sumUnitPrice );
+                    sumOrderQty = $.fn.dataTable.render.number(',', '.', 0, '').display( sumOrderQty );
+
+                    var sumUnitPrice = rows
+                        .data()
+                        .pluck("unitPrice")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumUnitPrice = $.fn.dataTable.render.number(',', '.', 2, '').display( sumUnitPrice );
+
+                    var sumAmount = rows
+                        .data()
+                        .pluck("amount")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumAmount = $.fn.dataTable.render.number(',', '.', 2, '').display( sumAmount );
+
+                    var sumOrderQtyLB = rows
+                        .data()
+                        .pluck("orderQtyLB")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumOrderQtyLB = $.fn.dataTable.render.number(',', '.', 2, '').display( sumOrderQtyLB );
+
+                    var sumProducedQty = rows
+                        .data()
+                        .pluck("producedQtySubTotal")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumProducedQty = $.fn.dataTable.render.number(',', '.', 0, '').display( sumProducedQty );
+
+                    var sumInvoiceQty = rows
+                        .data()
+                        .pluck("invoicedQtySubTotal")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumInvoiceQty = $.fn.dataTable.render.number(',', '.', 0, '').display( sumInvoiceQty );
+
+                    var sumShipmentQty = rows
+                        .data()
+                        .pluck("shipmentQtySubTotal")
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumShipmentQty = $.fn.dataTable.render.number(',', '.', 0, '').display( sumShipmentQty );
 
                     return $('<tr/>')
-                        .append( '<td colspan="22">Sub Total for ['+group+']</td>' )
+                        .append( '<td colspan="11">Sub Total for [' + group + ']</td>' )
+                        .append( '<td class="dt-body-right">'+sumOrderQty+'</td>' )
                         .append( '<td class="dt-body-right">'+sumUnitPrice+'</td>' )
-                        .append( '<td colspan="4"></td>' );
+                        .append( '<td class="dt-body-right">'+sumAmount+'</td>' )
+                        .append( '<td class="dt-body-right">'+sumOrderQtyLB+'</td>' )
+                        .append( '<td class="dt-body-right">'+sumProducedQty+'</td>' )
+                        .append( '<td class="dt-body-right">'+sumInvoiceQty+'</td>' )
+                        .append( '<td class="dt-body-right">'+sumShipmentQty+'</td>' )
                 },
-                dataSrc: 1
+                dataSrc: "poNo"
             }
             	        /*,
 	        footerCallback : function ( row, data, start, end, display ) {
