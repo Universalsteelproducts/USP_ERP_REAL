@@ -68,15 +68,6 @@
             },
             columns : [
                 {
-                    "data" : "soNo",
-                    "render": function ( data, type, row ) {
-                        data = checkNull(data);
-                        return data;
-                    },
-                    "width": "90px",
-                    "className" : "align-middle"
-                },
-                {
                     "data" : "lotNo",
                     "render" : function ( data, type, row ) {
                         return "LOT" + checkNull(data);
@@ -117,6 +108,15 @@
                 {
                     "data" : "paintName",
                     "width" : "150px"
+                },
+                {
+                    "data" : "soNo",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        return data;
+                    },
+                    "width": "90px",
+                    "className" : "align-middle"
                 },
                 {
                     "data" : "orderQty",
@@ -163,16 +163,6 @@
                 }
             },
             columns : [
-                {
-                    "name" : "soNo",
-                    "data" : "soNo",
-                    "render": function ( data, type, row ) {
-                        data = checkNull(data);
-                        return data;
-                    },
-                    "width": "80px",
-                    "className" : "dt-body-center"
-                },
                 {
                     "name" : "lotNo",
                     "data" : "lotNo",
@@ -271,6 +261,16 @@
                         }
                     },
                     "width" : "50px",
+                    "className" : "dt-body-center"
+                },
+                {
+                    "name" : "soNo",
+                    "data" : "soNo",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        return data;
+                    },
+                    "width": "80px",
                     "className" : "dt-body-center"
                 },
                 {
@@ -488,7 +488,7 @@
                     text: 'Download CSV Upload Form',
                     className: "buttonsToHide",
                     exportOptions: {
-                            columns: [15, 1, 2, 3, 18, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                            columns: [15, 0, 1, 2, 18, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14]
                     },
                     //Function which customize the CSV (input : csv is the object that you can preprocesss)
                     customize: function (csv) {
@@ -504,7 +504,6 @@
                         $.each(split_csv.slice(1), function (index, csv_row) {
                             //Split on quotes and comma to get each cell
                             var csv_cell_array = csv_row.split('","');
-                                console.log(index);
                             if(csv_cell_array[9] == ""
                                 && csv_cell_array[11] == ""
                                 && csv_cell_array[13] == ""
