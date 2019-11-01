@@ -670,6 +670,8 @@ under the License.
                     data["unitPrice"] = parseFloat(data["unitPrice"]);
                     data["amount"] = parseFloat(data["amount"]);
                     data["orderQtyLB"] = parseFloat(data["orderQtyLB"]);
+                    data["paintCode"] = "";
+                    data["paintName"] = "";
                 }
 
                 var reqArray = makeArrayData(reqData);
