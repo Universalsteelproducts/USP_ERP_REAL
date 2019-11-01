@@ -323,7 +323,7 @@
         <value xml:lang="en">Customer</value>
     </property>
     <property key="internalRef">
-        <value xml:lang="en">Internal REF Number </value>
+        <value xml:lang="en">Internal Ref Number </value>
     </property>
     <property key="item">
         <value xml:lang="en">Item</value>
@@ -370,7 +370,7 @@
         <value xml:lang="en">Buying Agent</value>
     </property>
     <property key="purchaseClass">
-        <value xml:lang="en">Purchase Class</value>
+        <value xml:lang="en">Purchase Type</value>
     </property>
     <property key="vendor">
         <value xml:lang="en">Vendor</value>
@@ -411,7 +411,7 @@
         <value xml:lang="en">Product Attribute</value>
     </property>
     <property key="orderRemark">
-        <value xml:lang="en">External Remark</value>
+        <value xml:lang="en">External Note</value>
     </property>
     <property key="poType">
         <value xml:lang="en">PO Type</value>
@@ -603,7 +603,7 @@
         <value xml:lang="en">Coil Spec</value>
     </property>
     <property key="coilId">
-        <value xml:lang="en">Coil Inner Diameter</value>
+        <value xml:lang="en">Coil Inner Diameter(IN)</value>
     </property>
     <property key="otherDetails">
         <value xml:lang="en">Other Details</value>
