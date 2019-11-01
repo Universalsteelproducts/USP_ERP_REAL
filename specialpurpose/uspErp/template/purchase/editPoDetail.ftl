@@ -903,12 +903,12 @@
     		<table class="display cell-border stripe" id="fullfillmentList" name="fullfillmentList" style="width:100%">
     			<thead>
     				<tr>
-    					<th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.lot}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.internalRef}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.productId}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.paintCode}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.paintName}</th>
+    					<th style="vertical-align: middle;">${uiLabelMap.soNo}</th>
     					<!--<th style="vertical-align: middle;">${uiLabelMap.thickness}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.width}</th>
     					<th style="vertical-align: middle;">${uiLabelMap.fobPoint}</th>-->
@@ -1064,7 +1064,6 @@
             <table class="display cell-border stripe" id="itemList" name="itemList" style="width:100%">
                 <thead>
                     <tr>
-                        <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.soNo}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.lot}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.internalRef}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.itemId}</th>
@@ -1074,6 +1073,7 @@
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.thickness}</th>
                         <th style="vertical-align: middle;text-align: center;" colspan="2">${uiLabelMap.width}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.fobPoint}</th>
+                        <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.soNo}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.producedQtyLB}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.itemLength}</th>
                         <th style="vertical-align: middle;" rowspan="2">${uiLabelMap.unitCost}</th>
@@ -1093,9 +1093,9 @@
                         <th colspan="2" style="text-align:right"></th>
                         <th colspan="2" style="text-align:right"></th>
                         <th colspan="2" style="text-align:right"></th>
-                        <th colspan="2" style="text-align:right">Produced Qty :</th>
+                        <th colspan="2" style="text-align:right">Produced Qty(LB) :</th>
                         <th colspan="2" style="text-align:right"></th>
-                        <th colspan="2" style="text-align:right">Item Length :</th>
+                        <th colspan="2" style="text-align:right">Item Length(FT) :</th>
                         <th colspan="2" style="text-align:right"></th>
                     </tr>
                 </tfoot>

@@ -29,35 +29,35 @@ crudMode = "INIT"
 nowTs = UtilDateTime.nowTimestamp()
 poCommonInfo.put("orderDate", nowTs)
 
-poStatus = from("PoStatusCode").orderBy("sortSeq").queryList()
-purchaseClass = from("PurchaseClassCode").orderBy("sortSeq").queryList()
+poStatus = from("PoStatusCode").orderBy("sortSeq ASC").queryList()
+purchaseClass = from("PurchaseClassCode").orderBy("sortSeq ASC").queryList()
 
 //priceTerm = from("TermType").where("parentTypeId", "INCO_TERM").queryList()
-priceTerm = from("PriceTermCode").orderBy("sortSeq").queryList()
+priceTerm = from("PriceTermCode").orderBy("sortSeq ASC").queryList()
 //paymentTerm = from("TermType").where("parentTypeId", "PAYMENT").queryList()
-paymentTerm = from("PaymentTermCode").orderBy("sortSeq").queryList()
+paymentTerm = from("PaymentTermCode").orderBy("sortSeq ASC").queryList()
 paymentMethodType = from("PaymentMethodType").queryList()
 
-productTmp = from("ProductTmp").orderBy("sortSeq").queryList()
-fobPointTmp = from("FobPointTmp").orderBy("sortSeq").queryList()
-destinationTmp = from("DestinationTmp").orderBy("sortSeq").queryList()
+productTmp = from("ProductTmp").orderBy("sortSeq ASC").queryList()
+fobPointTmp = from("FobPointTmp").orderBy("sortSeq ASC").queryList()
+destinationTmp = from("DestinationTmp").orderBy("sortSeq ASC").queryList()
 
-steelType = from("SteelTypeCode").orderBy("sortSeq").queryList()
-grade = from("GradeCode").orderBy("sortSeq").queryList()
-coatingWeight = from("CoatingWeightCode").orderBy("sortSeq").queryList()
-surfaceType = from("SurfaceTypeCode").orderBy("sortSeq").queryList()
-thickness = [] //from("ThicknessCode").orderBy("sortSeq").queryList()
+steelType = from("SteelTypeCode").orderBy("sortSeq ASC").queryList()
+grade = from("GradeCode").orderBy("sortSeq ASC").queryList()
+coatingWeight = from("CoatingWeightCode").orderBy("sortSeq ASC").queryList()
+surfaceType = from("SurfaceTypeCode").orderBy("sortSeq ASC").queryList()
+thickness = [] //from("ThicknessCode").orderBy("sortSeq ASC").queryList()
 
-exw = from("ExwCode").orderBy("sortSeq").queryList()
-purchaseAgent = from("PurchaseAgentCode").orderBy("sortSeq").queryList()
-coilMaxWeight = from("CoilMaxWeightCode").orderBy("sortSeq").queryList()
-packaging = from("PackagingCode").orderBy("sortSeq").queryList()
+exw = from("ExwCode").orderBy("sortSeq ASC").queryList()
+purchaseAgent = from("PurchaseAgentCode").orderBy("sortSeq ASC").queryList()
+coilMaxWeight = from("CoilMaxWeightCode").orderBy("sortSeq ASC").queryList()
+packaging = from("PackagingCode").orderBy("sortSeq ASC").queryList()
 
 poNo = parameters.poNo
 pageAction = "new"
 if(poNo != null && poNo != "") {
-    shippingLine = from("ShippingLineTmp").orderBy("sortSeq").queryList()
-    shippingAgent = from("ShippingAgentTmp").orderBy("sortSeq").queryList()
+    shippingLine = from("ShippingLineTmp").orderBy("sortSeq ASC").queryList()
+    shippingAgent = from("ShippingAgentTmp").orderBy("sortSeq ASC").queryList()
     context.shippingLine = shippingLine
     context.shippingAgent = shippingAgent
 

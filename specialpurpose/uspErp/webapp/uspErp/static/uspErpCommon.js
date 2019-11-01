@@ -451,6 +451,9 @@ var selectedColTotal = function(tableObj, setColNUnitNIdxArry) {
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 });
+            if(total == null || total == "") {
+                total = 0;
+            }
 
             $( tableObj.column( splitStr[2] ).footer() ).html(
                 $.fn.dataTable.render.number( ',', '.', 2, '').display(selectTotal ) +

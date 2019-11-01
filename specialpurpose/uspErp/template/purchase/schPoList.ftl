@@ -22,12 +22,6 @@ under the License.
 		/***************************************************************************
 		 ******************			Common Control				********************
 		 ***************************************************************************/
-		/*$('#poList tfoot th').each( function (index) {
-                var title = $(this).text();
-                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-
-        });*/
-
 		var poListTable = $("#poList").DataTable({
 			dom : "lfrtip",
 			processing : true,
@@ -232,6 +226,27 @@ under the License.
 	        		"visible": false
 	        	}
 	        ],
+	        rowGroup: {
+                startRender: null,
+                endRender: function ( rows, group ) {
+                    var sumUnitPrice = rows
+                        .data()
+                        .pluck(22)
+                        .reduce( function (a, b) {
+                            a = (a == null || a == "") ? 0 : a;
+                            b = (b == null || b == "") ? 0 : b;
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+                    sumUnitPrice = $.fn.dataTable.render.number(',', '.', 2, '$').display( sumUnitPrice );
+
+                    return $('<tr/>')
+                        .append( '<td colspan="22">Sub Total for ['+group+']</td>' )
+                        .append( '<td class="dt-body-right">'+sumUnitPrice+'</td>' )
+                        .append( '<td colspan="4"></td>' );
+                },
+                dataSrc: 1
+            }
+            	        /*,
 	        footerCallback : function ( row, data, start, end, display ) {
                 var api = this.api(), data;
 
@@ -289,35 +304,8 @@ under the License.
                     '<font color="red">Order Qty(LB) #</font> : ' +
                     $.fn.dataTable.render.number( ',', '.', 2, '').display(pageOrderQtyLBTotal) + ' MT(' + $.fn.dataTable.render.number( ',', '.', 2, '').display(orderQtyLBTotal) + ' MT)'
                 );
-            }
-	        /*,
-            initComplete: function () {
-                this.api().column(0).every( function () {
-                    var column = this;
-                    var select = $('<select><option value=""></option></select>')
-                        .appendTo( $(column.footer()).empty() )
-                        .on( 'change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column.search( val ? '^'+val+'$' : '', true, false ).draw();
-                        });
-
-                    var $option = $("#poStatusTemp").html();
-                    select.append($option);
-                } );
             }*/
 		});
-
-		/*poListTable.columns().every( function () {
-            var that = this;
-
-            $('input', this.footer()).on('keyup change clear', function() {
-                if(that.search() !== this.value) {
-                    that.search(this.value).draw();
-                }
-            });
-        });*/
 
         $("#poList").on("change", "select.poStatus",function() {
             var rowIdx = poListTable.cell( $(this).parent() ).index().row;
