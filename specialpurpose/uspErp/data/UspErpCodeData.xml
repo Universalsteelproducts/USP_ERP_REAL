@@ -40,11 +40,7 @@
 
     <SteelTypeCode steelTypeId="GI" steelTypeNm="GI" sortSeq="1" description="" />
     <SteelTypeCode steelTypeId="GL" steelTypeNm="GL" sortSeq="2" description="" />
-    <SteelTypeCode steelTypeId="PPGI" steelTypeNm="PPGI" sortSeq="3" description="" />
-    <SteelTypeCode steelTypeId="PPGL" steelTypeNm="PPGL" sortSeq="4" description="" />
-    <SteelTypeCode steelTypeId="PGL" steelTypeNm="PGL" sortSeq="5" description="" />
-    <SteelTypeCode steelTypeId="PGI" steelTypeNm="PGI" sortSeq="6" description="" />
-    <SteelTypeCode steelTypeId="QUICK ADD" steelTypeNm="Quick Add" sortSeq="7" description="" />
+      <SteelTypeCode steelTypeId="QUICK ADD" steelTypeNm="Quick Add" sortSeq="3" description="" />
 
     <GradeCode gradeId="GR80" gradeNm="GR80" sortSeq="1" description="" />
     <GradeCode gradeId="GR50" gradeNm="GR50" sortSeq="2" description="" />
@@ -84,15 +80,17 @@
 
     <ExwCode exwId="DA" exwNm="DA" sortSeq="1" description="" />
     <ExwCode exwId="YE" exwNm="YE" sortSeq="2" description="" />
-    <ExwCode exwId="TM" exwNm="TM" sortSeq="3" description="" />
-    <ExwCode exwId="GD" exwNm="GD" sortSeq="4" description="" />
-    <ExwCode exwId="TU" exwNm="TU" sortSeq="5" description="" />
-    <ExwCode exwId="PT" exwNm="PT" sortSeq="6" description="" />
-    <ExwCode exwId="YC" exwNm="YC" sortSeq="7" description="" />
-    <ExwCode exwId="WTH" exwNm="WTH" sortSeq="8" description="" />
-    <ExwCode exwId="PMC" exwNm="PMC" sortSeq="9" description="" />
-    <ExwCode exwId="PMH" exwNm="PMH" sortSeq="10" description="" />
-    <ExwCode exwId="JIT" exwNm="JIT" sortSeq="11" description="" />
+    <ExwCode exwId="NK" exwNm="NK" sortSeq="3" description="" />
+    <ExwCode exwId="YE" exwNm="YE" sortSeq="4" description="" />
+    <ExwCode exwId="TM" exwNm="TM" sortSeq="5" description="" />
+    <ExwCode exwId="GD" exwNm="GD" sortSeq="6" description="" />
+    <ExwCode exwId="TU" exwNm="TU" sortSeq="7" description="" />
+    <ExwCode exwId="PT" exwNm="PT" sortSeq="8" description="" />
+    <ExwCode exwId="YC" exwNm="YC" sortSeq="9" description="" />
+    <ExwCode exwId="WTH" exwNm="WTH" sortSeq="10" description="" />
+    <ExwCode exwId="PMC" exwNm="PMC" sortSeq="11" description="" />
+    <ExwCode exwId="PMH" exwNm="PMH" sortSeq="12" description="" />
+    <ExwCode exwId="JIT" exwNm="JIT" sortSeq="13" description="" />
 
     <PurchaseAgentCode purchaseAgentId="PD" purchaseAgentNm="Podong" sortSeq="1" description="" />
     <PurchaseAgentCode purchaseAgentId="SM" purchaseAgentNm="Simon" sortSeq="2" description="" />
@@ -136,7 +134,13 @@
     <DestinationTmp destinationId="PMC" destinationNm="PMC" sortSeq="2" description="" />
     <DestinationTmp destinationId="PMH" destinationNm="PMH" sortSeq="3" description="" />
     <DestinationTmp destinationId="ADS" destinationNm="ADS" sortSeq="4" description="" />
-    <DestinationTmp destinationId="JIT" destinationNm="JIT" sortSeq="5" description="" />
+    <DestinationTmp destinationId="CMA" destinationNm="ADS" sortSeq="5" description="" />
+    <DestinationTmp destinationId="JIT" destinationNm="JIT" sortSeq="6" description="" />
+    <DestinationTmp destinationId="HOU" destinationNm="HOU" sortSeq="7" description="" />
+    <DestinationTmp destinationId="SAV" destinationNm="SAV" sortSeq="8" description="" />
+    <DestinationTmp destinationId="NOLA" destinationNm="NOLA" sortSeq="9" description="" />
+    <DestinationTmp destinationId="TAM" destinationNm="TAM" sortSeq="10" description="" />
+
 
     <ShippingLineTmp shippingLineId="SK" shippingLineNm="SK SHIPPING" sortSeq="1" description="" />
     <ShippingLineTmp shippingLineId="PO" shippingLineNm="Pan Ocean" sortSeq="2" description="" />
@@ -164,6 +168,8 @@
     <Vendor vendorId="TM" vendorNm="Ternium USA Inc" vendorInitials="TM" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="3" description="" />
     <Vendor vendorId="GD" vendorNm="Galvasid" vendorInitials="GD" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="4" description="" />
     <Vendor vendorId="FLK" vendorNm="Flack" vendorInitials="FLK" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="5" description="" />
+    <Vendor vendorId="NK" vendorNm="Nam Kim Steel Joint Stock Company" vendorInitials="NK" vendorAddr="" vendorEmail="" vendorTel="" vendorFax="" priceTerm="" freightTerm="" paymentTerm="" remark="" sortSeq="6" description="" />
+
 
     <Customer customerId="AMR" customerName="AMERICAN ROOFING PRODUCTS" contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="1" description="" />
     <Customer customerId="CDC" customerName="CDC METALS INC." contactPerson="" customerTel="" customerFax="" customerEmail="" customerAddr="" sortSeq="2" description="" />
