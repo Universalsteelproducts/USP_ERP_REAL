@@ -33,6 +33,10 @@ under the License.
 			processing : true,
 			scrollY : true,
 	        scrollX : true,
+	        fixedHeader : true,
+            fixedColumns : {
+                leftColumns: 2
+            },
 	        ajax : {
 	        	"type"		: "POST",
 	            "url"		: '<@ofbizUrl>RUPoList</@ofbizUrl>',

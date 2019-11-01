@@ -122,7 +122,7 @@
                     "data" : "orderQty",
                     "width" : "90px",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data*2204.62);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data*2204.62);
                     },
                     "className" : "dt-body-right"
                 },
@@ -130,7 +130,7 @@
                     "data" : "producedQtySubTotal",
                     "width" : "120px",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "className" : "dt-body-right"
                 },
@@ -138,7 +138,7 @@
                     "data" : "invoicedQtySubTotal",
                     "width" : "80px",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "className" : "dt-body-right"
                 }
@@ -292,7 +292,7 @@
                     "name" : "producedQty",
                     "data" : "producedQty",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
@@ -301,7 +301,7 @@
                     "name" : "itemLength",
                     "data" : "itemLength",
                     "render": function ( data, type, row ) {
-                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
                     },
                     "width" : "90px",
                     "className" : "dt-body-right"
@@ -612,12 +612,25 @@
                 },
                 {
                     "data" : "producedThickness",
+                    "render": function ( data, type, row ) {
+                        data = checkNull(data);
+                        if(data.indexOf(".") == -1) {
+                            return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                        } else {
+                            return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
+                        }
+                    }
                     "width" : "100px"
                 },
                 {
                     "data" : "orderWidth",
                     "render": function ( data, type, row ) {
-                        return "<input type='text' name='orderWidth' id='orderWidth' value='" + data + "' />";
+                        data = checkNull(data);
+                        if(data.indexOf(".") == -1) {
+                            return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                        } else {
+                            return $.fn.dataTable.render.number( ',', '.', 4, '').display(data);
+                        }
                     },
                     "width" : "50px"
                 },
@@ -645,14 +658,23 @@
                 },
                 {
                     "data" : "orderQty",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                    },
                     "width" : "90px"
                 },
                 {
                     "data" : "producedQty",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                    },
                     "width" : "120px"
                 },
                 {
                     "data" : "invoicedQty",
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                    },
                     "width" : "80px"
                 }
             ]

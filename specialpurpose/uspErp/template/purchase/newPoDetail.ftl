@@ -121,7 +121,11 @@ under the License.
 	            },
 	            {
                     "data" : "orderQty",
-                    "width" : "60px"
+                    "render": function ( data, type, row ) {
+                        return $.fn.dataTable.render.number( ',', '.', 0, '').display(data);
+                    },
+                    "width" : "60px",
+                    "className" : "dt-body-right"
                 },
                 {
                     "data" : "qtyUnit",
@@ -130,12 +134,7 @@ under the License.
 	            {
                     "data" : "unitPrice",
                     "render": function ( data, type, row ) {
-                        if(data != null && data != "") {
-                            data =  checkNull(data).format(2);
-                        } else {
-                            data =  "";
-                        }
-                        return "<input type='number' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + data + "'/>";
+                        return "<input type='number' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + $.fn.dataTable.render.number( ',', '.', 2, '').display(data) + "'/>";
                     },
                     "width" : "60px"
                 },
@@ -146,7 +145,7 @@ under the License.
                 {
                     "data" : "amount",
                     "render": function ( data, type, row ) {
-                        return data;
+                        return $.fn.dataTable.render.number( ',', '.', 2, '').display(data);
                     },
                     "width" : "60px",
                     "className" : "dt-body-right"
@@ -296,9 +295,8 @@ under the License.
                     }, 0 );
 
                 // Update footer
-                var qtyUnit = $("#qtyUnitText").val();
                 $( api.column( 7 ).footer() ).html(
-                    'Weight # : '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(pageWeightTotal) + ' ' + qtyUnit + '('+ $.fn.dataTable.render.number( ',', '.', 2, '').display(weightTotal) + ' ' + qtyUnit + ')'
+                    'Weight # : '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(pageWeightTotal) + ' MT('+ $.fn.dataTable.render.number( ',', '.', 2, '').display(weightTotal) + ' MT)'
                 );
                 $( api.column( 11 ).footer() ).html(
                     'Amount # : $ '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(pageAmountTotal) +' ( $ '+ $.fn.dataTable.render.number( ',', '.', 2, '').display(amountTotal) + ')'
