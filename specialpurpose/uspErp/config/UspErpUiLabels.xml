@@ -254,7 +254,7 @@
         <value xml:lang="en">Supplier</value>
     </property>
     <property key="supplierId">
-        <value xml:lang="en">Supplier Id</value>
+        <value xml:lang="en">Supplier ID</value>
     </property>
     <property key="supplierNm">
         <value xml:lang="en">Supplier Name</value>
@@ -263,7 +263,7 @@
         <value xml:lang="en">Supplier Initials</value>
     </property>
     <property key="productId">
-        <value xml:lang="en">Product Id</value>
+        <value xml:lang="en">Product ID</value>
     </property>
     <property key="paintCode">
         <value xml:lang="en">Paint Code</value>
@@ -278,7 +278,7 @@
         <value xml:lang="en">Paint Type</value>
     </property>
     <property key="orderQtyMT">
-        <value xml:lang="en">Order QTY(MT)</value>
+        <value xml:lang="en">Order Qty(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
@@ -287,16 +287,16 @@
         <value xml:lang="en">Amount($)</value>
     </property>
     <property key="orderQtyLB">
-        <value xml:lang="en">Order QTY(LB)</value>
+        <value xml:lang="en">Order Qty(LB)</value>
     </property>
     <property key="produced">
         <value xml:lang="en">Produced</value>
     </property>
     <property key="producedQtyMT">
-        <value xml:lang="en">Produced QTY(MT)</value>
+        <value xml:lang="en">Produced Qty(MT)</value>
     </property>
     <property key="producedQtyLB">
-        <value xml:lang="en">Produced QTY(LB)</value>
+        <value xml:lang="en">Produced Qty(LB)</value>
     </property>
     <property key="producedThickness">
         <value xml:lang="en">Produced Thickness(IN)</value>
@@ -308,13 +308,13 @@
         <value xml:lang="en">Item Length(FT)</value>
     </property>
     <property key="invoicedRev">
-        <value xml:lang="en">Acquired QTY(LB)</value>
+        <value xml:lang="en">Acquired Qty(LB)</value>
     </property>
     <property key="invoicedQty">
-        <value xml:lang="en">Invoiced QTY(LB)</value>
+        <value xml:lang="en">Invoiced Qty(LB)</value>
     </property>
     <property key="shipmentCreated">
-        <value xml:lang="en">Shipment Created QTY(LB)</value>
+        <value xml:lang="en">Shipment Created Qty(LB)</value>
     </property>
     <property key="customerId">
         <value xml:lang="en">Customer</value>
@@ -347,7 +347,7 @@
         <value xml:lang="en">Commission Price</value>
     </property>
     <property key="qty">
-        <value xml:lang="en">QTY</value>
+        <value xml:lang="en">Qty(MT)</value>
     </property>
     <property key="unitCost">
         <value xml:lang="en">Unit Cost($/MT)</value>
@@ -423,7 +423,7 @@
         <value xml:lang="en">Reference Number </value>
     </property>
     <property key="product">
-        <value xml:lang="en">Product</value>
+        <value xml:lang="en">Product ID</value>
     </property>
     <property key="ppglNo">
         <value xml:lang="en">PPGL#</value>
@@ -476,13 +476,13 @@
         <value xml:lang="en">Other Details</value>
     </property>
     <property key="orderQuantity">
-        <value xml:lang="en">Order QTY</value>
+        <value xml:lang="en">Order Qty</value>
     </property>
     <property key="unitQuantity">
-        <value xml:lang="en">Unit QTY</value>
+        <value xml:lang="en">Unit Qty</value>
     </property>
     <property key="quantityUnit">
-        <value xml:lang="en">QTY Unit</value>
+        <value xml:lang="en">Qty Unit</value>
     </property>
     <property key="unitPrice">
         <value xml:lang="en">Unit Cost ($/MT)</value>
@@ -536,7 +536,7 @@
         <value xml:lang="en">P/L?</value>
     </property>
     <property key="loadedQty">
-        <value xml:lang="en">Loaded QTY</value>
+        <value xml:lang="en">Loaded Qty</value>
     </property>
     <property key="weight">
         <value xml:lang="en">Weight</value>
@@ -545,7 +545,7 @@
         <value xml:lang="en">Lineal Feet</value>
     </property>
     <property key="coilQuantity">
-        <value xml:lang="en">Coil QTY</value>
+        <value xml:lang="en">Coil Qty</value>
     </property>
     <property key="mtcFile">
         <value xml:lang="en">MTC File</value>
@@ -566,7 +566,7 @@
         <value xml:lang="en">Gauge Control (Yield Control:LB/FT)</value>
     </property>
     <property key="totalQuantity">
-        <value xml:lang="en">Total Order QTY(MT)</value>
+        <value xml:lang="en">Total Order Qty(MT)</value>
     </property>
     <property key="vendorAddr">
         <value xml:lang="en">Address</value>
@@ -612,7 +612,7 @@
         <value xml:lang="en">Coil Grade</value>
     </property>
     <property key="gaugeControlYield">
-        <value xml:lang="en">Gauge Control Yield</value>
+        <value xml:lang="en">Gauge Control(Yield Control:LB/FT)</value>
     </property>
 
     <property key="stage">
@@ -726,7 +726,7 @@
     </property>
 
     <property key="producedQtyLB">
-        <value xml:lang="en">Produced QTY(LB)</value>
+        <value xml:lang="en">Produced Qty(LB)</value>
     </property>
 
     <property key="itemList">
@@ -751,7 +751,7 @@
         <value xml:lang="en">MTC Required? Y/N</value>
     </property>
     <property key="producedQtyLB">
-        <value xml:lang="en">Produced QTY(LB)</value>
+        <value xml:lang="en">Produced Qty(LB)</value>
     </property>
     <property key="mtcVerified">
         <value xml:lang="en">MTC Verified</value>
@@ -765,7 +765,9 @@
     <property key="fobPrice">
         <value xml:lang="en">FOB Price($/LB)</value>
     </property>
-
+    <property key="orderWidth">
+        <value xml:lang="en">Order Width(IN)</value>
+    </property>
 
 
 
@@ -933,7 +935,7 @@
         <value xml:lang="en">Permissions List</value>
     </property>
     <property key="permissionId">
-        <value xml:lang="en">Permissions Id</value>
+        <value xml:lang="en">Permissions ID</value>
     </property>
     <property key="permission">
         <value xml:lang="en">Permissions</value>
@@ -1078,10 +1080,10 @@
     </property>
 
     <property key="contentIdError">
-        <value xml:lang="en">The Content Id cannot be blank.</value>
+        <value xml:lang="en">The Content ID cannot be blank.</value>
     </property>
     <property key="contentIdLengthError">
-        <value xml:lang="en">The Content Id cannot be more than 20 characters.</value>
+        <value xml:lang="en">The Content ID cannot be more than 20 characters.</value>
     </property>
     <property key="contentIdExistError">
         <value xml:lang="en">Content ID ${contentId} is already available.
