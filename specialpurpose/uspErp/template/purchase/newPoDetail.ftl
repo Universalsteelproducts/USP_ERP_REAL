@@ -248,10 +248,10 @@ under the License.
                     "data" : "priceUnit",
                     "visible": false
                 },
-                {
+                /*{
                     "data" : "amountUnit",
                     "visible": false
-                },
+                },*/
                 {
                     "data" : "orderQtyLB",
                     "visible": false
@@ -406,10 +406,10 @@ under the License.
 	     ***************************************************************************/
         $("#qtyUnit").on("change", function() {
             $("#totalQtyUnit").val($(this).val());
-            $("#totalOrderAmountUnit").val($(this).val());
+            //$("#totalOrderAmountUnit").val($(this).val());
             $("#priceUnit").val($(this).val());
             $("#priceUnitText").val($("#priceUnit option:selected").text());
-            $("#amountUnit").val($(this).val());
+            //$("#amountUnit").val($(this).val());
             $("#commissionPriceUnit").val($(this).val());
         });
 
@@ -1107,12 +1107,12 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="amount" id="amount" size="16" disabled="disabled" maxlength="255" style="text-align:right;" />
-                        <select name="amountUnit" id="amountUnit" disabled="disabled" style="width:45px;">
+                        <input type="text" name="amount" id="amount" size="22" disabled="disabled" maxlength="255" style="text-align:right;" />
+                        <!--<select name="amountUnit" id="amountUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
                             <option value="LB">$/LB</option>
-                        </select>
+                        </select>-->
                     </td>
                 </tr>
             </table>

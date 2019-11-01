@@ -379,12 +379,12 @@ under the License.
                         <input type="hidden" id="qtyUnitText" name="qtyUnitText" value="${poCommonInfo.totalQtyUnit!}" />
                         <input type="hidden" id="priceUnitText" name="priceUnitText" value="$/${poCommonInfo.totalQtyUnit!}" />
                     <#else>
-                        <input type="text" name="totalOrderAmount" id="totalOrderAmount" value="" size="18" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
-                        <select name="totalOrderAmountUnit" id="totalOrderAmountUnit" style="text-align:right;background-color:#EEEEEE;width:45px;" readonly="readonly">
+                        <input type="text" name="totalOrderAmount" id="totalOrderAmount" value="" size="24" style="text-align:right;background-color:#EEEEEE;" readonly="readonly" />
+                        <!--<select name="totalOrderAmountUnit" id="totalOrderAmountUnit" style="text-align:right;background-color:#EEEEEE;width:45px;" readonly="readonly">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
                             <option value="LB">$/LB</option>
-                        </select>
+                        </select>-->
                     </#if>
                     </td>
 				</tr>
