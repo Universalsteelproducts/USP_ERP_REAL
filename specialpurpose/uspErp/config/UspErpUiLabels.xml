@@ -254,13 +254,13 @@
         <value xml:lang="en">Supplier</value>
     </property>
     <property key="supplierId">
-        <value xml:lang="en">Supplier Id</value>
+        <value xml:lang="en">Supplier ID</value>
     </property>
     <property key="supplierNm">
         <value xml:lang="en">Supplier Name</value>
     </property>
     <property key="supplierIt">
-        <value xml:lang="en">Supplier Initials</value>
+        <value xml:lang="en">Supplier Initial</value>
     </property>
     <property key="productId">
         <value xml:lang="en">Product Id</value>
@@ -317,7 +317,7 @@
         <value xml:lang="en">Shipment Created QTY(LB)</value>
     </property>
     <property key="customerId">
-        <value xml:lang="en">Customer</value>
+        <value xml:lang="en">Customer ID</value>
     </property>
     <property key="customerName">
         <value xml:lang="en">Customer</value>

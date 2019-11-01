@@ -85,7 +85,7 @@ under the License.
 	            	"data" : "orderThickness",
 	                "render": function ( data, type, row ) {
 	                    data = checkNull(data);
-	                	return "<input type='text' name='orderThickness' id='orderThickness' value='" + data + "' />";
+	                	return "<input type='number' name='orderThickness' id='orderThickness' value='" + data + "' />";
 					},
 	  				"width" : "150px"
 	            },
@@ -93,7 +93,7 @@ under the License.
 	            	"data" : "orderWidth",
 	            	"render": function ( data, type, row ) {
 	            	    data = checkNull(data);
-		            	return "<input type='text' name='orderWidth' id='orderWidth' value='" + data + "' />";
+		            	return "<input type='number' name='orderWidth' id='orderWidth' value='" + data + "' />";
 	            	},
 	  				"width" : "50px"
 	            },
@@ -135,7 +135,7 @@ under the License.
                         } else {
                             data =  "";
                         }
-                        return "<input type='text' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + data + "'/>";
+                        return "<input type='number' id='unitPrice' style='text-align:right;' name='unitPrice' value='" + data + "'/>";
                     },
                     "width" : "60px"
                 },
@@ -365,7 +365,6 @@ under the License.
 	    });
 
 	    $("#unitPrice,#orderQty").on("change, keyup", function(event) {
-	        $(this).objectFormat({format : "float"});
 	        var elementId = $(this).prop("id");
             if(elementId == "unitPrice") {
                 var qty = Number($("#orderQty").val()) >= 0 ? Number($("#orderQty").val()) : 0;
@@ -1068,7 +1067,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="orderQty" id="orderQty" size="16" maxlength="255" style="text-align:right;" />
+                        <input type="number" name="orderQty" id="orderQty" size="16" maxlength="255" style="text-align:right;" />
                         <select name="qtyUnit" id="qtyUnit" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">MT</option>
@@ -1080,7 +1079,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="commissionPrice" id="commissionPrice" size="16" maxlength="255"/>
+                        <input type="number" name="commissionPrice" id="commissionPrice" size="16" maxlength="255"/>
                         <select name="commissionPriceUnit" id="commissionPriceUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
@@ -1094,7 +1093,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="unitPrice" id="unitPrice" size="16" maxlength="255" style="text-align:right;" />
+                        <input type="number" name="unitPrice" id="unitPrice" size="16" maxlength="255" style="text-align:right;" />
                         <select name="priceUnit" id="priceUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>
@@ -1107,7 +1106,7 @@ under the License.
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="34%" >
-                        <input type="text" name="amount" id="amount" size="22" disabled="disabled" maxlength="255" style="text-align:right;" />
+                        <input type="number" name="amount" id="amount" size="22" disabled="disabled" maxlength="255" style="text-align:right;" />
                         <!--<select name="amountUnit" id="amountUnit" disabled="disabled" style="width:45px;">
                             <option value=""></option>
                             <option value="MT">$/MT</option>

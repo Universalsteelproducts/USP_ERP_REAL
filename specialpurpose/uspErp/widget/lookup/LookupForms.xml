@@ -23,8 +23,8 @@ under the License.
 
     <form name="LookupSupplier" target="LookupSupplier" title="Supplier" type="single"
           header-row-style="header-row" default-table-style="basic-table">
-        <field position="1" name="supplierId"><text/></field>
-        <field position="2" name="supplierNm"><text/></field>
+        <field position="1" name="supplierId" title="${uiLabelMap.supplierId}"><text/></field>
+        <field position="2" name="supplierNm" title="${uiLabelMap.supplierNm}"><text/></field>
 
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
         <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
@@ -44,13 +44,13 @@ under the License.
             <hyperlink description="${vendorId}" target="javascript:set_value('${vendorId}')" also-hidden="false" target-type="plain"/>
         </field>
         <field name="vendorNm" title="${uiLabelMap.supplierNm}"><display/></field>
-        <field name="vendorInitials" title="${uiLabelMap.ssupplierInitials}"><display/></field>
+        <field name="vendorInitials" title="${uiLabelMap.supplierIt}"><display/></field>
     </form>
 
     <form name="LookupCustomer" target="LookupCustomer" title="Customer" type="single"
           header-row-style="header-row" default-table-style="basic-table">
-        <field position="1" name="customerId"><text/></field>
-        <field position="2" name="customerNm"><text/></field>
+        <field position="1" name="customerId" title="${uiLabelMap.customerId}"><text/></field>
+        <field position="2" name="customerNm" title="${uiLabelMap.customerName}"><text/></field>
 
         <field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
         <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
@@ -69,7 +69,7 @@ under the License.
         <field name="customerId" widget-style="buttontext">
             <hyperlink description="${customerId}" target="javascript:set_customer('${customerId}', '${customerName}')" also-hidden="false" target-type="plain"/>
         </field>
-        <field name="customerName" title="${uiLabelMap.CustomerName}"><display/></field>
+        <field name="customerName" title="${uiLabelMap.customerName}"><display/></field>
     </form>
 
     <form name="LookupPaint" target="LookupPaint" title="Paint Code" type="single"
