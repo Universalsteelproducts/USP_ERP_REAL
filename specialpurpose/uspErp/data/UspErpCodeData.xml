@@ -7,8 +7,9 @@
     <PoStatusCode poStatusId="HO" poStatusNm="Hold" sortSeq="4" description="" />
     <PoStatusCode poStatusId="CP" poStatusNm="Completed" sortSeq="5" description="" />
 
-    <PurchaseClassCode purchaseClassId="IT" purchaseClassNm="Inventory" sortSeq="1" description="" />
-    <PurchaseClassCode purchaseClassId="PD" purchaseClassNm="Production" sortSeq="2" description="" />
+    <PurchaseClassCode purchaseClassId="PD" purchaseClassNm="Production" sortSeq="1" description="" />
+    <PurchaseClassCode purchaseClassId="IT" purchaseClassNm="Inventory" sortSeq="2" description="" />
+
 
     <PaintCode paintCode="U2WM4212" paintBrand="Continental" paintName="Polar White" paintType="RMP" sortSeq="1" description="" />
     <PaintCode paintCode="U2GM3027" paintBrand="Continental" paintName="GA Green" paintType="RMP" sortSeq="2" description="" />
