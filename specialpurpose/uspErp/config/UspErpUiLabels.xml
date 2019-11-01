@@ -411,7 +411,7 @@
         <value xml:lang="en">Product Attribute</value>
     </property>
     <property key="orderRemark">
-        <value xml:lang="en">Order Remark</value>
+        <value xml:lang="en">External Remark</value>
     </property>
     <property key="poType">
         <value xml:lang="en">PO Type</value>
