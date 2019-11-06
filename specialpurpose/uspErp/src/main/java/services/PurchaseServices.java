@@ -46,13 +46,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ofbiz.base.conversion.ConversionException;
 import org.apache.ofbiz.base.conversion.DateTimeConverters;
 import org.apache.ofbiz.base.conversion.JSONConverters;
-import org.apache.ofbiz.base.util.Debug;
-import org.apache.ofbiz.base.util.StringUtil;
-import org.apache.ofbiz.base.util.UtilDateTime;
-import org.apache.ofbiz.base.util.UtilGenerics;
-import org.apache.ofbiz.base.util.UtilMisc;
-import org.apache.ofbiz.base.util.UtilProperties;
-import org.apache.ofbiz.base.util.UtilValidate;
+import org.apache.ofbiz.base.util.*;
 import org.apache.ofbiz.base.util.string.FlexibleStringExpander;
 import org.apache.ofbiz.entity.Delegator;
 import org.apache.ofbiz.entity.GenericEntityException;
@@ -313,21 +307,18 @@ public class PurchaseServices {
 								Object value = new Object();
 								if (jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
 									if ("orderQty".equals(key) || "producedQty".equals(key) || "itemLength".equals(key)) {
-										String str = jsonobj.getString(key);
+										String str = UtilFormatOut.checkNull(jsonobj.getString(key)) == "" ? "0" : jsonobj.getString(key);
 										long lStr = Long.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(lStr);
 									} else if ("amount".equals(key) || "unitPrice".equals(key) || "commissionPrice".equals(key) || "orderQtyLB".equals(key)) {
-										String str = jsonobj.getString(key);
+										String str = UtilFormatOut.checkNull(jsonobj.getString(key)) == "" ? "0" : jsonobj.getString(key);
 										double dbl = Double.valueOf(str.replaceAll(",", ""));
 										value = BigDecimal.valueOf(dbl);
-									} else if ("exwEtd".equals(key) || "fobPointEta".equals(key) || "blDate".equals(key)) {
-										String test = jsonobj.getString(key);
-										Date aa = new Date();
-										aa.setTime(Long.valueOf(test));
-										value = new Timestamp(aa.getTime());
-										//DateTimeConverters.StringToTimestamp stringToTimestamp = new DateTimeConverters.StringToTimestamp();
-										Debug.logInfo("@@@@@ = " + value, null);
-										//value = stringToTimestamp.convert(test);
+									} else if ("exwEtd".equals(key) || "fobPointEta".equals(key) || "blDate".equals(key) || "commercialInvoiceDate".equals(key)) {
+										Debug.logInfo(key, null);
+										value = Timestamp.valueOf(UtilFormatOut.checkNull(jsonobj.getString(key)));
+									} else if ("paintCode".equals(key) || "paintName".equals(key)) {
+										value = UtilFormatOut.checkNull(jsonobj.getString(key));
 									} else {
 										value = jsonobj.getString(key);
 									}

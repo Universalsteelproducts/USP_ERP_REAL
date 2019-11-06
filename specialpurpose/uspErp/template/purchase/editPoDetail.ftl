@@ -412,7 +412,7 @@
                     name: 'selected',
                     text: "${uiLabelMap.applySelectedBtn}",
                     action: function ( e, dt, button, config ) {
-                        var selectRow = dt.rows( '.selected' ).data();
+                        var selectRow = dt.rows( '.selected' ).indexes();
 
                         if(selectRow.length  > 0) {
                             for(var i=0 ; selectRow.length > i ; i++) {
@@ -723,26 +723,49 @@
 
 	    $("#submitBtn").on("click", function() {
             var reqData = itemListTable.rows().data();
-            var reqArray = makeArrayData(reqData);
+            if(reqData.length > 0) {
+                for(var i=0 ; reqData.length > i ; i++) {
+                    var data = reqData[i];
 
-            jQuery.ajax({
-                url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
-                type: 'POST',
-                data: "crudMode=U&reqData=" + JSON.stringify(reqArray),
-                error: function(msg) {
-                    showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
-                },
-                success: function(data, status) {
-                    if(data.successStr == "success") {
-                        alert("PO Create Completed");
-
-                        /*$("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "</@ofbizUrl>");
-                        $("#pageMoveForm").submit();*/
-                    } else {
-                        alert("PO Create Fail");
+                    var commercialInvoiceDate = checkNull(data["commercialInvoiceDate"]);
+                    if(commercialInvoiceDate != "") {
+                        data["commercialInvoiceDate"] = timeTodateFormat(commercialInvoiceDate);
+                    }
+                    var blDate = checkNull(data["blDate"]);
+                    if(blDate != "") {
+                        data["blDate"] = timeTodateFormat(blDate);
+                    }
+                    var exwEtd = checkNull(data["exwEtd"]);
+                    if(exwEtd != "") {
+                        data["exwEtd"] = timeTodateFormat(exwEtd);
+                    }
+                    var fobPointEta = checkNull(data["fobPointEta"]);
+                    if(fobPointEta != "") {
+                        data["fobPointEta"] = timeTodateFormat(fobPointEta);
                     }
                 }
-            });
+
+                var reqArray = makeArrayData(reqData);
+
+                jQuery.ajax({
+                    url: '<@ofbizUrl>CRUPoList</@ofbizUrl>',
+                    type: 'POST',
+                    data: "crudMode=U&reqData=" + JSON.stringify(reqArray),
+                    error: function(msg) {
+                        showErrorAlert("${uiLabelMap.CommonErrorMessage2}","${uiLabelMap.ErrorLoadingContent} : " + msg);
+                    },
+                    success: function(data, status) {
+                        if(data.successStr == "success") {
+                            alert("PO Create Completed");
+
+                            /*$("#pageMoveForm").attr("action", "<@ofbizUrl>editPo?poNo=" + $("#poNo").val() + "</@ofbizUrl>");
+                            $("#pageMoveForm").submit();*/
+                        } else {
+                            alert("PO Create Fail");
+                        }
+                    }
+                });
+            }
         });
 
 	    $("#uploadCSVFileBtn").on("click", function(event) {
@@ -1004,14 +1027,14 @@
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <@htmlTemplate.renderDateTimeField name="commercialInvoiceDate" id="commercialInvoiceDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd" value="" size="10" maxlength="10" dateType="date" shortDateInput=true timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                        <@htmlTemplate.renderDateTimeField name="commercialInvoiceDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="commercialInvoiceDate" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                     </td>
                     <td class="label" width="13%" align="right">
                         ${uiLabelMap.blDate}
                     </td>
                     <td width="1%">&nbsp;</td>
                     <td width="20%" >
-                        <input type="text" name="blDate" id="blDate" />
+                        <@htmlTemplate.renderDateTimeField name="blDate" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="blDate" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                     </td>
                 </tr>
                 <tr>

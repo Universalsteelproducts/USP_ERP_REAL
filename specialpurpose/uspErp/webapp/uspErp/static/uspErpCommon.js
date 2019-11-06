@@ -465,8 +465,7 @@ var selectedColTotal = function(tableObj, setColNUnitNIdxArry) {
 }
 
 var timeTodateFormat = function(inputDate) {
-    var date = new Date();
-    date.setTime(inputDate);
+    var date = new Date(inputDate);
     var d = date.getDate();
     if(d < 10) {
         d = "0" + d;

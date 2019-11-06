@@ -196,10 +196,6 @@ under the License.
                     "visible": false
                 },
                 {
-                    "data" : "fobPointEta",
-                    "visible": false
-                },
-                {
                     "data" : "gaugeControlYield",
                     "visible": false
                 },
@@ -254,7 +250,95 @@ under the License.
                 {
                     "data" : "orderQtyLB",
                     "visible": false
-                }
+                },
+                {
+                    "data" : "customerNm",
+                    "visible": false
+                },
+                {
+                    "data" : "customerId",
+                    "visible": false
+                },
+                {
+                    "data" : "productNm",
+                    "visible": false
+                },
+                {
+                    "data" : "commissionPrice",
+                    "visible": false
+                },
+                {
+                    "data" : "exwEtd",
+                    "render" : function ( data, type, row ) {
+                        if(data == null || data =="") {
+                            return "";
+                        } else {
+                            var date = new Date(data);
+                            var d = date.getDate();
+                            if(d < 10) {
+                                d = "0" + d;
+                            }
+                            var m = date.getMonth();
+                            m += 1;
+                            if(m < 10) {
+                                m = "0" + m;
+                            }
+                            var y = date.getFullYear();
+
+                            var h = date.getHours();
+                            if(h < 10) {
+                                h = "0" + h;
+                            }
+                            var M = date.getMinutes();
+                            if(M < 10) {
+                                M = "0" + M;
+                            }
+                            var s = date.getSeconds();
+                            if(s < 10) {
+                                s = "0" + s;
+                            }
+
+                            return y + "-" + m + "-" + d + " " + h + ":" + M + ":" + s;
+                        }
+                    },
+                    "visible": false
+                },
+                {
+                    "data" : "fobPointEta",
+	        		"render" : function ( data, type, row ) {
+	        		    if(data == null || data =="") {
+	        		        return "";
+	        		    } else {
+                            var date = new Date(data);
+                            var d = date.getDate();
+                            if(d < 10) {
+                                d = "0" + d;
+                            }
+                            var m = date.getMonth();
+                            m += 1;
+                            if(m < 10) {
+                                m = "0" + m;
+                            }
+                            var y = date.getFullYear();
+
+                            var h = date.getHours();
+                            if(h < 10) {
+                                h = "0" + h;
+                            }
+                            var M = date.getMinutes();
+                            if(M < 10) {
+                                M = "0" + M;
+                            }
+                            var s = date.getSeconds();
+                            if(s < 10) {
+                                s = "0" + s;
+                            }
+
+                            return y + "-" + m + "-" + d + " " + h + ":" + M + ":" + s;
+                        }
+	        		},
+                    "visible": false
+                },
 			],
 			drawCallback : function(settings) {
 				totalPriceNQuantity(this.api(), "totalOrderQty", "totalOrderAmount");
@@ -591,13 +675,6 @@ under the License.
             rowMap = addToOrder("itemInfo", rowMap);
 
             rowMap["referenceNo"] = $("#poNo").val() + $("#lotNo").val() + "00";
-            if($("#paintCode").val() == "") {
-                rowMap["paintCode"] = "";
-            }
-            if($("#paintName").val() == "") {
-                rowMap["paintName"] = "";
-            }
-
             var orderQtyLB = 0;
             if($("#qtyUnit").val() == "MT") {
                 orderQtyLB = Number(rowMap["orderQty"]) * 2204.62;
@@ -605,7 +682,6 @@ under the License.
                 orderQtyLB = Number(rowMap["orderQty"]);
             }
             rowMap["orderQtyLB"] = orderQtyLB.toFixed(2);
-
             poListTable.row.add(rowMap).columns.adjust().draw();
         });
 
@@ -666,12 +742,24 @@ under the License.
                 for(var i=0 ; reqData.length > i ; i++) {
                     var data = reqData[i];
 
-                    data["orderQty"] = parseFloat(data["orderQty"]);
-                    data["unitPrice"] = parseFloat(data["unitPrice"]);
-                    data["amount"] = parseFloat(data["amount"]);
-                    data["orderQtyLB"] = parseFloat(data["orderQtyLB"]);
-                    data["paintCode"] = "";
-                    data["paintName"] = "";
+                    var orderQty = checkNull(data["orderQty"]) == "" ? "0" : parseFloat(data["orderQty"])
+                    var unitPrice = checkNull(data["unitPrice"]) == "" ? "0" : parseFloat(data["unitPrice"])
+                    var amount = checkNull(data["amount"]) == "" ? "0" : parseFloat(data["amount"])
+                    var orderQtyLB = checkNull(data["orderQtyLB"]) == "" ? "0" : parseFloat(data["orderQtyLB"])
+
+                    data["orderQty"] = orderQty;
+                    data["unitPrice"] = unitPrice;
+                    data["amount"] = amount;
+                    data["orderQtyLB"] = orderQtyLB;
+
+                    var exwEtd = checkNull(data["exwEtd"]);
+                    if(exwEtd != "") {
+                        data["exwEtd"] = timeTodateFormat(exwEtd);
+                    }
+                    var fobPointEta = checkNull(data["fobPointEta"]);
+                    if(fobPointEta != "") {
+                        data["fobPointEta"] = timeTodateFormat(fobPointEta);
+                    }
                 }
 
                 var reqArray = makeArrayData(reqData);
@@ -758,14 +846,14 @@ under the License.
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="20%">
-                    <@htmlTemplate.renderDateTimeField name="exwEtd" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="exwEtd" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                    <@htmlTemplate.renderDateTimeField name="exwEtd" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="20" maxlength="50" id="exwEtd" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                 </td>
                 <td class="label" width="12%" align="right">
                     ${uiLabelMap.fobPointEta}
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="20%">
-                    <@htmlTemplate.renderDateTimeField name="fobPointEta" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="25" maxlength="50" id="fobPointEta" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
+                    <@htmlTemplate.renderDateTimeField name="fobPointEta" event="" action="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" value="" size="20" maxlength="50" id="fobPointEta" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                 </td>
 			</tr>
 			<tr>
@@ -1005,7 +1093,7 @@ under the License.
                     <input type="text" name="innerDiameter" id="innerDiameter" value="" size="25" maxlength="255"/>
                 </td>
                 <td class="label" width="12%" align="right">
-                    ${uiLabelMap.gaugeControlYield}
+                    ${uiLabelMap.gaugeControl}
                 </td>
                 <td width="1%">&nbsp;</td>
                 <td width="35%">
