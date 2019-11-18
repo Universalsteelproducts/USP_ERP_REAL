@@ -84,10 +84,10 @@ var makeArrayData = function(reqData) {
 		var map = reqData[i];
 		for(var key in map) {
 			if(key != "undefined") {
-			    if(typeof reqData[key] == "string") {
-                    reqMap[key] = $.trim(map[key]);
+			    if(typeof map[key] == "string") {
+                    reqMap[key] = $.trim(checkNull(map[key]));
                 } else {
-                    reqMap[key] = map[key];
+                    reqMap[key] = checkNull(map[key]);
                 }
 			}
 		}
@@ -102,9 +102,9 @@ var makeMapData = function(reqData) {
     for(var key in reqData) {
         if(key != "undefined") {
             if(typeof reqData[key] == "string") {
-                reqMap[key] = $.trim(reqData[key]);
+                reqMap[key] = $.trim(checkNull(reqData[key]));
             } else {
-                reqMap[key] = reqData[key];
+                reqMap[key] = checkNull(reqData[key]);
             }
         }
     }

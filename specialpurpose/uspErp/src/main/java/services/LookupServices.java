@@ -266,14 +266,14 @@ public class LookupServices {
                         while (keysItr.hasNext()) {
                             String key = keysItr.next();
                             Object value = new Object();
-                            if (jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
+                            if (jsonobj.get(key) != null) {
                                 if ("sortSeq".equals(key)) {
-                                    value = Long.valueOf(jsonobj.getString(key));
+                                    value = Long.valueOf(jsonobj.getInt(key));
                                 } else {
-                                    value = jsonobj.getString(key);
+                                    value = jsonobj.get(key);
                                 }
                                 codeMap.put(key, value);
-                            } else if ("".equals(jsonobj.getString(key))) {
+                            } else {
                                 codeMap.put(key, "");
                             }
                         }
