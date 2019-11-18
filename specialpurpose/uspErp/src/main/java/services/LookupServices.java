@@ -193,6 +193,140 @@ public class LookupServices {
         return result;
     }
 
+    public static Map<String, Object> schCommCodeList(DispatchContext dctx, Map<String, ?> context) {
+        Delegator delegator = dctx.getDelegator();
+        Map<String, Object> result = ServiceUtil.returnSuccess();
+
+        try {
+            // Check if the country is a country group and get recursively the
+            // states
+            String entityNm = UtilFormatOut.checkNull((String)context.get("entityNm"));
+            String codeId = UtilFormatOut.checkNull((String)context.get("codeId"));
+            String codeNm = UtilFormatOut.checkNull((String)context.get("codeNm"));
+            String schCodeId = UtilFormatOut.checkNull((String)context.get("schCodeId"));
+            String schCodeNm = UtilFormatOut.checkNull((String)context.get("schCodeNm"));
+
+            List<EntityCondition> conditionList = new LinkedList<EntityCondition>();
+
+            if(!"".equals(schCodeId)) {
+                conditionList.add(EntityCondition.makeCondition(codeId, EntityOperator.LIKE, "%" + schCodeId + "%"));
+            }
+
+            if(!"".equals(schCodeNm)) {
+                conditionList.add(EntityCondition.makeCondition(codeNm, EntityOperator.LIKE, "%" + schCodeNm + "%"));
+            }
+
+            EntityCondition codeListCondition = EntityCondition.makeCondition(conditionList, EntityOperator.AND);
+
+            List<GenericValue> codeList = EntityQuery.use(delegator)
+                    .from(entityNm)
+                    .where(codeListCondition)
+                    .queryList();
+
+            result.put("data", codeList);
+            result.put("recordsTotal", codeList.size());
+            result.put("recordsFiltered", codeList.size());
+
+        } catch (GenericEntityException e){
+            Debug.logError(e, "Cannot lookup schCommCodeList ", module);
+        }
+
+        return result;
+    }
+
+    public static Map<String, Object> CUCommCodeList(DispatchContext dctx, Map<String, ?> context) {
+        Delegator delegator = dctx.getDelegator();
+        GenericValue userLogin = (GenericValue) context.get("userLogin");
+        String userLoginId = (String) userLogin.get("userLoginId");
+
+        String entityNm = UtilFormatOut.checkNull((String)context.get("entityNm"));
+        String codeId = UtilFormatOut.checkNull((String)context.get("codeId"));
+        String codeNm = UtilFormatOut.checkNull((String)context.get("codeNm"));
+        String crudMode = UtilFormatOut.checkNull((String)context.get("crudMode"));
+        String reqData = context.get("reqData") == null ? "" : (String) context.get("reqData");
+
+        Map<String, Object> result = ServiceUtil.returnSuccess();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        List<Map<String, Object>> resultList = new LinkedList<Map<String,Object>>();
+
+        try {
+            JSONArray data = new JSONArray(reqData);//jsonarray 형태로
+
+            int resultInt = 0;
+            if (data.length() > 0) {
+                GenericValue createNUpdateCodeInfo = delegator.makeValue(entityNm);
+
+                if("CU".equals(crudMode)) {
+                    for (int i = 0; data.length() > i; i++) {
+                        Map<String, Object> codeMap = new HashMap<String, Object>();
+                        JSONObject jsonobj = data.getJSONObject(i);
+                        long sortSeq = 0L;
+
+                        Iterator<String> keysItr = jsonobj.keys();
+                        while (keysItr.hasNext()) {
+                            String key = keysItr.next();
+                            Object value = new Object();
+                            if (jsonobj.getString(key) != null && !"".equals(jsonobj.getString(key))) {
+                                if ("sortSeq".equals(key)) {
+                                    value = Long.valueOf(jsonobj.getString(key));
+                                } else {
+                                    value = jsonobj.getString(key);
+                                }
+                                codeMap.put(key, value);
+                            } else if ("".equals(jsonobj.getString(key))) {
+                                codeMap.put(key, "");
+                            }
+                        }
+
+                        GenericValue codeExistInfo = EntityQuery.use(delegator)
+                                .from(entityNm)
+                                .where(codeId, codeMap.get("codeId"))
+                                .queryOne();
+                        if (codeExistInfo == null) {
+                            codeMap.put("createdStamp", UtilDateTime.nowTimestamp());
+                            codeMap.put("createdTxStamp", UtilDateTime.nowTimestamp());
+                        } else {
+                            codeMap.put("createdStamp", codeExistInfo.getTimestamp("createdStamp"));
+                            codeMap.put("createdTxStamp", codeExistInfo.getTimestamp("createdTxStamp"));
+                        }
+                        codeMap.put("lastUpdatedStamp", UtilDateTime.nowTimestamp());
+                        codeMap.put("lastUpdatedTxStamp", UtilDateTime.nowTimestamp());
+
+                        createNUpdateCodeInfo.setPKFields(codeMap);
+                        createNUpdateCodeInfo.setNonPKFields(codeMap);
+
+                        createNUpdateCodeInfo = delegator.createOrStore(createNUpdateCodeInfo);
+
+                        resultMap.putAll(createNUpdateCodeInfo);
+                        resultList.add(resultMap);
+
+                        createNUpdateCodeInfo.clear();
+                        resultInt++;
+                    }
+                } else if("D".equals(crudMode)) {
+                    for(int i=0 ; data.length() > i ; i++) {
+                        JSONObject jsonobj = data.getJSONObject(i);
+                        createNUpdateCodeInfo.set(codeId, jsonobj.getString(codeId));
+                        resultInt += delegator.removeByAnd(entityNm, createNUpdateCodeInfo);
+                    }
+                }
+            }
+
+            if (resultInt > 0) {
+                result.put("successStr", "success");
+            } else {
+                result.put("successStr", "fail");
+            }
+        } catch (GenericEntityException e){
+            Debug.logError(e, "Cannot CUCommCodeList ", module);
+        }
+        result.put("data", resultList);
+        result.put("recordsTotal", resultList.size());
+        result.put("recordsFiltered", resultList.size());
+
+        return result;
+    }
+
     public static Map<String, Object> multipleUploadShippingDoc(DispatchContext dctx, Map<String, ? extends Object> context)
             throws IOException, JDOMException {
 
@@ -340,7 +474,7 @@ public class LookupServices {
                         referenceInfo.put("shippingAgent", context.get("shippingAgent"));
                         referenceInfo.put("email", context.get("email"));
                     }
-                    Debug.logInfo("############################## = " + referenceInfo.toString(), null);
+
                     referenceInfo = delegator.createOrStore(referenceInfo);
                 }
             }

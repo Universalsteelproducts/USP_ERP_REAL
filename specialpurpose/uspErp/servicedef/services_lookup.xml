@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
     <description>UspErp Services</description>
     <vendor></vendor>
     <version>1.0</version>
@@ -26,5 +26,30 @@
         <attribute name="returnDataInfo" mode="OUT" type="java.util.Map"/>
         <attribute name="resultState" mode="OUT" type="String" optional="false"/>
     </service>
-    
+
+    <service name="schCommCodeList" engine="java" auth="true"
+             location="services.LookupServices" invoke="schCommCodeList">
+        <attribute name="entityNm" mode="IN" type="String" optional="false"/>
+        <attribute name="codeId" mode="IN" type="String" optional="false"/>
+        <attribute name="codeNm" mode="IN" type="String" optional="false"/>
+        <attribute name="schCodeId" mode="IN" type="String" optional="true"/>
+        <attribute name="schCodeNm" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+    </service>
+
+    <service name="CUCommCodeList" engine="java" auth="true"
+             location="services.LookupServices" invoke="CUCommCodeList">
+        <attribute name="entityNm" mode="IN" type="String" optional="true"/>
+        <attribute name="codeId" mode="IN" type="String" optional="true"/>
+        <attribute name="codeNm" mode="IN" type="String" optional="true"/>
+        <attribute name="crudMode" mode="IN" type="String" optional="true"/>
+        <attribute name="reqData" mode="IN" type="String" optional="true"/>
+        <attribute name="data" mode="OUT" type="java.util.List" optional="true"/>
+        <attribute name="recordsTotal" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="recordsFiltered" mode="OUT" type="Integer" optional="true"/>
+        <attribute name="successStr" mode="OUT" type="String" optional="true"/>
+    </service>
+
 </services>

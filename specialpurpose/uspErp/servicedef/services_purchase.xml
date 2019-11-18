@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
     <description>UspErp Services</description>
     <vendor></vendor>
     <version>1.0</version>
@@ -109,5 +109,5 @@
         <attribute mode="INOUT" name="lotNo" optional="false" type="String"/>
         <attribute mode="IN" name="docClass" optional="true" type="String"/>
     </service>
-    
+
 </services>

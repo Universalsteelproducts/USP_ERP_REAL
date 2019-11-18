@@ -17,7 +17,7 @@
     <entity entity-name="PoStatusCode" package-name="usperp.common" title="PO Status">
         <field name="poStatusId" type="id-long-ne"></field>
         <field name="poStatusNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="poStatusId"/>
@@ -26,7 +26,7 @@
     <entity entity-name="ProcessingStatusCode" package-name="usperp.common" title="Processing Status">
         <field name="ProcessingStatusId" type="id-long-ne"></field>
         <field name="ProcessingStatusNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="ProcessingStatusId"/>
@@ -35,7 +35,7 @@
     <entity entity-name="PriceTermCode" package-name="usperp.common" title="Price Term">
         <field name="priceTermId" type="id-long-ne"></field>
         <field name="priceTermNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="priceTermId"/>
@@ -44,7 +44,7 @@
     <entity entity-name="PaymentTermCode" package-name="usperp.common" title="Payment Term">
         <field name="paymentTermId" type="id-long-ne"></field>
         <field name="paymentTermNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="paymentTermId"/>
@@ -53,7 +53,7 @@
     <entity entity-name="TransferStatusCode" package-name="usperp.common" title="Processing Status">
         <field name="TransferStatusId" type="id-long-ne"></field>
         <field name="TransferStatusNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="TransferStatusId"/>
@@ -62,7 +62,7 @@
     <entity entity-name="PurchaseClassCode" package-name="usperp.common" title="Purchase Class">
         <field name="purchaseClassId" type="id-long-ne"></field>
         <field name="purchaseClassNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="purchaseClassId"/>
@@ -71,7 +71,7 @@
     <entity entity-name="QuantityUnitCode" package-name="usperp.common" title="Quantity Unit">
         <field name="quantityUnitId" type="id-long-ne"></field>
         <field name="quantityUnitNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="quantityUnitId"/>
@@ -80,7 +80,7 @@
     <entity entity-name="PriceUnitCode" package-name="usperp.common" title="Price Unit">
         <field name="priceUnitId" type="id-long-ne"></field>
         <field name="priceUnitNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="priceUnitId"/>
@@ -89,7 +89,7 @@
     <entity entity-name="DestinationCode" package-name="usperp.common" title="Destination">
         <field name="destinationId" type="id-long-ne"></field>
         <field name="destinationNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="destinationId"/>
@@ -98,7 +98,7 @@
     <entity entity-name="SteelTypeCode" package-name="usperp.common" title="Steel Type">
         <field name="steelTypeId" type="id-long-ne"></field>
         <field name="steelTypeNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="steelTypeId"/>
@@ -107,7 +107,7 @@
     <entity entity-name="SurfaceTypeCode" package-name="usperp.common" title="Surface Type">
         <field name="surfaceTypeId" type="id-long-ne"></field>
         <field name="surfaceTypeNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="surfaceTypeId"/>
@@ -116,7 +116,7 @@
     <entity entity-name="GradeCode" package-name="usperp.common" title="Grade">
         <field name="gradeId" type="id-long-ne"></field>
         <field name="gradeNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="gradeId"/>
@@ -125,7 +125,7 @@
     <entity entity-name="CoatingWeightCode" package-name="usperp.common" title="Coating Weight">
         <field name="coatingWeightId" type="id-long-ne"></field>
         <field name="coatingWeightNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="coatingWeightId"/>
@@ -134,7 +134,7 @@
     <entity entity-name="GaugeCode" package-name="usperp.common" title="Gauge">
         <field name="gaugeId" type="id-long-ne"></field>
         <field name="gaugeNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="gaugeId"/>
@@ -143,7 +143,7 @@
     <entity entity-name="ExwCode" package-name="usperp.common" title="Exw">
         <field name="exwId" type="id-long-ne"></field>
         <field name="exwNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="exwId"/>
@@ -152,7 +152,7 @@
     <entity entity-name="CoilMaxWeightCode" package-name="usperp.common" title="Coil Max Weight">
         <field name="coilMaxWeightId" type="id-long-ne"></field>
         <field name="coilMaxWeightNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="coilMaxWeightId"/>
@@ -161,7 +161,7 @@
     <entity entity-name="PurchaseAgentCode" package-name="usperp.common" title="Purchase Agent Code">
         <field name="purchaseAgentId" type="id-long-ne"></field>
         <field name="purchaseAgentNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="purchaseAgentId"/>
@@ -170,7 +170,7 @@
     <entity entity-name="PackagingCode" package-name="usperp.common" title="Packaging Code">
         <field name="packagingId" type="id-long-ne"></field>
         <field name="packagingNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="packagingId"/>
@@ -179,7 +179,7 @@
     <entity entity-name="ThicknessCode" package-name="usperp.common" title="Thickness">
         <field name="thicknessId" type="id-long-ne"></field>
         <field name="thicknessNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="thicknessId"/>
@@ -190,7 +190,7 @@
         <field name="paintBrand" type="id-long-ne"></field>
         <field name="paintName" type="id-long-ne"></field>
         <field name="paintType" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="paintCode"/>
@@ -199,7 +199,7 @@
     <entity entity-name="ProductTmp" package-name="usperp.common" title="Product Tmp">
         <field name="productId" type="id-long-ne"></field>
         <field name="productNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="productId"/>
@@ -208,7 +208,7 @@
     <entity entity-name="FobPointTmp" package-name="usperp.common" title="FobPoint Tmp">
         <field name="fobPointId" type="id-long-ne"></field>
         <field name="fobPointNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="fobPointId"/>
@@ -217,7 +217,7 @@
     <entity entity-name="DestinationTmp" package-name="usperp.common" title="Destination Tmp">
         <field name="destinationId" type="id-long-ne"></field>
         <field name="destinationNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="destinationId"/>
@@ -226,7 +226,7 @@
     <entity entity-name="ShippingLineTmp" package-name="usperp.common" title="Shipping Line Tmp">
         <field name="shippingLineId" type="id-long-ne"></field>
         <field name="shippingLineNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="shippingLineId"/>
@@ -235,28 +235,10 @@
     <entity entity-name="ShippingAgentTmp" package-name="usperp.common" title="Shipping Agent Tmp">
         <field name="shippingAgentId" type="id-long-ne"></field>
         <field name="shippingAgentNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
+        <field name="sortSeq" type="numeric"></field>
         <field name="description" type="comment"></field>
 
         <prim-key field="shippingAgentId"/>
-    </entity>
-
-    <entity entity-name="ProcessingStatusCode" package-name="usperp.common" title="Processing Status">
-        <field name="processingStatusId" type="id-long-ne"></field>
-        <field name="processingStatusNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
-        <field name="description" type="comment"></field>
-
-        <prim-key field="processingStatusId"/>
-    </entity>
-
-    <entity entity-name="TransferStatusCode" package-name="usperp.common" title="Transfer Status">
-        <field name="transferStatusId" type="id-long-ne"></field>
-        <field name="transferStatusNm" type="id-long-ne"></field>
-        <field name="sortSeq" type="id-long-ne"></field>
-        <field name="description" type="comment"></field>
-
-        <prim-key field="transferStatusId"/>
     </entity>
     <!--
     ******************************************************

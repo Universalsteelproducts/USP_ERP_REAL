@@ -84,7 +84,11 @@ var makeArrayData = function(reqData) {
 		var map = reqData[i];
 		for(var key in map) {
 			if(key != "undefined") {
-				reqMap[key] = $.trim(map[key]);
+			    if(typeof reqData[key] == "string") {
+                    reqMap[key] = $.trim(map[key]);
+                } else {
+                    reqMap[key] = map[key];
+                }
 			}
 		}
 		reqArray.push(reqMap);
@@ -97,11 +101,15 @@ var makeMapData = function(reqData) {
     var reqMap = new Object();
     for(var key in reqData) {
         if(key != "undefined") {
-            reqMap[key] = $.trim(reqData[key]);
+            if(typeof reqData[key] == "string") {
+                reqMap[key] = $.trim(reqData[key]);
+            } else {
+                reqMap[key] = reqData[key];
+            }
         }
     }
 
-	return reqMap;
+    return reqMap;
 };
 
 var makeStringArrayData = function(reqData, colName) {
@@ -490,4 +498,62 @@ var timeTodateFormat = function(inputDate) {
     }
 
     return y + "-" + m + "-" + d  + " " + h + ":" + M + ":" + s;
+}
+
+jQuery(document).ready(function() {
+    $("select").on("change", function() {
+        if($(this).val() == "QUICK_ADD") {
+            var entityNm = $(this).find("option:selected").attr("entity-name");
+            var codeId = $(this).find("option:selected").attr("code-id");
+            var codeNm = $(this).find("option:selected").attr("code-nm");
+            var elementId = $(this).attr("id");
+            var option = {
+                url : "/uspErp/control/LookupAddCode",
+                width : 600,
+                height : 630,
+                title : "${uiLabelMap.addCodeLookup}",
+                formId : "lookupForm",
+                data : {
+                    "entityNm": entityNm,
+                    "codeId": codeId,
+                    "codeNm": codeNm,
+                    "elementId" : elementId
+                }
+            };
+            openDialog.open(option);
+        }
+    });
+});
+
+var redrawDropdown = function(reqData, paramMap) {
+    if(reqData.length > 0) {
+        var entityNm = paramMap["entityNm"];
+        var codeId = paramMap["codeId"];
+        var codeNm = paramMap["codeNm"];
+        var elementId = paramMap["elementId"];
+
+        reqData.sort(function(a, b){
+            var a1= a.sortSeq, b1= b.sortSeq;
+            if(a1== b1) return 0;
+            return a1> b1? 1: -1;
+        });
+
+        $("#" + elementId + " option").remove();
+        var $option = "<option value=''>--Select</option>";
+        for(var i=0 ; reqData.length > i ; i++) {
+            var data = reqData[i];
+            var codeVal = data[codeId];
+            var nameVal = data[codeNm];
+            if(codeVal == "QUICK_ADD") {
+                $option += "<option value='" + codeVal + "' entity-name='" + entityNm + "' code-id='" + codeId + "' code-nm='" + codeNm + "'>" + nameVal + "</option>";
+            } else {
+                $option += "<option value='" + codeVal + "'>" + nameVal + "</option>";
+            }
+        }
+        $("#" + elementId).append($option);
+    }
+    var option = {
+        formId : "lookupForm"
+    };
+    openDialog.close(option);
 }

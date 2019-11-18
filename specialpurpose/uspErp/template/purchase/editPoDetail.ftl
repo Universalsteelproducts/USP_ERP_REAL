@@ -505,16 +505,27 @@
                         $.each(split_csv.slice(1), function (index, csv_row) {
                             //Split on quotes and comma to get each cell
                             var csv_cell_array = csv_row.split('","');
+                            csv_cell_array[0] = csv_cell_array[0].replace(/"/g, '');
+                            //Remove replace the two quotes which are left at the beginning and the end (first and last cell)
+                            csv_cell_array[(csv_cell_array.length-1)] = csv_cell_array[(csv_cell_array.length-1)].replace(/"/g, '');
+
+                            if(csv_cell_array[8].indexOf(",") > -1) {
+                                csv_cell_array[8] = csv_cell_array[8].replace(/\,/g,'');
+                            }
+                            if(csv_cell_array[10].indexOf(",") > -1) {
+                                csv_cell_array[10] = csv_cell_array[10].replace(/\,/g,'');
+                            }
+                            if(csv_cell_array[(csv_cell_array.length-1)].indexOf(",") > -1) {
+                                csv_cell_array[(csv_cell_array.length-1)] = csv_cell_array[(csv_cell_array.length-1)].replace(/\,/g,'');
+                            }
+
+                            //Join the table on the quotes and comma; add back the quotes at the beginning and end
+                            csv_cell_array_quotes = '"' + csv_cell_array.join('","') + '"';
+
                             if(csv_cell_array[9] == ""
                                 && csv_cell_array[11] == ""
                                 && csv_cell_array[13] == ""
                                 && csv_cell_array[14] == "") {
-                                //Remove replace the two quotes which are left at the beginning and the end (first and last cell)
-                                csv_cell_array[0] = csv_cell_array[0].replace(/"/g, '');
-                                csv_cell_array[(csv_cell_array.length-1)] = csv_cell_array[(csv_cell_array.length-1)].replace(/"/g, '');
-
-                                //Join the table on the quotes and comma; add back the quotes at the beginning and end
-                                csv_cell_array_quotes = '"' + csv_cell_array.join('","') + '"';
                                 //Insert the new row into the rows array at the previous index (index +1 because the header was sliced)
                                 newSplit_csv[newIdx] = csv_cell_array_quotes;
                                 newIdx++;
@@ -789,10 +800,10 @@
                             var csvPaintName = (csvData["paintName"] == null || csvData["paintName"] == "") == true ? "" : csvData["paintName"];
 
                             var csvItemId = csvData["itemId"];
-                            var csvProducedThickness = csvData["producedThickness"];
-                            var csvProducedWidth = csvData["producedWidth"];
-                            var csvProducedQty = csvData["producedQty"];
-                            var csvItemLength = csvData["itemLength"];
+                            var csvProducedThickness = csvData["producedThickness"].replace(/\,/g,'');
+                            var csvProducedWidth = csvData["producedWidth"].replace(/\,/g,'');
+                            var csvProducedQty = csvData["producedQty"].replace(/\,/g,'');
+                            var csvItemLength = csvData["itemLength"].replace(/\,/g,'');
 
                             var eqDataCnt = 0;
                             var baseDataCnt = 0;
@@ -840,8 +851,6 @@
                                     }
                                 }
                             }
-
-                            console.log(eqDataCnt);
 
                             if(eqDataCnt == 0) {
                                 if(rowIdxArry != "") {

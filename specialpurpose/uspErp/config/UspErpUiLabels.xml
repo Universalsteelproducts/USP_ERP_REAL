@@ -323,7 +323,7 @@
         <value xml:lang="en">Customer</value>
     </property>
     <property key="internalRef">
-        <value xml:lang="en">Internal Ref Number </value>
+        <value xml:lang="en">Internal REF Number </value>
     </property>
     <property key="item">
         <value xml:lang="en">Item</value>
@@ -370,7 +370,7 @@
         <value xml:lang="en">Buying Agent</value>
     </property>
     <property key="purchaseClass">
-        <value xml:lang="en">Purchase Type</value>
+        <value xml:lang="en">Purchase Class</value>
     </property>
     <property key="vendor">
         <value xml:lang="en">Vendor</value>
@@ -411,7 +411,7 @@
         <value xml:lang="en">Product Attribute</value>
     </property>
     <property key="orderRemark">
-        <value xml:lang="en">External Note</value>
+        <value xml:lang="en">Order Remark</value>
     </property>
     <property key="poType">
         <value xml:lang="en">PO Type</value>
@@ -603,7 +603,7 @@
         <value xml:lang="en">Coil Spec</value>
     </property>
     <property key="coilId">
-        <value xml:lang="en">Coil Inner Diameter(IN)</value>
+        <value xml:lang="en">Coil Inner Diameter</value>
     </property>
     <property key="otherDetails">
         <value xml:lang="en">Other Details</value>
@@ -1119,6 +1119,15 @@
     </property>
     <property key="LookupPaint">
         <value xml:lang="en">Lookup Paint</value>
+    </property>
+    <property key="codeId">
+        <value xml:lang="en">Code ID</value>
+    </property>
+    <property key="codeNm">
+        <value xml:lang="en">Code Name</value>
+    </property>
+    <property key="sortSeq">
+        <value xml:lang="en">Sort Num</value>
     </property>
     <!-- Lookup LABEL END -->
 </resource>

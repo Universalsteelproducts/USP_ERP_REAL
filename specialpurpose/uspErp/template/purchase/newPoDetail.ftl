@@ -23,6 +23,22 @@ under the License.
 		/***************************************************************************
 	     ******************			Common Control				********************
 	     ***************************************************************************/
+	    // 팝업 X 버튼으로 닫을때 event
+        $("#lookupForm").on("dialogclose", function() {
+            var data = $("#codeList").DataTable().rows().data();
+            var entityNm = $("input[name=entityNm]").val();
+            var codeId = checkNull($("#codeId").val());
+            var codeNm = checkNull($("#codeNm").val());
+            var elementId = $("input[name=elementId]").val();
+            var paramMap = {
+                "entityNm" : entityNm,
+                "codeId" : codeId,
+                "codeNm" : codeNm,
+                "elementId" : elementId
+            };
+
+            redrawDropdown(data, paramMap);
+        });
 
 		/***************************************************************************
 	     ******************				Init Table				********************
@@ -561,27 +577,6 @@ under the License.
             }
         });
 
-        $("select").on("change", function() {
-            var entityName = $(this).find("option:selected").attr("entity-name");
-            var codeId = $(this).find("option:selected").attr("code-id");
-            var codeNm = $(this).find("option:selected").attr("code-nm");
-            if($(this).val() == "OT") {
-                var option = {
-                    url : "/uspErp/control/LookupAddCode",
-                    width : 600,
-                    height : 630,
-                    title : "${uiLabelMap.addCodeLookup}",
-                    formId : "lookupForm",
-                    data : {
-                        "entityName": entityName,
-                        "codeId": codeId,
-                        "codeNm": codeNm
-                    }
-                };
-                openDialog.open(option);
-            }
-        });
-
 	    /***************************************************************************
 	     ******************				Button Control			********************
 	     ***************************************************************************/
@@ -994,10 +989,13 @@ under the License.
                         <option value="">--Select</option>
                     <#if steelType??>
                         <#list steelType as steelTypeInfo>
+                            <#if steelTypeInfo.steelTypeId == "QUICK_ADD">
+                        <option value="${steelTypeInfo.steelTypeId!}" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">${steelTypeInfo.steelTypeNm!}</option>
+                            <#else>
                         <option value="${steelTypeInfo.steelTypeId!}" >${steelTypeInfo.steelTypeNm!}</option>
+                            </#if>
                         </#list>
                     </#if>
-                        <!--<option value="OT" entity-name="SteelTypeCode" code-id="steelTypeId" code-nm="steelTypeNm">Other</option>-->
                     </select>
                 </td>
                 <td class="label" width="12%" align="right">
@@ -1018,7 +1016,11 @@ under the License.
                         <option value="">--Select</option>
                     <#if surfaceType??>
                         <#list surfaceType as surfaceTypeInfo>
-                        <option value="${surfaceTypeInfo.surfaceTypeId!}">${surfaceTypeInfo.surfaceTypeNm!}</option>
+                            <#if surfaceTypeInfo.surfaceTypeId == "QUICK_ADD">
+                        <option value="${surfaceTypeInfo.surfaceTypeId!}" entity-name="SurfaceTypeCode" code-id="surfaceTypeId" code-nm="surfaceTypeNm">${surfaceTypeInfo.surfaceTypeNm!}</option>
+                            <#else>
+                        <option value="${surfaceTypeInfo.surfaceTypeId!}" >${surfaceTypeInfo.surfaceTypeNm!}</option>
+                            </#if>
                         </#list>
                     </#if>
                     </select>
@@ -1041,7 +1043,11 @@ under the License.
                         <option value="">--Select</option>
                     <#if grade??>
                         <#list grade as gradeInfo>
-                        <option value="${gradeInfo.gradeId!}">${gradeInfo.gradeNm!}</option>
+                            <#if gradeInfo.gradeId == "QUICK_ADD">
+                        <option value="${gradeInfo.gradeId!}" entity-name="GradeCode" code-id="gradeId" code-nm="gradeNm">${gradeInfo.gradeNm!}</option>
+                            <#else>
+                        <option value="${gradeInfo.gradeId!}" >${gradeInfo.gradeNm!}</option>
+                            </#if>
                         </#list>
                     </#if>
                     </select>
@@ -1064,7 +1070,11 @@ under the License.
                         <option value="">--Select</option>
                     <#if coatingWeight??>
                         <#list coatingWeight as coatingWeightInfo>
-                        <option value="${coatingWeightInfo.coatingWeightId!}">${coatingWeightInfo.coatingWeightNm!}</option>
+                            <#if coatingWeightInfo.coatingWeightId == "QUICK_ADD">
+                        <option value="${coatingWeightInfo.coatingWeightId!}" entity-name="CoatingWeightCode" code-id="coatingWeightId" code-nm="coatingWeightNm">${coatingWeightInfo.coatingWeightNm!}</option>
+                            <#else>
+                        <option value="${coatingWeightInfo.coatingWeightId!}" >${coatingWeightInfo.coatingWeightNm!}</option>
+                            </#if>
                         </#list>
                     </#if>
                     </select>
@@ -1078,7 +1088,11 @@ under the License.
                         <option value="">--Select</option>
                     <#if packaging??>
                         <#list packaging as packagingInfo>
-                        <option value="${packagingInfo.packagingId!}">${packagingInfo.packagingNm!}</option>
+                            <#if packagingInfo.packagingId == "QUICK_ADD">
+                        <option value="${packagingInfo.packagingId!}" entity-name="PackagingCode" code-id="packagingId" code-nm="packagingNm">${packagingInfo.packagingNm!}</option>
+                            <#else>
+                        <option value="${packagingInfo.packagingId!}" >${packagingInfo.packagingNm!}</option>
+                            </#if>
                         </#list>
                     </#if>
                     </select>
@@ -1284,5 +1298,5 @@ under the License.
 	</ul>
 </div>
 
-<form name="pageMoveForm" id="pageMoveForm" method="post">
+<form name="pageMoveForm" id="pageMoveForm" method="post"></form>
 <form name="lookupForm" id="lookupForm" method="post"></form>

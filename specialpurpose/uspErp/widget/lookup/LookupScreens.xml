@@ -19,7 +19,7 @@ under the License.
 -->
 
 <screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+         xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
     <screen name="LookupSupplier">
         <section>
@@ -118,7 +118,7 @@ under the License.
                 <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
                 <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
                 <set field="entityName" value="SecurityGroup"/>
-                <set field="employeeLoginId" value="parameters.employeeLoginId"/>
+                <set field="employeeLoginId" from-field="parameters.employeeLoginId"/>
                 <set field="searchFields" value="[groupId]"/>
             </actions>
             <widgets>
@@ -139,13 +139,35 @@ under the License.
                 <property-map resource="UspErpUiLabels" map-name="uiLabelMap" global="true"/>
                 <set field="title" value="${uiLabelMap.permissionList}"/>
                 <set field="entityName" value="SecurityGroupPermission"/>
-                <set field="groupId" value="parameters.groupId"/>
+                <set field="groupId" from-field="parameters.groupId"/>
             </actions>
             <widgets>
                 <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
                     <decorator-section name="body">
                         <platform-specific>
                             <html><html-template location="component://uspErp/template/lookup/securityGroupPermissionLookup.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="LookupAddCode">
+        <section>
+            <actions>
+                <property-map resource="UspErpUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.addCodeLookup}"/>
+                <set field="entityNm" from-field="parameters.entityNm"/>
+                <set field="codeId" from-field="parameters.codeId"/>
+                <set field="codeNm" from-field="parameters.codeNm"/>
+                <set field="elementId" from-field="parameters.elementId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="body">
+                        <platform-specific>
+                            <html><html-template location="component://uspErp/template/lookup/addCodeLookup.ftl"/></html>
                         </platform-specific>
                     </decorator-section>
                 </decorator-screen>
